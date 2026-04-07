@@ -1,0 +1,17 @@
+[
+  {
+    "filename": "char_wp_00000_happy_18.png",
+    "prompt": "anime otome, 20 years old young woman, visual novel style, clean lineart, flat colors, soft shading, shoulder-length straight hair, dark brown hair, almond eyes, brown eyes, natural skin tone, simple idol-style outfit solid colors no print, cheerful natural smile, three-quarter front view, close-up bust portrait from chest up, plain black background, solid background, no text\n\nPortrait shot at age 18: same identity as the main description, age-appropriate face and proportions, consistent features.\nExpression for this variant: happy face, bright smile, cheerful expression.",
+    "negative_prompt": "blurry, worst quality, low quality, deformed hands, bad anatomy, watermark, text, full body, wide shot"
+  },
+  {
+    "filename": "char_wp_00001_happy_18.png",
+    "prompt": "anime otome, 25 years old young woman, visual novel style, clean lineart, flat colors, soft shading, shoulder-length straight hair, dark brown hair, almond eyes, brown eyes, natural skin tone, simple idol-style outfit solid colors no print, cheerful natural smile, three-quarter front view, close-up bust portrait from chest up, plain black background, solid background, no text\n\nPortrait shot at age 18: same identity as the main description, age-appropriate face and proportions, consistent features.\nExpression for this variant: happy face, bright smile, cheerful expression.",
+    "negative_prompt": "blurry, worst quality, low quality, deformed hands, bad anatomy, watermark, text, full body, wide shot"
+  },
+  {
+    "filename": "char_wp_00002_happy_18.png",
+    "prompt": "anime style, 22 years old young man, bishounen, visual novel style, clean lineart, flat colors, soft shading, shoulder-length straight hair, dark brown hair, almond eyes, brown eyes, natural skin tone, simple idol-style outfit solid colors no print, cheerful natural smile, three-quarter front view, close-up bust portrait from chest up, plain black background, solid background, no text\n\nPortrait shot at age 18: same identity as the main description, age-appropriate face and proportions, consistent features.\nExpression for this variant: happy face, bright smile, cheerful expression.",
+    "negative_prompt": "blurry, worst quality, low quality, deformed hands, bad anatomy, watermark, text, full body, wide shot"
+  }
+]

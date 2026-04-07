@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "promptVersion": "2026-04-gemini-v2",
+  "entries": {
+    "wp_00000": {
+      "schemaVersion": 2,
+      "idolId": "wp_00000",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Matsumoto Rei",
+      "nameJp": "松本 怜",
+      "background": {
+        "pt": "Rei passou o início dos seus vinte anos trabalhando em um emprego comum no exterior antes de retornar silenciosamente ao Japão. Sem grandes ambições de se tornar uma superestrela, ela entrou na agência buscando apenas uma renda estável e um ambiente estruturado. Embora seja quieta e não chame muita atenção para si mesma, sua ética de trabalho disciplinada e sua voz suave a tornam um pilar de apoio confiável para as outras idols.",
+        "ja": "怜は20代前半を海外の一般的な職場で過ごした後、静かに日本へ帰国しました。スーパースターになるという野心は低く、安定した収入と規則正しい環境を求めて事務所に入所しました。口数が少なく目立つタイプではありませんが、その真面目な労働意欲と安定した歌声から、他のアイドルたちを陰で支える頼もしい存在となっています。"
+      },
+      "physical": {
+        "hairStyle": "neat low ponytail with straight bangs",
+        "hairColor": "dark ash brown",
+        "eyeShape": "drooping, gentle eyes",
+        "eyeColor": "muted hazel",
+        "skinTone": "fair",
+        "accessories": "simple silver stud earrings",
+        "outfitNotes": "practical and modest casual office-style blouse"
+      },
+      "portraitPromptPositive": "1girl, 25 years old female, anime bust portrait, chest-up, three-quarter view, plain solid black background. She has a neat low ponytail with straight bangs in dark ash brown hair, and gentle drooping muted hazel eyes. Fair skin tone, wearing simple silver stud earrings and a practical, modest casual office-style blouse. Calm, quiet, reliable expression, mature aura. Anime otome game style, visual novel clean lineart, soft shading, no text, no watermark, high quality, masterpiece.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, poorly drawn, extra limbs, bad anatomy, deformed, messy lines, highly detailed background, abstract, realistic, 3d, flashy, exaggerated expressions"
+    }
+  }
+}

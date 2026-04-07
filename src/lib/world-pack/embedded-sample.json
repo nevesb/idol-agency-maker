@@ -1,0 +1,72 @@
+[
+	{
+		"id": "wp_demo_01",
+		"nameRomaji": "Nakamura Kana",
+		"nameJp": "中村佳奈",
+		"age": 18,
+		"gender": "female",
+		"potential": 61,
+		"visible": {
+			"vocal": 54,
+			"dance": 58,
+			"acting": 44,
+			"variety": 50,
+			"visual": 62,
+			"charisma": 53,
+			"communication": 49,
+			"aura": 51,
+			"stamina": 56,
+			"discipline": 55,
+			"mentality": 50,
+			"adaptability": 48
+		},
+		"hidden": {
+			"consistency": 11,
+			"ambition": 13,
+			"loyalty": 12,
+			"temperament": 9,
+			"personalLife": 7
+		},
+		"activityState": "active",
+		"personalityLabelKey": "personality.balanced",
+		"visualSeed": 91001,
+		"regionId": "osaka",
+		"entryMonth": 0,
+		"tier": "C"
+	},
+	{
+		"id": "wp_demo_02",
+		"nameRomaji": "Fujita Taro",
+		"nameJp": "藤田太郎",
+		"age": 21,
+		"gender": "male",
+		"potential": 49,
+		"visible": {
+			"vocal": 48,
+			"dance": 46,
+			"acting": 52,
+			"variety": 55,
+			"visual": 45,
+			"charisma": 58,
+			"communication": 54,
+			"aura": 50,
+			"stamina": 52,
+			"discipline": 48,
+			"mentality": 51,
+			"adaptability": 53
+		},
+		"hidden": {
+			"consistency": 10,
+			"ambition": 10,
+			"loyalty": 14,
+			"temperament": 11,
+			"personalLife": 9
+		},
+		"activityState": "training",
+		"personalityLabelKey": "personality.public_life",
+		"visualSeed": 91002,
+		"regionId": "fukuoka",
+		"entryMonth": 24,
+		"tier": "D"
+	}
+]

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnrichedSidecar",
+  "type": "object",
+  "required": ["schemaVersion", "promptVersion", "entries"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "enum": [1, 2] },
+    "promptVersion": { "type": "string" },
+    "entries": {
+      "type": "object",
+      "additionalProperties": { "$ref": "idol_enriched.schema.json" }
+    }
+  },
+  "additionalProperties": false
+}

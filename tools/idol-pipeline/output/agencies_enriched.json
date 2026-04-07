@@ -1,0 +1,755 @@
+{
+  "promptVersion": "2026-04-agency-v1",
+  "entries": {
+    "ag_000": {
+      "agencyId": "ag_000",
+      "agencyNameRomaji": "Shinsei Productions",
+      "agencyNameJp": "新星プロダクション",
+      "ownerNameRomaji": "Kanzaki Ryuzo",
+      "ownerNameJp": "神崎 龍三",
+      "ownerBackground": {
+        "pt": "Kanzaki Ryuzo é um ex-produtor de televisão implacável que construiu seu império em Osaka esmagando a concorrência sem piedade. Ele é amplamente temido e respeitado por suas táticas de marketing agressivas e por exigir resultados imediatos. Para ele, o mundo do entretenimento é um campo de batalha onde apenas os mais ferozes sobrevivem.",
+        "ja": "神崎龍三は、競争相手を容赦なく潰すことで大阪に帝国を築き上げた元敏腕テレビプロデューサーである。攻撃的なマーケティング手法と、所属アイドルへの絶対的な結果至上主義で広く恐れられ、同時に尊敬を集めている。彼にとって芸能界とは、最も獰猛な者だけが生き残る戦場に他ならない。"
+      },
+      "agencyCulture": {
+        "pt": "A agência opera com uma mentalidade de dominação total, investindo pesadamente em campanhas virais e monopólio de mídia para manter seus talentos no topo. Sendo uma potência de nível S, os recursos são ilimitados, mas a pressão interna sobre os ídolos é esmagadora.",
+        "ja": "この事務所は完全な業界支配を目標に掲げ、タレントを常にトップに立たせるため、バイラルキャンペーンやメディアの独占に巨額の投資を行っている。Sランクの強豪として提供されるリソースは無限だが、アイドルにかかる内部のプレッシャーは計り知れない。"
+      }
+    },
+    "ag_001": {
+      "agencyId": "ag_001",
+      "agencyNameRomaji": "Tengen Entertainment",
+      "agencyNameJp": "天元エンターテインメント",
+      "ownerNameRomaji": "Godo Masayoshi",
+      "ownerNameJp": "郷田 正義",
+      "ownerBackground": {
+        "pt": "Masayoshi Godo construiu a agência do zero com táticas implacáveis de mercado e aquisições hostis de talentos rivais. Ele é temido e respeitado na indústria de Tóquio por sua personalidade dominadora e foco absoluto no domínio do mercado.",
+        "ja": "郷田正義は、容赦ない市場戦術とライバルからの強引な引き抜きによって、ゼロからこの事務所を築き上げた。支配的な性格と絶対的な市場支配への執念により、東京の芸能界で恐れられ、同時に尊敬もされている。"
+      },
+      "agencyCulture": {
+        "pt": "A cultura da agência é de alta pressão e foco em resultados imediatos, onde apenas os ídolos mais lucrativos recebem atenção e investimento. Sua reputação é a de uma verdadeira máquina de fazer dinheiro que esmaga a concorrência sem qualquer hesitação.",
+        "ja": "事務所の文化はプレッシャーが高く、即座に結果を出すことが求められ、最も利益を生むアイドルだけが投資を受ける。ためらうことなく競争相手を叩き潰す、冷徹な利益追求の場として広く知られている。"
+      }
+    },
+    "ag_002": {
+      "agencyId": "ag_002",
+      "agencyNameRomaji": "Hibiki Production",
+      "agencyNameJp": "響プロダクション",
+      "ownerNameRomaji": "Tsukishiro Miyako",
+      "ownerNameJp": "月城 都",
+      "ownerBackground": {
+        "pt": "Miyako foi uma idol de sucesso na região de Kansai durante os anos 90, mas sofreu com a pressão extrema e o esgotamento na indústria. Ela fundou sua própria agência em Osaka com o objetivo de proteger e nutrir jovens talentos de forma saudável. Conhecida por sua empatia maternal, ela prioriza o bem-estar físico e mental de seus artistas muito acima das margens de lucro imediatas.",
+        "ja": "都は90年代に関西地方で成功を収めた元アイドルですが、業界の極端なプレッシャーと過労に苦しんだ過去を持ちます。彼女は若き才能を健康的に守り育てることを目的に、大阪で自らの事務所を設立しました。母親のような共感力で知られ、目先の利益よりも所属アーティストの心身の健康を最優先しています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência é famosa por seu ambiente acolhedor, quase familiar, e pelo foco no desenvolvimento pessoal a longo prazo. Refletindo a filosofia de que 'talentos felizes brilham mais', seus idols costumam ter carreiras longas, leais e excepcionalmente estáveis.",
+        "ja": "家族のような温かい環境と、長期的な人間的成長に焦点を当てていることで業界内でも高く評価されています。「幸せな才能こそが最も輝く」という哲学を反映し、所属アイドルは長く忠実で、非常に安定したキャリアを築く傾向があります。"
+      }
+    },
+    "ag_003": {
+      "agencyId": "ag_003",
+      "agencyNameRomaji": "Vertex Management",
+      "agencyNameJp": "ヴァーテックス・マネジメント",
+      "ownerNameRomaji": "Domoto Kenji",
+      "ownerNameJp": "堂本 健二",
+      "ownerBackground": {
+        "pt": "Domoto Kenji é um ex-produtor musical implacável, famoso por transformar talentos novatos em estrelas através de campanhas de marketing agressivas. Ele acredita que o mundo do entretenimento é um campo de batalha e não tem escrúpulos em roubar os holofotes de agências rivais. Seu estilo de gestão foca no domínio total do mercado.",
+        "ja": "堂本健二は、攻撃的なマーケティングで新人タレントをスターダムに押し上げることで有名な、冷酷な元音楽プロデューサーです。彼は芸能界を戦場と考えており、ライバル事務所からスポットライトを奪うことに一切の躊躇がありません。彼の経営スタイルは、市場の完全な支配に焦点を当てています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência adota uma postura predatória, investindo pesadamente em publicidade massiva e controle de mídia para manter seus idols no topo. O sucesso financeiro absoluto é a única métrica que importa, criando um ambiente interno altamente competitivo.",
+        "ja": "この事務所は、所属アイドルを常にトップに立たせるため、大規模な広告やメディアコントロールに多額の投資を行うという、攻撃的な姿勢をとっています。絶対的な経済的成功だけが唯一の評価基準であり、社内は非常に競争の激しい環境です。"
+      }
+    },
+    "ag_004": {
+      "agencyId": "ag_004",
+      "agencyNameRomaji": "Ginga Promotion",
+      "agencyNameJp": "銀河プロモーション",
+      "ownerNameRomaji": "Takagi Shigeo",
+      "ownerNameJp": "高木 茂男",
+      "ownerBackground": {
+        "pt": "Takagi Shigeo começou sua carreira como produtor musical nos anos 90, trabalhando com grandes nomes do J-Pop. Ele é conhecido por sua abordagem pragmática e calma, preferindo estabilidade e planejamento a longo prazo em vez de riscos desnecessários. Sua vasta rede de contatos na mídia de Tóquio o torna um executivo altamente respeitado na indústria.",
+        "ja": "高木茂男は90年代に音楽プロデューサーとしてキャリアをスタートさせ、J-POPのビッグネームたちと仕事をしてきました。不必要なリスクよりも安定と長期的な計画を好む、実用的で穏やかなアプローチで知られています。東京のメディアにおける幅広い人脈により、業界で非常に尊敬されるエグゼクティブとなっています。"
+      },
+      "agencyCulture": {
+        "pt": "A Ginga Promotion foca em um crescimento sustentável, equilibrando talentos tradicionais com novas tendências do mercado digital. A agência é famosa por oferecer um ambiente de trabalho seguro, bem estruturado e focado no bem-estar de seus ídolos.",
+        "ja": "銀河プロモーションは、伝統的な才能とデジタル市場の新しいトレンドのバランスを取りながら、持続可能な成長に焦点を当てています。この事務所は、アイドルに安全でよく構造化された、福利厚生を重視した環境を提供することで有名です。"
+      }
+    },
+    "ag_005": {
+      "agencyId": "ag_005",
+      "agencyNameRomaji": "Mugen Entertainment",
+      "agencyNameJp": "無限エンターテインメント",
+      "ownerNameRomaji": "Yagami Seiji",
+      "ownerNameJp": "八神 誠司",
+      "ownerBackground": {
+        "pt": "Seiji Yagami é um ex-produtor de televisão conhecido por suas táticas implacáveis de negociação e domínio da mídia. Ele fundou a agência com o objetivo de monopolizar a indústria de idols em Tóquio, esmagando a concorrência sem hesitação. Sua visão foca em lucros rápidos, superexposição e controle total sobre a imagem de seus talentos.",
+        "ja": "八神誠司は、冷酷な交渉術とメディア支配で知られる元テレビプロデューサーです。東京のアイドル業界を独占し、競争相手を容赦なく潰すことを目的に事務所を設立しました。彼のビジョンは、短期的な利益、メディアへの過剰露出、そしてタレントのイメージに対する完全なコントロールに焦点を当てています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência opera sob uma filosofia de 'vencer a qualquer custo', exigindo dedicação extrema e resultados imediatos para manter seu status de elite. É temida no mercado por suas campanhas de marketing agressivas e táticas de intimidação corporativa contra estúdios rivais.",
+        "ja": "事務所は「勝つことがすべて」という哲学の下で運営されており、エリートとしての地位を維持するために極端な献身と即座の結果を要求します。攻撃的なマーケティングキャンペーンとライバル事務所に対する威圧的な戦術で、業界内で恐れられています。"
+      }
+    },
+    "ag_006": {
+      "agencyId": "ag_006",
+      "agencyNameRomaji": "Kansai Palette",
+      "agencyNameJp": "関西パレット",
+      "ownerNameRomaji": "Miyamoto Tatsuo",
+      "ownerNameJp": "宮本達男",
+      "ownerBackground": {
+        "pt": "Miyamoto Tatsuo é um ex-diretor de teatro de Osaka conhecido por sua personalidade excêntrica e visão artística. Ele fundou a agência para dar espaço a talentos não convencionais que não se encaixam nos moldes tradicionais de Tóquio. Sua abordagem foca em nichos específicos, combinando comédia, teatro e música.",
+        "ja": "宮本達男は、そのエキセントリックな性格と芸術的なビジョンで知られる大阪の元舞台演出家です。東京の伝統的な枠に収まらない型破りな才能に活躍の場を提供するため、この事務所を設立しました。彼の手法は、お笑いや演劇、音楽を融合させた特定のニッチ市場に焦点を当てています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência valoriza a individualidade extrema e foca em construir bases de fãs dedicadas em nichos específicos, como ídolos de comédia ou rock underground. Eles preferem dominar mercados menores em Kansai do que competir pelo apelo de massa nacional.",
+        "ja": "当事務所は極端な個性を重んじ、お笑いアイドルやアンダーグラウンドロックなど、特定のニッチな分野で熱狂的なファン層を築くことに注力しています。全国的な大衆受けを狙うよりも、関西の小規模市場を制覇することを好みます。"
+      }
+    },
+    "ag_007": {
+      "agencyId": "ag_007",
+      "agencyNameRomaji": "Nexus Promotion",
+      "agencyNameJp": "ネクサスプロモーション",
+      "ownerNameRomaji": "Sugiyama Hideki",
+      "ownerNameJp": "杉山 秀樹",
+      "ownerBackground": {
+        "pt": "Sugiyama Hideki é um ex-produtor musical que decidiu abrir sua própria agência após anos de experiência na indústria de entretenimento. Ele é conhecido por sua abordagem calma e metódica, equilibrando cuidadosamente o bem-estar dos talentos com a viabilidade comercial. Sua vasta rede de contatos em Tóquio o ajuda a garantir contratos estáveis e oportunidades de crescimento para seus ídolos.",
+        "ja": "杉山秀樹は、エンターテインメント業界で長年経験を積んだ後、自身の事務所を立ち上げた元音楽プロデューサーです。タレントの健康と商業的な成功のバランスを慎重に取る、穏やかで理路整然としたアプローチで知られています。東京での幅広い人脈を活かし、所属タレントに安定した仕事と成長の機会を提供しています。"
+      },
+      "agencyCulture": {
+        "pt": "A Nexus Promotion foca em um crescimento sustentável, evitando superexposição e priorizando o desenvolvimento a longo prazo de suas estrelas. A agência mantém um ambiente de trabalho equilibrado que atrai talentos em busca de uma carreira sólida e confiável na capital.",
+        "ja": "ネクサスプロモーションは、過剰な露出を避け、所属タレントの長期的な育成を優先する持続可能な成長に重点を置いています。東京で堅実かつ信頼できるキャリアを求めるタレントを惹きつける、バランスの取れた労働環境を維持しています。"
+      }
+    },
+    "ag_008": {
+      "agencyId": "ag_008",
+      "agencyNameRomaji": "Akatsuki Promotion",
+      "agencyNameJp": "暁プロモーション",
+      "ownerNameRomaji": "Sawamura Katsuya",
+      "ownerNameJp": "沢村 勝也",
+      "ownerBackground": {
+        "pt": "Sawamura Katsuya é um ex-olheiro de uma grande gravadora que fundou sua própria agência com uma mentalidade implacável. Conhecido por suas táticas agressivas de roubo de talentos e campanhas de marketing de alto risco, ele não mede esforços para alcançar o topo. Ele exige obediência absoluta e uma ética de trabalho ininterrupta de seus ídolos.",
+        "ja": "沢村勝也は大手レーベルの元スカウトマンであり、容赦ない精神で自らの事務所を立ち上げました。強引な引き抜きやハイリスク・ハイリターンのマーケティング戦略で知られ、トップに立つためには手段を選びません。彼は所属アイドルに絶対的な服従と絶え間ない労働を要求します。"
+      },
+      "agencyCulture": {
+        "pt": "A Akatsuki Promotion prospera em meio a controvérsias e domínio agressivo da mídia, levando seus talentos ao limite para obter exposição máxima. Sua reputação na indústria é polarizadora, mas sua rápida ascensão e resultados financeiros são inegáveis.",
+        "ja": "暁プロモーションは、メディアの積極的な支配と時には炎上も辞さないスタイルで、タレントを限界まで追い込み露出を最大化します。業界内での評判は二分されていますが、その急速な成長と資金力は誰の目にも明らかです。"
+      }
+    },
+    "ag_009": {
+      "agencyId": "ag_009",
+      "agencyNameRomaji": "Dengeki Entertainment",
+      "agencyNameJp": "電撃エンターテインメント",
+      "ownerNameRomaji": "Kuroda Ryuhei",
+      "ownerNameJp": "黒田 竜平",
+      "ownerBackground": {
+        "pt": "Kuroda Ryuhei é um ex-promotor de shows underground em Osaka que construiu sua agência através de pura determinação e táticas agressivas de recrutamento. Ele é famoso por seu estilo de negociação intimidador e escandaloso. Para ele, os resultados e o lucro estão acima de qualquer outra coisa.",
+        "ja": "黒田竜平は、大阪の地下ライブの元プロモーターであり、執念と強引な引き抜き戦略で現在の事務所を築き上げた人物である。威圧的で声の大きい交渉スタイルで広く知られている。彼にとっては、結果と利益がすべてに優先する。"
+      },
+      "agencyCulture": {
+        "pt": "A agência opera com uma mentalidade de 'vencer a qualquer custo', focando em expansão rápida e domínio do mercado de Kansai. Os ídolos enfrentam cronogramas brutais e alta pressão, mas a agência garante enorme visibilidade na mídia local.",
+        "ja": "「勝つためなら手段を選ばない」というメンタリティで運営され、関西市場の覇権と急成長に焦点を当てている。所属アイドルは過酷なスケジュールと高いプレッシャーに直面するが、事務所は地元メディアでの圧倒的な露出を保証している。"
+      }
+    },
+    "ag_010": {
+      "agencyId": "ag_010",
+      "agencyNameRomaji": "Otomeza Factory",
+      "agencyNameJp": "乙女座ファクトリー",
+      "ownerNameRomaji": "Akiyama Yosuke",
+      "ownerNameJp": "秋山 洋介",
+      "ownerBackground": {
+        "pt": "Akiyama Yosuke é um ex-produtor de animes que mudou seu foco para gerenciar ídolos voltados para a subcultura e dublagem (seiyuu). Ele é profundamente apaixonado pela cultura otaku e prefere construir bases de fãs dedicadas e leais em vez de buscar o apelo popular. Nos bastidores, é conhecido por ser um perfeccionista exigente quando se trata de conceitos artísticos e figurinos.",
+        "ja": "秋山洋介は、サブカルチャーや声優アイドルのプロデュースに転身した元アニメプロデューサーです。オタク文化への深い情熱を持ち、大衆受けよりも熱狂的で忠実なファン層を築くことを好みます。舞台裏では、芸術的なコンセプトや衣装に関して妥協を許さない完璧主義者として知られています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência é famosa por criar grupos de ídolos altamente temáticos que atendem a públicos de nicho, especialmente na cena de Akihabara. A filosofia do estúdio prioriza o engajamento profundo dos fãs e conceitos únicos em vez de seguir as tendências do mercado de massa.",
+        "ja": "当事務所は、秋葉原のシーンを中心に、ニッチな層に向けたテーマ性の高いアイドルグループを展開することで有名です。大衆市場のトレンドを追うのではなく、ファンとの深い交流と独自のコンセプトを重視する哲学を持っています。"
+      }
+    },
+    "ag_011": {
+      "agencyId": "ag_011",
+      "agencyNameRomaji": "Mirai Canvas",
+      "agencyNameJp": "ミライキャンバス",
+      "ownerNameRomaji": "Hiraoka Tetsuya",
+      "ownerNameJp": "平岡哲也",
+      "ownerBackground": {
+        "pt": "Tetsuya Hiraoka é um ex-diretor de elenco que se cansou da exploração na indústria do entretenimento. Ele fundou sua própria agência com a promessa de colocar o bem-estar e o desenvolvimento pessoal de seus talentos em primeiro lugar. Ele é conhecido por ser uma figura paterna rigorosa, mas incrivelmente protetora.",
+        "ja": "平岡哲也は、芸能界の搾取的な体質に嫌気がさした元キャスティングディレクターです。彼はタレントの幸福と人間的成長を第一に考えることを誓い、自身の事務所を設立しました。厳格でありながらも、非常に保護的な父親のような存在として知られています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência prioriza o treinamento a longo prazo e a saúde mental em vez de lucros rápidos, construindo carreiras sustentáveis. Embora não tenham o maior orçamento, sua reputação de cuidar bem dos ídolos atrai muitos aspirantes talentosos.",
+        "ja": "目先の利益よりも長期的なトレーニングとメンタルヘルスを優先し、持続可能なキャリアを築くことを方針としています。予算はトップクラスではありませんが、アイドルを大切にするという評判が多くの才能ある志願者を惹きつけています。"
+      }
+    },
+    "ag_012": {
+      "agencyId": "ag_012",
+      "agencyNameRomaji": "Seiwa Arts",
+      "agencyNameJp": "星和アーツ",
+      "ownerNameRomaji": "Nomura Hideo",
+      "ownerNameJp": "野村 英雄",
+      "ownerBackground": {
+        "pt": "Hideo Nomura é um veterano da indústria que trabalhou por décadas em uma das maiores agências tradicionais do Japão antes de fundar sua própria empresa. Ele valoriza a estabilidade a longo prazo e o treinamento rigoroso em vez de modismos virais. Embora seja visto como rígido, ele é profundamente respeitado por sua ética de trabalho e lealdade.",
+        "ja": "野村英雄は、日本最大手の伝統的な事務所で何十年もマネージャーとして働いた後、独立して自身の会社を設立した業界のベテランです。彼は一時的なバズよりも、長期的な安定と厳しいトレーニングを重んじます。厳格な人物として知られていますが、その仕事ぶりから深く尊敬されています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência mantém uma filosofia conservadora, focando na construção de carreiras duradouras através da mídia tradicional, como televisão e rádio. Eles são conhecidos por ter regras rígidas de conduta e manter uma imagem pública impecável para todos os seus talentos.",
+        "ja": "テレビやラジオといった伝統的なメディアを通じて、息の長いキャリアを築くことに重点を置く保守的な方針を持っています。所属タレントに対する厳格な行動規範と、完璧でクリーンなパブリックイメージを維持することで知られています。"
+      }
+    },
+    "ag_013": {
+      "agencyId": "ag_013",
+      "agencyNameRomaji": "Karakuri Arts",
+      "agencyNameJp": "カラクリアーツ",
+      "ownerNameRomaji": "Tsuji Kansuke",
+      "ownerNameJp": "辻 勘助",
+      "ownerBackground": {
+        "pt": "Tsuji Kansuke é um ex-produtor de teatro underground de Osaka que decidiu aplicar sua visão excêntrica no mundo das idols. Ele é conhecido por sua personalidade extravagante e por não ter medo de chocar o público. Sua abordagem foca em conceitos artísticos não convencionais e apresentações teatrais intensas em vez do apelo comercial tradicional.",
+        "ja": "辻勘助は、元アングラ演劇のプロデューサーであり、その奇抜なビジョンをアイドル界に持ち込みました。派手な性格で、観客を驚かせることを恐れないことで知られています。彼のやり方は、伝統的な商業的アピールよりも、型破りな芸術的コンセプトと激しい演劇的パフォーマンスを重視しています。"
+      },
+      "agencyCulture": {
+        "pt": "A Karakuri Arts foca em nichos altamente específicos, misturando a energia cômica de Osaka com conceitos de vanguarda. A agência tem a reputação de lançar grupos que parecem bizarros no início, mas que rapidamente conquistam uma base de fãs fanaticamente dedicada.",
+        "ja": "カラクリアーツは、大阪のコメディのエネルギーと前衛的なコンセプトを融合させ、極めて特化したニッチ市場に焦点を当てています。最初は奇妙に見えても、すぐに熱狂的なファンを獲得するグループを輩出することで定評があります。"
+      }
+    },
+    "ag_014": {
+      "agencyId": "ag_014",
+      "agencyNameRomaji": "Reppu Promotion",
+      "agencyNameJp": "烈風プロモーション",
+      "ownerNameRomaji": "Araki Go",
+      "ownerNameJp": "荒木 豪",
+      "ownerBackground": {
+        "pt": "Araki Go é um ex-promotor de rock underground que mudou para a indústria de idols ao ver seu potencial de crescimento explosivo. Conhecido por suas táticas de negociação implacáveis e personalidade barulhenta, ele leva seus talentos aos limites absolutos.",
+        "ja": "荒木豪は、アイドルの爆発的な成長の可能性に目をつけ、業界に参入した元アングラロックのプロモーターです。容赦のない交渉術と豪快な性格で知られ、所属タレントを限界まで追い込みます。"
+      },
+      "agencyCulture": {
+        "pt": "A Reppu Promotion opera com uma filosofia de alto risco e alta recompensa, priorizando manobras virais e turnês implacáveis. Eles esgotam rapidamente a equipe e os talentos, mas aqueles que sobrevivem frequentemente alcançam uma fama local feroz.",
+        "ja": "烈風プロモーションはハイリスク・ハイリターンの哲学で運営されており、バイラルを狙った過激な企画や過酷なツアーを優先します。スタッフやタレントの消耗は激しいですが、生き残った者は熱狂的な人気を獲得します。"
+      }
+    },
+    "ag_015": {
+      "agencyId": "ag_015",
+      "agencyNameRomaji": "Senjin Entertainment",
+      "agencyNameJp": "先陣エンターテインメント",
+      "ownerNameRomaji": "Sendo Kenshin",
+      "ownerNameJp": "千堂 健心",
+      "ownerBackground": {
+        "pt": "Sendo Kenshin é um ex-promotor de idols underground que construiu sua reputação através de marketing agressivo de guerrilha e táticas virais. Ele é conhecido por levar seus talentos ao limite, acreditando que a superexposição constante é a única maneira de dominar o mercado de Tóquio.",
+        "ja": "千堂健心は、過激なゲリラマーケティングやバイラル戦略で評判を築いた元地下アイドルプロモーターです。東京の市場を支配するには絶え間ない露出しかないと信じており、所属タレントを限界まで追い込むことで知られています。"
+      },
+      "agencyCulture": {
+        "pt": "A Senjin Entertainment opera com uma filosofia de alto risco e alta recompensa, priorizando o crescimento rápido e campanhas de mídia agressivas em vez de estabilidade a longo prazo. O ambiente é extremamente competitivo, exigindo dedicação implacável de todos.",
+        "ja": "先陣エンターテインメントは、長期的な安定よりも急成長と攻撃的なメディア展開を優先する、ハイリスク・ハイリターンな方針をとっています。社内は非常に競争が激しく、タレントには容赦のないハングリー精神が求められます。"
+      }
+    },
+    "ag_016": {
+      "agencyId": "ag_016",
+      "agencyNameRomaji": "Aoba Promotion",
+      "agencyNameJp": "青葉プロモーション",
+      "ownerNameRomaji": "Hashimoto Takumi",
+      "ownerNameJp": "橋本匠",
+      "ownerBackground": {
+        "pt": "Hashimoto Takumi era um produtor de televisão local que decidiu fundar sua própria agência para apoiar talentos regionais. Ele é conhecido por sua abordagem pragmática e justa, preferindo um crescimento constante em vez de fama rápida e insustentável. Acredita firmemente em proteger o bem-estar físico e mental de seus ídolos.",
+        "ja": "橋本匠は、地方の才能を支援するために自らの事務所を設立した元ローカルテレビ局のプロデューサーです。彼は短期的で不安定な名声よりも、着実な成長を好む現実的で公正なアプローチで知られています。所属アイドルの心身の健康を守ることを何よりも大切にしています。"
+      },
+      "agencyCulture": {
+        "pt": "A Aoba Promotion foca em construir uma base de fãs leal através de trabalhos locais consistentes, como comerciais e programas de rádio. A agência mantém um ambiente familiar e equilibrado, preparando seus talentos de forma sustentável para o futuro.",
+        "ja": "青葉プロモーションは、地元のCMやラジオ番組などの着実な仕事を通じて、忠実なファンベースを築くことに注力しています。アットホームでバランスの取れた環境を保ち、タレントの将来に向けた持続可能な育成を行っています。"
+      }
+    },
+    "ag_017": {
+      "agencyId": "ag_017",
+      "agencyNameRomaji": "Yodogawa Records",
+      "agencyNameJp": "淀川レコーズ",
+      "ownerNameRomaji": "Kida Yasushi",
+      "ownerNameJp": "木田康",
+      "ownerBackground": {
+        "pt": "Kida Yasushi é um ex-baixista de rock underground que encontrou uma nova paixão em produzir ídolos alternativos em Osaka. Excêntrico e profundamente envolvido com subculturas, ele prefere construir uma base de fãs pequena e extremamente leal a buscar o apelo popular. Ele acredita que a verdadeira arte idol nasce nas margens da sociedade.",
+        "ja": "木田康は元アングラロックバンドのベーシストで、大阪でオルタナティブアイドルのプロデュースに新たな情熱を見出しました。エキセントリックでサブカルチャーに深く傾倒しており、大衆受けよりも小規模で熱狂的なファン層を築くことを好みます。真のアイドル芸術は社会の周縁から生まれると信じています。"
+      },
+      "agencyCulture": {
+        "pt": "A Yodogawa Records foca em conceitos não convencionais que misturam rock, punk e a cultura idol. Eles são famosos na cena underground de Kansai por seus shows intensos e uma filosofia anti-mainstream.",
+        "ja": "淀川レコーズは、ロックやパンクとアイドル文化を融合させた、型破りなコンセプトに焦点を当てています。関西のアンダーグラウンドシーンでは、その激しいライブパフォーマンスと反メインストリームの哲学で有名です。"
+      }
+    },
+    "ag_018": {
+      "agencyId": "ag_018",
+      "agencyNameRomaji": "Shiranui Entertainment",
+      "agencyNameJp": "不知火エンターテインメント",
+      "ownerNameRomaji": "Kuroki Takeru",
+      "ownerNameJp": "黒木猛",
+      "ownerBackground": {
+        "pt": "Kuroki Takeru é um ex-promotor de eventos de rock em Fukuoka conhecido por suas táticas de negociação implacáveis. Ele entrou no mercado de idols para provar que a energia agressiva de Kyushu pode dominar a cena nacional. Ele não tem paciência para o treinamento tradicional, preferindo jogar seus talentos diretamente no fogo da mídia.",
+        "ja": "黒木猛は、容赦ない交渉術で知られる福岡の元ロックイベントプロモーターです。九州の攻撃的なエネルギーが全国のシーンを支配できることを証明するために、アイドル市場に参入しました。伝統的なトレーニングには我慢できず、才能を直接メディアの最前線に投げ込むことを好みます。"
+      },
+      "agencyCulture": {
+        "pt": "A Shiranui Entertainment foca em campanhas de marketing virais e táticas de guerrilha para roubar rapidamente os holofotes. A cultura interna é de alta pressão, onde apenas os ídolos mais resilientes sobrevivem ao ritmo frenético de promoções consecutivas.",
+        "ja": "不知火エンターテインメントは、バイラルマーケティングとゲリラ戦術に焦点を当て、スポットライトを素早く奪い取ります。社内文化はプレッシャーが高く、最も回復力のあるアイドルだけが連続するプロモーションの熱狂的なペースを生き残ることができます。"
+      }
+    },
+    "ag_019": {
+      "agencyId": "ag_019",
+      "agencyNameRomaji": "Zenkai Productions",
+      "agencyNameJp": "全開プロダクション",
+      "ownerNameRomaji": "Okada Daigo",
+      "ownerNameJp": "岡田大吾",
+      "ownerBackground": {
+        "pt": "Okada Daigo é um ex-organizador de eventos underground do distrito de Minami, em Osaka. Conhecido por sua voz estrondosa e táticas implacáveis de recrutamento, ele não tem medo de roubar talentos de agências rivais. Ele exige dedicação extrema e busca o sucesso rápido a qualquer custo.",
+        "ja": "岡田大吾は、大阪のミナミでアンダーグラウンドのイベントを主催していた元イベンターです。大声と容赦のないスカウト戦術で知られ、ライバル事務所からの引き抜きも辞さない強引さを持っています。所属タレントには極端な献身を要求し、どんな犠牲を払ってでも手っ取り早い成功を追求します。"
+      },
+      "agencyCulture": {
+        "pt": "A agência opera com uma mentalidade de \"tudo ou nada\", focando em promoções agressivas e volume alto de trabalho para gerar lucro rápido. Embora o risco de esgotamento seja alto, seus talentos frequentemente ganham fama explosiva na cena local.",
+        "ja": "「一か八か」の精神で運営されており、迅速な利益を生み出すために攻撃的なプロモーションと大量の仕事をこなすことに重点を置いています。燃え尽き症候群のリスクは高いものの、所属タレントは地元シーンで爆発的な人気を得ることがよくあります。"
+      }
+    },
+    "ag_020": {
+      "agencyId": "ag_020",
+      "agencyNameRomaji": "Kizuna Management",
+      "agencyNameJp": "キズナマネジメント",
+      "ownerNameRomaji": "Fukushima Shohei",
+      "ownerNameJp": "福島翔平",
+      "ownerBackground": {
+        "pt": "Fukushima Shohei é um ex-produtor de televisão local de Osaka que decidiu abrir sua própria agência para nutrir talentos de forma sustentável. Ele é conhecido por sua abordagem equilibrada, focando tanto no treinamento rigoroso quanto em garantir contratos comerciais estáveis para manter o fluxo de caixa. Sua personalidade calorosa, porém pragmática, atrai ídolos que buscam uma carreira longa e segura na indústria.",
+        "ja": "福島翔平は、持続可能な形でタレントを育成するために自身の事務所を立ち上げた、元大阪のローカルテレビ局プロデューサーです。厳しいレッスンと、資金繰りを安定させるための確実な商業契約の両方を重視する、バランスの取れたアプローチで知られています。彼の温厚かつ現実的な性格は、業界で長く安定したキャリアを求めるアイドルたちを惹きつけています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência opera com uma mentalidade familiar típica de Kansai, mas mantém operações de negócios rigorosas e pragmáticas. Eles preferem um crescimento constante e seguro através de eventos locais e aparições em mídias regionais, evitando riscos financeiros desnecessários.",
+        "ja": "関西特有のアットホームな雰囲気でありながら、厳格で現実的なビジネス運営を行っている事務所です。不必要な財政的リスクを避け、地元でのイベントや地方メディアへの出演を通じて、着実で安全な成長を優先しています。"
+      }
+    },
+    "ag_021": {
+      "agencyId": "ag_021",
+      "agencyNameRomaji": "Komorebi Project",
+      "agencyNameJp": "木漏れ日プロジェクト",
+      "ownerNameRomaji": "Mizuno Satoru",
+      "ownerNameJp": "水野 悟",
+      "ownerBackground": {
+        "pt": "Mizuno Satoru é um ex-produtor de música indie que se cansou das fórmulas pop convencionais. Ele é conhecido por sua personalidade excêntrica e foco em grupos de idols alternativos, valorizando a expressão artística e a originalidade acima do apelo de massa.",
+        "ja": "水野悟は、従来のポップスの公式に飽き飽きした元インディーズ音楽プロデューサーです。エキセントリックな性格で知られ、大衆性よりも芸術的表現やオリジナリティを重視し、オルタナティヴなアイドルグループの育成に注力しています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência foca em subculturas altamente específicas de Tóquio, criando bases de fãs pequenas, mas extremamente apaixonadas e leais. Embora não tenham um grande orçamento, compensam com conceitos únicos, moda vanguardista e uma identidade visual marcante.",
+        "ja": "東京の非常に特殊なサブカルチャーに焦点を当て、小規模ながらも非常に熱狂的で忠実なファンベースを構築しています。潤沢な予算はありませんが、ユニークなコンセプト、前衛的なファッション、際立った視覚的アイデンティティでそれを補っています。"
+      }
+    },
+    "ag_022": {
+      "agencyId": "ag_022",
+      "agencyNameRomaji": "Hakoniwa Production",
+      "agencyNameJp": "箱庭プロダクション",
+      "ownerNameRomaji": "Eguchi Soji",
+      "ownerNameJp": "江口 宗司",
+      "ownerBackground": {
+        "pt": "Soji Eguchi é um ex-produtor de música indie que sempre preferiu o cenário underground. Ele fundou sua agência para apoiar talentos peculiares que não se encaixam nos padrões da indústria tradicional. Sua abordagem é extremamente focada em nichos, preferindo fãs devotos a um apelo de massa.",
+        "ja": "江口宗司は、常にアングラシーンを好んできた元インディーズ音楽プロデューサーです。伝統的な業界の枠に収まらない個性的な才能を支援するために、自身の事務所を設立しました。大衆受けよりも熱狂的なファンを重視する、極めてニッチなアプローチをとっています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência modesta e excêntrica que se orgulha de focar em subculturas e conceitos únicos. Embora não tenham grande alcance comercial, seus poucos ídolos possuem uma base de fãs incrivelmente leal e apaixonada.",
+        "ja": "サブカルチャーや独自のコンセプトに特化していることを誇りとする、小規模で風変わりな事務所です。商業的なリーチは広くありませんが、所属アイドルたちは驚くほど忠実で情熱的なファンベースを持っています。"
+      }
+    },
+    "ag_023": {
+      "agencyId": "ag_023",
+      "agencyNameRomaji": "Gensou Syndicate",
+      "agencyNameJp": "幻想シンジケート",
+      "ownerNameRomaji": "Amamiya Kyosuke",
+      "ownerNameJp": "雨宮 京介",
+      "ownerBackground": {
+        "pt": "Amamiya Kyosuke é um ex-gerente de clubes noturnos de Shibuya que se voltou para a produção de talentos alternativos. Ele possui um olho afiado para estéticas underground e subculturas, mas muitas vezes ignora o apelo de massa. Sua personalidade é fria e calculista, preferindo a lealdade de um público de nicho focado.",
+        "ja": "雨宮京介は、渋谷の元ナイトクラブマネージャーであり、オルタナティヴな才能のプロデュースに転身しました。アンダーグラウンドな美学やサブカルチャーに対する鋭い目を持っていますが、大衆受けを無視することがよくあります。冷酷で計算高い性格で、熱狂的なニッチなファン層の忠誠心を好みます。"
+      },
+      "agencyCulture": {
+        "pt": "A agência opera nas sombras do mainstream, focando intensamente em conceitos alternativos e cyberpunk. Embora tenham um orçamento modesto, eles construíram uma reputação cult e uma base de fãs extremamente dedicada.",
+        "ja": "メインストリームの影で活動し、オルタナティヴやサイバーパンクのコンセプトに強く焦点を当てています。予算は控えめですが、カルト的な評価と非常に熱狂的なファンベースを築き上げています。"
+      }
+    },
+    "ag_024": {
+      "agencyId": "ag_024",
+      "agencyNameRomaji": "Minato Arts",
+      "agencyNameJp": "ミナトアーツ",
+      "ownerNameRomaji": "Imai Takayuki",
+      "ownerNameJp": "今井 隆之",
+      "ownerBackground": {
+        "pt": "Takayuki Imai trabalhou como gerente em uma grande agência antes de fundar sua própria empresa em Tóquio. Frustrado com a cultura de esgotamento rápido de ídolos, ele busca um ambiente mais sustentável e humano para seus talentos. Ele é conhecido por sua abordagem metódica e justa nos negócios.",
+        "ja": "今井隆之は大手事務所でマネージャーとして働いた後、東京で自身の会社を設立しました。アイドルの使い捨て文化に不満を抱き、タレントにとってより持続可能で人間らしい環境を目指しています。ビジネスにおける公平で計画的なアプローチで知られています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência adota uma filosofia de crescimento equilibrado, priorizando o bem-estar dos talentos e a construção de uma base de fãs leal. Embora não assumam grandes riscos financeiros, possuem uma reputação sólida de estabilidade e confiabilidade na indústria.",
+        "ja": "タレントの健康と熱心なファン層の構築を優先し、バランスの取れた成長哲学を採用しています。財務的に大きなリスクは取りませんが、業界内では安定性と信頼性のある堅実な評判を築いています。"
+      }
+    },
+    "ag_025": {
+      "agencyId": "ag_025",
+      "agencyNameRomaji": "Hidamari Arts",
+      "agencyNameJp": "ひだまりアーツ",
+      "ownerNameRomaji": "Nishimura Hiroshi",
+      "ownerNameJp": "西村 浩",
+      "ownerBackground": {
+        "pt": "Ex-gerente de uma grande agência de Tóquio, Hiroshi voltou para sua terra natal, Osaka, exausto com a natureza implacável e focada apenas em lucros da indústria. Ele fundou sua própria agência com o objetivo de ser como uma família acolhedora, priorizando a saúde física e mental, além da individualidade de cada talento.",
+        "ja": "東京の大手芸能事務所でマネージャーを務めていたが、利益至上主義の過酷な業界体質に疲弊し、地元である大阪に帰郷した。タレントの心身の健康と個性を何よりも大切にする、家族のような温かい事務所を目指している。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência com clima familiar que prioriza a felicidade e o desenvolvimento a longo prazo de seus ídolos em vez de lucros a curto prazo. Conhecida na região de Kansai como uma agência que 'cuida de seus talentos', ela conquista fãs locais dedicados através de atividades saudáveis e sustentáveis.",
+        "ja": "短期的な利益よりも、所属アイドルの幸福と長期的な育成を最優先するアットホームな社風。関西エリアでは「タレントを大切にする事務所」として知られ、健全な活動を通じて熱心な地元ファンを獲得している。"
+      }
+    },
+    "ag_026": {
+      "agencyId": "ag_026",
+      "agencyNameRomaji": "Harukaze Promotion",
+      "agencyNameJp": "春風プロモーション",
+      "ownerNameRomaji": "Yoshimura Daichi",
+      "ownerNameJp": "吉村 大地",
+      "ownerBackground": {
+        "pt": "Yoshimura Daichi é um ex-treinador vocal que decidiu abrir sua própria agência após ver jovens talentos serem explorados pela indústria. Ele prioriza o bem-estar e o desenvolvimento pessoal de seus ídolos acima do lucro rápido. Sua abordagem paternal atrai novatos, mas a falta de agressividade comercial mantém a agência pequena.",
+        "ja": "吉村大地は、業界で若い才能が搾取されるのを目の当たりにし、独立を決意した元ボイストレーナーです。目先の利益よりも、アイドルの心身の健康と個人的な成長を最優先しています。その父親のような温かいアプローチは新人から慕われていますが、商業的な強引さに欠けるため事務所の規模は小さいままです。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência acolhedora que funciona como uma verdadeira família para seus talentos. O foco está no crescimento sustentável e na saúde mental, mesmo que isso signifique perder oportunidades de marketing agressivo.",
+        "ja": "所属タレントにとって本当の家族のように機能する、温かくアットホームな事務所です。たとえ攻撃的なマーケティングの機会を逃すことになっても、持続可能な成長とメンタルヘルスを重視しています。"
+      }
+    },
+    "ag_027": {
+      "agencyId": "ag_027",
+      "agencyNameRomaji": "Yotsuba Promotion",
+      "agencyNameJp": "四葉プロモーション",
+      "ownerNameRomaji": "Umeda Shinichi",
+      "ownerNameJp": "梅田 真一",
+      "ownerBackground": {
+        "pt": "Shinichi trabalhou durante anos como gerente em uma agência implacável de Tóquio, onde viu ídolos serem tratados como produtos descartáveis. Desiludido, ele retornou à sua cidade natal, Osaka, para fundar uma agência focada no bem-estar humano. Ele é conhecido como uma figura paterna calorosa que sempre coloca a saúde de seus talentos acima dos lucros.",
+        "ja": "真一はかつて東京の冷酷な大手事務所でマネージャーとして働いていましたが、アイドルが使い捨てにされる現実に失望しました。彼は地元大阪に戻り、人間性を重視する小さな事務所を立ち上げました。利益よりもタレントの心身の健康を最優先する、温かい父親のような存在として知られています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência opera com uma filosofia familiar, priorizando o crescimento artístico e a saúde mental em vez de agendas exaustivas. Embora os recursos sejam escassos, o ambiente acolhedor atrai jovens talentos que buscam um espaço seguro para brilhar.",
+        "ja": "過酷なスケジュールよりも芸術的な成長とメンタルヘルスを優先する、アットホームな哲学で運営されています。資金は限られていますが、その温かい環境は、安心して輝ける場所を求める若い才能を惹きつけています。"
+      }
+    },
+    "ag_028": {
+      "agencyId": "ag_028",
+      "agencyNameRomaji": "Kamigata Promotion",
+      "agencyNameJp": "上方プロモーション",
+      "ownerNameRomaji": "Fujiwara Kenzo",
+      "ownerNameJp": "藤原 健三",
+      "ownerBackground": {
+        "pt": "Fujiwara Kenzo é um veterano da velha guarda que começou sua carreira nos teatros tradicionais de Osaka. Ele acredita no treinamento rigoroso e na construção de uma base sólida antes de qualquer estreia na mídia. Extremamente cauteloso, ele prefere evitar riscos financeiros e ignora as tendências modernas da internet.",
+        "ja": "藤原健三は、大阪の伝統的な劇場でキャリアをスタートさせた昔気質のベテランマネージャーです。メディアデビュー前の厳しい訓練と基礎固めを何よりも重視しています。非常に慎重な性格で、経済的なリスクを嫌い、現代のインターネットの流行を避ける傾向があります。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência pequena e tradicional que foca em talentos locais e apresentações ao vivo na região de Kansai. A cultura é rigorosa e conservadora, priorizando carreiras longas e estáveis em vez de fama rápida e passageira.",
+        "ja": "関西地方の地元タレントとライブパフォーマンスに焦点を当てた、小規模で伝統的な事務所です。社風は厳格かつ保守的で、一時的な名声よりも長く安定したキャリアを優先しています。"
+      }
+    },
+    "ag_029": {
+      "agencyId": "ag_029",
+      "agencyNameRomaji": "Raiga Entertainment",
+      "agencyNameJp": "雷牙エンターテインメント",
+      "ownerNameRomaji": "Katsuragi Gen",
+      "ownerNameJp": "葛城 源",
+      "ownerBackground": {
+        "pt": "Katsuragi Gen é um ex-promotor de shows underground conhecido por suas táticas de negociação implacáveis e mentalidade de alto risco. Ele leva seus idols ao limite absoluto, acreditando que apenas os mais famintos sobrevivem na implacável indústria de Tóquio.",
+        "ja": "葛城源は、冷酷な交渉術とハイリスク・ハイリターンな考え方で知られる元地下ライブプロモーターです。東京の過酷な業界で生き残るのは最もハングリーな者だけだと信じ、所属アイドルを極限まで追い込みます。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência pequena e ferozmente competitiva que prioriza a rápida expansão e o marketing de guerrilha em vez da estabilidade a longo prazo. Eles são notórios por seu recrutamento agressivo de talentos e agendas superlotadas.",
+        "ja": "長期的な安定よりも急速な拡大とゲリラ的マーケティングを優先する、小規模で競争の激しい事務所です。強引なスカウトと過密なスケジュールを組むことで悪名高いです。"
+      }
+    },
+    "ag_030": {
+      "agencyId": "ag_030",
+      "agencyNameRomaji": "Shinsekai Drops",
+      "agencyNameJp": "新世界ドロップス",
+      "ownerNameRomaji": "Hasegawa Jiro",
+      "ownerNameJp": "長谷川 次郎",
+      "ownerBackground": {
+        "pt": "Jiro Hasegawa é um ex-organizador de shows underground que conhece cada casa de show escondida em Osaka. Ele é excêntrico e apaixonado por conceitos musicais não convencionais, sempre preferindo a originalidade artística ao sucesso comercial fácil.",
+        "ja": "長谷川次郎は、大阪の隠れたライブハウスを知り尽くした元アングライベント主催者です。エキセントリックで型破りな音楽コンセプトに情熱を注ぎ、安易な商業的成功よりも芸術的なオリジナリティを常に優先します。"
+      },
+      "agencyCulture": {
+        "pt": "Focada em subculturas e conceitos de nicho como 'idols de rock alternativo' ou temas de comédia local, a agência atrai um público pequeno, porém fanaticamente leal na região de Kansai.",
+        "ja": "オルタナティヴ・ロックや地元密着型のお笑いテーマなど、サブカルチャーやニッチなコンセプトに特化しており、関西地方で小規模ながらも熱狂的なファン層を惹きつけています。"
+      }
+    },
+    "ag_031": {
+      "agencyId": "ag_031",
+      "agencyNameRomaji": "Asunaro Project",
+      "agencyNameJp": "あすなろプロジェクト",
+      "ownerNameRomaji": "Matsuoka Ryohei",
+      "ownerNameJp": "松岡 良平",
+      "ownerBackground": {
+        "pt": "Ryohei é um ex-diretor de teatro local de Fukuoka que se cansou da extrema pressão e exploração na indústria do entretenimento. Ele fundou sua própria agência com o objetivo de proteger jovens talentos, priorizando sempre a saúde mental e física acima do lucro rápido. Embora falte orçamento e influência corporativa, ele compensa com dedicação paternal e treinamento personalizado.",
+        "ja": "松岡は福岡の元地元劇団の演出家で、芸能界の過度なプレッシャーと搾取的な体質に嫌気がさしていました。若き才能を守り、目先の利益よりも心身の健康を最優先にするために自身の事務所を設立しました。予算や企業としての影響力には欠けますが、父親のような献身的な姿勢と丁寧な個別指導でカバーしています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência pequena e acolhedora que funciona como uma família, focada inteiramente no desenvolvimento humano e artístico de seus ídolos. O crescimento comercial é lento, mas os talentos desenvolvem uma lealdade inquebrável à empresa.",
+        "ja": "利益よりもアイドルの人間的・芸術的な成長を優先する、家族のような温かい小規模事務所です。商業的な成長はゆっくりですが、所属タレントの事務所に対する忠誠心は非常に高いです。"
+      }
+    },
+    "ag_032": {
+      "agencyId": "ag_032",
+      "agencyNameRomaji": "Genkai Productions",
+      "agencyNameJp": "玄海プロダクション",
+      "ownerNameRomaji": "Takahashi Shinzo",
+      "ownerNameJp": "高橋 晋三",
+      "ownerBackground": {
+        "pt": "Takahashi Shinzo é um ex-produtor de uma emissora de TV local em Fukuoka que decidiu abrir sua própria agência após a aposentadoria. Ele é extremamente cauteloso com finanças e prefere construir carreiras sólidas através de comerciais regionais em vez de arriscar grandes estreias nacionais. Sua vasta rede de contatos em Kyushu garante trabalhos constantes, embora modestos, para seus talentos.",
+        "ja": "高橋晋三は、福岡のローカルテレビ局の元プロデューサーで、定年退職後に自身の事務所を設立しました。財務に対して非常に慎重で、リスクを伴う全国デビューよりも、地域のCMなどを通じて堅実なキャリアを築くことを好みます。九州での幅広い人脈により、控えめながらも安定した仕事をタレントに提供しています。"
+      },
+      "agencyCulture": {
+        "pt": "A Genkai Productions foca em estabilidade a longo prazo, priorizando o mercado local de Kyushu de forma conservadora. A agência é conhecida por seu ambiente seguro e tradicional, mas frequentemente é criticada por sua falta de ambição para alcançar o estrelato nacional.",
+        "ja": "玄海プロダクションは、保守的なアプローチで九州のローカル市場を最優先し、長期的な安定に焦点を当てています。安全で伝統的な環境で知られていますが、全国的なスターダムを目指す野心に欠けているとしばしば批判されます。"
+      }
+    },
+    "ag_033": {
+      "agencyId": "ag_033",
+      "agencyNameRomaji": "Chitose Management",
+      "agencyNameJp": "千歳マネジメント",
+      "ownerNameRomaji": "Watanabe Koji",
+      "ownerNameJp": "渡辺 浩二",
+      "ownerBackground": {
+        "pt": "Watanabe Koji é um ex-contador de uma grande gravadora que valoriza a estabilidade financeira acima de tudo. Ele administra a agência com cautela extrema, preferindo o crescimento lento e seguro para evitar qualquer risco de escândalo. Sua abordagem é paternalista, focando em proteger seus talentos e manter as contas sempre no azul.",
+        "ja": "渡辺浩二は、大手レコード会社で経理を務めていた経歴を持ち、何よりも財務の安定を重んじる人物です。極端なまでに慎重な経営を行い、スキャンダルのリスクを避けるためにゆっくりとした確実な成長を好みます。所属タレントを保護し、常に黒字を維持することに注力する家父長的なアプローチをとっています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma pequena agência de Tóquio focada em trabalhos de baixo risco, como comerciais locais e figuração. Eles ignoram as tendências passageiras em favor de um desenvolvimento de ídolos tradicional e disciplinado.",
+        "ja": "東京にある小さな事務所で、地方CMやエキストラなど、リスクの低い仕事を重視しています。一時的な流行を避け、伝統的で規律あるアイドル育成を行っています。"
+      }
+    },
+    "ag_034": {
+      "agencyId": "ag_034",
+      "agencyNameRomaji": "Gekiryu Entertainment",
+      "agencyNameJp": "激流エンターテインメント",
+      "ownerNameRomaji": "Matsubara Taiga",
+      "ownerNameJp": "松原 大河",
+      "ownerBackground": {
+        "pt": "Matsubara Taiga é um ex-promotor de eventos underground em Osaka conhecido por suas táticas de marketing implacáveis e agressivas. Ele fundou a agência com a filosofia de que 'qualquer publicidade é boa publicidade', muitas vezes forçando seus talentos a aceitarem qualquer trabalho que traga visibilidade rápida. Ele é barulhento, extremamente exigente e focado inteiramente em dominar o mercado local a qualquer custo.",
+        "ja": "松原大河は、大阪のアンダーグラウンドなイベントプロモーター出身で、容赦ない攻撃的なマーケティング手法で知られています。「悪名は無名に勝る」という哲学のもと、知名度を上げるためならタレントにどんな仕事でも引き受けさせます。声が大きく、要求が非常に厳しく、手段を選ばず地元市場を支配することに執念を燃やしています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência novata e feroz de Osaka que foca em táticas de guerrilha e até mesmo controvérsias para ganhar atenção rápida na mídia. O ambiente interno é de altíssima pressão, onde a quantidade de trabalhos e a exposição constante importam muito mais do que o desenvolvimento artístico ou o bem-estar dos ídolos.",
+        "ja": "ゲリラ的な宣伝活動や意図的な炎上すら利用して、メディアの注目を素早く集める大阪の攻撃的な新興事務所です。タレントの芸術的成長や健康よりも、圧倒的な仕事量と絶え間ない露出を最優先する、非常にプレッシャーの強い環境です。"
+      }
+    },
+    "ag_035": {
+      "agencyId": "ag_035",
+      "agencyNameRomaji": "Kikyo Promotion",
+      "agencyNameJp": "桔梗プロモーション",
+      "ownerNameRomaji": "Shibata Isao",
+      "ownerNameJp": "柴田 功",
+      "ownerBackground": {
+        "pt": "Isao Shibata é um empresário veterano que acredita no caminho tradicional dos idols, focado num crescimento lento e constante. Ele trabalhou anteriormente numa grande agência, mas saiu para fundar o seu próprio negócio, evitando os artifícios e tendências modernas. A sua abordagem rigorosa, mas paternal, garante que os seus talentos sejam bem-educados, embora muitas vezes lhes falte uma popularidade explosiva.",
+        "ja": "柴田功は、ゆっくりとした着実な成長という伝統的なアイドルの育成方針を重んじるベテランマネージャーです。かつては大手事務所に勤務していましたが、現代の過激な話題作りを嫌い独立しました。彼の厳格かつ父親のような指導により、所属タレントは礼儀正しいものの、爆発的な人気を得るには至っていません。"
+      },
+      "agencyCulture": {
+        "pt": "A Kikyo Promotion opera com um orçamento muito limitado, concentrando-se em eventos locais e meios de comunicação tradicionais em vez de adotar estratégias digitais arriscadas. A agência é conhecida na indústria por apresentar talentos extremamente educados, mas com uma imagem um pouco antiquada.",
+        "ja": "桔梗プロモーションは限られた予算で運営されており、リスクの伴うネット戦略よりも地道な営業や伝統的なメディア活動を重視しています。非常に礼儀正しく、どこか古風な魅力を持つタレントを育成することで知られています。"
+      }
+    },
+    "ag_036": {
+      "agencyId": "ag_036",
+      "agencyNameRomaji": "Hokushin Management",
+      "agencyNameJp": "北辰マネジメント",
+      "ownerNameRomaji": "Abe Tetsuro",
+      "ownerNameJp": "阿部 哲郎",
+      "ownerBackground": {
+        "pt": "Abe Tetsuro é um ex-apresentador de rádio local em Hokkaido que é apaixonado por subculturas e música alternativa. Ele fundou a agência para apoiar idols que não se encaixam nos padrões convencionais, focando em conceitos únicos como o estilo gótico ou misturas de folk e idol. Ele é excêntrico, mas valoriza profundamente a integridade artística acima do apelo de massa.",
+        "ja": "阿部哲郎は、サブカルチャーとオルタナティヴ音楽をこよなく愛する北海道の元ローカルラジオパーソナリティです。彼は、ゴシックやフォークソングとの融合など、型にはまらない独自のコンセプトを持つアイドルを支援するためにこの事務所を設立しました。エキセントリックな性格ですが、大衆受けよりも芸術的な誠実さを深く重んじています。"
+      },
+      "agencyCulture": {
+        "pt": "A Hokushin Management foca em conceitos de idols altamente especializados e de nicho, construindo uma base de fãs pequena, mas ferozmente leal na região norte. Eles priorizam a liberdade criativa e uma marca única em vez de uma rápida expansão comercial.",
+        "ja": "北辰マネジメントは、高度に専門化されたニッチなアイドルコンセプトに注力し、北部地域で小規模ながらも熱狂的なファン層を築いています。急速な商業的拡大よりも、クリエイティブな自由と独自のブランディングを優先しています。"
+      }
+    },
+    "ag_037": {
+      "agencyId": "ag_037",
+      "agencyNameRomaji": "Namba Harmony",
+      "agencyNameJp": "難波ハーモニー",
+      "ownerNameRomaji": "Nakajima Kenta",
+      "ownerNameJp": "中島 健太",
+      "ownerBackground": {
+        "pt": "Nakajima Kenta trabalhou como gerente de palco em vários teatros locais em Osaka antes de abrir sua própria agência. Ele é conhecido por sua abordagem metódica e justa, sempre equilibrando o bem-estar dos talentos com as necessidades comerciais. Sua atitude calorosa e pé no chão atrai ídolos que buscam um ambiente de trabalho estável.",
+        "ja": "中島健太は、大阪の地元劇場で舞台監督として働いた後、自身の事務所を設立しました。タレントの健康と商業的なニーズのバランスを常に保つ、公平で几帳面なアプローチで知られています。彼の温かく地に足の着いた態度は、安定した職場環境を求めるアイドルたちを惹きつけています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência novata que valoriza tanto o treinamento prático quanto a presença em programas de variedades locais. Embora pequena e com orçamento limitado, a Namba Harmony é respeitada por seu crescimento constante e por não forçar seus talentos ao limite.",
+        "ja": "実践的なトレーニングと地元バラエティ番組への出演を等しく重視する新興事務所です。小規模で予算は限られていますが、難波ハーモニーは着実な成長とタレントに無理をさせない方針で評価されています。"
+      }
+    },
+    "ag_038": {
+      "agencyId": "ag_038",
+      "agencyNameRomaji": "Guren Arts",
+      "agencyNameJp": "紅蓮アーツ",
+      "ownerNameRomaji": "Sakai Ryuji",
+      "ownerNameJp": "酒井竜二",
+      "ownerBackground": {
+        "pt": "Ryuji Sakai é um ex-gerente de clubes noturnos de Tóquio que entrou no mercado de idols buscando lucro e influência. Ele é conhecido por sua atitude implacável e por exigir que seus talentos façam qualquer coisa por atenção na mídia. Para ele, qualquer publicidade, mesmo a negativa, é uma vitória se gerar engajamento.",
+        "ja": "酒井竜二は、東京の元ナイトクラブ支配人であり、利益と影響力を求めてアイドル業界に参入した。冷酷な態度で知られ、メディアの注目を集めるためならタレントに過激なことでも要求する。彼にとって、悪名であっても話題になればそれは勝利である。"
+      },
+      "agencyCulture": {
+        "pt": "A agência opera sob uma mentalidade de 'vencer a qualquer custo', utilizando táticas de guerrilha e acrobacias de relações públicas controversas. O ambiente é de extrema pressão, onde apenas os talentos mais durões e dispostos a tudo sobrevivem.",
+        "ja": "「勝てば官軍」の精神で運営されており、ゲリラ的なプロモーションや物議を醸す炎上商法を多用する。プレッシャーが非常に高く、何でもやる覚悟のあるタフなタレントだけが生き残れる過酷な環境である。"
+      }
+    },
+    "ag_039": {
+      "agencyId": "ag_039",
+      "agencyNameRomaji": "Meijo Promotion",
+      "agencyNameJp": "名城プロモーション",
+      "ownerNameRomaji": "Kato Noboru",
+      "ownerNameJp": "加藤 昇",
+      "ownerBackground": {
+        "pt": "Kato Noboru é um ex-produtor de uma emissora de TV local em Nagoya que decidiu fundar sua própria agência. Ele acredita em um crescimento constante e seguro, priorizando o bem-estar de seus talentos sem arriscar muito financeiramente. Sua vasta rede de contatos na região de Chubu o ajuda a conseguir trabalhos consistentes para a agência.",
+        "ja": "加藤昇は、名古屋のローカルテレビ局の元プロデューサーであり、独立して自身の事務所を設立しました。彼は過度な財務的リスクを避け、タレントの健康と着実な成長を第一に考える堅実な経営を信条としています。中部地方における彼の幅広い人脈は、事務所に安定した仕事をもたらしています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência novata que foca em equilibrar o treinamento de idols com trabalhos locais na região de Nagoya. Embora não tenham um grande orçamento, são conhecidos por sua gestão ética e ambiente familiar.",
+        "ja": "名古屋周辺での地域密着型の仕事とアイドルの育成をバランス良く両立させる新興事務所です。予算は限られていますが、倫理的なマネジメントとアットホームな雰囲気で知られています。"
+      }
+    },
+    "ag_040": {
+      "agencyId": "ag_040",
+      "agencyNameRomaji": "Naniwa Egao Project",
+      "agencyNameJp": "なにわ笑顔プロジェクト",
+      "ownerNameRomaji": "Yamamoto Kiyoshi",
+      "ownerNameJp": "山本 清",
+      "ownerBackground": {
+        "pt": "Kiyoshi é um ex-gerente que se cansou de ver a grande indústria tratar os idols como produtos descartáveis. Ele voltou para sua cidade natal, Osaka, para fundar sua própria agência, focando no bem-estar e no crescimento pessoal de seus talentos. Ele é uma figura paterna, calorosa e ferozmente protetora com sua pequena equipe.",
+        "ja": "清は、アイドルを使い捨ての消耗品として扱う業界に嫌気がさした元マネージャーです。故郷の大阪に戻り、タレントの心身の健康と人間的成長を第一に考える自身の事務所を設立しました。彼は温かく父親のような存在であり、所属タレントを全力で守り抜く性格です。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência minúscula e familiar em Osaka que prioriza a felicidade de seus idols acima do lucro rápido. Embora não tenham grandes conexões ou um orçamento robusto, seus talentos são conhecidos por seus sorrisos genuínos e forte lealdade.",
+        "ja": "目先の利益よりもアイドルの幸せを最優先する、大阪の小さなアットホームな事務所です。業界のコネや予算には乏しいものの、所属タレントの心からの笑顔と強い絆が評価されています。"
+      }
+    },
+    "ag_041": {
+      "agencyId": "ag_041",
+      "agencyNameRomaji": "Sakurabashi Promotion",
+      "agencyNameJp": "桜橋プロモーション",
+      "ownerNameRomaji": "Inoue Masato",
+      "ownerNameJp": "井上雅人",
+      "ownerBackground": {
+        "pt": "Masato Inoue é um ex-produtor de TV local que decidiu abrir sua própria agência para apoiar idols iniciantes na região de Kansai. Ele é conhecido por sua abordagem pragmática, mas atenciosa, equilibrando as realidades financeiras com os sonhos de seus talentos.",
+        "ja": "井上雅人は、関西地方で駆け出しのアイドルを支援するために自身の事務所を立ち上げた元ローカル番組のプロデューサーです。現実的な資金面とタレントの夢を天秤にかけながら、堅実で思いやりのあるマネジメントを行うことで知られています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência muito pequena, mas bem organizada, que foca em um crescimento constante e sustentável em vez de sucesso da noite para o dia. Eles valorizam a construção de uma base sólida de fãs locais em Osaka antes de pensar em expansão.",
+        "ja": "一夜にしての成功よりも、堅実で持続可能な成長を重視する、小規模ながらも組織化された事務所です。全国展開を考える前に、まずは大阪で強固なローカルファン層を築くことを大切にしています。"
+      }
+    },
+    "ag_042": {
+      "agencyId": "ag_042",
+      "agencyNameRomaji": "Hoshioto Production",
+      "agencyNameJp": "星音プロダクション",
+      "ownerNameRomaji": "Kojima Natsumi",
+      "ownerNameJp": "小島 夏美",
+      "ownerBackground": {
+        "pt": "Natsumi Kojima é uma ex-professora de canto que decidiu abrir sua própria agência após ver jovens talentos sendo explorados pela indústria. Ela trata seus ídolos como família, focando mais no bem-estar mental e desenvolvimento vocal do que no lucro rápido.",
+        "ja": "小島夏美は、業界で搾取される若い才能を目の当たりにし、自身の事務所を立ち上げることを決意した元ボーカルトレーナーです。彼女はアイドルを家族のように扱い、目先の利益よりも精神面やボーカルのケアを重視しています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência pequena e acolhedora em Tóquio que prioriza o desenvolvimento pessoal e a saúde dos artistas. Embora o orçamento seja muito limitado e os recursos escassos, a lealdade e o respeito mútuo entre a equipe e os ídolos são inabaláveis.",
+        "ja": "アーティストの個人的な成長と健康を最優先する、東京の小さくアットホームな事務所です。予算は非常に限られていますが、スタッフとアイドルの間の絆と相互の尊重は揺るぎません。"
+      }
+    },
+    "ag_043": {
+      "agencyId": "ag_043",
+      "agencyNameRomaji": "Kotobuki Management",
+      "agencyNameJp": "寿マネジメント",
+      "ownerNameRomaji": "Otsuka Hajime",
+      "ownerNameJp": "大塚 肇",
+      "ownerBackground": {
+        "pt": "Otsuka Hajime trabalhou como contador em uma grande agência de talentos de Tóquio antes de fundar seu próprio negócio. Ele é extremamente avesso a riscos, recusando-se a contrair empréstimos ou fazer grandes investimentos sem retorno garantido. Essa cautela excessiva manteve a agência estagnada no nível mais baixo, mas a protegeu da falência.",
+        "ja": "大塚肇は、東京の大手芸能事務所で経理として働いた後、独立して自身の事務所を設立しました。彼は極端にリスクを嫌い、確実な見返りがない限り、ローンを組んだり大規模な投資を行ったりすることを拒否します。この過度な慎重さが事務所の成長を最下層で停滞させていますが、同時に倒産から守ってもいます。"
+      },
+      "agencyCulture": {
+        "pt": "A agência valoriza a tradição e o crescimento lento e constante, preferindo evitar tendências passageiras e escândalos. O ambiente de trabalho é rigoroso e metódico, ideal para talentos que buscam uma carreira estável em vez de fama meteórica.",
+        "ja": "事務所は伝統とゆっくりとした着実な成長を重んじ、一時的な流行やスキャンダルを徹底的に避けます。職場環境は厳格かつ規則的であり、爆発的な名声よりも安定したキャリアを求めるタレントにとって理想的です。"
+      }
+    },
+    "ag_044": {
+      "agencyId": "ag_044",
+      "agencyNameRomaji": "Tsumugi Arts",
+      "agencyNameJp": "紡ぎアーツ",
+      "ownerNameRomaji": "Hoshino Yutaka",
+      "ownerNameJp": "星野 豊",
+      "ownerBackground": {
+        "pt": "Yutaka trabalhou como gerente em uma grande agência de Tóquio, mas desiludiu-se com a forma como os ídolos eram tratados como produtos descartáveis. Ele retornou à sua região natal para fundar uma pequena agência onde o bem-estar e o crescimento pessoal dos talentos são a prioridade absoluta.",
+        "ja": "豊はかつて東京の大手事務所でマネージャーを務めていたが、アイドルを使い捨ての消耗品のように扱う業界の体質に幻滅した。彼は地元に戻り、タレントの心身の健康と人間的な成長を最優先する小さな事務所を立ち上げた。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência minúscula com uma atmosfera familiar e acolhedora. Embora o orçamento seja muito limitado, a agência é conhecida por proteger seus talentos e focar no desenvolvimento a longo prazo em vez de lucros rápidos.",
+        "ja": "アットホームで家族のような雰囲気を持つ極小規模な事務所。予算は非常に限られているが、目先の利益よりもタレントを守り、長期的な成長に焦点を当てることで知られている。"
+      }
+    },
+    "ag_045": {
+      "agencyId": "ag_045",
+      "agencyNameRomaji": "Kakurega Productions",
+      "agencyNameJp": "隠れ家プロダクション",
+      "ownerNameRomaji": "Oikawa Keisuke",
+      "ownerNameJp": "及川 圭介",
+      "ownerBackground": {
+        "pt": "Oikawa Keisuke é um ex-produtor de música indie excêntrico com uma paixão profunda por subculturas underground. Ele fundou a agência em um pequeno escritório no subsolo em Akihabara, buscando talentos crus e não convencionais que as grandes empresas ignoram. Sua abordagem é altamente experimental, preferindo a autenticidade pura à perfeição comercial.",
+        "ja": "及川圭介は、アングラなサブカルチャーに深い情熱を注ぐ風変わりな元インディーズ音楽プロデューサーです。大手が見落とすような、荒削りで型破りな才能を発掘するため、秋葉原の地下にある小さなオフィスで事務所を立ち上げました。商業的な完璧さよりも個人の持ち味を重視する、非常に実験的なアプローチをとっています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência foca estritamente em nichos de mercado, como ídolos de estilo gótico ou temáticas cyberpunk, operando quase inteiramente fora do mainstream. É conhecida por ter uma base de fãs pequena, porém extremamente leal e dedicada.",
+        "ja": "ゴシックやサイバーパンクといった特定のニッチな市場に特化しており、メインストリームからはほぼ完全に外れた活動をしています。規模は小さいものの、熱狂的で非常に忠誠心の高いファン層を抱えていることで知られています。"
+      }
+    },
+    "ag_046": {
+      "agencyId": "ag_046",
+      "agencyNameRomaji": "Kazamidori Arts",
+      "agencyNameJp": "風見鶏アーツ",
+      "ownerNameRomaji": "Endo Kazuya",
+      "ownerNameJp": "遠藤 和也",
+      "ownerBackground": {
+        "pt": "Kazuya trabalhou como engenheiro de som em Tóquio antes de retornar à sua cidade natal para fundar sua própria agência. Ele acredita em um crescimento constante e equilibrado, valorizando tanto o desenvolvimento do talento quanto o bem-estar da equipe. Apesar do orçamento limitado, ele é conhecido por sua paciência e dedicação paternal.",
+        "ja": "和也は東京で音響エンジニアとして働いた後、地元に戻り自身の事務所を設立しました。才能の育成とスタッフの健康の両方を重視し、着実でバランスの取れた成長を信条としています。限られた予算の中でも、その忍耐強さと父親のような献身的な姿勢で知られています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência recém-fundada e de pequeno porte que foca em construir uma base sólida sem assumir riscos desnecessários. Eles priorizam um ambiente acolhedor e estão se preparando cuidadosamente para recrutar seus primeiros talentos locais.",
+        "ja": "不必要なリスクを負わず、確固たる基盤を築くことに注力する設立間もない小規模事務所。アットホームな環境を優先し、初めての地元タレントのスカウトに向けて慎重に準備を進めています。"
+      }
+    },
+    "ag_047": {
+      "agencyId": "ag_047",
+      "agencyNameRomaji": "Meioh Promotion",
+      "agencyNameJp": "名桜プロモーション",
+      "ownerNameRomaji": "Kondo Michio",
+      "ownerNameJp": "近藤 道男",
+      "ownerBackground": {
+        "pt": "Ex-diretor de rádio local em Nagoya, Michio fundou a agência para cultivar talentos versáteis da região de Tokai. Ele é conhecido por sua abordagem metódica e paciente, preferindo o crescimento sustentável a sucessos passageiros.",
+        "ja": "名古屋の地元ラジオ局の元ディレクターである道男は、東海地方から多才なタレントを育成するために事務所を設立しました。彼は一時的な成功よりも持続可能な成長を好む、忍耐強く計画的なアプローチで知られています。"
+      },
+      "agencyCulture": {
+        "pt": "A agência foca em um desenvolvimento equilibrado, garantindo que os ídolos sejam competentes em várias áreas do entretenimento. Embora seja uma empresa iniciante, possui fortes conexões com a mídia local de Nagoya.",
+        "ja": "所属アイドルがエンターテインメントの様々な分野で確かな実力を持てるよう、バランスの取れた育成に注力しています。新興企業ですが、名古屋の地元メディアとの強固な繋がりを持っています。"
+      }
+    },
+    "ag_048": {
+      "agencyId": "ag_048",
+      "agencyNameRomaji": "Hyoujin Entertainment",
+      "agencyNameJp": "氷刃エンターテインメント",
+      "ownerNameRomaji": "Igarashi Gaku",
+      "ownerNameJp": "五十嵐 岳",
+      "ownerBackground": {
+        "pt": "Igarashi Gaku é um ex-promotor de rock underground de Susukino que trouxe seu estilo implacável para a indústria de idols. Ele acredita em táticas de choque, marketing viral e turnês incessantes, não se importando muito com o desgaste físico de seus talentos. Sua ambição é dominar o mercado do norte do Japão a qualquer custo, atropelando a concorrência se necessário.",
+        "ja": "五十嵐岳は、すすきの出身の元アングラロックプロモーターであり、その容赦ないスタイルをアイドル業界に持ち込みました。彼はショックバリューやバイラルマーケティング、そして絶え間ないツアーを信条としており、タレントの疲労をあまり気にしません。手段を選ばず北日本の市場を支配するという野望を抱いています。"
+      },
+      "agencyCulture": {
+        "pt": "Conhecida por suas táticas de guerrilha e campanhas de marketing agressivas, a agência não tem medo de usar controvérsias para ganhar visibilidade. O ambiente de trabalho é brutal e focado em resultados rápidos, o que explica a alta rotatividade e o fato de não terem nenhum idol no elenco atualmente.",
+        "ja": "ゲリラ戦術や攻撃的なマーケティングキャンペーンで知られ、知名度を上げるためには炎上や論争も辞さない事務所です。労働環境は過酷で短期的な結果を重視するため、離職率が非常に高く、現在の所属タレントがゼロである理由もそこにあります。"
+      }
+    },
+    "ag_049": {
+      "agencyId": "ag_049",
+      "agencyNameRomaji": "Matsukaze Office",
+      "agencyNameJp": "松風オフィス",
+      "ownerNameRomaji": "Murakami Tadashi",
+      "ownerNameJp": "村上 正",
+      "ownerBackground": {
+        "pt": "Murakami Tadashi trabalhou como contador em uma grande agência antes de abrir seu próprio negócio. Ele prefere evitar riscos financeiros, focando em talentos que oferecem estabilidade a longo prazo em vez de fama rápida.",
+        "ja": "村上正は、大手事務所で経理として働いた後、自身のオフィスを設立しました。彼は経済的なリスクを避けることを好み、急激な名声よりも長期的な安定をもたらす才能に焦点を当てています。"
+      },
+      "agencyCulture": {
+        "pt": "Uma agência pequena e tradicional que valoriza a lealdade e o crescimento seguro. Eles evitam escândalos e investimentos arriscados a todo custo, resultando em um ritmo de expansão muito lento e constante.",
+        "ja": "忠誠心と安全な成長を重んじる、小規模で伝統的な事務所です。スキャンダルや危険な投資を何よりも避けるため、拡大のペースは非常に遅く、そして着実です。"
+      }
+    }
+  }
+}

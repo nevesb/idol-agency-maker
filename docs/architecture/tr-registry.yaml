@@ -1,0 +1,2069 @@
+# Technical Requirement ID Registry
+#
+# PURPOSE: Persistent, stable IDs for every GDD technical requirement.
+# Prevents TR-ID renumbering across /architecture-review runs, which would
+# break story references.
+#
+# RULES:
+#   - IDs are PERMANENT. Never renumber, never delete (use status: deprecated).
+#   - Add new entries only at the END of each system's list.
+#   - When a GDD requirement is reworded (same intent): update `requirement`
+#     text and add a `revised` date. The ID stays the same.
+#   - When a requirement is removed from the GDD: set status: deprecated.
+#   - When a requirement is split or replaced: set status: superseded-by with
+#     the new TR-ID(s).
+#
+# WRITTEN BY: /architecture-review (appends new entries, never overwrites)
+# READ BY:    /create-stories (embed IDs in stories)
+#             /story-done (look up current requirement text at review time)
+#             /story-readiness (validate TR-ID exists and is active)
+#
+# ID FORMAT: TR-[system-slug]-[NNN]
+#   system-slug = short slug matching the GDD system name
+#   NNN = three-digit zero-padded sequence per system, starting at 001
+#
+# STATUS VALUES: active | deprecated | superseded-by: TR-[system]-NNN
+
+version: 2
+last_updated: "2026-04-07"
+
+requirements:
+  # ── stats (idol-attribute-stats.md) ──
+  - id: TR-stats-001
+    system: stats
+    gdd: design/gdd/idol-attribute-stats.md
+    requirement: "16 visible + 6 hidden attributes per idol, PT, TA, traits, VocalProfile from uint64 seed"
+    created: "2026-04-07"
+    status: active
+  - id: TR-stats-002
+    system: stats
+    gdd: design/gdd/idol-attribute-stats.md
+    requirement: "Hidden attributes never surfaced as numeric values to player"
+    created: "2026-04-07"
+    status: active
+  - id: TR-stats-003
+    system: stats
+    gdd: design/gdd/idol-attribute-stats.md
+    requirement: "Tier F-SSS derived from PT via lookup table; PT never mutates"
+    created: "2026-04-07"
+    status: active
+  - id: TR-stats-004
+    system: stats
+    gdd: design/gdd/idol-attribute-stats.md
+    requirement: "Weekly growth via 6-factor multiplicative formula clamped to ceiling"
+    created: "2026-04-07"
+    status: active
+  - id: TR-stats-005
+    system: stats
+    gdd: design/gdd/idol-attribute-stats.md
+    requirement: "Physical attribute decay by age bracket; 4 non-decaying attributes excluded"
+    created: "2026-04-07"
+    status: active
+  - id: TR-stats-006
+    system: stats
+    gdd: design/gdd/idol-attribute-stats.md
+    requirement: "Burnout recovery formula; permanent -5 loss if forced to work during burnout"
+    created: "2026-04-07"
+    status: active
+  - id: TR-stats-007
+    system: stats
+    gdd: design/gdd/idol-attribute-stats.md
+    requirement: "Scout precision noise injection per pipeline type"
+    created: "2026-04-07"
+    status: active
+  - id: TR-stats-008
+    system: stats
+    gdd: design/gdd/idol-attribute-stats.md
+    requirement: "Conditional trait activation requires show-system context metadata"
+    created: "2026-04-07"
+    status: active
+
+  # ── time (time-calendar.md) ──
+  - id: TR-time-001
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Canonical unit is 1 week; 4 weeks/month, 12 months/year, 48 weeks/year"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-002
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Three simulation modes Live/Pause/Skip as state machine; transitions <100ms"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-003
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Skip mode processes full week in <200ms"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-004
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Live mode maintains 60fps during daily processing"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-005
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Speed multipliers scale wall-clock timer; state persists across Pause/Resume"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-006
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Priority event queue interrupts Skip/Live forcing Pause"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-007
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Pause mode consumes zero CPU processing cycles"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-008
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Support 960+ weeks (20 years) without integer overflow"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-009
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "Seasonal events from World Pack indexed by month/week for O(1) lookup"
+    created: "2026-04-07"
+    status: active
+  - id: TR-time-010
+    system: time
+    gdd: design/gdd/time-calendar.md
+    requirement: "End-of-month reports trigger on week 4 of each month"
+    created: "2026-04-07"
+    status: active
+
+  # ── week-sim (week-simulation.md) ──
+  - id: TR-week-sim-001
+    system: week-sim
+    gdd: design/gdd/week-simulation.md
+    requirement: "4-phase pipeline Start/Daily/End/Report with budgets 50/200/200/50ms"
+    created: "2026-04-07"
+    status: active
+  - id: TR-week-sim-002
+    system: week-sim
+    gdd: design/gdd/week-simulation.md
+    requirement: "Jobs for different idols computed in parallel in Phase 2"
+    created: "2026-04-07"
+    status: active
+  - id: TR-week-sim-003
+    system: week-sim
+    gdd: design/gdd/week-simulation.md
+    requirement: "Performance Events dispatched to show-system not generic formula"
+    created: "2026-04-07"
+    status: active
+  - id: TR-week-sim-004
+    system: week-sim
+    gdd: design/gdd/week-simulation.md
+    requirement: "50 rival agencies complete within 100ms total at 2ms each"
+    created: "2026-04-07"
+    status: active
+  - id: TR-week-sim-005
+    system: week-sim
+    gdd: design/gdd/week-simulation.md
+    requirement: "50 agencies x 3000 idols in Skip mode within 500ms"
+    created: "2026-04-07"
+    status: active
+  - id: TR-week-sim-006
+    system: week-sim
+    gdd: design/gdd/week-simulation.md
+    requirement: "Mid-Live agenda changes only affect unprocessed days; processed results immutable"
+    created: "2026-04-07"
+    status: active
+  - id: TR-week-sim-007
+    system: week-sim
+    gdd: design/gdd/week-simulation.md
+    requirement: "Moment Engine selects up to 5 headlines post-simulation by ranking formula"
+    created: "2026-04-07"
+    status: active
+
+  # ── economy (agency-economy.md) ──
+  - id: TR-economy-001
+    system: economy
+    gdd: design/gdd/agency-economy.md
+    requirement: "6 revenue streams and 11 expense categories as separate ledger entries"
+    created: "2026-04-07"
+    status: active
+  - id: TR-economy-002
+    system: economy
+    gdd: design/gdd/agency-economy.md
+    requirement: "Monthly processing fires at end of week 4 triggered by Time/Calendar"
+    created: "2026-04-07"
+    status: active
+  - id: TR-economy-003
+    system: economy
+    gdd: design/gdd/agency-economy.md
+    requirement: "Agency tier thresholds as configurable lookup table not hardcoded"
+    created: "2026-04-07"
+    status: active
+  - id: TR-economy-004
+    system: economy
+    gdd: design/gdd/agency-economy.md
+    requirement: "Debt state machine Healthy/Difficulty/Crisis/GameOver"
+    created: "2026-04-07"
+    status: active
+  - id: TR-economy-005
+    system: economy
+    gdd: design/gdd/agency-economy.md
+    requirement: "Market value formula owned by Economy referenced by Market/Transfer"
+    created: "2026-04-07"
+    status: active
+  - id: TR-economy-006
+    system: economy
+    gdd: design/gdd/agency-economy.md
+    requirement: "Facility upgrade costs leveled 1-3 levels per facility"
+    created: "2026-04-07"
+    status: active
+
+  # ── wellness (happiness-wellness.md) ──
+  - id: TR-wellness-001
+    system: wellness
+    gdd: design/gdd/happiness-wellness.md
+    requirement: "4 wellness bars Health/Happiness/Stress/Motivation as float 0-100 per idol"
+    created: "2026-04-07"
+    status: active
+  - id: TR-wellness-002
+    system: wellness
+    gdd: design/gdd/happiness-wellness.md
+    requirement: "All bars initialize to 70 at contract signing"
+    created: "2026-04-07"
+    status: active
+  - id: TR-wellness-003
+    system: wellness
+    gdd: design/gdd/happiness-wellness.md
+    requirement: "Wellness states composable; penalties stack multiplicatively"
+    created: "2026-04-07"
+    status: active
+  - id: TR-wellness-004
+    system: wellness
+    gdd: design/gdd/happiness-wellness.md
+    requirement: "Burnout Stress=100 triggers urgent event forcing Pause"
+    created: "2026-04-07"
+    status: active
+  - id: TR-wellness-005
+    system: wellness
+    gdd: design/gdd/happiness-wellness.md
+    requirement: "Happiness below 20 for 4 consecutive weeks fires rescission-demand"
+    created: "2026-04-07"
+    status: active
+  - id: TR-wellness-006
+    system: wellness
+    gdd: design/gdd/happiness-wellness.md
+    requirement: "Facility modifiers require allocated agenda slot to take effect"
+    created: "2026-04-07"
+    status: active
+
+  # ── contract (contract-system.md) ──
+  - id: TR-contract-001
+    system: contract
+    gdd: design/gdd/contract-system.md
+    requirement: "9 clause values per contract plus dates and agency_id"
+    created: "2026-04-07"
+    status: active
+  - id: TR-contract-002
+    system: contract
+    gdd: design/gdd/contract-system.md
+    requirement: "Up to 3 counter-proposal rounds; acceptance probability per-clause"
+    created: "2026-04-07"
+    status: active
+  - id: TR-contract-003
+    system: contract
+    gdd: design/gdd/contract-system.md
+    requirement: "Composer royalties persist beyond contract termination"
+    created: "2026-04-07"
+    status: active
+  - id: TR-contract-004
+    system: contract
+    gdd: design/gdd/contract-system.md
+    requirement: "Group contracts as N individual contracts with shared lock date"
+    created: "2026-04-07"
+    status: active
+  - id: TR-contract-005
+    system: contract
+    gdd: design/gdd/contract-system.md
+    requirement: "Non-exclusive block probability computed at schedule-build time"
+    created: "2026-04-07"
+    status: active
+  - id: TR-contract-006
+    system: contract
+    gdd: design/gdd/contract-system.md
+    requirement: "Expiry check in weekly tick Phase 1; renewal warning 4 weeks before"
+    created: "2026-04-07"
+    status: active
+
+  # ── fame (fame-rankings.md) ──
+  - id: TR-fame-001
+    system: fame
+    gdd: design/gdd/fame-rankings.md
+    requirement: "fama float 0-10000 per idol/group; rankings sorted monthly"
+    created: "2026-04-07"
+    status: active
+  - id: TR-fame-002
+    system: fame
+    gdd: design/gdd/fame-rankings.md
+    requirement: "Tier derived from rank position percentile not stored"
+    created: "2026-04-07"
+    status: active
+  - id: TR-fame-003
+    system: fame
+    gdd: design/gdd/fame-rankings.md
+    requirement: "Group fame independent of member fame"
+    created: "2026-04-07"
+    status: active
+  - id: TR-fame-004
+    system: fame
+    gdd: design/gdd/fame-rankings.md
+    requirement: "Ranking sort of ~3000 idols within monthly tick budget"
+    created: "2026-04-07"
+    status: active
+  - id: TR-fame-005
+    system: fame
+    gdd: design/gdd/fame-rankings.md
+    requirement: "Age-bracket fame multipliers as lookup not stored per idol"
+    created: "2026-04-07"
+    status: active
+
+  # ── scouting (scouting-recruitment.md) ──
+  - id: TR-scouting-001
+    system: scouting
+    gdd: design/gdd/scouting-recruitment.md
+    requirement: "~500 fixed scout NPCs in World Pack with XP/level progression"
+    created: "2026-04-07"
+    status: active
+  - id: TR-scouting-002
+    system: scouting
+    gdd: design/gdd/scouting-recruitment.md
+    requirement: "Scout hiring reduces pool; agency_id updated atomically"
+    created: "2026-04-07"
+    status: active
+  - id: TR-scouting-003
+    system: scouting
+    gdd: design/gdd/scouting-recruitment.md
+    requirement: "Stat estimates computed as real +/- noise at report time not stored"
+    created: "2026-04-07"
+    status: active
+  - id: TR-scouting-004
+    system: scouting
+    gdd: design/gdd/scouting-recruitment.md
+    requirement: "S/SS/SSS masked as S+ until contracted"
+    created: "2026-04-07"
+    status: active
+
+  # ── jobs (job-assignment.md) ──
+  - id: TR-jobs-001
+    system: jobs
+    gdd: design/gdd/job-assignment.md
+    requirement: "Job source enum for filtering and rival competition logic"
+    created: "2026-04-07"
+    status: active
+  - id: TR-jobs-002
+    system: jobs
+    gdd: design/gdd/job-assignment.md
+    requirement: "Performance Events dispatched to show-system not generic formula"
+    created: "2026-04-07"
+    status: active
+  - id: TR-jobs-003
+    system: jobs
+    gdd: design/gdd/job-assignment.md
+    requirement: "Job board refresh at Phase 1; expired jobs auto-removed"
+    created: "2026-04-07"
+    status: active
+  - id: TR-jobs-004
+    system: jobs
+    gdd: design/gdd/job-assignment.md
+    requirement: "Rival AI competes only on premium/special jobs"
+    created: "2026-04-07"
+    status: active
+  - id: TR-jobs-005
+    system: jobs
+    gdd: design/gdd/job-assignment.md
+    requirement: "Post-job breakdown records dominant formula factors"
+    created: "2026-04-07"
+    status: active
+  - id: TR-jobs-006
+    system: jobs
+    gdd: design/gdd/job-assignment.md
+    requirement: "Emissora favorability per agency_id/source_id as float"
+    created: "2026-04-07"
+    status: active
+
+  # ── schedule (schedule-agenda.md) ──
+  - id: TR-schedule-001
+    system: schedule
+    gdd: design/gdd/schedule-agenda.md
+    requirement: "7x2 slot grid per idol 14 slots/week with typed slots"
+    created: "2026-04-07"
+    status: active
+  - id: TR-schedule-002
+    system: schedule
+    gdd: design/gdd/schedule-agenda.md
+    requirement: "Under-16 idols capped at 3 job slots regardless of contract"
+    created: "2026-04-07"
+    status: active
+  - id: TR-schedule-003
+    system: schedule
+    gdd: design/gdd/schedule-agenda.md
+    requirement: "Current week + next 4 weeks queryable for planning"
+    created: "2026-04-07"
+    status: active
+  - id: TR-schedule-004
+    system: schedule
+    gdd: design/gdd/schedule-agenda.md
+    requirement: "Burnout/Incapacitated blocks all slots; allocation raises error"
+    created: "2026-04-07"
+    status: active
+
+  # ── rival-ai (rival-agency-ai.md) ──
+  - id: TR-rival-ai-001
+    system: rival-ai
+    gdd: design/gdd/rival-agency-ai.md
+    requirement: "50 agencies in single sub-phase within 100ms"
+    created: "2026-04-07"
+    status: active
+  - id: TR-rival-ai-002
+    system: rival-ai
+    gdd: design/gdd/rival-agency-ai.md
+    requirement: "RivalAgency entity with full persistent state"
+    created: "2026-04-07"
+    status: active
+  - id: TR-rival-ai-003
+    system: rival-ai
+    gdd: design/gdd/rival-agency-ai.md
+    requirement: "AI-AI buyouts automatic; AI-Player via urgent-event queue"
+    created: "2026-04-07"
+    status: active
+  - id: TR-rival-ai-004
+    system: rival-ai
+    gdd: design/gdd/rival-agency-ai.md
+    requirement: "Shared 500-scout and composer pools across all agencies"
+    created: "2026-04-07"
+    status: active
+  - id: TR-rival-ai-005
+    system: rival-ai
+    gdd: design/gdd/rival-agency-ai.md
+    requirement: "Memory of player interactions per rival"
+    created: "2026-04-07"
+    status: active
+  - id: TR-rival-ai-006
+    system: rival-ai
+    gdd: design/gdd/rival-agency-ai.md
+    requirement: "50 seed-defined rival agencies in World Pack"
+    created: "2026-04-07"
+    status: active
+
+  # ── market (market-transfer.md) ──
+  - id: TR-market-001
+    system: market
+    gdd: design/gdd/market-transfer.md
+    requirement: "Market pool updated atomically at Phase 1; simultaneous proposals scored together"
+    created: "2026-04-07"
+    status: active
+  - id: TR-market-002
+    system: market
+    gdd: design/gdd/market-transfer.md
+    requirement: "~20% visibility without scouting; computed view not stored flag"
+    created: "2026-04-07"
+    status: active
+  - id: TR-market-003
+    system: market
+    gdd: design/gdd/market-transfer.md
+    requirement: "Buyout negotiation spans multiple weeks; intermediate state persists"
+    created: "2026-04-07"
+    status: active
+  - id: TR-market-004
+    system: market
+    gdd: design/gdd/market-transfer.md
+    requirement: "Talent Board responses accumulate per week"
+    created: "2026-04-07"
+    status: active
+  - id: TR-market-005
+    system: market
+    gdd: design/gdd/market-transfer.md
+    requirement: "Idols abandon market after configurable months without offer"
+    created: "2026-04-07"
+    status: active
+
+  # ── save (save-load.md) ──
+  - id: TR-save-001
+    system: save
+    gdd: design/gdd/save-load.md
+    requirement: "Atomic autosave transaction no partial writes"
+    created: "2026-04-07"
+    status: active
+  - id: TR-save-002
+    system: save
+    gdd: design/gdd/save-load.md
+    requirement: "Autosave <200ms using delta-save strategy"
+    created: "2026-04-07"
+    status: active
+  - id: TR-save-003
+    system: save
+    gdd: design/gdd/save-load.md
+    requirement: "Full save <2s and <50MB on disk"
+    created: "2026-04-07"
+    status: active
+  - id: TR-save-004
+    system: save
+    gdd: design/gdd/save-load.md
+    requirement: "Version migration chain on load; original preserved if migration fails"
+    created: "2026-04-07"
+    status: active
+  - id: TR-save-005
+    system: save
+    gdd: design/gdd/save-load.md
+    requirement: "World pack ID validation on load"
+    created: "2026-04-07"
+    status: active
+  - id: TR-save-006
+    system: save
+    gdd: design/gdd/save-load.md
+    requirement: "Indexed queries within <1.5s load budget"
+    created: "2026-04-07"
+    status: active
+  - id: TR-save-007
+    system: save
+    gdd: design/gdd/save-load.md
+    requirement: "Cloud sync post-autosave when online; local is primary"
+    created: "2026-04-07"
+    status: active
+  - id: TR-save-008
+    system: save
+    gdd: design/gdd/save-load.md
+    requirement: "2-copy backup rotation with checksum validation"
+    created: "2026-04-07"
+    status: active
+
+  # ── lifecycle (idol-lifecycle.md) ──
+  - id: TR-lifecycle-001
+    system: lifecycle
+    gdd: design/gdd/idol-lifecycle.md
+    requirement: "Debut/retirement conditions evaluated per idol per weekly tick"
+    created: "2026-04-07"
+    status: active
+  - id: TR-lifecycle-002
+    system: lifecycle
+    gdd: design/gdd/idol-lifecycle.md
+    requirement: "Active idol pool maintained ~3000 +/-500 through organic entry/exit"
+    created: "2026-04-07"
+    status: active
+  - id: TR-lifecycle-003
+    system: lifecycle
+    gdd: design/gdd/idol-lifecycle.md
+    requirement: "Debutada idols stay in database with decaying fame"
+    created: "2026-04-07"
+    status: active
+  - id: TR-lifecycle-004
+    system: lifecycle
+    gdd: design/gdd/idol-lifecycle.md
+    requirement: "Graduation ceremony 3 types with costs boosts and 4-week advance notice"
+    created: "2026-04-07"
+    status: active
+
+  # ── chargen (character-generation.md) ──
+  - id: TR-chargen-001
+    system: chargen
+    gdd: design/gdd/character-generation.md
+    requirement: "Image generation is offline batch; client fetches pre-generated WebP from CDN"
+    created: "2026-04-07"
+    status: active
+  - id: TR-chargen-002
+    system: chargen
+    gdd: design/gdd/character-generation.md
+    requirement: "24 images per idol 8 ages x 3 expressions"
+    created: "2026-04-07"
+    status: active
+  - id: TR-chargen-003
+    system: chargen
+    gdd: design/gdd/character-generation.md
+    requirement: "Runtime image selection is pure function to CDN URL"
+    created: "2026-04-07"
+    status: active
+  - id: TR-chargen-004
+    system: chargen
+    gdd: design/gdd/character-generation.md
+    requirement: "visual_seed uint64 produces deterministic output"
+    created: "2026-04-07"
+    status: active
+  - id: TR-chargen-005
+    system: chargen
+    gdd: design/gdd/character-generation.md
+    requirement: "Face consistency enforced by IP-Adapter; cosine similarity >0.7"
+    created: "2026-04-07"
+    status: active
+  - id: TR-chargen-006
+    system: chargen
+    gdd: design/gdd/character-generation.md
+    requirement: "Generation pipeline supports checkpoint/resume"
+    created: "2026-04-07"
+    status: active
+
+  # ── idol-db (idol-database-generator.md) ──
+  - id: TR-idol-db-001
+    system: idol-db
+    gdd: design/gdd/idol-database-generator.md
+    requirement: "World Pack is static read-only database loaded at game start"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-db-002
+    system: idol-db
+    gdd: design/gdd/idol-database-generator.md
+    requirement: "All entities deterministic from single master_seed via platform-independent PRNG"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-db-003
+    system: idol-db
+    gdd: design/gdd/idol-database-generator.md
+    requirement: "Generator simulates ~5 years to produce mature initial state"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-db-004
+    system: idol-db
+    gdd: design/gdd/idol-database-generator.md
+    requirement: "World Pack loads in <1.5s with indices"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-db-005
+    system: idol-db
+    gdd: design/gdd/idol-database-generator.md
+    requirement: "Idol names in kanji + hiragana + romaji"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-db-006
+    system: idol-db
+    gdd: design/gdd/idol-database-generator.md
+    requirement: "Validator rejects invalid World Packs"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-db-007
+    system: idol-db
+    gdd: design/gdd/idol-database-generator.md
+    requirement: "Community packs use same schema and validation"
+    created: "2026-04-07"
+    status: active
+
+  # ── news (news-feed.md) ──
+  - id: TR-news-001
+    system: news
+    gdd: design/gdd/news-feed.md
+    requirement: "Templates from World Pack not hardcoded"
+    created: "2026-04-07"
+    status: active
+  - id: TR-news-002
+    system: news
+    gdd: design/gdd/news-feed.md
+    requirement: "~375 templates x 3 languages = ~1125 with i18n from day one"
+    created: "2026-04-07"
+    status: active
+  - id: TR-news-003
+    system: news
+    gdd: design/gdd/news-feed.md
+    requirement: "Only 3 months retained; older discarded at monthly tick"
+    created: "2026-04-07"
+    status: active
+  - id: TR-news-004
+    system: news
+    gdd: design/gdd/news-feed.md
+    requirement: "Vehicle assignment from fame percentile at generation time"
+    created: "2026-04-07"
+    status: active
+  - id: TR-news-005
+    system: news
+    gdd: design/gdd/news-feed.md
+    requirement: "Weekly digest is derived view of max 5-10 items not stored"
+    created: "2026-04-07"
+    status: active
+  - id: TR-news-006
+    system: news
+    gdd: design/gdd/news-feed.md
+    requirement: "Follow idol list persisted and used as filter"
+    created: "2026-04-07"
+    status: active
+
+  # ── groups (group-management.md) ──
+  - id: TR-groups-001
+    system: groups
+    gdd: design/gdd/group-management.md
+    requirement: "Group stats computed as avg top 50% members cached per week"
+    created: "2026-04-07"
+    status: active
+  - id: TR-groups-002
+    system: groups
+    gdd: design/gdd/group-management.md
+    requirement: "Pairwise affinity stored as sparse float matrix"
+    created: "2026-04-07"
+    status: active
+  - id: TR-groups-003
+    system: groups
+    gdd: design/gdd/group-management.md
+    requirement: "Group fama independent; only modified by group events"
+    created: "2026-04-07"
+    status: active
+  - id: TR-groups-004
+    system: groups
+    gdd: design/gdd/group-management.md
+    requirement: "Patinho feio crisis is deterministic no random"
+    created: "2026-04-07"
+    status: active
+  - id: TR-groups-005
+    system: groups
+    gdd: design/gdd/group-management.md
+    requirement: "Leadership dispute follows deterministic triggers"
+    created: "2026-04-07"
+    status: active
+  - id: TR-groups-006
+    system: groups
+    gdd: design/gdd/group-management.md
+    requirement: "Idol may belong to multiple groups"
+    created: "2026-04-07"
+    status: active
+  - id: TR-groups-007
+    system: groups
+    gdd: design/gdd/group-management.md
+    requirement: "~200 group logos pre-generated as static assets"
+    created: "2026-04-07"
+    status: active
+
+  # ── music-charts (music-charts.md) ──
+  - id: TR-music-charts-001
+    system: music-charts
+    gdd: design/gdd/music-charts.md
+    requirement: "Top 100 sorted monthly; score from quality x fama x promotion x decay"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-charts-002
+    system: music-charts
+    gdd: design/gdd/music-charts.md
+    requirement: "Listener pool dynamic; revenue share from score/sum ratio"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-charts-003
+    system: music-charts
+    gdd: design/gdd/music-charts.md
+    requirement: "5% weekly score decay"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-charts-004
+    system: music-charts
+    gdd: design/gdd/music-charts.md
+    requirement: "Composer NPC fama derived from chart history not stored"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-charts-005
+    system: music-charts
+    gdd: design/gdd/music-charts.md
+    requirement: "Seasonal marketing multipliers from calendar"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-charts-006
+    system: music-charts
+    gdd: design/gdd/music-charts.md
+    requirement: "Physical media sales tracked per release per week"
+    created: "2026-04-07"
+    status: active
+
+  # ── music-prod (music-production.md) ──
+  - id: TR-music-prod-001
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "MusicProject entity with 4 sequential stages"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-002
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Stalled stage tracking with reason"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-003
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Choreography requires Dance Studio facility"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-004
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Multi-idol recording needs shared agenda slots"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-005
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Composer availability shared across agencies with capacity limits"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-006
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Cover licensing queries source songs agency"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-007
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Quality final is weighted sum of 4 stage qualities"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-008
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Release entity stores tracklist marketing physical media"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-009
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Marketing campaign diminishing returns formula"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-prod-010
+    system: music-prod
+    gdd: design/gdd/music-production.md
+    requirement: "Pre-release hype bonuses stack to cap of 1.5"
+    created: "2026-04-07"
+    status: active
+
+  # ── events (event-scandal-generator.md) ──
+  - id: TR-events-001
+    system: events
+    gdd: design/gdd/event-scandal-generator.md
+    requirement: "Event triggers evaluated deterministically per-idol per-day in weekly tick"
+    created: "2026-04-07"
+    status: active
+  - id: TR-events-002
+    system: events
+    gdd: design/gdd/event-scandal-generator.md
+    requirement: "Per-idol cooldown table prevents repeat firing 4-16 week ranges"
+    created: "2026-04-07"
+    status: active
+  - id: TR-events-003
+    system: events
+    gdd: design/gdd/event-scandal-generator.md
+    requirement: "PR facility level modifies impact deltas by 0/20/40/50%"
+    created: "2026-04-07"
+    status: active
+  - id: TR-events-004
+    system: events
+    gdd: design/gdd/event-scandal-generator.md
+    requirement: "Scandal during live show pauses show pipeline for player resolution"
+    created: "2026-04-07"
+    status: active
+  - id: TR-events-005
+    system: events
+    gdd: design/gdd/event-scandal-generator.md
+    requirement: "Event generator reads from 8+ source systems requiring unified read interface"
+    created: "2026-04-07"
+    status: active
+
+  # ── fanclub (fan-club-system.md) ──
+  - id: TR-fanclub-001
+    system: fanclub
+    gdd: design/gdd/fan-club-system.md
+    requirement: "FanClubDetailed entity with 11 numeric fields per idol updated weekly"
+    created: "2026-04-07"
+    status: active
+  - id: TR-fanclub-002
+    system: fanclub
+    gdd: design/gdd/fan-club-system.md
+    requirement: "Segment conversion rates applied as monthly deltas"
+    created: "2026-04-07"
+    status: active
+  - id: TR-fanclub-003
+    system: fanclub
+    gdd: design/gdd/fan-club-system.md
+    requirement: "Merch revenue formula depends on fan club state at economy settlement"
+    created: "2026-04-07"
+    status: active
+  - id: TR-fanclub-004
+    system: fanclub
+    gdd: design/gdd/fan-club-system.md
+    requirement: "Ticket revenue requires fan club state before show revenue settlement"
+    created: "2026-04-07"
+    status: active
+
+  # ── staff (staff-functional.md) ──
+  - id: TR-staff-001
+    system: staff
+    gdd: design/gdd/staff-functional.md
+    requirement: "PRODUCER_TIME_BUDGET 100 points/week with quality degradation above limit"
+    created: "2026-04-07"
+    status: active
+  - id: TR-staff-002
+    system: staff
+    gdd: design/gdd/staff-functional.md
+    requirement: "Staff functions maintain executor state enum read by dependent systems"
+    created: "2026-04-07"
+    status: active
+  - id: TR-staff-003
+    system: staff
+    gdd: design/gdd/staff-functional.md
+    requirement: "NPC multi-role penalty via lookup table"
+    created: "2026-04-07"
+    status: active
+  - id: TR-staff-004
+    system: staff
+    gdd: design/gdd/staff-functional.md
+    requirement: "Production package costs per-event not global"
+    created: "2026-04-07"
+    status: active
+  - id: TR-staff-005
+    system: staff
+    gdd: design/gdd/staff-functional.md
+    requirement: "producao_total computed before show simulation as modifier"
+    created: "2026-04-07"
+    status: active
+  - id: TR-staff-006
+    system: staff
+    gdd: design/gdd/staff-functional.md
+    requirement: "Staff budget negotiation on quarterly cycle"
+    created: "2026-04-07"
+    status: active
+
+  # ── strategy (agency-strategy.md) ──
+  - id: TR-strategy-001
+    system: strategy
+    gdd: design/gdd/agency-strategy.md
+    requirement: "4 independent lever values as persistent agency-level struct"
+    created: "2026-04-07"
+    status: active
+  - id: TR-strategy-002
+    system: strategy
+    gdd: design/gdd/agency-strategy.md
+    requirement: "Focus 12-week and image 8-week transition cooldowns"
+    created: "2026-04-07"
+    status: active
+  - id: TR-strategy-003
+    system: strategy
+    gdd: design/gdd/agency-strategy.md
+    requirement: "All strategy modifiers additive with +/-40% cap"
+    created: "2026-04-07"
+    status: active
+  - id: TR-strategy-004
+    system: strategy
+    gdd: design/gdd/agency-strategy.md
+    requirement: "Rival agencies persist full strategy profile from world-seed"
+    created: "2026-04-07"
+    status: active
+
+  # ── intel (agency-intelligence-reports.md) ──
+  - id: TR-intel-001
+    system: intel
+    gdd: design/gdd/agency-intelligence-reports.md
+    requirement: "Prediction accuracy formula computed at alert generation time"
+    created: "2026-04-07"
+    status: active
+  - id: TR-intel-002
+    system: intel
+    gdd: design/gdd/agency-intelligence-reports.md
+    requirement: "6-month rolling weekly performance snapshots per idol"
+    created: "2026-04-07"
+    status: active
+  - id: TR-intel-003
+    system: intel
+    gdd: design/gdd/agency-intelligence-reports.md
+    requirement: "Alert deduplication per alert_type/entity_id"
+    created: "2026-04-07"
+    status: active
+  - id: TR-intel-004
+    system: intel
+    gdd: design/gdd/agency-intelligence-reports.md
+    requirement: "Post-mortem reads 6+ systems synchronously after job conclusion"
+    created: "2026-04-07"
+    status: active
+  - id: TR-intel-005
+    system: intel
+    gdd: design/gdd/agency-intelligence-reports.md
+    requirement: "Dashboard alert cap 3 visible/2 urgent as render-time filter"
+    created: "2026-04-07"
+    status: active
+
+  # ── producer (producer-profile.md) ──
+  - id: TR-producer-001
+    system: producer
+    gdd: design/gdd/producer-profile.md
+    requirement: "Producer profile immutable after creation; referenced by 15+ subsystems"
+    created: "2026-04-07"
+    status: active
+  - id: TR-producer-002
+    system: producer
+    gdd: design/gdd/producer-profile.md
+    requirement: "Additive modifier stacking with +/-40% cap"
+    created: "2026-04-07"
+    status: active
+  - id: TR-producer-003
+    system: producer
+    gdd: design/gdd/producer-profile.md
+    requirement: "Trait-idol compatibility calculation at contract-negotiation time"
+    created: "2026-04-07"
+    status: active
+
+  # ── reputation (player-reputation-affinity.md) ──
+  - id: TR-reputation-001
+    system: reputation
+    gdd: design/gdd/player-reputation-affinity.md
+    requirement: "Affinity per idol as float 0-100 persisted across agency switches"
+    created: "2026-04-07"
+    status: active
+  - id: TR-reputation-002
+    system: reputation
+    gdd: design/gdd/player-reputation-affinity.md
+    requirement: "Memory struct generated on significant events persisted indefinitely"
+    created: "2026-04-07"
+    status: active
+  - id: TR-reputation-003
+    system: reputation
+    gdd: design/gdd/player-reputation-affinity.md
+    requirement: "Legacy titles evaluated cumulatively from historical records"
+    created: "2026-04-07"
+    status: active
+  - id: TR-reputation-004
+    system: reputation
+    gdd: design/gdd/player-reputation-affinity.md
+    requirement: "Global reputation score reads across multiple history sources"
+    created: "2026-04-07"
+    status: active
+
+  # ── talent (talent-development-plans.md) ──
+  - id: TR-talent-001
+    system: talent
+    gdd: design/gdd/talent-development-plans.md
+    requirement: "DevelopmentPlan struct with 12-week duration and status state machine"
+    created: "2026-04-07"
+    status: active
+  - id: TR-talent-002
+    system: talent
+    gdd: design/gdd/talent-development-plans.md
+    requirement: "Training focus multiplier x2/x3 applied during weekly stat-growth tick"
+    created: "2026-04-07"
+    status: active
+  - id: TR-talent-003
+    system: talent
+    gdd: design/gdd/talent-development-plans.md
+    requirement: "External development creates buyout_risk flag polled by market/transfer"
+    created: "2026-04-07"
+    status: active
+  - id: TR-talent-004
+    system: talent
+    gdd: design/gdd/talent-development-plans.md
+    requirement: "Mentoring bonus reads mentor live stats; mentor must have workload <80%"
+    created: "2026-04-07"
+    status: active
+  - id: TR-talent-005
+    system: talent
+    gdd: design/gdd/talent-development-plans.md
+    requirement: "Trait structs persisted per idol through agency changes"
+    created: "2026-04-07"
+    status: active
+  - id: TR-talent-006
+    system: talent
+    gdd: design/gdd/talent-development-plans.md
+    requirement: "Development plan auto-pauses on burnout without extending deadline"
+    created: "2026-04-07"
+    status: active
+
+  # ── shows (show-system.md) ──
+  - id: TR-shows-001
+    system: shows
+    gdd: design/gdd/show-system.md
+    requirement: "Show entity aggregates setlist/idols/production/audience in single sim context"
+    created: "2026-04-07"
+    status: active
+  - id: TR-shows-002
+    system: shows
+    gdd: design/gdd/show-system.md
+    requirement: "Per-music performance is 3 multiplicative layers requiring all inputs resolved first"
+    created: "2026-04-07"
+    status: active
+  - id: TR-shows-003
+    system: shows
+    gdd: design/gdd/show-system.md
+    requirement: "Intra-show fatigue is sequential accumulator not parallelizable"
+    created: "2026-04-07"
+    status: active
+  - id: TR-shows-004
+    system: shows
+    gdd: design/gdd/show-system.md
+    requirement: "Mid-show substitution logic with max 2-3 substitutions"
+    created: "2026-04-07"
+    status: active
+  - id: TR-shows-005
+    system: shows
+    gdd: design/gdd/show-system.md
+    requirement: "Show revenue settled atomically into Agency Economy after simulation"
+    created: "2026-04-07"
+    status: active
+  - id: TR-shows-006
+    system: shows
+    gdd: design/gdd/show-system.md
+    requirement: "XP gain per idol per music feeds back into stat-growth system"
+    created: "2026-04-07"
+    status: active
+  - id: TR-shows-007
+    system: shows
+    gdd: design/gdd/show-system.md
+    requirement: "Show states Planned/Ready/Executing/Completed/Cancelled as state machine"
+    created: "2026-04-07"
+    status: active
+
+  # ── setlist (setlist-system.md) ──
+  - id: TR-setlist-001
+    system: setlist
+    gdd: design/gdd/setlist-system.md
+    requirement: "Mastery table idol_id/music_id with logarithmic growth requiring indexed reads"
+    created: "2026-04-07"
+    status: active
+  - id: TR-setlist-002
+    system: setlist
+    gdd: design/gdd/setlist-system.md
+    requirement: "Pacing score recomputed in real time during setlist editing"
+    created: "2026-04-07"
+    status: active
+  - id: TR-setlist-003
+    system: setlist
+    gdd: design/gdd/setlist-system.md
+    requirement: "Three rehearsal modes produce different mastery distributions"
+    created: "2026-04-07"
+    status: active
+  - id: TR-setlist-004
+    system: setlist
+    gdd: design/gdd/setlist-system.md
+    requirement: "Affinity idol/music cached per pair invalidated on stat change"
+    created: "2026-04-07"
+    status: active
+
+  # ── music-ent (music-entities.md) ──
+  - id: TR-music-ent-001
+    system: music-ent
+    gdd: design/gdd/music-entities.md
+    requirement: "Music entity has performance requirements and reception potential as separate facets"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-ent-002
+    system: music-ent
+    gdd: design/gdd/music-entities.md
+    requirement: "novelty_efetiva decays by 0.95^play_count"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-ent-003
+    system: music-ent
+    gdd: design/gdd/music-entities.md
+    requirement: "vocal_fit discrete lookup 1.0/0.85/0.65 from tessitura compatibility"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-ent-004
+    system: music-ent
+    gdd: design/gdd/music-entities.md
+    requirement: "Music state machine allows simultaneous Released and InSetlist states"
+    created: "2026-04-07"
+    status: active
+  - id: TR-music-ent-005
+    system: music-ent
+    gdd: design/gdd/music-entities.md
+    requirement: "Composer as persistent entity with tier and exclusivity fields"
+    created: "2026-04-07"
+    status: active
+
+  # ── costume (costume-wardrobe.md) ──
+  - id: TR-costume-001
+    system: costume
+    gdd: design/gdd/costume-wardrobe.md
+    requirement: "Inventory bounded by facility tier 5-100+ slots"
+    created: "2026-04-07"
+    status: active
+  - id: TR-costume-002
+    system: costume
+    gdd: design/gdd/costume-wardrobe.md
+    requirement: "Durability decrements per show; quality degrades at thresholds"
+    created: "2026-04-07"
+    status: active
+  - id: TR-costume-003
+    system: costume
+    gdd: design/gdd/costume-wardrobe.md
+    requirement: "Mid-show change consumes MC/interlude slot requires Stage Manager"
+    created: "2026-04-07"
+    status: active
+  - id: TR-costume-004
+    system: costume
+    gdd: design/gdd/costume-wardrobe.md
+    requirement: "visual_hype_contribution composite formula passed to show-system"
+    created: "2026-04-07"
+    status: active
+  - id: TR-costume-005
+    system: costume
+    gdd: design/gdd/costume-wardrobe.md
+    requirement: "Lighting synergy matrix 10 themes x 3 tiers as static lookup"
+    created: "2026-04-07"
+    status: active
+  - id: TR-costume-006
+    system: costume
+    gdd: design/gdd/costume-wardrobe.md
+    requirement: "Costume states Ordered/Available/InUse/Degraded/Destroyed with delivery delay"
+    created: "2026-04-07"
+    status: active
+
+  # ── briefing (pre-show-briefing.md) ──
+  - id: TR-briefing-001
+    system: briefing
+    gdd: design/gdd/pre-show-briefing.md
+    requirement: "pressure_base computed from venue/stakes/context before briefing"
+    created: "2026-04-07"
+    status: active
+  - id: TR-briefing-002
+    system: briefing
+    gdd: design/gdd/pre-show-briefing.md
+    requirement: "reaction_modifier reads 3 hidden attributes regardless of player visibility"
+    created: "2026-04-07"
+    status: active
+  - id: TR-briefing-003
+    system: briefing
+    gdd: design/gdd/pre-show-briefing.md
+    requirement: "performance_modifier clamped 0.85-1.15 stored as immutable per-idol modifier"
+    created: "2026-04-07"
+    status: active
+  - id: TR-briefing-004
+    system: briefing
+    gdd: design/gdd/pre-show-briefing.md
+    requirement: "Staff skill gating for phrase/prediction unlocks"
+    created: "2026-04-07"
+    status: active
+  - id: TR-briefing-005
+    system: briefing
+    gdd: design/gdd/pre-show-briefing.md
+    requirement: "Skipping briefing produces default 1.0 modifier with zero computation"
+    created: "2026-04-07"
+    status: active
+
+  # ── formations (stage-formations.md) ──
+  - id: TR-formations-001
+    system: formations
+    gdd: design/gdd/stage-formations.md
+    requirement: "MusicFormation stores RoleAssignment per setlist position as 2D matrix"
+    created: "2026-04-07"
+    status: active
+  - id: TR-formations-002
+    system: formations
+    gdd: design/gdd/stage-formations.md
+    requirement: "role_fit formulas for 6 roles read different stat combinations"
+    created: "2026-04-07"
+    status: active
+  - id: TR-formations-003
+    system: formations
+    gdd: design/gdd/stage-formations.md
+    requirement: "group_chemistry_score averages pairwise affinity O(n^2) cached per week"
+    created: "2026-04-07"
+    status: active
+  - id: TR-formations-004
+    system: formations
+    gdd: design/gdd/stage-formations.md
+    requirement: "Choreographer recommendation bounded by role constraints within tick budget"
+    created: "2026-04-07"
+    status: active
+  - id: TR-formations-005
+    system: formations
+    gdd: design/gdd/stage-formations.md
+    requirement: "FormationPreset handles stale idol references gracefully"
+    created: "2026-04-07"
+    status: active
+
+  # ── awards (award-shows.md) ──
+  - id: TR-awards-001
+    system: awards
+    gdd: design/gdd/award-shows.md
+    requirement: "Nomination scores computed annually from cumulative chart and show data"
+    created: "2026-04-07"
+    status: active
+  - id: TR-awards-002
+    system: awards
+    gdd: design/gdd/award-shows.md
+    requirement: "AwardCategory stores fixed weights with normalization across nominees"
+    created: "2026-04-07"
+    status: active
+  - id: TR-awards-003
+    system: awards
+    gdd: design/gdd/award-shows.md
+    requirement: "Lobbying influence capped at LOBBY_MAX_INFLUENCE 0.80"
+    created: "2026-04-07"
+    status: active
+  - id: TR-awards-004
+    system: awards
+    gdd: design/gdd/award-shows.md
+    requirement: "Kouhaku eligibility check at week 52 requires annual aggregated queries"
+    created: "2026-04-07"
+    status: active
+  - id: TR-awards-005
+    system: awards
+    gdd: design/gdd/award-shows.md
+    requirement: "Award attendance is pre-ceremony intention flag gating fame boost"
+    created: "2026-04-07"
+    status: active
+
+  # ── dialogue (dialogue-system.md) ──
+  - id: TR-dialogue-001
+    system: dialogue
+    gdd: design/gdd/dialogue-system.md
+    requirement: "reaction_score deterministic sum of 6 factors read synchronously"
+    created: "2026-04-07"
+    status: active
+  - id: TR-dialogue-002
+    system: dialogue
+    gdd: design/gdd/dialogue-system.md
+    requirement: "Conversation cooldown per idol per week with diminishing returns"
+    created: "2026-04-07"
+    status: active
+  - id: TR-dialogue-003
+    system: dialogue
+    gdd: design/gdd/dialogue-system.md
+    requirement: "Promise struct persisted and checked weekly against deadline"
+    created: "2026-04-07"
+    status: active
+  - id: TR-dialogue-004
+    system: dialogue
+    gdd: design/gdd/dialogue-system.md
+    requirement: "ConversationMemory stored indefinitely referenced across agency switches"
+    created: "2026-04-07"
+    status: active
+  - id: TR-dialogue-005
+    system: dialogue
+    gdd: design/gdd/dialogue-system.md
+    requirement: "Wellness Advisor accuracy degrades when hidden attributes unknown"
+    created: "2026-04-07"
+    status: active
+  - id: TR-dialogue-006
+    system: dialogue
+    gdd: design/gdd/dialogue-system.md
+    requirement: "Topic trigger generation runs after weekly results checking conditions"
+    created: "2026-04-07"
+    status: active
+
+  # ── medical (medical-system.md) ──
+  - id: TR-medical-001
+    system: medical
+    gdd: design/gdd/medical-system.md
+    requirement: "Injury chance formulas for 7 types read stats/rest/job history"
+    created: "2026-04-07"
+    status: active
+  - id: TR-medical-002
+    system: medical
+    gdd: design/gdd/medical-system.md
+    requirement: "Injury struct persisted with weekly advancement"
+    created: "2026-04-07"
+    status: active
+  - id: TR-medical-003
+    system: medical
+    gdd: design/gdd/medical-system.md
+    requirement: "Permanent damage check requires player-confirmed blocking dialog"
+    created: "2026-04-07"
+    status: active
+  - id: TR-medical-004
+    system: medical
+    gdd: design/gdd/medical-system.md
+    requirement: "Medical Center facility level modifies injury chance and recovery"
+    created: "2026-04-07"
+    status: active
+  - id: TR-medical-005
+    system: medical
+    gdd: design/gdd/medical-system.md
+    requirement: "Rehab blocks physical stats; mental stats at 50% efficiency"
+    created: "2026-04-07"
+    status: active
+  - id: TR-medical-006
+    system: medical
+    gdd: design/gdd/medical-system.md
+    requirement: "Re-injury probability during 2-week post-recovery window"
+    created: "2026-04-07"
+    status: active
+
+  # ── merch (merchandising-production.md) ──
+  - id: TR-merch-001
+    system: merch
+    gdd: design/gdd/merchandising-production.md
+    requirement: "MerchProduct state machine with weekly tick advancement"
+    created: "2026-04-07"
+    status: active
+  - id: TR-merch-002
+    system: merch
+    gdd: design/gdd/merchandising-production.md
+    requirement: "Print-run scale factor and production time computed at order placement"
+    created: "2026-04-07"
+    status: active
+  - id: TR-merch-003
+    system: merch
+    gdd: design/gdd/merchandising-production.md
+    requirement: "Warehouse inventory enforces capacity limits by agency tier"
+    created: "2026-04-07"
+    status: active
+  - id: TR-merch-004
+    system: merch
+    gdd: design/gdd/merchandising-production.md
+    requirement: "Photocard pack gacha with rarity distribution"
+    created: "2026-04-07"
+    status: active
+  - id: TR-merch-005
+    system: merch
+    gdd: design/gdd/merchandising-production.md
+    requirement: "Special editions with hype_factor accumulator and fixed sales window"
+    created: "2026-04-07"
+    status: active
+  - id: TR-merch-006
+    system: merch
+    gdd: design/gdd/merchandising-production.md
+    requirement: "Sales formula reads fan club state before merch revenue computation"
+    created: "2026-04-07"
+    status: active
+
+  # ── idol-finance (idol-personal-finance.md) ──
+  - id: TR-idol-finance-001
+    system: idol-finance
+    gdd: design/gdd/idol-personal-finance.md
+    requirement: "IdolFinance hidden entity per idol updated monthly"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-finance-002
+    system: idol-finance
+    gdd: design/gdd/idol-personal-finance.md
+    requirement: "Debt 1%/month compound interest capped at 30% income payment"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-finance-003
+    system: idol-finance
+    gdd: design/gdd/idol-personal-finance.md
+    requirement: "Personal manager blocks buyout below 90% market value"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-finance-004
+    system: idol-finance
+    gdd: design/gdd/idol-personal-finance.md
+    requirement: "Life goal completion triggers permanent stat changes"
+    created: "2026-04-07"
+    status: active
+  - id: TR-idol-finance-005
+    system: idol-finance
+    gdd: design/gdd/idol-personal-finance.md
+    requirement: "Financial crisis detection feeds scandal-generator and news-feed"
+    created: "2026-04-07"
+    status: active
+
+  # ── audience (audience-system.md) ──
+  - id: TR-audience-001
+    system: audience
+    gdd: design/gdd/audience-system.md
+    requirement: "AudienceState mutable in-session struct discarded after settlement"
+    created: "2026-04-07"
+    status: active
+  - id: TR-audience-002
+    system: audience
+    gdd: design/gdd/audience-system.md
+    requirement: "Engagement delta requires all upstream per-music outputs finalized first"
+    created: "2026-04-07"
+    status: active
+  - id: TR-audience-003
+    system: audience
+    gdd: design/gdd/audience-system.md
+    requirement: "Lightstick distribution normalized to sum 1.0 across group members"
+    created: "2026-04-07"
+    status: active
+  - id: TR-audience-004
+    system: audience
+    gdd: design/gdd/audience-system.md
+    requirement: "Encore trigger evaluated once at show end"
+    created: "2026-04-07"
+    status: active
+  - id: TR-audience-005
+    system: audience
+    gdd: design/gdd/audience-system.md
+    requirement: "Post-show fan conversion writes to fan club within same weekly tick"
+    created: "2026-04-07"
+    status: active
+
+  # ── post-debut (post-debut-career.md) ──
+  - id: TR-post-debut-001
+    system: post-debut
+    gdd: design/gdd/post-debut-career.md
+    requirement: "Ex-idol career type assigned at graduation persisted as NPC entity"
+    created: "2026-04-07"
+    status: active
+  - id: TR-post-debut-002
+    system: post-debut
+    gdd: design/gdd/post-debut-career.md
+    requirement: "Ex-idol TV/radio programs generate recurring job slots monthly"
+    created: "2026-04-07"
+    status: active
+  - id: TR-post-debut-003
+    system: post-debut
+    gdd: design/gdd/post-debut-career.md
+    requirement: "Ex-idol composer added to active composer NPC pool"
+    created: "2026-04-07"
+    status: active
+
+  # ── player-events (player-created-events.md) ──
+  - id: TR-player-events-001
+    system: player-events
+    gdd: design/gdd/player-created-events.md
+    requirement: "Event success formula inputs locked at scheduling time"
+    created: "2026-04-07"
+    status: active
+  - id: TR-player-events-002
+    system: player-events
+    gdd: design/gdd/player-created-events.md
+    requirement: "External artist invitation queries tier/agenda/rivalry before acceptance"
+    created: "2026-04-07"
+    status: active
+
+  # ── media (media-entities.md) ──
+  - id: TR-media-001
+    system: media
+    gdd: design/gdd/media-entities.md
+    requirement: "MediaEntity and Show records from World Pack persist throughout campaign"
+    created: "2026-04-07"
+    status: active
+  - id: TR-media-002
+    system: media
+    gdd: design/gdd/media-entities.md
+    requirement: "Show audience formula recalculated monthly from performance/diversity"
+    created: "2026-04-07"
+    status: active
+  - id: TR-media-003
+    system: media
+    gdd: design/gdd/media-entities.md
+    requirement: "Airplay chart boost accumulated from radio plays before ranking"
+    created: "2026-04-07"
+    status: active
+  - id: TR-media-004
+    system: media
+    gdd: design/gdd/media-entities.md
+    requirement: "40-60 persistent media entities queryable by region/tier/stats"
+    created: "2026-04-07"
+    status: active
+
+  # ── finance-report (financial-reporting.md) ──
+  - id: TR-finance-report-001
+    system: finance-report
+    gdd: design/gdd/financial-reporting.md
+    requirement: "Monthly report aggregates all revenue/expense categories on 4-week tick"
+    created: "2026-04-07"
+    status: active
+  - id: TR-finance-report-002
+    system: finance-report
+    gdd: design/gdd/financial-reporting.md
+    requirement: "ROI per idol requires 3-month rolling history"
+    created: "2026-04-07"
+    status: active
+  - id: TR-finance-report-003
+    system: finance-report
+    gdd: design/gdd/financial-reporting.md
+    requirement: "Revenue projection uses 3-month moving average; not computed before 3 months"
+    created: "2026-04-07"
+    status: active
+  - id: TR-finance-report-004
+    system: finance-report
+    gdd: design/gdd/financial-reporting.md
+    requirement: "Rival financial estimates flagged as estimates in data model"
+    created: "2026-04-07"
+    status: active
+
+  # ── planning (agency-planning-board.md) ──
+  - id: TR-planning-001
+    system: planning
+    gdd: design/gdd/agency-planning-board.md
+    requirement: "Planning Board aggregates 9 systems into single read-only view"
+    created: "2026-04-07"
+    status: active
+  - id: TR-planning-002
+    system: planning
+    gdd: design/gdd/agency-planning-board.md
+    requirement: "Seasonal events injected with 8 weeks advance notice"
+    created: "2026-04-07"
+    status: active
+  - id: TR-planning-003
+    system: planning
+    gdd: design/gdd/agency-planning-board.md
+    requirement: "Risk projections use 3-month forward horizon"
+    created: "2026-04-07"
+    status: active
+
+  # ── meta-game (agency-meta-game.md) ──
+  - id: TR-meta-game-001
+    system: meta-game
+    gdd: design/gdd/agency-meta-game.md
+    requirement: "Agency transfer carries reputation and affinity as player-scoped data"
+    created: "2026-04-07"
+    status: active
+  - id: TR-meta-game-002
+    system: meta-game
+    gdd: design/gdd/agency-meta-game.md
+    requirement: "Dismissal after 6+ months failing targets persistent counter"
+    created: "2026-04-07"
+    status: active
+  - id: TR-meta-game-003
+    system: meta-game
+    gdd: design/gdd/agency-meta-game.md
+    requirement: "Agency tier 1-5 gates facilities/staff/products across subsystems"
+    created: "2026-04-07"
+    status: active
+
+  # ── roster (roster-balance.md) ──
+  - id: TR-roster-001
+    system: roster
+    gdd: design/gdd/roster-balance.md
+    requirement: "Roster balance analysis derived from existing system data no new fields"
+    created: "2026-04-07"
+    status: active
+  - id: TR-roster-002
+    system: roster
+    gdd: design/gdd/roster-balance.md
+    requirement: "Star dependency index requires last 4 weeks per-idol revenue"
+    created: "2026-04-07"
+    status: active
+  - id: TR-roster-003
+    system: roster
+    gdd: design/gdd/roster-balance.md
+    requirement: "Roster balance auto-recalculates on roster change as computed view"
+    created: "2026-04-07"
+    status: active
+
+  # ── archetypes (idol-archetypes-roles.md) ──
+  - id: TR-archetypes-001
+    system: archetypes
+    gdd: design/gdd/idol-archetypes-roles.md
+    requirement: "Archetype computed at read time not stored"
+    created: "2026-04-07"
+    status: active
+  - id: TR-archetypes-002
+    system: archetypes
+    gdd: design/gdd/idol-archetypes-roles.md
+    requirement: "Primary/secondary archetype cached after weekly stat update"
+    created: "2026-04-07"
+    status: active
+  - id: TR-archetypes-003
+    system: archetypes
+    gdd: design/gdd/idol-archetypes-roles.md
+    requirement: "Chaos Magnet reads hidden Temperamento without exposing it"
+    created: "2026-04-07"
+    status: active
+  - id: TR-archetypes-004
+    system: archetypes
+    gdd: design/gdd/idol-archetypes-roles.md
+    requirement: "Group synergy bonus recorded per show/week not rerolled retroactively"
+    created: "2026-04-07"
+    status: active
+
+  # ── tutorial (tutorial-onboarding.md) ──
+  - id: TR-tutorial-001
+    system: tutorial
+    gdd: design/gdd/tutorial-onboarding.md
+    requirement: "Tutorial state persists across sessions and is resettable"
+    created: "2026-04-07"
+    status: active
+  - id: TR-tutorial-002
+    system: tutorial
+    gdd: design/gdd/tutorial-onboarding.md
+    requirement: "Contextual tip system is read-only observer with no game state writes"
+    created: "2026-04-07"
+    status: active
+
+  # ── settings (settings-accessibility.md) ──
+  - id: TR-settings-001
+    system: settings
+    gdd: design/gdd/settings-accessibility.md
+    requirement: "All settings persist in player-level config separate from save data"
+    created: "2026-04-07"
+    status: active
+  - id: TR-settings-002
+    system: settings
+    gdd: design/gdd/settings-accessibility.md
+    requirement: "Language change applies globally without restart"
+    created: "2026-04-07"
+    status: active
+  - id: TR-settings-003
+    system: settings
+    gdd: design/gdd/settings-accessibility.md
+    requirement: "Simulation speed does not alter deterministic outcomes"
+    created: "2026-04-07"
+    status: active
+  - id: TR-settings-004
+    system: settings
+    gdd: design/gdd/settings-accessibility.md
+    requirement: "1 autosave + 3 manual save slots with independent serialization"
+    created: "2026-04-07"
+    status: active
+  - id: TR-settings-005
+    system: settings
+    gdd: design/gdd/settings-accessibility.md
+    requirement: "Colourblind mode uses icon+text redundancy at component level"
+    created: "2026-04-07"
+    status: active
+
+  # ── visual-gen (visual-generator.md) ──
+  - id: TR-visual-gen-001
+    system: visual-gen
+    gdd: design/gdd/visual-generator.md
+    requirement: "Visual generation deterministic from visual_seed via specified PRNG"
+    created: "2026-04-07"
+    status: active
+  - id: TR-visual-gen-002
+    system: visual-gen
+    gdd: design/gdd/visual-generator.md
+    requirement: "Modular part composition <50ms at runtime from pre-built sprites"
+    created: "2026-04-07"
+    status: active
+  - id: TR-visual-gen-003
+    system: visual-gen
+    gdd: design/gdd/visual-generator.md
+    requirement: "Surgery aesthetic update writes override flags to idol record"
+    created: "2026-04-07"
+    status: active
+  - id: TR-visual-gen-004
+    system: visual-gen
+    gdd: design/gdd/visual-generator.md
+    requirement: "System supports 5000+ visually distinct outputs"
+    created: "2026-04-07"
+    status: active
+
+  # ── messages (message-types-catalog.md) ──
+  - id: TR-messages-001
+    system: messages
+    gdd: design/gdd/message-types-catalog.md
+    requirement: "57 message types across 11 categories as discriminated union type model"
+    created: "2026-04-07"
+    status: active
+  - id: TR-messages-002
+    system: messages
+    gdd: design/gdd/message-types-catalog.md
+    requirement: "27 action-required messages persist until resolved or dismissed"
+    created: "2026-04-07"
+    status: active
+  - id: TR-messages-003
+    system: messages
+    gdd: design/gdd/message-types-catalog.md
+    requirement: "Message priority enum drives visual rendering and notification eligibility"
+    created: "2026-04-07"
+    status: active
+  - id: TR-messages-004
+    system: messages
+    gdd: design/gdd/message-types-catalog.md
+    requirement: "All 11 system sources enqueue messages asynchronously during weekly tick"
+    created: "2026-04-07"
+    status: active
+  - id: TR-messages-005
+    system: messages
+    gdd: design/gdd/message-types-catalog.md
+    requirement: "Message templating supports per-sender and per-idol personality tone"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-ia (ui-information-architecture.md) ──
+  - id: TR-ui-ia-001
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "PC target 1920x1080 minimum; mobile requires dedicated layouts"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-002
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "Top navigation bar permanently fixed across all screens"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-003
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "Universal search Ctrl+K queries across idols/staff/jobs/news/screens"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-004
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "Table column configuration saved per-screen per-save file"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-005
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "Filter and sort state persists across sessions"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-006
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "Every idol mention renders avatar alongside name"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-007
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "Avatar border color data-driven by tier"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-008
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "All tables support column sort/filter/configurable columns/bulk selection"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-009
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "Keyboard traversal works in every table"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-ia-010
+    system: ui-ia
+    gdd: design/gdd/ui-information-architecture.md
+    requirement: "Right-click context menu on any entity"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-dash (ui-dashboard.md) ──
+  - id: TR-ui-dash-001
+    system: ui-dash
+    gdd: design/gdd/ui-dashboard.md
+    requirement: "Portal loads complete state in under 1 second"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-dash-002
+    system: ui-dash
+    gdd: design/gdd/ui-dashboard.md
+    requirement: "3-column layout 25%/45%/30% at 1920x1080"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-dash-003
+    system: ui-dash
+    gdd: design/gdd/ui-dashboard.md
+    requirement: "Portal aggregates live data from 13 systems simultaneously"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-dash-004
+    system: ui-dash
+    gdd: design/gdd/ui-dashboard.md
+    requirement: "Post-simulation state refreshes Portal data immediately"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-idol (ui-idol-profile.md) ──
+  - id: TR-ui-idol-001
+    system: ui-idol
+    gdd: design/gdd/ui-idol-profile.md
+    requirement: "Profile header sticky with identity/wellness/contract/actions"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-idol-002
+    system: ui-idol
+    gdd: design/gdd/ui-idol-profile.md
+    requirement: "16 attributes across 4 categories as progress bars with ceiling on hover"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-idol-003
+    system: ui-idol
+    gdd: design/gdd/ui-idol-profile.md
+    requirement: "Unscouted idol stats display +/-15 error margin indicator"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-idol-004
+    system: ui-idol
+    gdd: design/gdd/ui-idol-profile.md
+    requirement: "Wellness data not visible for non-contracted idols"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-idol-005
+    system: ui-idol
+    gdd: design/gdd/ui-idol-profile.md
+    requirement: "Profile navigable entirely by keyboard"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-news (ui-news-feed.md) ──
+  - id: TR-ui-news-001
+    system: ui-news
+    gdd: design/gdd/ui-news-feed.md
+    requirement: "News feed supports infinite scroll with 3-month retention"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-news-002
+    system: ui-news
+    gdd: design/gdd/ui-news-feed.md
+    requirement: "Every news card renders avatars of cited persons and agency logo"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-news-003
+    system: ui-news
+    gdd: design/gdd/ui-news-feed.md
+    requirement: "Weekly skip mode produces compact newspaper modal top 5-10 items"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-news-004
+    system: ui-news
+    gdd: design/gdd/ui-news-feed.md
+    requirement: "Feed supports filtering by tab All/MyIdols/Market/Followed"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-contract (ui-contract-negotiation.md) ──
+  - id: TR-ui-contract-001
+    system: ui-contract
+    gdd: design/gdd/ui-contract-negotiation.md
+    requirement: "Acceptance probability recalculates in real-time on every clause change"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-contract-002
+    system: ui-contract
+    gdd: design/gdd/ui-contract-negotiation.md
+    requirement: "Auto-fill populates all 9 clauses yielding >90% acceptance"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-contract-003
+    system: ui-contract
+    gdd: design/gdd/ui-contract-negotiation.md
+    requirement: "Monthly cost computed live as sum of all cost components"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-calendar (ui-calendar-planning.md) ──
+  - id: TR-ui-calendar-001
+    system: ui-calendar
+    gdd: design/gdd/ui-calendar-planning.md
+    requirement: "Calendar supports 4 zoom levels Week/Month/Quarter/Year"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-calendar-002
+    system: ui-calendar
+    gdd: design/gdd/ui-calendar-planning.md
+    requirement: "Contract expiry and deadlines surface as alerts at all zoom levels"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-jobs (ui-job-board.md) ──
+  - id: TR-ui-jobs-001
+    system: ui-jobs
+    gdd: design/gdd/ui-job-board.md
+    requirement: "Job board table with 20+ rows loads in under 500ms"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-jobs-002
+    system: ui-jobs
+    gdd: design/gdd/ui-job-board.md
+    requirement: "Best Available cross-checks schedule/wellness/contract/strategy"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-jobs-003
+    system: ui-jobs
+    gdd: design/gdd/ui-job-board.md
+    requirement: "Assignment confirmation includes inline validation checklist"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-jobs-004
+    system: ui-jobs
+    gdd: design/gdd/ui-job-board.md
+    requirement: "Recurring jobs auto-schedule every week until cancelled"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-rankings (ui-rankings.md) ──
+  - id: TR-ui-rankings-001
+    system: ui-rankings
+    gdd: design/gdd/ui-rankings.md
+    requirement: "Three parallel ranking lists Individual/Group/Agency as tabs"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-rankings-002
+    system: ui-rankings
+    gdd: design/gdd/ui-rankings.md
+    requirement: "Player-owned idols visually distinguished with marker"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-scouting (ui-scouting.md) ──
+  - id: TR-ui-scouting-001
+    system: ui-scouting
+    gdd: design/gdd/ui-scouting.md
+    requirement: "Interactive map with clickable regions showing scouts and timers"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-scouting-002
+    system: ui-scouting
+    gdd: design/gdd/ui-scouting.md
+    requirement: "Candidate stats display with uncertainty marker per scout skill"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-scouting-003
+    system: ui-scouting
+    gdd: design/gdd/ui-scouting.md
+    requirement: "Scout assignment timer persists across sessions in game-time"
+    created: "2026-04-07"
+    status: active
+
+  # ── ui-results (ui-week-results.md) ──
+  - id: TR-ui-results-001
+    system: ui-results
+    gdd: design/gdd/ui-week-results.md
+    requirement: "2-column layout 65%/35% with Agency Mood banner"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-results-002
+    system: ui-results
+    gdd: design/gdd/ui-week-results.md
+    requirement: "Max 5 headlines ranked by dramaticity not chronology"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-results-003
+    system: ui-results
+    gdd: design/gdd/ui-week-results.md
+    requirement: "Headlines expand inline to show Moment Engine post-mortem"
+    created: "2026-04-07"
+    status: active
+  - id: TR-ui-results-004
+    system: ui-results
+    gdd: design/gdd/ui-week-results.md
+    requirement: "Monthly report appears as additional section every 4 weeks"
+    created: "2026-04-07"
+    status: active
+
+  # ── main-menu (main-menu-flow.md) ──
+  - id: TR-main-menu-001
+    system: main-menu
+    gdd: design/gdd/main-menu-flow.md
+    requirement: "Main menu full-screen without in-game nav bar"
+    created: "2026-04-07"
+    status: active
+  - id: TR-main-menu-002
+    system: main-menu
+    gdd: design/gdd/main-menu-flow.md
+    requirement: "Continue only appears if autosave exists"
+    created: "2026-04-07"
+    status: active
+  - id: TR-main-menu-003
+    system: main-menu
+    gdd: design/gdd/main-menu-flow.md
+    requirement: "1 autosave + 3 manual save slots; cloud requires auth"
+    created: "2026-04-07"
+    status: active
+  - id: TR-main-menu-004
+    system: main-menu
+    gdd: design/gdd/main-menu-flow.md
+    requirement: "Language selection accessible from main menu before game data loads"
+    created: "2026-04-07"
+    status: active
+  - id: TR-main-menu-005
+    system: main-menu
+    gdd: design/gdd/main-menu-flow.md
+    requirement: "SvelteKit route groups separate menu from gameplay routes"
+    created: "2026-04-07"
+    status: active
+  - id: TR-main-menu-006
+    system: main-menu
+    gdd: design/gdd/main-menu-flow.md
+    requirement: "Authentication via Supabase with Google/Discord/email; optional"
+    created: "2026-04-07"
+    status: active
+  - id: TR-main-menu-007
+    system: main-menu
+    gdd: design/gdd/main-menu-flow.md
+    requirement: "Selected agency roster initialized as player idols; rest as rivals"
+    created: "2026-04-07"
+    status: active

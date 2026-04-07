@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "mode": "quick",
+    "idol_count": 3,
+    "portrait_jobs": 3,
+    "ages": null,
+    "expressions": [
+      "happy",
+      "serious",
+      "sad"
+    ]
+  },
+  "jobs": [
+    {
+      "idol_key": "wp_00000",
+      "age": 18,
+      "expression": "happy",
+      "filename": "char_wp_00000_happy_18.png"
+    },
+    {
+      "idol_key": "wp_00001",
+      "age": 18,
+      "expression": "happy",
+      "filename": "char_wp_00001_happy_18.png"
+    },
+    {
+      "idol_key": "wp_00002",
+      "age": 18,
+      "expression": "happy",
+      "filename": "char_wp_00002_happy_18.png"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+[
+	{
+		"filename": "smoke_test_portrait.png",
+		"prompt": "1girl, anime portrait, idol, studio lighting, high quality",
+		"negative_prompt": "lowres, blurry, bad anatomy, watermark"
+	}
+]

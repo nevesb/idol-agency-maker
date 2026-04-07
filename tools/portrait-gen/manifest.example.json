@@ -1,0 +1,12 @@
+{
+	"version": 1,
+	"worldPackId": "embedded_sample",
+	"entries": [
+		{
+			"idolId": "idol_01",
+			"variant": "base",
+			"localPath": "portraits/idol_01/base.webp",
+			"storagePath": "idol_01/base.webp"
+		}
+	]
+}

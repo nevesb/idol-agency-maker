@@ -1,0 +1,2902 @@
+[
+  {
+    "id": "wp_00000",
+    "nameRomaji": "Sato Maria",
+    "nameJp": "佐藤 マリア",
+    "age": 25,
+    "gender": "female",
+    "potential": 36,
+    "tier": "D",
+    "visible": {
+      "vocal": 20,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 16,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 13,
+      "ambition": 4,
+      "loyalty": 9,
+      "temperament": 11,
+      "personalLife": 14
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.silent_pillar",
+    "visualSeed": 697455,
+    "regionId": "other",
+    "entryMonth": 168,
+    "talentAverage": 15.5,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00000",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Sato Maria",
+      "nameJp": "佐藤 マリア",
+      "background": {
+        "pt": "Maria cresceu no exterior, onde cantava no coral da comunidade local, desenvolvendo uma base vocal sólida e disciplinada. Ela retornou ao Japão recentemente e foi recrutada quase por acaso enquanto trabalhava em um café. Sendo uma pessoa quieta e diligente, ela faz o que lhe é pedido sem reclamar, mas sua total falta de ambição a mantém nas sombras. Ela é uma presença estabilizadora nos bastidores, preferindo apoiar o grupo a ser o centro das atenções.",
+        "ja": "マリアは海外で育ち、地元のコミュニティの合唱団で歌うことで、確かなボーカルの基礎と規律を身につけました。最近日本に帰国し、カフェで働いていたところを半ば偶然にスカウトされました。物静かで勤勉な彼女は、文句を言わずに求められたことをこなしますが、野心のなさが彼女を影の存在に留めています。スポットライトを浴びるよりもグループを支えることを好む、舞台裏の頼もしい存在です。"
+      },
+      "physical": {
+        "hairStyle": "Long, straight, neatly tied in a half-up style",
+        "hairColor": "Ash brown",
+        "eyeShape": "Drooping, gentle (tareme)",
+        "eyeColor": "Hazel",
+        "skinTone": "Fair",
+        "accessories": "Simple silver pendant necklace",
+        "outfitNotes": "Modest, comfortable casual wear in muted earth tones."
+      },
+      "portraitPromptPositive": "1girl, 25 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, long straight ash brown hair tied in a neat half-up style, drooping gentle hazel eyes, fair skin, simple silver pendant necklace, modest muted earth tone casual wear, quiet expression, gentle and reliable aura, anime otome style, visual novel clean lineart, soft shading, no text, no watermark.",
+      "portraitPromptNegative": "worst quality, low quality, deformed, mutated, ugly, bad anatomy, bad proportions, extra limbs, missing limbs, text, watermark, background details, scenery, vibrant colors, expressive emotion"
+    }
+  },
+  {
+    "id": "wp_00001",
+    "nameRomaji": "Kurokawa Reina",
+    "nameJp": "黒川 玲奈",
+    "age": 28,
+    "gender": "female",
+    "potential": 9,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 8,
+      "ambition": 18,
+      "loyalty": 18,
+      "temperament": 7,
+      "personalLife": 6
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.time_bomb",
+    "visualSeed": 502392,
+    "regionId": "tokyo",
+    "entryMonth": 155,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00001",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kurokawa Reina",
+      "nameJp": "黒川 玲奈",
+      "background": {
+        "pt": "Reina passou a maior parte de seus vinte anos saltando entre empregos de meio período e a vida noturna de Tóquio, buscando desesperadamente um palco para brilhar. Apesar de não ter treinamento formal e possuir um temperamento notoriamente explosivo, sua pura ambição a levou a fazer um teste para uma agência de idols aos 28 anos. Ela é ferozmente leal àqueles que lhe dão uma chance, mas sua vida pessoal caótica e falta de filtro a tornam um risco constante de relações públicas.",
+        "ja": "玲奈は20代の大半をアルバイトと東京の夜の街で過ごし、自分が輝ける舞台を必死に探していた。正式なレッスンを受けた経験はなく、すぐに感情を爆発させる気性の荒さがあるが、その強い野心から28歳でアイドル事務所のオーディションを受けた。自分にチャンスを与えてくれた人には強い忠誠心を抱くが、波乱万丈な私生活と口の悪さから、常に炎上のリスクを抱える危険な存在である。"
+      },
+      "physical": {
+        "hairStyle": "Long, messy waves with visible dark roots",
+        "hairColor": "Bleached blonde with dark brown roots",
+        "eyeShape": "Sharp, slightly narrowed and intense (sanpaku)",
+        "eyeColor": "Amber",
+        "skinTone": "Fair but slightly pallid",
+        "accessories": "Cheap hoop earrings and a dark choker",
+        "outfitNotes": "Slightly outdated, flashy street fashion that looks a bit worn out."
+      },
+      "portraitPromptPositive": "1girl, 28yo woman, solo, bust portrait, chest-up, three-quarter view, plain solid black background, long messy bleached blonde hair with dark brown roots, sharp intense amber eyes, sanpaku eyes, fair pallid skin, wearing cheap hoop earrings and a dark choker, slightly outdated flashy casual street clothes, intense expression, slightly tired but ambitious look, anime otome style, visual novel sprite, clean lineart, soft shading, high quality, masterpiece, no text, no watermark.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, poorly drawn face, extra limbs, lowres, bad hands, missing fingers, worst quality, low quality, blurry, 3d, realistic, simple background, messy lines."
+    }
+  },
+  {
+    "id": "wp_00002",
+    "nameRomaji": "Hasegawa Shizuku",
+    "nameJp": "長谷川 雫",
+    "age": 18,
+    "gender": "female",
+    "potential": 16,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 12,
+      "ambition": 5,
+      "loyalty": 10,
+      "temperament": 4,
+      "personalLife": 9
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.silent_pillar",
+    "visualSeed": 505348,
+    "regionId": "tokyo",
+    "entryMonth": 92,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00002",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Hasegawa Shizuku",
+      "nameJp": "長谷川 雫",
+      "background": {
+        "pt": "Nascida e criada na agitação de Tóquio, Shizuku sempre preferiu observar o mundo ao seu redor em silêncio em vez de ser o centro das atenções. Ela nunca buscou ativamente a fama, mas acabou participando de uma audição para acompanhar uma amiga, aceitando o resultado com sua calma habitual. Embora atualmente não tenha grandes ambições ou habilidades de destaque, sua presença firme e paciência inabalável fazem dela um porto seguro para suas colegas.",
+        "ja": "東京の喧騒の中で生まれ育った雫は、注目を集めるよりも、周囲の世界を静かに観察することを好む少女でした。自ら名声を求めたことはありませんでしたが、友人の付き添いでオーディションに参加し、持ち前の落ち着きで結果を受け入れました。現在は目立ったスキルや野心はありませんが、その揺るぎない存在感と忍耐力は、仲間たちにとって静かな心の支えとなっています。"
+      },
+      "physical": {
+        "hairStyle": "Straight, shoulder-length bob with neat bangs",
+        "hairColor": "Muted dark ash brown",
+        "eyeShape": "Slightly downturned, gentle and observant",
+        "eyeColor": "Deep charcoal gray",
+        "skinTone": "Fair",
+        "accessories": "Simple silver hairpin",
+        "outfitNotes": "Modest and practical casual wear, favoring neutral colors like beige and navy."
+      },
+      "portraitPromptPositive": "1girl, 18 years old, anime bust portrait, chest-up, three-quarter view, plain solid black background, straight shoulder-length bob with neat bangs, muted dark ash brown hair, slightly downturned gentle observant deep charcoal gray eyes, fair skin, simple silver hairpin, wearing modest practical casual wear in beige and navy, silent stoic gentle expression, quiet demeanor, anime otome, visual novel style, clean lineart, soft shading, high quality, masterpiece",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, ugly, poorly drawn face, chaotic background"
+    }
+  },
+  {
+    "id": "wp_00003",
+    "nameRomaji": "Takahashi Ren",
+    "nameJp": "高橋 蓮",
+    "age": 16,
+    "gender": "male",
+    "potential": 40,
+    "tier": "D",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 6,
+      "ambition": 16,
+      "loyalty": 12,
+      "temperament": 13,
+      "personalLife": 14
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 214317,
+    "regionId": "tokyo",
+    "entryMonth": 84,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00003",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Takahashi Ren",
+      "nameJp": "高橋 蓮",
+      "background": {
+        "pt": "Ren cresceu no movimentado centro de Tóquio, levando uma vida escolar perfeitamente normal e equilibrada. Sem se destacar em nenhuma área específica, ele decidiu fazer um teste para a agência movido por uma ambição repentina de provar seu valor. Embora ainda não tenha polido suas habilidades e às vezes seja inconsistente em seu foco, sua natureza adaptável e vida pessoal tranquila o tornam um diamante bruto perfeitamente moldável.",
+        "ja": "蓮は東京の賑やかな中心部で育ち、ごく普通でバランスの取れた学校生活を送ってきた。特定の分野で目立つことはなかったが、自分の価値を証明したいという突然の野心に突き動かされ、事務所のオーディションを受けることを決意した。まだスキルは磨かれておらず、集中力に欠けることもあるが、適応力の高さと穏やかな私生活は、彼がこれから形作られる原石であることを示している。"
+      },
+      "physical": {
+        "hairStyle": "Short, slightly messy layered cut",
+        "hairColor": "Dark brown",
+        "eyeShape": "Round and friendly",
+        "eyeColor": "Hazel",
+        "skinTone": "Fair",
+        "accessories": "",
+        "outfitNotes": "Casual school uniform style with a loose necktie"
+      },
+      "portraitPromptPositive": "1 boy, 16 years old, anime bust portrait, chest-up, three-quarter view, short slightly messy layered dark brown hair, round friendly hazel eyes, fair skin, casual school uniform style with a loose necktie, plain solid black background, no text, no watermark, anime otome, visual novel clean lineart soft shading.",
+      "portraitPromptNegative": "low quality, worst quality, sketch, ugly, distorted, deformed, text, watermark, signature, multiple people, poorly drawn face, bad anatomy, background elements."
+    }
+  },
+  {
+    "id": "wp_00004",
+    "nameRomaji": "Fujiwara Akane",
+    "nameJp": "藤原 茜",
+    "age": 26,
+    "gender": "female",
+    "potential": 17,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 15,
+      "ambition": 11,
+      "loyalty": 15,
+      "temperament": 14,
+      "personalLife": 4
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.golden_heart",
+    "visualSeed": 379209,
+    "regionId": "osaka",
+    "entryMonth": 140,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00004",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Fujiwara Akane",
+      "nameJp": "藤原 茜",
+      "background": {
+        "pt": "Akane passou a maior parte de seus vinte anos trabalhando em empregos de meio período em Osaka para ajudar a sustentar pessoas próximas, sempre colocando as necessidades dos outros acima das suas. Apesar de uma vida pessoal caótica e de começar tarde na indústria de ídolos, seu coração de ouro e natureza empática a trouxeram para a agência. Ela não tem experiência formal em canto ou dança e suas habilidades ainda são cruas, mas sua bondade genuína e vontade de fazer os outros sorrirem a mantêm seguindo em frente.",
+        "ja": "茜は20代のほとんどを大阪でのアルバイトに費やし、常に他人のニーズを自分のことより優先して周囲の人々を支えてきました。私生活は波乱万丈でアイドル業界へのスタートも遅れましたが、その黄金のような心と共感性の高さが彼女を事務所へと導きました。歌やダンスの正式な経験はなく実力はまだまだですが、彼女の純粋な優しさと誰かを笑顔にしたいという思いが原動力となっています。"
+      },
+      "physical": {
+        "hairStyle": "messy low ponytail with loose bangs",
+        "hairColor": "warm chestnut brown",
+        "eyeShape": "drooping kind eyes (tareme)",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "a simple beaded bracelet",
+        "outfitNotes": "casual, slightly worn-out oversized knit sweater"
+      },
+      "portraitPromptPositive": "1girl, 26 years old, female, chest-up bust portrait, three-quarter view, plain solid black background. She has a messy low ponytail with loose bangs in warm chestnut brown hair, drooping kind hazel eyes, and fair skin. Wearing a casual slightly worn-out oversized knit sweater and a simple beaded bracelet. Anime otome game style, visual novel sprite, clean lineart, soft shading, gentle and warm expression, high quality, masterpiece, no text, no watermark.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, abstract background, complex background, 3d, realistic"
+    }
+  },
+  {
+    "id": "wp_00005",
+    "nameRomaji": "Nakajima Naomi",
+    "nameJp": "中島 ナオミ",
+    "age": 21,
+    "gender": "female",
+    "potential": 39,
+    "tier": "D",
+    "visible": {
+      "vocal": 17,
+      "dance": 16,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 17,
+      "communication": 15,
+      "aura": 20,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 7,
+      "ambition": 9,
+      "loyalty": 14,
+      "temperament": 16,
+      "personalLife": 5
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 275904,
+    "regionId": "other",
+    "entryMonth": 128,
+    "talentAverage": 15.83,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00005",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Nakajima Naomi",
+      "nameJp": "中島 ナオミ",
+      "background": {
+        "pt": "Naomi nasceu no exterior e mudou-se para o Japão recentemente, buscando uma mudança de ares em vez de fama. Ela tem uma presença natural que atrai olhares, mas falta-lhe a ambição e a consistência necessárias para a vida de idol. Seus passatempos noturnos e vida pessoal agitada frequentemente atrapalham seus treinos, refletindo sua falta de compromisso inicial. Apesar de seu temperamento equilibrado, ela precisará de muita orientação para levar a carreira a sério.",
+        "ja": "ナオミは海外で生まれ育ち、名声よりも環境の変化を求めて最近日本に引っ越してきた。彼女には人の目を惹きつける自然なオーラがあるが、アイドル生活に必要な野心や一貫性に欠けている。夜遊びや派手な私生活がレッスンの妨げになることもしばしばあり、初期のコミットメントの低さを表している。バランスの取れた性格ではあるものの、キャリアを真剣に考えさせるためには多くの指導が必要だろう。"
+      },
+      "physical": {
+        "hairStyle": "messy shoulder-length waves",
+        "hairColor": "bleached blonde with dark roots",
+        "eyeShape": "drooping, relaxed tareme",
+        "eyeColor": "hazel",
+        "skinTone": "light tan",
+        "accessories": "black choker and multiple ear piercings",
+        "outfitNotes": "oversized graphic tee slipped off one shoulder"
+      },
+      "portraitPromptPositive": "1girl, 21 years old, young woman, anime bust portrait, chest-up, three-quarter view, plain solid black background, messy shoulder-length wavy bleached blonde hair with dark roots, drooping relaxed tareme hazel eyes, light tan skin, wearing an oversized graphic tee slipped off one shoulder, black choker necklace, multiple ear piercings, casual slightly unkempt look, visual novel character sprite, clean lineart, soft cel shading, high quality, masterpiece",
+      "portraitPromptNegative": "text, watermark, signature, ugly, poorly drawn, extra limbs, bad anatomy, low resolution, crowded background, 3d, realistic, photorealistic, bad proportions"
+    }
+  },
+  {
+    "id": "wp_00006",
+    "nameRomaji": "Shirakawa Lily",
+    "nameJp": "白川 リリ",
+    "age": 20,
+    "gender": "female",
+    "potential": 48,
+    "tier": "D",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 21,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 17,
+      "ambition": 4,
+      "loyalty": 16,
+      "temperament": 14,
+      "personalLife": 8
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.golden_heart",
+    "visualSeed": 724562,
+    "regionId": "other",
+    "entryMonth": 126,
+    "talentAverage": 15.5,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00006",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Shirakawa Lily",
+      "nameJp": "白川 リリ",
+      "background": {
+        "pt": "Nascida no Canadá e filha de pais japoneses, Lily mudou-se para Tóquio recentemente em busca de suas raízes. Ela nunca teve grandes ambições de ser uma idol, mas sua aura naturalmente gentil chamou a atenção de um olheiro enquanto ela era voluntária em um abrigo de animais. Embora suas habilidades artísticas ainda sejam muito cruas, seu coração de ouro e lealdade inabalável fazem dela uma presença extremamente querida e reconfortante nos bastidores.",
+        "ja": "カナダで日本人の両親のもとに生まれたリリは、自身のルーツを探求するために最近東京に引っ越してきました。アイドルになるという強い野心は全くありませんでしたが、動物保護施設でボランティアをしている時に、彼女の持つ自然で優しいオーラがスカウトの目に留まりました。芸術的なスキルはまだ未熟ですが、その黄金の心と揺るぎない忠誠心により、舞台裏では非常に愛され、周囲を和ませる存在となっています。"
+      },
+      "physical": {
+        "hairStyle": "Long, loose wavy hair parted to the side",
+        "hairColor": "Soft ash blonde",
+        "eyeShape": "Round, gentle, and expressive",
+        "eyeColor": "Hazel",
+        "skinTone": "Fair",
+        "accessories": "A simple silver locket necklace",
+        "outfitNotes": "Cozy, pastel-colored oversized knitwear that emphasizes her approachable and warm personality."
+      },
+      "portraitPromptPositive": "1girl, solo, anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark, 20-year-old female, long loose wavy soft ash blonde hair parted to the side, round gentle hazel eyes, fair skin, sweet and kind expression, wearing cozy pastel-colored oversized knitwear, simple silver locket necklace. Style: anime otome, visual novel character sprite, clean lineart, soft shading, high quality, masterpiece, highly detailed face.",
+      "portraitPromptNegative": "worst quality, low quality, deformed, bad anatomy, poorly drawn face, mutated, extra limbs, ugly, text, watermark, signature, messy lines, background elements, chaotic background, 3d, realistic."
+    }
+  },
+  {
+    "id": "wp_00007",
+    "nameRomaji": "Aizawa Rina",
+    "nameJp": "相沢 莉奈",
+    "age": 18,
+    "gender": "female",
+    "potential": 70,
+    "tier": "B",
+    "visible": {
+      "vocal": 25,
+      "dance": 16,
+      "acting": 15,
+      "variety": 20,
+      "visual": 24,
+      "charisma": 23,
+      "communication": 15,
+      "aura": 18,
+      "stamina": 16,
+      "discipline": 15,
+      "mentality": 26,
+      "adaptability": 24
+    },
+    "hidden": {
+      "consistency": 15,
+      "ambition": 8,
+      "loyalty": 7,
+      "temperament": 6,
+      "personalLife": 15
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.public_life",
+    "visualSeed": 306361,
+    "regionId": "tokyo",
+    "entryMonth": 179,
+    "talentAverage": 19.75,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00007",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Aizawa Rina",
+      "nameJp": "相沢 莉奈",
+      "background": {
+        "pt": "Nascida e criada no coração de Tóquio, Rina sempre viveu para os holofotes e para as redes sociais. Ela construiu uma base de fãs online antes mesmo de entrar para a agência, atraindo a atenção tanto pelo seu carisma quanto pelos dramas frequentes da sua vida pessoal. Graças à sua mentalidade de ferro, ela não se abala com críticas, adaptando-se rapidamente a qualquer nova tendência ou controvérsia. No entanto, sua sede de atenção e amor por festas podem ser um desafio constante para a equipe de relações públicas.",
+        "ja": "東京の中心で生まれ育った莉奈は、常にスポットライトとSNSの注目のために生きてきました。事務所に入る前からオンラインでファンを獲得しており、そのカリスマ性だけでなく、頻繁に起こる私生活のドラマでも注目を集めています。鉄のメンタルのおかげで批判に動じることはなく、どんな新しいトレンドや炎上にも素早く適応します。しかし、承認欲求の強さとパーティー好きの性格は、PRチームにとって常に悩みの種となるでしょう。"
+      },
+      "physical": {
+        "hairStyle": "wavy twin tails",
+        "hairColor": "ash blonde",
+        "eyeShape": "round and expressive",
+        "eyeColor": "amber",
+        "skinTone": "fair",
+        "accessories": "heart-shaped choker and trendy hair clips",
+        "outfitNotes": "Harajuku street fashion mixed with idol cute, off-shoulder top"
+      },
+      "portraitPromptPositive": "Anime bust portrait, chest-up, three-quarter view, plain solid black background, 18-year-old female Japanese idol, fair skin, ash blonde wavy twin tails adorned with trendy hair clips, round expressive amber eyes. Wearing a Harajuku street fashion off-shoulder top and a heart-shaped choker. Confident and slightly mischievous expression, trendy Tokyo influencer vibe. Clean lineart, soft shading, anime otome, visual novel style, high quality, masterpiece, no text, no watermark.",
+      "portraitPromptNegative": "ugly, poorly drawn, deformed, mutated, text, watermark, signature, multiple girls, bad anatomy, bad hands, missing fingers, background elements, scenery, realistic, 3d, photographic, messy lines"
+    }
+  },
+  {
+    "id": "wp_00008",
+    "nameRomaji": "Matsumoto Chika",
+    "nameJp": "松本 千佳",
+    "age": 28,
+    "gender": "female",
+    "potential": 58,
+    "tier": "C",
+    "visible": {
+      "vocal": 18,
+      "dance": 53,
+      "acting": 43,
+      "variety": 28,
+      "visual": 49,
+      "charisma": 53,
+      "communication": 25,
+      "aura": 31,
+      "stamina": 27,
+      "discipline": 47,
+      "mentality": 42,
+      "adaptability": 53
+    },
+    "hidden": {
+      "consistency": 6,
+      "ambition": 6,
+      "loyalty": 11,
+      "temperament": 17,
+      "personalLife": 7
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 167424,
+    "regionId": "tokyo",
+    "entryMonth": 81,
+    "talentAverage": 39.08,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00008",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Matsumoto Chika",
+      "nameJp": "松本 千佳",
+      "background": {
+        "pt": "Nascida em Tóquio, Chika trabalhou por anos como dançarina de apoio na cena underground antes de decidir tentar a sorte como idol aos 28 anos. Embora possua um carisma natural e se adapte facilmente a novas coreografias, sua falta de ambição a manteve na obscuridade por muito tempo. Nos bastidores, sua vida pessoal é frequentemente caótica e ela tem dificuldade em manter a lealdade, o que a torna uma figura imprevisível para a agência.",
+        "ja": "東京で生まれた千佳は、28歳でアイドルとして運試しをする前は、アンダーグラウンドシーンで長年バックダンサーとして働いていました。天性のカリスマ性を持ち、新しい振り付けにも簡単に適応しますが、野心の低さが彼女を長い間無名のままにしていました。舞台裏では、彼女の私生活はしばしば混沌としており、事務所にとって予測不可能な存在となっています。"
+      },
+      "physical": {
+        "hairStyle": "asymmetrical bob cut",
+        "hairColor": "ash blonde with dark roots",
+        "eyeShape": "sharp, slightly sleepy eyes",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "silver hoop earrings and a black choker",
+        "outfitNotes": "edgy street-casual with a leather jacket over a crop top"
+      },
+      "portraitPromptPositive": "1girl, 28 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, asymmetrical bob cut, ash blonde hair with dark roots, sharp slightly sleepy hazel eyes, fair skin, wearing silver hoop earrings and a black choker, edgy street-casual outfit with a leather jacket over a crop top, mature yet trendy tokyo vibe, confident charismatic expression, visual novel clean lineart soft shading, official art, high quality",
+      "portraitPromptNegative": "text, watermark, signature, ugly, poorly drawn, deformed, extra limbs, low quality, sketch, monochrome, background elements, simple background, messy lines, text, error, cropped, worst quality, jpeg artifacts"
+    }
+  },
+  {
+    "id": "wp_00009",
+    "nameRomaji": "Watanabe Hina",
+    "nameJp": "渡辺 陽菜",
+    "age": 16,
+    "gender": "female",
+    "potential": 31,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 8,
+      "ambition": 17,
+      "loyalty": 9,
+      "temperament": 16,
+      "personalLife": 10
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 160954,
+    "regionId": "tokyo",
+    "entryMonth": 88,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00009",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Watanabe Hina",
+      "nameJp": "渡辺 陽菜",
+      "background": {
+        "pt": "Nascida e criada em Tóquio, Hina sempre sonhou com a fama, mas nunca se dedicou a uma única paixão por muito tempo. Embora tenha uma personalidade equilibrada, sua falta de consistência a faz pular de um interesse para outro rapidamente. Ela entrou para a agência buscando um atalho para o estrelato, confiando mais em sua grande ambição do que em suas habilidades, que ainda são bastante medianas. Apesar de sua vida pessoal um pouco desorganizada, ela acredita firmemente que nasceu para os palcos.",
+        "ja": "東京で生まれ育った陽菜は、常に名声に憧れてきましたが、一つの情熱に長く打ち込むことはありませんでした。バランスの取れた性格ですが、一貫性の低さから、興味の対象が次々と変わってしまいます。彼女は現在の平均的な実力よりも持ち前の野心に頼り、スターへの近道を求めて事務所に入所しました。私生活は少しルーズですが、自分はステージで輝くために生まれてきたと固く信じています。"
+      },
+      "physical": {
+        "hairStyle": "Shoulder-length bob with slightly uneven bangs",
+        "hairColor": "Natural dark brown",
+        "eyeShape": "Round, slightly wide-eyed",
+        "eyeColor": "Hazel brown",
+        "skinTone": "Fair",
+        "accessories": "Colorful plastic hair clips",
+        "outfitNotes": "Standard Tokyo high school summer uniform with a slightly wrinkled red ribbon"
+      },
+      "portraitPromptPositive": "1 girl, 16 years old, anime bust portrait, chest-up, three-quarter view. Natural dark brown hair in a shoulder-length bob with slightly uneven bangs, decorated with colorful plastic hair clips. Round, slightly wide-eyed hazel brown eyes, fair skin. Wearing a standard Tokyo high school summer uniform with a slightly wrinkled red ribbon. Plain solid black background. Clean lineart, soft shading, anime otome game, visual novel sprite style, highly detailed, masterpiece.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, poorly drawn, extra limbs, bad anatomy, low quality, sketch, realistic, 3d, complex background, messy lines"
+    }
+  },
+  {
+    "id": "wp_00010",
+    "nameRomaji": "Ito Yumi",
+    "nameJp": "伊藤 結美",
+    "age": 22,
+    "gender": "female",
+    "potential": 27,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 17,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 7,
+      "ambition": 9,
+      "loyalty": 8,
+      "temperament": 16,
+      "personalLife": 8
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 749981,
+    "regionId": "tokyo",
+    "entryMonth": 73,
+    "talentAverage": 15.17,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00010",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Ito Yumi",
+      "nameJp": "伊藤 結美",
+      "background": {
+        "pt": "Yumi cresceu em Tóquio e sempre participou de pequenos papéis como figurante em dramas de TV locais. Com uma personalidade equilibrada e calma, ela decidiu tentar a sorte na indústria de idols sem grandes ambições iniciais. Embora não tenha talentos que se destaquem no momento, sua experiência básica em atuação a ajuda a se expressar de forma natural.",
+        "ja": "結美は東京で育ち、地元のテレビドラマでエキストラとして小さな役をこなしてきました。穏やかでバランスの取れた性格の彼女は、最初は大きな野心を持たずにアイドル業界に挑戦することを決めました。現在は際立った才能はありませんが、基礎的な演技の経験が彼女の自然な表現力を支えています。"
+      },
+      "physical": {
+        "hairStyle": "shoulder-length simple bob",
+        "hairColor": "dark brown",
+        "eyeShape": "round, gentle",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "simple hair clip",
+        "outfitNotes": "casual everyday Tokyo street fashion, nothing flashy"
+      },
+      "portraitPromptPositive": "1girl, 22-year-old female, anime bust portrait, chest-up, three-quarter view, plain solid black background, shoulder-length simple dark brown bob hair, wearing a simple hair clip, round gentle hazel eyes, fair skin, casual everyday Tokyo street fashion, clean lineart, soft shading, anime otome visual novel style, high quality, masterpiece",
+      "portraitPromptNegative": "ugly, deformed, poorly drawn, extra limbs, low resolution, sketch, messy, text, watermark, signature, background details, flashy, overdesigned"
+    }
+  },
+  {
+    "id": "wp_00011",
+    "nameRomaji": "Miyazaki Elena",
+    "nameJp": "宮崎 エレナ",
+    "age": 23,
+    "gender": "female",
+    "potential": 80,
+    "tier": "A",
+    "visible": {
+      "vocal": 22,
+      "dance": 24,
+      "acting": 27,
+      "variety": 43,
+      "visual": 39,
+      "charisma": 29,
+      "communication": 30,
+      "aura": 27,
+      "stamina": 39,
+      "discipline": 45,
+      "mentality": 35,
+      "adaptability": 39
+    },
+    "hidden": {
+      "consistency": 6,
+      "ambition": 17,
+      "loyalty": 5,
+      "temperament": 15,
+      "personalLife": 10
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 674739,
+    "regionId": "other",
+    "entryMonth": 121,
+    "talentAverage": 33.25,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00011",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Miyazaki Elena",
+      "nameJp": "宮崎 エレナ",
+      "background": {
+        "pt": "Criada no exterior, Elena retornou ao Japão trazendo consigo uma ética de trabalho impecável e uma facilidade natural para programas de variedades. Sua personalidade equilibrada e alta adaptabilidade permitiram que ela superasse rapidamente as barreiras culturais da indústria. Dona de uma beleza marcante e muita energia, ela é uma profissional confiável que está sempre pronta para qualquer desafio na TV.",
+        "ja": "海外で育ったエレナは、完璧な労働倫理とバラエティ番組への天性の才能を携えて日本へ帰国しました。彼女のバランスの取れた性格と高い適応力により、業界の文化的な壁をすぐに乗り越えることができました。際立ったルックスと無尽蔵のスタミナを持つ彼女は、テレビのどんな困難な企画にも対応できる信頼性の高いプロフェッショナルです。"
+      },
+      "physical": {
+        "hairStyle": "Long, sleek high ponytail with side-swept bangs",
+        "hairColor": "Ash blonde",
+        "eyeShape": "Almond-shaped, confident and alert",
+        "eyeColor": "Hazel",
+        "skinTone": "Light olive",
+        "accessories": "Gold hoop earrings",
+        "outfitNotes": "Chic, sporty-casual streetwear with a tailored blazer"
+      },
+      "portraitPromptPositive": "1girl, 23 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark, long sleek ash blonde high ponytail with side-swept bangs, almond-shaped confident hazel eyes, light olive skin, wearing gold hoop earrings, chic sporty-casual streetwear with a tailored blazer. Anime otome game style, visual novel clean lineart, soft shading, highly detailed, expressive, striking and professional.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, ugly, deformed"
+    }
+  },
+  {
+    "id": "wp_00012",
+    "nameRomaji": "Yoshida Alice",
+    "nameJp": "吉田 アリス",
+    "age": 19,
+    "gender": "female",
+    "potential": 6,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 7,
+      "ambition": 4,
+      "loyalty": 9,
+      "temperament": 11,
+      "personalLife": 5
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 739299,
+    "regionId": "other",
+    "entryMonth": 126,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00012",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Yoshida Alice",
+      "nameJp": "吉田 アリス",
+      "background": {
+        "pt": "Alice nasceu no exterior e mudou-se para o Japão após terminar o ensino médio, buscando descobrir suas raízes. Com uma personalidade incrivelmente equilibrada e gentil, ela não possui uma ambição avassaladora para o estrelato, mas é extremamente leal à agência que a acolheu. Suas habilidades são medianas em todas as áreas, tornando-a uma verdadeira tela em branco pronta para ser moldada pela gerência certa.",
+        "ja": "アリスは海外で生まれ育ち、高校卒業後に自身のルーツを探るために日本へ移住してきました。驚くほどバランスの取れた穏やかな性格で、スターになるという強烈な野心はありませんが、自分を受け入れてくれた事務所には非常に忠実です。すべてのスキルが平均的であり、適切なプロデュースによってどんな色にも染まる白紙のような存在です。"
+      },
+      "physical": {
+        "hairStyle": "shoulder-length wavy hair with a side part",
+        "hairColor": "light ash brown",
+        "eyeShape": "round, gentle eyes",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "simple silver pendant necklace",
+        "outfitNotes": "comfortable pastel pink cardigan over a plain white blouse"
+      },
+      "portraitPromptPositive": "1girl, anime bust portrait, chest-up, three-quarter view, 19-year-old female, light ash brown shoulder-length wavy hair with a side part, round gentle hazel eyes, fair skin, wearing a simple silver pendant necklace and a comfortable pastel pink cardigan over a plain white blouse, plain solid black background, no text, no watermark, anime otome, visual novel style, clean lineart, soft shading, highly detailed.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, abstract background, complex background, poorly drawn face, monochrome."
+    }
+  },
+  {
+    "id": "wp_00013",
+    "nameRomaji": "Shibata Daiki",
+    "nameJp": "柴田 大輝",
+    "age": 23,
+    "gender": "male",
+    "potential": 77,
+    "tier": "A",
+    "visible": {
+      "vocal": 38,
+      "dance": 40,
+      "acting": 32,
+      "variety": 20,
+      "visual": 29,
+      "charisma": 44,
+      "communication": 44,
+      "aura": 43,
+      "stamina": 46,
+      "discipline": 25,
+      "mentality": 27,
+      "adaptability": 20
+    },
+    "hidden": {
+      "consistency": 4,
+      "ambition": 15,
+      "loyalty": 15,
+      "temperament": 11,
+      "personalLife": 12
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 910667,
+    "regionId": "nagoya",
+    "entryMonth": 135,
+    "talentAverage": 34.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00013",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Shibata Daiki",
+      "nameJp": "柴田 大輝",
+      "background": {
+        "pt": "Daiki era uma figura popular na cena de dança de rua de Nagoya, conhecido por seu carisma natural e energia inesgotável. Ele possui uma aura cativante que atrai as pessoas facilmente, permitindo-lhe alcançar o sucesso sem muito esforço ou disciplina. Apesar de seu imenso potencial e charme equilibrado, sua falta de ambição e tendência a se distrair com a vida pessoal exigem um produtor firme para mantê-lo focado.",
+        "ja": "名古屋のストリートダンス界隈で人気者だった大輝は、持ち前のカリスマ性と無尽蔵のスタミナで知られています。人を惹きつける魅力的なオーラがあり、あまり努力や規律を重んじなくても成功を収めてきました。その計り知れないポテンシャルとバランスの取れた魅力とは裏腹に、野心の低さと私生活に流されやすい性格のため、彼を導くには厳格なプロデューサーが必要です。"
+      },
+      "physical": {
+        "hairStyle": "Messy, textured medium-length hair with a slight undercut",
+        "hairColor": "Ash brown",
+        "eyeShape": "Relaxed, slightly drooping (tareme)",
+        "eyeColor": "Amber",
+        "skinTone": "Light tan",
+        "accessories": "Silver hoop earrings",
+        "outfitNotes": "Casual streetwear, oversized graphic tee with a loose open jacket"
+      },
+      "portraitPromptPositive": "1boy, 23 years old male, anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark. Messy textured medium-length ash brown hair with a slight undercut, relaxed slightly drooping amber eyes, light tan skin. Wearing silver hoop earrings, casual streetwear, oversized graphic tee with a loose open jacket. Handsome, natural charisma, chill and approachable vibe. Anime visual novel style, otome game art, clean lineart, soft shading, high quality, masterpiece.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, abstract, realistic, 3d, ugly, deformed, poorly drawn face, mutated"
+    }
+  },
+  {
+    "id": "wp_00014",
+    "nameRomaji": "Okamoto Sayaka",
+    "nameJp": "岡本沙也加",
+    "age": 23,
+    "gender": "female",
+    "potential": 5,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 16,
+      "ambition": 18,
+      "loyalty": 17,
+      "temperament": 5,
+      "personalLife": 14
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.unstable_ambitious",
+    "visualSeed": 848325,
+    "regionId": "osaka",
+    "entryMonth": 76,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00014",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Okamoto Sayaka",
+      "nameJp": "岡本沙也加",
+      "background": {
+        "pt": "Sayaka passou anos na cena underground de Osaka, saltando entre pequenos grupos devido a constantes desentendimentos com a gerência e colegas. Apesar de suas habilidades ainda serem bastante rudimentares, ela possui uma ambição feroz de conquistar a indústria. No entanto, seu temperamento volátil e instável frequentemente sabota suas próprias oportunidades de crescimento. Ela está determinada a provar que todos estão errados, custe o que custar.",
+        "ja": "沙也加は大阪の地下アイドル界隈で何年も活動してきたが、運営やメンバーとの衝突が絶えずグループを転々としてきた。基礎スキルはまだ荒削りであるものの、アイドル業界で頂点に立つという野心は人一倍強い。しかし、その感情の起伏の激しさが度々自身のチャンスを潰してしまっている。何があっても周囲を見返してやると固く決意している。"
+      },
+      "physical": {
+        "hairStyle": "messy shoulder-length wolf cut",
+        "hairColor": "bleached blonde with dark roots",
+        "eyeShape": "sharp glaring sanpaku eyes",
+        "eyeColor": "dark brown",
+        "skinTone": "light tan",
+        "accessories": "black choker with a small metal ring",
+        "outfitNotes": "worn-out punk-inspired idol jacket over a graphic tee"
+      },
+      "portraitPromptPositive": "anime bust portrait, chest-up, three-quarter view, 23-year-old female, messy shoulder-length wolf cut bleached blonde hair with dark roots, sharp glaring sanpaku eyes, dark brown eyes, light tan skin, wearing a black choker with a small metal ring and a worn-out punk-inspired idol jacket over a graphic tee, plain solid black background, no text, no watermark, anime otome style, visual novel clean lineart, soft shading, masterpiece, high quality.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, ugly, deformed, bright background, complex background."
+    }
+  },
+  {
+    "id": "wp_00015",
+    "nameRomaji": "Kojima Sarah",
+    "nameJp": "小島サラ",
+    "age": 16,
+    "gender": "female",
+    "potential": 37,
+    "tier": "D",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 7,
+      "ambition": 17,
+      "loyalty": 17,
+      "temperament": 5,
+      "personalLife": 8
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.unstable_ambitious",
+    "visualSeed": 550358,
+    "regionId": "other",
+    "entryMonth": 191,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00015",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kojima Sarah",
+      "nameJp": "小島サラ",
+      "background": {
+        "pt": "Sarah cresceu no exterior, alimentando um sonho ardente de se tornar uma idol no Japão, apesar de não ter nenhum treinamento formal. Sua ambição desmedida muitas vezes colide com suas emoções voláteis, tornando-a imprevisível e dramática nos ensaios. No entanto, sua lealdade feroz à agência que lhe deu uma chance a mantém motivada a provar seu valor. Ela ainda precisa refinar todas as suas habilidades básicas para conseguir se destacar na indústria.",
+        "ja": "サラは海外で育ち、正式な訓練を受けたことがないにもかかわらず、日本でアイドルになるという熱い夢を抱き続けてきた。彼女の並外れた野心はしばしば不安定な感情と衝突し、レッスンの場では予測不可能な態度をとることがある。それでも、自分にチャンスを与えてくれた事務所への強い忠誠心が、彼女を前進させている。業界で輝くためには、まずすべての基礎スキルを磨く必要がある。"
+      },
+      "physical": {
+        "hairStyle": "Messy twin tails",
+        "hairColor": "Ash blonde",
+        "eyeShape": "Wide, slightly glaring",
+        "eyeColor": "Hazel",
+        "skinTone": "Light tan",
+        "accessories": "Black choker and colorful hair clips",
+        "outfitNotes": "Punk-rock inspired casual wear, slightly mismatched but energetic."
+      },
+      "portraitPromptPositive": "1girl, 16 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, messy ash blonde twin tails, wide slightly glaring hazel eyes, light tan skin, wearing a black choker and colorful hair clips, punk-rock inspired casual wear slightly mismatched, fierce and ambitious expression, anime otome, visual novel clean lineart soft shading, highly detailed, beautiful, aesthetic.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, poorly drawn face, extra limbs, low resolution, bad hands, monochrome, realistic, 3d, out of frame, background elements."
+    }
+  },
+  {
+    "id": "wp_00016",
+    "nameRomaji": "Endo Maki",
+    "nameJp": "遠藤 真紀",
+    "age": 28,
+    "gender": "female",
+    "potential": 12,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 16,
+      "ambition": 16,
+      "loyalty": 8,
+      "temperament": 14,
+      "personalLife": 8
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.disciplined_star",
+    "visualSeed": 864784,
+    "regionId": "tokyo",
+    "entryMonth": 70,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00016",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Endo Maki",
+      "nameJp": "遠藤 真紀",
+      "background": {
+        "pt": "Maki cresceu em um ambiente rigoroso em Tóquio, onde a disciplina e a perfeição sempre foram exigidas. Ela entrou na indústria de idols tarde, aos 28 anos, impulsionada por uma ambição feroz de provar seu valor, apesar de suas habilidades ainda estarem no nível básico. Embora sua ética de trabalho seja impecável, sua lealdade é questionável e fofocas sobre sua vida pessoal turbulenta frequentemente ameaçam atrapalhar sua carreira.",
+        "ja": "東京の厳格な家庭で育った真紀は、常に規律と完璧さを求められてきた。基礎能力はまだ低いものの、自身の価値を証明するという激しい野心に突き動かされ、28歳という遅咲きの年齢でアイドル業界に飛び込んだ。仕事への態度は真面目そのものだが、忠誠心には欠け、波乱万丈な私生活の噂が時折彼女のキャリアの足を引っ張る。"
+      },
+      "physical": {
+        "hairStyle": "neat shoulder-length bob with sharp bangs",
+        "hairColor": "ash black",
+        "eyeShape": "narrow, serious and calculating",
+        "eyeColor": "dark brown",
+        "skinTone": "fair",
+        "accessories": "simple silver stud earrings",
+        "outfitNotes": "professional tailored dark blazer over a crisp white blouse"
+      },
+      "portraitPromptPositive": "1girl, 28 years old, mature female, anime bust portrait, chest-up, three-quarter view, plain solid black background, neat shoulder-length ash black bob hair with sharp bangs, narrow serious calculating dark brown eyes, fair skin, simple silver stud earrings, wearing a professional tailored dark blazer over a crisp white blouse, disciplined and stern expression, anime otome visual novel style, clean lineart, soft shading, masterpiece, best quality, highly detailed, no text, no watermark.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, abstract background, messy, chaotic, childish, loli."
+    }
+  },
+  {
+    "id": "wp_00017",
+    "nameRomaji": "Koga Ryusei",
+    "nameJp": "古賀 竜星",
+    "age": 28,
+    "gender": "male",
+    "potential": 48,
+    "tier": "D",
+    "visible": {
+      "vocal": 23,
+      "dance": 17,
+      "acting": 31,
+      "variety": 27,
+      "visual": 40,
+      "charisma": 43,
+      "communication": 16,
+      "aura": 24,
+      "stamina": 37,
+      "discipline": 24,
+      "mentality": 43,
+      "adaptability": 16
+    },
+    "hidden": {
+      "consistency": 6,
+      "ambition": 6,
+      "loyalty": 14,
+      "temperament": 8,
+      "personalLife": 16
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.public_life",
+    "visualSeed": 161615,
+    "regionId": "fukuoka",
+    "entryMonth": 10,
+    "talentAverage": 28.42,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00017",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Koga Ryusei",
+      "nameJp": "古賀 竜星",
+      "background": {
+        "pt": "Ryusei era uma figura carismática e bem conhecida na agitada vida noturna de Nakasu, em Fukuoka, onde sua aparência marcante atraía muita atenção. Apesar de não ter nenhum talento natural para o canto ou a dança, sua autoconfiança inabalável e resiliência mental impressionaram um olheiro local. Ele está muito acostumado a viver sob os holofotes e mantém uma vida social extremamente ativa, o que muitas vezes desafia a paciência de seus gerentes. Aos 28 anos, ele encara a indústria de idols não como um sonho de infância, mas como uma extensão natural de sua personalidade pública e extravagante.",
+        "ja": "竜星は福岡の中洲のナイトライフでよく知られたカリスマ的な存在であり、その際立ったルックスで多くの注目を集めていた。歌やダンスの才能は全くないが、揺るぎない自信と強靭なメンタルが地元のスカウトの目に留まった。スポットライトを浴びることに慣れきっており、プライベートでの交友関係も非常に派手なため、マネージャーを悩ませることもしばしばある。28歳という年齢もあり、アイドルという職業を幼い頃の夢としてではなく、自身の華やかなパブリックイメージの延長線として捉えている。"
+      },
+      "physical": {
+        "hairStyle": "messy, slightly long, stylishly swept back on one side",
+        "hairColor": "ash blonde with silver-grey highlights",
+        "eyeShape": "sharp, hooded, confident",
+        "eyeColor": "amber",
+        "skinTone": "light tan",
+        "accessories": "silver hoop earrings, subtle chain necklace",
+        "outfitNotes": "open-collared dark silk shirt under a stylish, slightly flashy blazer"
+      },
+      "portraitPromptPositive": "1boy, 28 years old, handsome adult male, ash blonde hair with silver-grey highlights, messy slightly long hair stylishly swept back on one side, sharp hooded amber eyes, light tan skin, confident smirk, wearing an open-collared dark silk shirt under a stylish flashy blazer, silver hoop earrings, subtle chain necklace, anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark, anime otome game style, visual novel sprite, clean lineart, soft shading, highly detailed face, charismatic aura.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, female, girl, child, young boy, poorly drawn face, mutation, deformed."
+    }
+  },
+  {
+    "id": "wp_00018",
+    "nameRomaji": "Nakamura Aoi",
+    "nameJp": "中村 葵",
+    "age": 19,
+    "gender": "female",
+    "potential": 24,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 6,
+      "ambition": 4,
+      "loyalty": 15,
+      "temperament": 13,
+      "personalLife": 10
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 887398,
+    "regionId": "tokyo",
+    "entryMonth": 48,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00018",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Nakamura Aoi",
+      "nameJp": "中村 葵",
+      "background": {
+        "pt": "Nascida e criada no ritmo acelerado de Tóquio, Aoi nunca teve a ambição ardente de se tornar uma estrela. Ela entrou para a indústria do entretenimento quase por acaso, após ser recrutada enquanto acompanhava uma amiga em uma audição. Embora não tenha um talento que se destaque imediatamente e lhe falte um espírito competitivo, sua natureza equilibrada e lealdade profunda a tornam uma colega de equipe confiável. Ela prefere seguir o fluxo e manter a harmonia do grupo a lutar pelo centro das atenções.",
+        "ja": "東京の喧騒の中で生まれ育った葵は、スターになるという強い野心を持ったことがありません。友人のオーディションに付き添った際にスカウトされ、半ば成り行きで芸能界入りしました。すぐに目を引くような突出した才能や競争心には欠けますが、バランスの取れた性格と強い忠誠心から、信頼できるチームメイトとして重宝されています。センターを争うよりも、周囲との調和を保ちながら流れに身を任せることを好みます。"
+      },
+      "physical": {
+        "hairStyle": "shoulder-length bob with soft bangs",
+        "hairColor": "natural dark brown",
+        "eyeShape": "round, gentle",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "simple silver hairpin",
+        "outfitNotes": "casual, comfortable Tokyo street fashion, modest and unassuming"
+      },
+      "portraitPromptPositive": "1girl, 19 years old, female, chest-up bust portrait, anime otome visual novel style, clean lineart, soft shading. Shoulder-length natural dark brown bob hair with soft bangs, round gentle hazel eyes, fair skin. Wearing a simple silver hairpin and casual unassuming Tokyo street fashion. Gentle, easygoing and balanced expression. Plain solid black background, three-quarter view, no text, no watermark.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, ugly, deformed, flashy"
+    }
+  },
+  {
+    "id": "wp_00019",
+    "nameRomaji": "Oda Kaito",
+    "nameJp": "織田海斗",
+    "age": 20,
+    "gender": "male",
+    "potential": 22,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 17,
+      "ambition": 9,
+      "loyalty": 14,
+      "temperament": 17,
+      "personalLife": 12
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 356046,
+    "regionId": "nagoya",
+    "entryMonth": 167,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00019",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Oda Kaito",
+      "nameJp": "織田海斗",
+      "background": {
+        "pt": "Nascido e criado em Nagoya, Kaito sempre foi um jovem equilibrado e de temperamento calmo, preferindo a estabilidade à fama meteórica. Ele trabalhava em meio período em um café local quando foi descoberto por um olheiro. Sem muita ambição inicial, ele decidiu tentar a vida de idol apenas para ver onde isso o levaria. Suas habilidades são perfeitamente medianas no momento, mas sua consistência o torna um talento em que a agência pode confiar.",
+        "ja": "名古屋で生まれ育った海斗は、常にバランスの取れた穏やかな性格の青年で、急激な名声よりも安定を好む。地元のカフェでアルバイトをしていたところをスカウトされた。当初はそれほど野心を持っていなかったが、自分の可能性を試すためにアイドルの道へ進むことを決意した。現在の能力は全て平均的だが、その堅実さが彼の最大の武器である。"
+      },
+      "physical": {
+        "hairStyle": "short, neat, slightly parted bangs",
+        "hairColor": "ash brown",
+        "eyeShape": "gentle, slightly droopy",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "simple silver ear stud",
+        "outfitNotes": "casual layered streetwear, neutral colors"
+      },
+      "portraitPromptPositive": "1boy, 20 years old, male, anime bust portrait, chest-up, three-quarter view, short neat ash brown hair with slightly parted bangs, gentle slightly droopy hazel eyes, fair skin, simple silver ear stud, casual layered streetwear in neutral colors, plain solid black background, no text, no watermark, anime otome game style, visual novel clean lineart, soft shading, masterpiece, high quality.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, multiple people, female."
+    }
+  },
+  {
+    "id": "wp_00020",
+    "nameRomaji": "Kinoshita Yuta",
+    "nameJp": "木下 優太",
+    "age": 23,
+    "gender": "male",
+    "potential": 58,
+    "tier": "C",
+    "visible": {
+      "vocal": 26,
+      "dance": 17,
+      "acting": 33,
+      "variety": 15,
+      "visual": 17,
+      "charisma": 35,
+      "communication": 24,
+      "aura": 16,
+      "stamina": 29,
+      "discipline": 30,
+      "mentality": 22,
+      "adaptability": 16
+    },
+    "hidden": {
+      "consistency": 11,
+      "ambition": 6,
+      "loyalty": 14,
+      "temperament": 17,
+      "personalLife": 5
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 102093,
+    "regionId": "tokyo",
+    "entryMonth": 83,
+    "talentAverage": 23.33,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00020",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kinoshita Yuta",
+      "nameJp": "木下 優太",
+      "background": {
+        "pt": "Yuta cresceu no vibrante cenário de Tóquio, participando de pequenas peças de teatro desde jovem, o que desenvolveu sua excelente capacidade de atuação e carisma natural. Embora seja disciplinado durante os ensaios, falta-lhe a ambição feroz necessária para chegar ao topo, muitas vezes se distraindo com a agitada vida noturna da cidade. Sua aparência é bastante comum, permitindo que ele passe despercebido nas ruas, mas ele compensa isso com uma presença de palco cativante quando assume um personagem.",
+        "ja": "東京の活気ある環境で育った優太は、若い頃から小さな演劇に参加しており、それが彼の優れた演技力と自然なカリスマ性を育てました。稽古中は規律正しいものの、トップに立つための強い野心には欠けており、しばしば都会の派手なナイトライフに気を取られがちです。外見はごく普通で街中では目立ちませんが、役に入り込んだ時の魅力的なステージプレゼンスでそれを補っています。"
+      },
+      "physical": {
+        "hairStyle": "Short, slightly messy and casually unstyled",
+        "hairColor": "Dark brown",
+        "eyeShape": "Average, slightly droopy",
+        "eyeColor": "Hazel",
+        "skinTone": "Fair",
+        "accessories": "Simple silver stud earring",
+        "outfitNotes": "Casual streetwear, featuring a slightly worn denim jacket over a plain white t-shirt."
+      },
+      "portraitPromptPositive": "1boy, 23 years old, male, short slightly messy casually unstyled dark brown hair, average slightly droopy hazel eyes, fair skin, plain everyday appearance, simple silver stud earring, wearing a casual slightly worn denim jacket over a plain white t-shirt, anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark, anime otome, visual novel clean lineart soft shading.",
+      "portraitPromptNegative": "ugly, striking, overly handsome, poorly drawn, deformed, mutated, text, watermark, signature, multiple people, bad anatomy, bad proportions, missing fingers, extra digits, realistic, 3d, messy lines, complex background."
+    }
+  },
+  {
+    "id": "wp_00021",
+    "nameRomaji": "Morita Kaori",
+    "nameJp": "森田 香織",
+    "age": 26,
+    "gender": "female",
+    "potential": 61,
+    "tier": "C",
+    "visible": {
+      "vocal": 41,
+      "dance": 17,
+      "acting": 43,
+      "variety": 19,
+      "visual": 17,
+      "charisma": 18,
+      "communication": 24,
+      "aura": 40,
+      "stamina": 32,
+      "discipline": 47,
+      "mentality": 20,
+      "adaptability": 32
+    },
+    "hidden": {
+      "consistency": 18,
+      "ambition": 16,
+      "loyalty": 15,
+      "temperament": 10,
+      "personalLife": 11
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.disciplined_star",
+    "visualSeed": 898963,
+    "regionId": "tokyo",
+    "entryMonth": 81,
+    "talentAverage": 29.17,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00021",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Morita Kaori",
+      "nameJp": "森田 香織",
+      "background": {
+        "pt": "Nascida em Tóquio, Kaori passou anos aprimorando suas habilidades vocais e de atuação em teatros locais, sempre exigindo a perfeição de si mesma. Apesar de sua extrema disciplina profissional, sua baixa tolerância ao estresse e aparência considerada comum dificultaram sua ascensão na competitiva indústria de idols. Ela frequentemente se frustra com colegas menos dedicados, mas sua técnica sólida a torna uma artista incrivelmente confiável no palco.",
+        "ja": "東京出身の香織は、地元の小劇場で長年演技と歌唱力を磨き、常に自身に完璧を求めてきた。プロとしての規律は非常に高いが、ストレス耐性の低さと地味なビジュアルが、競争の激しいアイドル業界での飛躍を妨げている。献身的でない同僚に苛立つことも多いが、その確かな技術によりステージ上では信頼できるパフォーマーとなっている。"
+      },
+      "physical": {
+        "hairStyle": "straight, shoulder-length, neatly tied back in a low ponytail",
+        "hairColor": "ash brown",
+        "eyeShape": "narrow, slightly sharp and stern",
+        "eyeColor": "dark brown",
+        "skinTone": "fair, slightly pale",
+        "accessories": "simple wire-rimmed glasses",
+        "outfitNotes": "conservative, practical button-up blouse with no frills"
+      },
+      "portraitPromptPositive": "1girl, 26 years old, anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark, plain ash brown hair tied in a neat low ponytail, narrow sharp dark brown eyes, fair slightly pale skin, wearing simple wire-rimmed glasses, conservative practical button-up blouse, stern and disciplined expression, slight bags under eyes, plain appearance, anime otome style, visual novel clean lineart, soft shading",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, colorful background, abstract background, frills, flashy clothes"
+    }
+  },
+  {
+    "id": "wp_00022",
+    "nameRomaji": "Nishida Mio",
+    "nameJp": "西田 美桜",
+    "age": 18,
+    "gender": "female",
+    "potential": 20,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 10,
+      "ambition": 17,
+      "loyalty": 9,
+      "temperament": 9,
+      "personalLife": 4
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 868645,
+    "regionId": "osaka",
+    "entryMonth": 165,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00022",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Nishida Mio",
+      "nameJp": "西田 美桜",
+      "background": {
+        "pt": "Nascida em Osaka, Mio sempre sonhou em ser o centro das atenções, movida por uma ambição inabalável de alcançar o estrelato. Apesar de sua atitude equilibrada e amigável na superfície, ela esconde uma vida pessoal um pouco caótica e cheia de distrações. Sem nenhum treinamento formal, ela está começando do zero na agência, mas sua vontade feroz de vencer pode ser seu maior trunfo.",
+        "ja": "大阪出身の美桜は、スターダムにのし上がるという揺るぎない野心に突き動かされ、常に注目の的になることを夢見てきた。表向きはバランスの取れた人当たりの良い態度だが、実は少し波乱万丈で誘惑の多い私生活を隠している。正式なトレーニングは全く受けておらずゼロからのスタートだが、その成功への執念が彼女の最大の武器になるかもしれない。"
+      },
+      "physical": {
+        "hairStyle": "Shoulder-length messy bob with side-swept bangs",
+        "hairColor": "Dark brown",
+        "eyeShape": "Round, expressive eyes",
+        "eyeColor": "Hazel",
+        "skinTone": "Fair",
+        "accessories": "Simple hoop earrings",
+        "outfitNotes": "Casual streetwear, slightly mismatched but trendy"
+      },
+      "portraitPromptPositive": "18-year-old Japanese girl, anime bust portrait, chest-up, three-quarter view. Shoulder-length messy dark brown bob with side-swept bangs, round expressive hazel eyes, fair skin. Wearing simple hoop earrings and casual trendy streetwear. Plain solid black background, no text, no watermark. Anime otome game style, visual novel clean lineart, soft shading.",
+      "portraitPromptNegative": "ugly, deformed, poorly drawn, extra limbs, bad anatomy, text, watermark, signature, realistic, 3d, multiple people, busy background, abstract, messy lines"
+    }
+  },
+  {
+    "id": "wp_00023",
+    "nameRomaji": "Yamaguchi Rika",
+    "nameJp": "山口 梨花",
+    "age": 21,
+    "gender": "female",
+    "potential": 1,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 8,
+      "ambition": 8,
+      "loyalty": 4,
+      "temperament": 4,
+      "personalLife": 5
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.time_bomb",
+    "visualSeed": 976380,
+    "regionId": "tokyo",
+    "entryMonth": 67,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00023",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Yamaguchi Rika",
+      "nameJp": "山口 梨花",
+      "background": {
+        "pt": "Nascida em Tóquio, Rika passou a juventude mudando impulsivamente de um emprego de meio período para outro, sempre causando atritos com seus colegas. Apesar de não ter nenhum treinamento formal ou talento natural para as artes cênicas, ela decidiu se tornar uma idol por puro capricho após uma discussão acalorada com seus pais. Sua atitude explosiva e total falta de disciplina fazem dela uma verdadeira bomba-relógio nos bastidores, pronta para causar drama a qualquer momento.",
+        "ja": "東京で生まれた梨花は、同僚とのトラブルが絶えず、アルバイトを衝動的に転々とする青春時代を過ごしてきました。芸能活動の経験や才能は全くありませんが、両親との口論をきっかけに、単なる思いつきでアイドルを目指すことにしました。その爆発しやすい性格と規律のなさは、いつでもトラブルを引き起こしかねない時限爆弾のような存在です。"
+      },
+      "physical": {
+        "hairStyle": "Choppy asymmetrical bob",
+        "hairColor": "Bleached blonde with visible dark roots",
+        "eyeShape": "Sharp and defiant",
+        "eyeColor": "Dark brown",
+        "skinTone": "Fair",
+        "accessories": "Black leather choker, multiple silver ear piercings",
+        "outfitNotes": "Oversized graphic tee worn off one shoulder, slightly disheveled streetwear"
+      },
+      "portraitPromptPositive": "1girl, 21 years old female, chest-up bust portrait, three-quarter view, plain solid black background, no text, no watermark. She has a choppy asymmetrical bob, bleached blonde hair with visible dark roots, and sharp defiant dark brown eyes. Fair skin. She is wearing a black leather choker and multiple silver ear piercings, dressed in an oversized graphic tee worn off one shoulder, slightly disheveled streetwear. Anime otome game style, visual novel character sprite, clean lineart, soft shading, high quality, masterpiece.",
+      "portraitPromptNegative": "ugly, poorly drawn, bad anatomy, missing limbs, extra digits, text, watermark, signature, complex background, scenery, objects in background, monochrome, realistic"
+    }
+  },
+  {
+    "id": "wp_00024",
+    "nameRomaji": "Kamiyama Chloe",
+    "nameJp": "神山 クロエ",
+    "age": 20,
+    "gender": "female",
+    "potential": 87,
+    "tier": "S",
+    "visible": {
+      "vocal": 31,
+      "dance": 18,
+      "acting": 26,
+      "variety": 34,
+      "visual": 34,
+      "charisma": 30,
+      "communication": 32,
+      "aura": 27,
+      "stamina": 35,
+      "discipline": 36,
+      "mentality": 33,
+      "adaptability": 33
+    },
+    "hidden": {
+      "consistency": 18,
+      "ambition": 4,
+      "loyalty": 5,
+      "temperament": 9,
+      "personalLife": 13
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.silent_pillar",
+    "visualSeed": 889276,
+    "regionId": "other",
+    "entryMonth": 152,
+    "talentAverage": 30.75,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00024",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kamiyama Chloe",
+      "nameJp": "神山 クロエ",
+      "background": {
+        "pt": "Nascida no exterior, Chloe cresceu em um ambiente rigoroso que moldou sua incrível disciplina e resistência física. Apesar de sua beleza marcante e talento natural para comunicação, ela não possui ambição própria, preferindo atuar como uma fundação silenciosa e confiável para o grupo. Ela cumpre suas tarefas com estoicismo e perfeição, mas sua falta de lealdade à indústria significa que ela poderia abandonar os palcos sem hesitar se sua vida tomasse outro rumo.",
+        "ja": "海外で生まれ育ったクロエは、厳格な環境で培われた驚異的な規律と体力を持っている。際立ったビジュアルとコミュニケーション能力を持ちながらも、彼女自身には野心がなく、グループの中では静かで頼りになる大黒柱として振る舞う。与えられた役割を完璧にこなすが、アイドル業界への執着心や忠誠心がないため、別の道が示されればいつでもステージを降りる危うさを秘めている。"
+      },
+      "physical": {
+        "hairStyle": "long, perfectly straight hime cut",
+        "hairColor": "platinum blonde",
+        "eyeShape": "tareme, calm and stoic",
+        "eyeColor": "ice blue",
+        "skinTone": "pale",
+        "accessories": "simple silver stud earrings",
+        "outfitNotes": "elegant monochromatic smart-casual wear, high collar"
+      },
+      "portraitPromptPositive": "1girl, anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark, 20-year-old female, striking platinum blonde long perfectly straight hair with a hime cut, pale skin, ice blue eyes with a calm and stoic tareme shape, wearing elegant monochromatic smart-casual wear with a high collar, simple silver stud earrings, quiet and reliable expression, mature aura, anime otome, visual novel style, clean lineart, soft shading, high quality, masterpiece.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, ugly, deformed."
+    }
+  },
+  {
+    "id": "wp_00025",
+    "nameRomaji": "Inoue Sora",
+    "nameJp": "井上 空",
+    "age": 17,
+    "gender": "male",
+    "potential": 43,
+    "tier": "D",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 13,
+      "ambition": 12,
+      "loyalty": 15,
+      "temperament": 4,
+      "personalLife": 14
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 403843,
+    "regionId": "tokyo",
+    "entryMonth": 77,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00025",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Inoue Sora",
+      "nameJp": "井上 空",
+      "background": {
+        "pt": "Sora nasceu e cresceu no centro de Tóquio, levando uma vida escolar perfeitamente comum. Ele não se destaca em nenhuma habilidade específica, mas sua natureza equilibrada e lealdade aos amigos o tornam uma presença reconfortante. Entrou para a agência quase por acaso, encarando o treinamento como uma atividade extracurricular. Embora falte ambição ardente e às vezes seja um pouco sensível a críticas, ele se esforça para não decepcionar quem confia nele.",
+        "ja": "空は東京の中心部で生まれ育ち、ごく普通の学生生活を送ってきた。特筆すべき才能はないが、バランスの取れた性格と友人への忠誠心から、周囲に安心感を与える存在である。部活動のような感覚で、半ば偶然に事務所へ入所した。強い野心に欠け、少し繊細な面もあるが、自分を信じてくれる人を裏切らないように日々努力している。"
+      },
+      "physical": {
+        "hairStyle": "short, slightly messy with a natural parting",
+        "hairColor": "dark brown",
+        "eyeShape": "round, gentle",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "single small silver ear stud",
+        "outfitNotes": "simple casual plain hoodie under a denim jacket"
+      },
+      "portraitPromptPositive": "anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark, 17-year-old male, Japanese youth, short slightly messy dark brown hair with a natural parting, round gentle hazel eyes, fair skin, wearing a simple casual plain hoodie under a denim jacket, single small silver ear stud, soft neutral expression, perfectly average but approachable look, anime otome, visual novel clean lineart soft shading",
+      "portraitPromptNegative": "ugly, deformed, poorly drawn, extra limbs, text, watermark, signature, blurry, low resolution, multiple angles, female, girl, flashy clothes, over-detailed background"
+    }
+  },
+  {
+    "id": "wp_00026",
+    "nameRomaji": "Kato Maya",
+    "nameJp": "加藤 マヤ",
+    "age": 20,
+    "gender": "female",
+    "potential": 20,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 12,
+      "ambition": 11,
+      "loyalty": 11,
+      "temperament": 18,
+      "personalLife": 5
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 808665,
+    "regionId": "other",
+    "entryMonth": 55,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00026",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kato Maya",
+      "nameJp": "加藤 マヤ",
+      "background": {
+        "pt": "Maya cresceu no exterior antes de se mudar para o Japão em busca de um novo começo na indústria do entretenimento. Ela tem uma personalidade incrivelmente amigável e equilibrada, o que a torna fácil de trabalhar, embora suas habilidades artísticas ainda sejam bastante rudimentares. Devido à sua adaptação a uma nova cultura, sua vida pessoal é um pouco caótica e desorganizada. Apesar das distrações, sua natureza pacífica a ajuda a lidar com o estresse da vida de trainee.",
+        "ja": "マヤは海外で育ち、エンターテインメント業界での新たなスタートを求めて日本へ移住してきました。非常に穏やかでバランスの取れた性格をしており、誰とでも働きやすいですが、アイドルとしての実力はまだ基礎段階です。新しい文化への適応に苦労しているのか、私生活は少しルーズでバタバタしがちです。それでも、持ち前の温厚さで練習生生活のストレスをうまく乗り越えようとしています。"
+      },
+      "physical": {
+        "hairStyle": "shoulder-length loose waves, slightly messy",
+        "hairColor": "dark brown",
+        "eyeShape": "round, friendly eyes",
+        "eyeColor": "hazel",
+        "skinTone": "light tan",
+        "accessories": "simple beaded bracelet",
+        "outfitNotes": "casual oversized sweater, comfortable but unpolished"
+      },
+      "portraitPromptPositive": "1girl, 20 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, dark brown shoulder-length loose messy wavy hair, round friendly hazel eyes, light tan skin, wearing a casual oversized sweater and a simple beaded bracelet, mild and balanced expression, unpolished but cute everyday look, anime otome style, visual novel clean lineart soft shading, masterpiece, best quality.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, poorly drawn, bad anatomy, extra limbs, low resolution, messy lines, background scenery, multiple people, heavy makeup, striking features"
+    }
+  },
+  {
+    "id": "wp_00027",
+    "nameRomaji": "Hoshino Rumi",
+    "nameJp": "星野 留美",
+    "age": 22,
+    "gender": "female",
+    "potential": 7,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 6,
+      "ambition": 11,
+      "loyalty": 8,
+      "temperament": 6,
+      "personalLife": 6
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.time_bomb",
+    "visualSeed": 371820,
+    "regionId": "tokyo",
+    "entryMonth": 79,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00027",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Hoshino Rumi",
+      "nameJp": "星野 留美",
+      "background": {
+        "pt": "Rumi cresceu na vibrante e caótica cena urbana de Tóquio, sempre buscando os holofotes com uma ambição feroz e implacável. Embora possua um talento latente formidável, seu temperamento explosivo e histórico de pequenos dramas pessoais a impediram de se firmar em qualquer agência até agora. Ela é uma aposta arriscada para qualquer produtor, perfeitamente capaz de alcançar o estrelato ou causar um desastre nas relações públicas em questão de segundos.",
+        "ja": "留美は東京の活気あるカオスなアンダーグラウンドシーンで育ち、常に激しい野心を持ってスポットライトを追い求めてきました。素晴らしい潜在能力を持っていますが、その爆発的な気性と絶えない個人的なトラブルのせいで、これまでどの事務所にも定着できませんでした。彼女はプロデューサーにとって危険な賭けであり、一瞬でスターダムにのし上がるか、PRの大きな危機を引き起こすかのどちらかです。"
+      },
+      "physical": {
+        "hairStyle": "asymmetrical bob with choppy bangs",
+        "hairColor": "bleach blonde with dark roots",
+        "eyeShape": "sharp upturned tsurime",
+        "eyeColor": "amber",
+        "skinTone": "fair",
+        "accessories": "multiple silver ear piercings and a black velvet choker",
+        "outfitNotes": "edgy Tokyo street fashion featuring a cropped leather jacket over a mesh top"
+      },
+      "portraitPromptPositive": "1girl, 22 years old female, asymmetrical bob hair with choppy bangs, bleach blonde hair with dark roots, sharp upturned amber eyes, fair skin, multiple silver ear piercings, black velvet choker, edgy Tokyo street fashion, cropped leather jacket, mesh top, rebellious smirk, chest-up bust portrait, three-quarter view, plain solid black background, no text, no watermark, anime otome visual novel style, clean lineart, soft shading, highly detailed, masterpiece.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, poorly drawn face, extra limbs, low resolution, sketch, messy lines, background scenery, 3d, realistic"
+    }
+  },
+  {
+    "id": "wp_00028",
+    "nameRomaji": "Igarashi Mei",
+    "nameJp": "五十嵐 芽衣",
+    "age": 16,
+    "gender": "female",
+    "potential": 70,
+    "tier": "B",
+    "visible": {
+      "vocal": 17,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 16,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 16,
+      "mentality": 16,
+      "adaptability": 16
+    },
+    "hidden": {
+      "consistency": 7,
+      "ambition": 10,
+      "loyalty": 7,
+      "temperament": 18,
+      "personalLife": 7
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 205458,
+    "regionId": "tokyo",
+    "entryMonth": 230,
+    "talentAverage": 15.5,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00028",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Igarashi Mei",
+      "nameJp": "五十嵐 芽衣",
+      "background": {
+        "pt": "Nascida e criada no agitado centro de Tóquio, Mei sempre foi uma garota incrivelmente equilibrada e confiável. Sem picos extremos de talento no momento, sua força reside na versatilidade e em um temperamento calmo que a impede de entrar em pânico sob pressão. Ela é vista como o pilar de estabilidade em qualquer grupo de idols, capaz de se adaptar a qualquer desafio com um sorriso sereno.",
+        "ja": "東京の賑やかな中心部で生まれ育った芽衣は、常に驚くほどバランスの取れた頼りになる少女でした。現時点では極端な才能の突出はありませんが、彼女の強みはその多才さと、プレッシャーの下でもパニックにならない穏やかな気質にあります。彼女はどんなアイドルグループにおいても安定の柱と見なされており、穏やかな笑顔でどんな課題にも適応することができます。"
+      },
+      "physical": {
+        "hairStyle": "Medium-length bob with soft curtain bangs",
+        "hairColor": "Chestnut brown",
+        "eyeShape": "Round and gentle",
+        "eyeColor": "Hazel",
+        "skinTone": "Fair",
+        "accessories": "Simple silver hairpin",
+        "outfitNotes": "Casual yet neat Tokyo street fashion, light cardigan over a blouse"
+      },
+      "portraitPromptPositive": "1 girl, 16 years old, anime bust portrait, chest-up, three-quarter view, plain solid black background. She has a medium-length chestnut brown bob with soft curtain bangs and round, gentle hazel eyes. Fair skin, wearing a simple silver hairpin. Dressed in casual neat Tokyo street fashion with a light cardigan over a blouse. Anime otome game style, visual novel sprite, clean lineart, soft shading, high quality, masterpiece, no text, no watermark.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, monochrome, ugly, deformed, 3d, realistic"
+    }
+  },
+  {
+    "id": "wp_00029",
+    "nameRomaji": "Matsuda Leon",
+    "nameJp": "松田 レオン",
+    "age": 23,
+    "gender": "male",
+    "potential": 50,
+    "tier": "D",
+    "visible": {
+      "vocal": 19,
+      "dance": 30,
+      "acting": 16,
+      "variety": 28,
+      "visual": 26,
+      "charisma": 27,
+      "communication": 24,
+      "aura": 20,
+      "stamina": 24,
+      "discipline": 25,
+      "mentality": 18,
+      "adaptability": 31
+    },
+    "hidden": {
+      "consistency": 11,
+      "ambition": 9,
+      "loyalty": 4,
+      "temperament": 18,
+      "personalLife": 16
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.public_life",
+    "visualSeed": 630325,
+    "regionId": "other",
+    "entryMonth": 149,
+    "talentAverage": 24.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00029",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Matsuda Leon",
+      "nameJp": "松田 レオン",
+      "background": {
+        "pt": "Leon cresceu no exterior, onde desenvolveu um amor pela dança de rua e por ser o centro das atenções. Ele entrou para a agência mais pela fama instantânea e pelas festas do que por uma verdadeira ambição artística. Embora sua capacidade de adaptação e ritmo sejam excelentes, seu estilo de vida altamente público e sua falta de lealdade frequentemente causam dores de cabeça para os gerentes. Ele vê a vida de idol como uma grande aventura contínua, mas tende a perder o interesse rapidamente quando o treinamento se torna monótono.",
+        "ja": "レオンは海外で育ち、ストリートダンスと注目を浴びることを愛する青年です。純粋な芸術的野心よりも、即席の名声と華やかなパーティーに惹かれて事務所に入りました。優れた適応力とダンスのリズム感を持っていますが、派手で公になりがちな私生活と忠誠心の低さがマネージャーの頭を悩ませています。アイドル生活を終わりのない冒険のように楽しんでいますが、地道な訓練が続くとすぐに飽きてしまう傾向があります。"
+      },
+      "physical": {
+        "hairStyle": "messy textured undercut",
+        "hairColor": "bleached blonde with dark roots",
+        "eyeShape": "relaxed, slightly droopy",
+        "eyeColor": "hazel",
+        "skinTone": "light tan",
+        "accessories": "silver chain necklace and multiple ear piercings",
+        "outfitNotes": "casual streetwear, oversized graphic tee, loose jacket"
+      },
+      "portraitPromptPositive": "1boy, 23 years old, male, anime bust portrait, chest-up, three-quarter view, plain solid black background, messy textured undercut hair, bleached blonde hair with dark roots, relaxed slightly droopy hazel eyes, light tan skin, silver chain necklace, multiple ear piercings, casual streetwear, oversized graphic tee, loose open jacket, confident smirk, outgoing party boy vibe, clean lineart, soft shading, visual novel style, otome game art, high quality, masterpiece",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, poorly drawn face, extra limbs, lowres, background elements, scenery, multiple people, realistic, 3d, monochrome, bad proportions, missing fingers"
+    }
+  },
+  {
+    "id": "wp_00030",
+    "nameRomaji": "Sasaki Haruto",
+    "nameJp": "佐々木 陽翔",
+    "age": 20,
+    "gender": "male",
+    "potential": 33,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 15,
+      "ambition": 13,
+      "loyalty": 12,
+      "temperament": 7,
+      "personalLife": 16
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.public_life",
+    "visualSeed": 111936,
+    "regionId": "tokyo",
+    "entryMonth": 206,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00030",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Sasaki Haruto",
+      "nameJp": "佐々木 陽翔",
+      "background": {
+        "pt": "Nascido em Tóquio, Haruto sempre tratou a sua vida como um reality show aberto ao público. Ele documenta cada passo do seu dia nas redes sociais, o que muitas vezes o coloca em apuros devido ao seu temperamento ligeiramente instável. Apesar de ter habilidades artísticas ainda muito cruas, ele acredita que a sua transparência digital pode ser o bilhete de entrada para o estrelato. A sua jornada agora é provar que consegue equilibrar a sua vida pessoal agitada com a disciplina exigida pelo palco.",
+        "ja": "東京出身の陽翔は、自分の人生を常に公開オーディションのように扱ってきた青年だ。SNSで日常のすべてをシェアするオープンな性格だが、その気分の波の激しさがトラブルを招くこともある。アイドルとしての実力はまだ発展途上であるものの、デジタル世代ならではの飾らない発信力を武器に業界へ飛び込んだ。今後は、波乱万丈な私生活とステージでの規律をどう両立させるかが課題となる。"
+      },
+      "physical": {
+        "hairStyle": "Messy wolf cut with dark roots",
+        "hairColor": "Bleached blonde",
+        "eyeShape": "Slightly droopy (tareme)",
+        "eyeColor": "Hazel",
+        "skinTone": "Fair",
+        "accessories": "Black choker and silver ear cuffs",
+        "outfitNotes": "Oversized graphic tee under a distressed denim jacket"
+      },
+      "portraitPromptPositive": "1boy, 20 years old, male, anime bust portrait, chest-up, three-quarter view, plain solid black background, messy wolf cut bleached blonde hair with dark roots, slightly droopy hazel eyes, fair skin, wearing a black choker and silver ear cuffs, oversized graphic tee under a distressed denim jacket, trendy Tokyo street style, casual influencer vibe, otome game style, visual novel clean lineart soft shading, high quality, masterpiece, no text, no watermark.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, poorly drawn face, extra limbs, low resolution, poorly drawn hands, missing fingers, bad proportions, blurry, 3d, realistic, simple background, messy lines."
+    }
+  },
+  {
+    "id": "wp_00031",
+    "nameRomaji": "Suzuki Kana",
+    "nameJp": "鈴木佳奈",
+    "age": 23,
+    "gender": "female",
+    "potential": 29,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 16,
+      "acting": 15,
+      "variety": 15,
+      "visual": 16,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 15,
+      "ambition": 15,
+      "loyalty": 14,
+      "temperament": 8,
+      "personalLife": 5
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 247084,
+    "regionId": "nagoya",
+    "entryMonth": 236,
+    "talentAverage": 15.17,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00031",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Suzuki Kana",
+      "nameJp": "鈴木佳奈",
+      "background": {
+        "pt": "Kana trabalhou meio período em um café local em Nagoya durante anos, levando uma vida comum e equilibrada. Ela decidiu participar de uma audição por capricho, mas carece de habilidades de destaque ou grande ambição para a vida de idol. Sua tendência de priorizar a vida social e os relacionamentos em vez de um treinamento rigoroso explica seu baixo desenvolvimento, embora ela mantenha uma postura educada e sensata com todos.",
+        "ja": "佳奈は名古屋の地元のカフェで何年もアルバイトをしており、ごく普通でバランスの取れた生活を送っていた。気まぐれでオーディションに参加したが、アイドルとしての際立ったスキルや強い野心には欠けている。厳しいトレーニングよりも私生活や交友関係を優先しがちな傾向が彼女の能力の低さを説明しているが、誰に対しても礼儀正しく穏やかな態度は崩さない。"
+      },
+      "physical": {
+        "hairStyle": "simple shoulder-length bob",
+        "hairColor": "dark brown",
+        "eyeShape": "round and gentle",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "small stud earrings",
+        "outfitNotes": "plain casual light blue blouse, very understated"
+      },
+      "portraitPromptPositive": "1girl, 23 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, simple shoulder-length dark brown bob hair, round gentle hazel eyes, fair skin tone, wearing small stud earrings and a plain casual light blue blouse, understated plain appearance, soft neutral expression, visual novel clean lineart soft shading, official art, otome game style, high quality",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, bad proportions, extra limbs, poorly drawn face, messy lines, distracting background, multiple girls, 3d render, realistic, abstract"
+    }
+  },
+  {
+    "id": "wp_00032",
+    "nameRomaji": "Otsuka Miyu",
+    "nameJp": "大塚 美優",
+    "age": 26,
+    "gender": "female",
+    "potential": 23,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 18,
+      "acting": 15,
+      "variety": 17,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 16,
+      "ambition": 5,
+      "loyalty": 12,
+      "temperament": 16,
+      "personalLife": 9
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.silent_pillar",
+    "visualSeed": 933409,
+    "regionId": "osaka",
+    "entryMonth": 50,
+    "talentAverage": 15.42,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00032",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Otsuka Miyu",
+      "nameJp": "大塚 美優",
+      "background": {
+        "pt": "Nascida em Osaka, ela passou anos como dançarina de apoio para trupes de teatro locais, nunca buscando os holofotes para si mesma. Apesar de sua falta de ambição para se tornar uma estrela, sua confiabilidade inabalável e comportamento calmo a tornaram a espinha dorsal de todos os grupos aos quais se juntou. Agora entrando na indústria de ídolos mais tarde do que o normal, ela continua sendo uma presença quieta, mas constante, que sempre entrega performances sólidas sem reclamar.",
+        "ja": "大阪で生まれ、長年地元の劇団でバックダンサーとして活動しており、自ら脚光を浴びることを求めたことは一度もなかった。スターになるという野心はないものの、その揺るぎない信頼性と穏やかな態度は、彼女が参加するすべてのグループの支柱となっていた。遅咲きでアイドル業界に入った今でも、文句一つ言わずに堅実なパフォーマンスを常に提供する、物静かだが確固たる存在である。"
+      },
+      "physical": {
+        "hairStyle": "Low ponytail with a few loose strands framing the face",
+        "hairColor": "Muted dark brown",
+        "eyeShape": "Gentle, slightly downturned eyes (tareme)",
+        "eyeColor": "Hazel",
+        "skinTone": "Fair",
+        "accessories": "Simple silver stud earrings",
+        "outfitNotes": "Modest, comfortable casual wear in earth tones"
+      },
+      "portraitPromptPositive": "1girl, 26 years old female, anime bust portrait, chest-up, three-quarter view, plain solid black background, mature but unassuming appearance, muted dark brown hair tied in a low ponytail with loose strands framing the face, gentle slightly downturned hazel eyes, fair skin, wearing simple silver stud earrings, modest and comfortable casual wear in earth tones, quiet and reliable expression, anime otome, visual novel style, clean lineart, soft shading, masterpiece, high quality, no text, no watermark.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, complex background, patterned background"
+    }
+  },
+  {
+    "id": "wp_00033",
+    "nameRomaji": "Uchida Sayuri",
+    "nameJp": "内田 小百合",
+    "age": 28,
+    "gender": "female",
+    "potential": 16,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 14,
+      "ambition": 13,
+      "loyalty": 16,
+      "temperament": 11,
+      "personalLife": 6
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 695510,
+    "regionId": "osaka",
+    "entryMonth": 194,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00033",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Uchida Sayuri",
+      "nameJp": "内田 小百合",
+      "background": {
+        "pt": "Sayuri passou a maior parte de seus vinte anos em um trabalho de escritório monótono em Osaka, aceitando bicos noturnos duvidosos para pagar as contas. Buscando um recomeço antes dos trinta, ela decidiu se inscrever na agência por capricho. Embora não tenha nenhum treinamento formal e sua vida pessoal seja um pouco bagunçada, sua natureza equilibrada a ajuda a manter os pés no chão.",
+        "ja": "小百合は20代の大半を大阪の平凡なオフィスワークで過ごし、生活費を稼ぐために夜のアルバイトも経験してきました。30歳を目前にして心機一転を図り、気まぐれで事務所に応募しました。正式なトレーニングを受けたことはなく、私生活も少し乱れがちですが、バランスの取れた性格が彼女を地に足の着いた状態に保っています。"
+      },
+      "physical": {
+        "hairStyle": "Shoulder-length bob with a slight wave, slightly unkempt",
+        "hairColor": "Ash brown",
+        "eyeShape": "Drooping, gentle eyes (tareme)",
+        "eyeColor": "Amber",
+        "skinTone": "Fair",
+        "accessories": "Simple hoop earrings",
+        "outfitNotes": "Office-casual wear, like a loose cardigan over a plain blouse"
+      },
+      "portraitPromptPositive": "1girl, 28 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, ash brown shoulder-length wavy bob hair, drooping gentle amber eyes, fair skin, simple hoop earrings, wearing a casual loose cardigan over a plain blouse, mature but slightly tired expression, anime otome style, visual novel clean lineart soft shading, highly detailed.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, heavy makeup, bright colors"
+    }
+  },
+  {
+    "id": "wp_00034",
+    "nameRomaji": "Saito Miki",
+    "nameJp": "斉藤 美紀",
+    "age": 24,
+    "gender": "female",
+    "potential": 22,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 14,
+      "ambition": 6,
+      "loyalty": 12,
+      "temperament": 10,
+      "personalLife": 8
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.silent_pillar",
+    "visualSeed": 179209,
+    "regionId": "tokyo",
+    "entryMonth": 75,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00034",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Saito Miki",
+      "nameJp": "斉藤 美紀",
+      "background": {
+        "pt": "Miki cresceu em Tóquio, sempre preferindo atuar nos bastidores em vez de ser o centro das atenções. Com uma natureza calma e confiável, ela costumava ajudar na organização de pequenos eventos locais. Sua entrada no mundo dos idols não foi movida por grande ambição, mas sim pelo desejo de apoiar um grupo e garantir que a equipe funcione perfeitamente. Ela é a base silenciosa que mantém seus colegas unidos e seguros.",
+        "ja": "美紀は東京で育ち、常にスポットライトを浴びるよりも裏方として働くことを好んでいました。穏やかで信頼できる性格の彼女は、地元の小さなイベントの運営をよく手伝っていました。アイドル界に入ったのは大きな野心からではなく、グループを支え、チームが円滑に機能するようにしたいという思いからです。彼女は仲間をまとめ、安心感を与える静かな大黒柱です。"
+      },
+      "physical": {
+        "hairStyle": "Neat shoulder-length bob with tucked bangs",
+        "hairColor": "Muted dark brown",
+        "eyeShape": "Gentle, slightly downturned eyes",
+        "eyeColor": "Soft hazel",
+        "skinTone": "Fair",
+        "accessories": "Simple silver stud earrings",
+        "outfitNotes": "Modest, practical casual wear, like a plain cardigan over a simple blouse"
+      },
+      "portraitPromptPositive": "Anime bust portrait, chest-up, three-quarter view, plain solid black background. A 24-year-old Japanese female idol with a modest, reliable, and gentle aura. She has a neat shoulder-length muted dark brown bob with tucked bangs, gentle slightly downturned soft hazel eyes, and fair skin. She wears simple silver stud earrings and a modest plain cardigan over a simple blouse. Visual novel clean lineart, soft shading, highly detailed, otome game style, no text, no watermark.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, abstract, exaggerated features, messy hair, extra accessories"
+    }
+  },
+  {
+    "id": "wp_00035",
+    "nameRomaji": "Hayashi Emma",
+    "nameJp": "林エマ",
+    "age": 17,
+    "gender": "female",
+    "potential": 68,
+    "tier": "B",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 19,
+      "variety": 15,
+      "visual": 19,
+      "charisma": 15,
+      "communication": 20,
+      "aura": 20,
+      "stamina": 15,
+      "discipline": 24,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 4,
+      "ambition": 8,
+      "loyalty": 14,
+      "temperament": 10,
+      "personalLife": 4
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 563504,
+    "regionId": "other",
+    "entryMonth": 183,
+    "talentAverage": 17.25,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00035",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Hayashi Emma",
+      "nameJp": "林エマ",
+      "background": {
+        "pt": "Emma cresceu no exterior antes de se mudar para o Japão, o que lhe conferiu uma aura única e uma excelente capacidade de comunicação. Embora seja extremamente disciplinada e siga as regras durante os treinos, ela carece de ambição própria e sua vida pessoal é surpreendentemente caótica. Suas habilidades de atuação são cativantes, mas sua falta de consistência faz com que seus resultados variem bastante.",
+        "ja": "エマは海外で育ち、日本に移住してきたため、独特のオーラと優れたコミュニケーション能力を持っている。レッスンでは非常に規律正しいが、強い野心はなく、私生活は驚くほどだらしない。演技力は高く魅力的だが、パフォーマンスにムラがあるため、結果が安定しないことが多い。"
+      },
+      "physical": {
+        "hairStyle": "medium wavy bob",
+        "hairColor": "ash blonde",
+        "eyeShape": "round and expressive",
+        "eyeColor": "hazel",
+        "skinTone": "light",
+        "accessories": "simple silver stud earrings",
+        "outfitNotes": "casual chic with a slightly bohemian touch"
+      },
+      "portraitPromptPositive": "17-year-old girl, female, medium wavy ash blonde bob hair, round expressive hazel eyes, light skin, simple silver stud earrings, casual chic outfit with a slightly bohemian touch. Anime bust portrait, chest-up, three-quarter view, plain solid black background, no text, no watermark, anime otome, visual novel clean lineart, soft shading, distinct aura, highly detailed, beautiful visual.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, messy lines"
+    }
+  },
+  {
+    "id": "wp_00036",
+    "nameRomaji": "Narita Sho",
+    "nameJp": "成田 翔",
+    "age": 28,
+    "gender": "male",
+    "potential": 7,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 5,
+      "ambition": 13,
+      "loyalty": 16,
+      "temperament": 10,
+      "personalLife": 16
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.public_life",
+    "visualSeed": 220074,
+    "regionId": "nagoya",
+    "entryMonth": 230,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00036",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Narita Sho",
+      "nameJp": "成田 翔",
+      "background": {
+        "pt": "Sho passou a maior parte de seus vinte anos como um pequeno apresentador de eventos e personalidade da TV local em Nagoya. Ele vive para a atenção do público, mas frequentemente prioriza sua agitada vida social e saídas com amigos em vez de um treinamento rigoroso, o que explica sua falta de consistência. Apesar de suas habilidades básicas e do início tardio na carreira de idol, sua lealdade aos fãs locais e sua ambição de brilhar no palco nacional o motivam a tentar a sorte na agência.",
+        "ja": "翔は20代の大半を名古屋のローカルTVタレントやイベントMCとして過ごしてきました。常に人目に触れることを好みますが、厳しいトレーニングよりも賑やかな交友関係や飲み会を優先しがちで、パフォーマンスにムラがあります。スキルは未熟でアイドルとしては遅咲きですが、地元のファンへの強い忠誠心と、全国区のステージに立ちたいという野心が彼をオーディションへと突き動かしました。"
+      },
+      "physical": {
+        "hairStyle": "slightly messy, swept-back medium hair",
+        "hairColor": "ash brown",
+        "eyeShape": "relaxed, slightly droopy",
+        "eyeColor": "amber",
+        "skinTone": "lightly tanned",
+        "accessories": "silver hoop earrings",
+        "outfitNotes": "casual open collar shirt with a loose tie"
+      },
+      "portraitPromptPositive": "1boy, 28 years old, adult male, chest-up bust portrait, three-quarter view, plain solid black background. He has slightly messy, swept-back medium ash brown hair and relaxed, slightly droopy amber eyes. He has lightly tanned skin and wears silver hoop earrings. Dressed in a casual open collar shirt with a loose tie, exuding a tired but charming, approachable older guy vibe. Anime otome game style, visual novel character sprite, clean lineart, soft shading, high quality, masterpiece, no text, no watermarks.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, monochrome, female, girl, 3d, realistic"
+    }
+  },
+  {
+    "id": "wp_00037",
+    "nameRomaji": "Maeda Koki",
+    "nameJp": "前田 光希",
+    "age": 18,
+    "gender": "male",
+    "potential": 21,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 7,
+      "ambition": 13,
+      "loyalty": 4,
+      "temperament": 13,
+      "personalLife": 11
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 724892,
+    "regionId": "osaka",
+    "entryMonth": 136,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00037",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Maeda Koki",
+      "nameJp": "前田 光希",
+      "background": {
+        "pt": "Nascido em Osaka, Koki sempre sonhou com os holofotes, mas nunca se comprometeu a fundo com uma única disciplina. Ele tem uma personalidade equilibrada que o ajuda a se dar bem com os outros, embora sua falta de lealdade e consistência o faça pular de projeto em projeto. Com habilidades ainda muito cruas e não lapidadas, ele vê esta nova oportunidade na agência como um trampolim rápido para a fama. Resta saber se ele terá a dedicação necessária para transformar suas ambições em realidade.",
+        "ja": "大阪出身の光希は常にスポットライトを夢見てきたが、一つの分野に深く専念したことはなかった。バランスの取れた性格で誰とでもうまくやれるが、忠誠心と一貫性の低さから、これまで複数のプロジェクトを転々としてきた。スキルはまだ非常に未熟で洗練されていないが、彼は事務所でのこの新しい機会を名声への手っ取り早い足がかりと見なしている。彼が野心を現実にするための献身を持てるかどうかが今後の課題である。"
+      },
+      "physical": {
+        "hairStyle": "messy, unstyled medium-length hair",
+        "hairColor": "ash brown",
+        "eyeShape": "slightly droopy, relaxed eyes",
+        "eyeColor": "dull amber",
+        "skinTone": "light tan",
+        "accessories": "cheap silver ear stud",
+        "outfitNotes": "faded graphic t-shirt under an oversized open flannel shirt"
+      },
+      "portraitPromptPositive": "1boy, 18 years old, male, anime bust portrait, chest-up, three-quarter view, plain solid black background, messy unstyled ash brown medium-length hair, slightly droopy relaxed dull amber eyes, light tan skin, wearing a cheap silver ear stud, faded graphic t-shirt under an oversized open flannel shirt, balanced and slightly unbothered expression, unpolished and ordinary appearance, anime otome, visual novel clean lineart soft shading, masterpiece, high quality, no text.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, poorly drawn face, extra limbs, lowres, background elements, scenery, female, girl, highly detailed background, makeup, overly shiny"
+    }
+  },
+  {
+    "id": "wp_00038",
+    "nameRomaji": "Takeda Jun",
+    "nameJp": "武田 潤",
+    "age": 17,
+    "gender": "male",
+    "potential": 60,
+    "tier": "C",
+    "visible": {
+      "vocal": 16,
+      "dance": 15,
+      "acting": 15,
+      "variety": 19,
+      "visual": 15,
+      "charisma": 16,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 17,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 18
+    },
+    "hidden": {
+      "consistency": 17,
+      "ambition": 11,
+      "loyalty": 12,
+      "temperament": 11,
+      "personalLife": 5
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 465389,
+    "regionId": "osaka",
+    "entryMonth": 55,
+    "talentAverage": 15.92,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00038",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Takeda Jun",
+      "nameJp": "武田 潤",
+      "background": {
+        "pt": "Nascido em Osaka, Jun cresceu em um ambiente familiar tranquilo e sempre foi o mediador pacifista entre seus amigos. Com uma habilidade natural para se adaptar a qualquer situação e um ótimo senso de humor típico de sua região, ele tem um talento especial para programas de variedades. Apesar de não ter uma ambição feroz, sua consistência impecável e vida pessoal regrada o tornam um ídolo extremamente confiável para a agência.",
+        "ja": "大阪出身の潤は、穏やかな家庭環境で育ち、常に友人たちの仲裁役でした。どんな状況にも適応できる天性の才能と、地元ならではのユーモアのセンスを持ち、バラエティ番組でその素質を発揮します。野心家ではありませんが、その堅実さとスキャンダルとは無縁の真面目さから、事務所にとって非常に信頼できるアイドルです。"
+      },
+      "physical": {
+        "hairStyle": "Messy short hair with parted bangs",
+        "hairColor": "Warm chestnut brown",
+        "eyeShape": "Friendly, slightly downturned tareme eyes",
+        "eyeColor": "Hazel",
+        "skinTone": "Light with a healthy glow",
+        "accessories": "Simple silver ear stud",
+        "outfitNotes": "Casual streetwear with a light denim jacket over a graphic tee"
+      },
+      "portraitPromptPositive": "17-year-old male anime idol, bust portrait, chest-up, three-quarter view. Messy short warm chestnut brown hair with parted bangs, friendly slightly downturned hazel eyes, light skin with a healthy glow. Wearing a simple silver ear stud, casual streetwear with a light denim jacket over a graphic tee. Plain solid black background. Anime otome game style, visual novel clean lineart, soft cel shading, high quality, masterpiece, handsome.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, bad proportions, extra limbs, missing fingers, poorly drawn face, realistic, 3d, cluttered background, multiple people, female, feminine"
+    }
+  },
+  {
+    "id": "wp_00039",
+    "nameRomaji": "Fujimoto Taichi",
+    "nameJp": "藤本 太一",
+    "age": 26,
+    "gender": "male",
+    "potential": 10,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 17,
+      "ambition": 9,
+      "loyalty": 17,
+      "temperament": 15,
+      "personalLife": 6
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.golden_heart",
+    "visualSeed": 397284,
+    "regionId": "osaka",
+    "entryMonth": 60,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00039",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Fujimoto Taichi",
+      "nameJp": "藤本 太一",
+      "background": {
+        "pt": "Taichi passou o início de seus vinte anos trabalhando em empregos temporários em Osaka para sustentar sua família, sempre colocando as necessidades dos outros acima de seus próprios sonhos. Apesar de sua total falta de experiência e talento artístico, seu coração de ouro o torna incrivelmente querido por todos ao seu redor. Ele muitas vezes se envolve em problemas devido à sua lealdade cega a amigos irresponsáveis, o que o levou a buscar a carreira de idol como uma tentativa desesperada de encontrar estabilidade.",
+        "ja": "太一は20代前半を大阪でのアルバイトに費やし、常に他人のニーズを自分の夢よりも優先して家族を支えてきました。芸術的な才能や経験は全くありませんが、その黄金の心により周囲の誰からも深く愛されています。無責任な友人への盲目的な忠誠心から私生活のトラブルに巻き込まれることが多く、生活を安定させるための必死の試みとしてアイドル業界に足を踏み入れました。"
+      },
+      "physical": {
+        "hairStyle": "slightly messy, overgrown short hair, unstyled",
+        "hairColor": "dull dark brown",
+        "eyeShape": "droopy, kind eyes",
+        "eyeColor": "warm amber",
+        "skinTone": "lightly tanned",
+        "accessories": "cheap faded woven bracelet",
+        "outfitNotes": "casual, slightly worn-out flannel shirt over a plain white tee"
+      },
+      "portraitPromptPositive": "Anime bust portrait, chest-up, three-quarter view, plain solid black background. A 26-year-old Japanese male with a kind, approachable but unpolished appearance. He has slightly messy, overgrown, unstyled dull dark brown hair and droopy, warm amber eyes that convey a gentle, golden-hearted nature. His skin is lightly tanned. He wears a casual, slightly worn-out flannel shirt over a plain white tee, and a cheap faded woven bracelet on his wrist. Anime otome game style, visual novel sprite, clean lineart, soft shading, no text, no watermark.",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, monochrome, horror, deformed, makeup, overly handsome"
+    }
+  },
+  {
+    "id": "wp_00040",
+    "nameRomaji": "Kikuchi Honoka",
+    "nameJp": "菊池 ほのか",
+    "age": 24,
+    "gender": "female",
+    "potential": 14,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 11,
+      "ambition": 18,
+      "loyalty": 15,
+      "temperament": 16,
+      "personalLife": 13
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.golden_heart",
+    "visualSeed": 131698,
+    "regionId": "tokyo",
+    "entryMonth": 231,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00040",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kikuchi Honoka",
+      "nameJp": "菊池 ほのか",
+      "background": {
+        "pt": "Nascida e criada em Tóquio, Honoka trabalhou como professora de creche antes de decidir seguir seu sonho tardio de se tornar uma idol. Embora não tenha treinamento formal e suas habilidades iniciais sejam modestas, ela possui um coração de ouro e uma vontade imensa de fazer os outros sorrirem. Sua ambição secreta a impulsiona a trabalhar duro todos os dias para compensar o tempo perdido e espalhar gentileza pelo mundo.",
+        "ja": "東京生まれ東京育ちのほのかは、アイドルになるという遅咲きの夢を追う前は保育士として働いていた。正式な訓練を受けたことがなく、初期のスキルは控えめだが、黄金の心と人々を笑顔にしたいという強い意志を持っている。彼女の内に秘めた野心が、遅れを取り戻し、世界中に優しさを広めるために日々努力する原動力となっている。"
+      },
+      "physical": {
+        "hairStyle": "shoulder-length bob with soft bangs",
+        "hairColor": "warm chestnut brown",
+        "eyeShape": "round, gentle, drooping slightly at the corners (tareme)",
+        "eyeColor": "soft hazel",
+        "skinTone": "fair",
+        "accessories": "small pearl earrings",
+        "outfitNotes": "casual modest pastel blouse"
+      },
+      "portraitPromptPositive": "1girl, 24 years old, female, chest-up bust portrait, three-quarter view, plain solid black background, anime visual novel style, otome game art, clean lineart, soft shading, warm chestnut brown shoulder-length bob hair with soft bangs, round gentle drooping tareme eyes, soft hazel eyes, fair skin, small pearl earrings, wearing a casual modest pastel blouse, gentle warm smile, kind aura.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, poorly drawn, extra limbs, messy colors, 3d, realistic, photographic, multiple girls, complex background"
+    }
+  },
+  {
+    "id": "wp_00041",
+    "nameRomaji": "Ono Kasumi",
+    "nameJp": "小野 霞",
+    "age": 28,
+    "gender": "female",
+    "potential": 43,
+    "tier": "D",
+    "visible": {
+      "vocal": 30,
+      "dance": 17,
+      "acting": 35,
+      "variety": 18,
+      "visual": 36,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 34,
+      "stamina": 36,
+      "discipline": 38,
+      "mentality": 31,
+      "adaptability": 18
+    },
+    "hidden": {
+      "consistency": 13,
+      "ambition": 13,
+      "loyalty": 16,
+      "temperament": 16,
+      "personalLife": 4
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.golden_heart",
+    "visualSeed": 460369,
+    "regionId": "tokyo",
+    "entryMonth": 191,
+    "talentAverage": 26.92,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00041",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Ono Kasumi",
+      "nameJp": "小野 霞",
+      "background": {
+        "pt": "Kasumi cresceu em Tóquio ajudando no pequeno restaurante de sua família, sempre colocando as necessidades dos outros antes das suas. Apesar de ser considerada velha para estrear na indústria, ela trabalhou diligentemente em pequenos papéis de atuação e comerciais locais ao longo dos anos. Sua falta de ambição agressiva a manteve fora dos grandes holofotes, mas sua natureza incrivelmente gentil e ética de trabalho impecável a tornam um pilar de apoio. Ela espera usar sua maturidade e experiência para guiar ídolos mais jovens.",
+        "ja": "霞は東京で実家の小さな食堂を手伝いながら育ち、常に他人のニーズを優先してきました。アイドル業界では遅咲きの年齢ですが、長年小さな演技やローカルCMの仕事を地道にこなしてきました。強い野心がないため脚光を浴びることはありませんでしたが、その信じられないほど優しい性格と真面目な仕事ぶりは、周囲の心の支えとなっています。彼女は自分の成熟した経験を活かして、若いアイドルたちを導きたいと願っています。"
+      },
+      "physical": {
+        "hairStyle": "shoulder-length soft waves",
+        "hairColor": "warm chestnut brown",
+        "eyeShape": "gentle, slightly drooping (tareme)",
+        "eyeColor": "hazel",
+        "skinTone": "fair",
+        "accessories": "simple silver pendant necklace",
+        "outfitNotes": "modest pastel knit cardigan over a white blouse"
+      },
+      "portraitPromptPositive": "1girl, 28 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, warm chestnut brown hair in shoulder-length soft waves, gentle slightly drooping hazel eyes, fair skin, wearing a simple silver pendant necklace, modest pastel knit cardigan over a white blouse. Mature, kind, motherly aura, visual novel sprite, clean lineart, soft shading, masterpiece, high quality.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, poorly drawn face, extra limbs, lowres, background scenery, multiple girls, harsh lighting, messy lines"
+    }
+  },
+  {
+    "id": "wp_00042",
+    "nameRomaji": "Kawai Risa",
+    "nameJp": "川井 理沙",
+    "age": 22,
+    "gender": "female",
+    "potential": 21,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 5,
+      "ambition": 10,
+      "loyalty": 16,
+      "temperament": 4,
+      "personalLife": 11
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.time_bomb",
+    "visualSeed": 257424,
+    "regionId": "tokyo",
+    "entryMonth": 53,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00042",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kawai Risa",
+      "nameJp": "川井 理沙",
+      "background": {
+        "pt": "Risa cresceu nos agitados distritos de vida noturna de Tóquio, sempre buscando atenção, mas sem a disciplina para mantê-la. Ela tem a reputação de ser imprevisível, muitas vezes agindo por impulso e causando dramas repentinos nos bastidores. Apesar de seu temperamento explosivo e performances inconsistentes, sua atitude crua e sem filtros atrai um público de nicho. A agência apostou nela, esperando canalizar sua energia caótica antes que ela se autodestrua.",
+        "ja": "理沙は東京の繁華街で育ち、常に注目を集めようとするものの、それを維持する規律に欠けていました。予測不可能な行動をとることで知られ、衝動的に動いては舞台裏で突然のトラブルを引き起こします。気性が荒くパフォーマンスも不安定ですが、彼女の生々しく飾らない態度は一部の熱狂的なファンを惹きつけています。事務所は彼女が自滅する前に、その混沌としたエネルギーをコントロールできることに賭けました。"
+      },
+      "physical": {
+        "hairStyle": "Messy twin tails with uneven bangs",
+        "hairColor": "Bleached blonde with dark roots",
+        "eyeShape": "Sharp, upturned, slightly glaring",
+        "eyeColor": "Magenta",
+        "skinTone": "Fair",
+        "accessories": "Black choker with metallic ring, multiple ear piercings",
+        "outfitNotes": "Punk-inspired casual wear, off-shoulder ripped top"
+      },
+      "portraitPromptPositive": "1girl, 22 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, messy twin tails with uneven bangs, bleached blonde hair with dark roots, sharp upturned slightly glaring magenta eyes, fair skin, wearing a black choker with a metallic ring, multiple ear piercings, punk-inspired off-shoulder ripped top, visual novel sprite, anime otome style, clean lineart, soft shading, expressive, slightly rebellious smirk, no text, no watermark.",
+      "portraitPromptNegative": "worst quality, low quality, bad anatomy, missing fingers, text, watermark, signature, ugly, deformed, background details, scenery, multiple girls"
+    }
+  },
+  {
+    "id": "wp_00043",
+    "nameRomaji": "Kubo Anna",
+    "nameJp": "久保 アンナ",
+    "age": 28,
+    "gender": "female",
+    "potential": 26,
+    "tier": "E",
+    "visible": {
+      "vocal": 18,
+      "dance": 22,
+      "acting": 15,
+      "variety": 15,
+      "visual": 17,
+      "charisma": 15,
+      "communication": 22,
+      "aura": 22,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 21,
+      "adaptability": 19
+    },
+    "hidden": {
+      "consistency": 14,
+      "ambition": 8,
+      "loyalty": 18,
+      "temperament": 18,
+      "personalLife": 6
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.golden_heart",
+    "visualSeed": 804864,
+    "regionId": "other",
+    "entryMonth": 115,
+    "talentAverage": 18.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00043",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kubo Anna",
+      "nameJp": "久保 アンナ",
+      "background": {
+        "pt": "Anna cresceu no Havaí, trabalhando como dançarina em resorts locais para ajudar a sustentar sua família. Com um coração de ouro, ela sempre colocou as necessidades dos outros acima de seus próprios sonhos, o que a impediu de buscar o estrelato mais cedo. Após um relacionamento conturbado e exaustivo, ela se mudou para o Japão aos 28 anos para tentar um recomeço na indústria de idols. Embora falte ambição competitiva, sua aura calorosa e empatia natural a tornam uma figura maternal e muito amada nos bastidores.",
+        "ja": "アンナはハワイで育ち、家族を養うために地元リゾートのダンサーとして働いてきました。黄金の心を持つ彼女は、常に他人のニーズを自分の夢よりも優先してきたため、早くからスターダムを追求することはありませんでした。波乱万丈な人間関係を経て、28歳で再出発のために日本へ渡りアイドル業界に飛び込みました。競争心には欠けますが、その温かいオーラと自然な共感力により、舞台裏では母性的な存在として愛されています。"
+      },
+      "physical": {
+        "hairStyle": "long, loose wavy hair parted on the side",
+        "hairColor": "sun-bleached light brown",
+        "eyeShape": "gentle, slightly downturned",
+        "eyeColor": "warm hazel",
+        "skinTone": "sun-kissed tan",
+        "accessories": "simple silver locket",
+        "outfitNotes": "casual, comfortable bohemian-style blouse with floral accents"
+      },
+      "portraitPromptPositive": "anime bust portrait, chest-up, three-quarter view, 28-year-old female, long loose wavy sun-bleached light brown hair parted on the side, gentle slightly downturned warm hazel eyes, sun-kissed tanned skin, wearing a casual comfortable bohemian-style blouse with floral accents and a simple silver locket, warm caring maternal expression, plain solid black background, no text, no watermark, anime otome, visual novel style, clean lineart, soft shading",
+      "portraitPromptNegative": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, jpeg artifacts, signature, watermark, username, blurry, monochrome, 3d, realistic, ugly, deformed, poorly drawn, extra limbs, bad proportions"
+    }
+  },
+  {
+    "id": "wp_00044",
+    "nameRomaji": "Matsuo Natsuki",
+    "nameJp": "松尾 夏希",
+    "age": 16,
+    "gender": "female",
+    "potential": 66,
+    "tier": "B",
+    "visible": {
+      "vocal": 19,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 16,
+      "stamina": 19,
+      "discipline": 15,
+      "mentality": 21,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 14,
+      "ambition": 15,
+      "loyalty": 11,
+      "temperament": 9,
+      "personalLife": 3
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 113014,
+    "regionId": "fukuoka",
+    "entryMonth": 127,
+    "talentAverage": 16.25,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00044",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Matsuo Natsuki",
+      "nameJp": "松尾 夏希",
+      "background": {
+        "pt": "Natsuki cresceu na agitada cidade de Fukuoka, muitas vezes passando as noites cantando em karaokês locais com os amigos para relaxar. Apesar de seu comportamento exterior calmo e equilibrado, ela possui uma notável força mental e resistência, permitindo-lhe lidar com as pressões da indústria de idols com facilidade. No entanto, sua vida social ativa ocasionalmente leva a pequenos rumores, embora seu forte talento vocal a mantenha firmemente nos holofotes.",
+        "ja": "活気あふれる福岡の街で育った夏希は、夜になると友人たちと地元のカラオケで歌って息抜きをすることが多かった。表向きは穏やかでバランスの取れた性格だが、並外れた精神力とスタミナを持ち、アイドル業界のプレッシャーにも難なく対応する。活発な交友関係が時折小さな噂を呼ぶこともあるが、その確かな歌唱力で常に注目を集めている。"
+      },
+      "physical": {
+        "hairStyle": "Shoulder-length bob with soft waves",
+        "hairColor": "Ash brown",
+        "eyeShape": "Round and expressive",
+        "eyeColor": "Amber",
+        "skinTone": "Fair",
+        "accessories": "Simple silver choker",
+        "outfitNotes": "Casual street-pop style, layered off-shoulder top"
+      },
+      "portraitPromptPositive": "1girl, anime bust portrait, chest-up, three-quarter view, plain solid black background, 16-year-old Japanese girl, shoulder-length ash brown bob hair with soft waves, round expressive amber eyes, fair skin, wearing a simple silver choker and casual street-pop layered off-shoulder top, balanced and calm expression, anime otome, visual novel clean lineart soft shading, no text, no watermark.",
+      "portraitPromptNegative": "ugly, deformed, poorly drawn, extra limbs, bad anatomy, text, watermark, signature, background elements, cluttered background, realistic, 3d, photographic, multiple girls"
+    }
+  },
+  {
+    "id": "wp_00045",
+    "nameRomaji": "Murakami Jin",
+    "nameJp": "村上 仁",
+    "age": 20,
+    "gender": "male",
+    "potential": 11,
+    "tier": "F",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 13,
+      "ambition": 9,
+      "loyalty": 15,
+      "temperament": 11,
+      "personalLife": 13
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 822335,
+    "regionId": "other",
+    "entryMonth": 49,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00045",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Murakami Jin",
+      "nameJp": "村上 仁",
+      "background": {
+        "pt": "Jin cresceu mudando-se entre vários países antes de se estabelecer no Japão, o que lhe deu uma perspectiva equilibrada, mas um tanto sem rumo. Ele entrou para a agência mais por lealdade a um amigo que o recomendou do que por grande ambição pessoal. Como um novato com habilidades ainda não desenvolvidas, ele é uma presença constante e confiável que está apenas começando a descobrir seu próprio caminho.",
+        "ja": "仁は日本に定住する前、様々な国を転々として育ったため、バランスの取れた、しかし少し目標の定まらない性格になった。彼が事務所に入ったのは、強い野心からではなく、彼を推薦してくれた友人への義理立てからである。全体的なスキルはまだ未熟だが、周囲に安心感を与える堅実な青年であり、これから自分の本当の道を見つけようとしている。"
+      },
+      "physical": {
+        "hairStyle": "short, neat, slightly parted",
+        "hairColor": "dark brown",
+        "eyeShape": "soft, relaxed",
+        "eyeColor": "hazel",
+        "skinTone": "lightly tanned",
+        "accessories": "simple silver ear stud",
+        "outfitNotes": "casual denim jacket over a plain white t-shirt"
+      },
+      "portraitPromptPositive": "1boy, 20 years old, male, anime bust portrait, chest-up, three-quarter view, plain solid black background, short neat dark brown hair slightly parted, soft relaxed hazel eyes, lightly tanned skin, wearing a casual denim jacket over a plain white t-shirt, simple silver ear stud, anime otome style, visual novel clean lineart, soft shading, plain looking, balanced features, no text, no watermark.",
+      "portraitPromptNegative": "worst quality, low quality, bad anatomy, missing fingers, extra digits, ugly, text, watermark, signature, multiple characters, background details, complex background."
+    }
+  },
+  {
+    "id": "wp_00046",
+    "nameRomaji": "Sakurai Miku",
+    "nameJp": "桜井 美空",
+    "age": 18,
+    "gender": "female",
+    "potential": 50,
+    "tier": "D",
+    "visible": {
+      "vocal": 20,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 19,
+      "aura": 15,
+      "stamina": 17,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 5,
+      "ambition": 13,
+      "loyalty": 16,
+      "temperament": 11,
+      "personalLife": 16
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.public_life",
+    "visualSeed": 599503,
+    "regionId": "tokyo",
+    "entryMonth": 235,
+    "talentAverage": 15.92,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00046",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Sakurai Miku",
+      "nameJp": "桜井 美空",
+      "background": {
+        "pt": "Nascida e criada no agitado centro de Tóquio, Miku sempre adorou compartilhar cada detalhe de sua vida nas redes sociais. Ela ganhou uma pequena base de fãs cantando em salas de karaokê e fazendo transmissões ao vivo. Embora seja muito comunicativa e adore os holofotes, sua falta de consistência e foco são desafios que precisará superar na agência.",
+        "ja": "東京の賑やかな中心部で生まれ育った美空は、自分の日常をSNSでシェアすることが大好きです。カラオケでの歌唱やライブ配信を通じて、すでに小さなファンを獲得しています。コミュニケーション能力が高く注目されることを好みますが、気まぐれな性格とプロとしての集中力の欠如は、今後の課題となるでしょう。"
+      },
+      "physical": {
+        "hairStyle": "Messy twin tails with blunt bangs",
+        "hairColor": "Ash blonde",
+        "eyeShape": "Round and expressive",
+        "eyeColor": "Hazel",
+        "skinTone": "Light",
+        "accessories": "Flashy star-shaped hair clips",
+        "outfitNotes": "Trendy Harajuku street fashion with an oversized pastel jacket"
+      },
+      "portraitPromptPositive": "1girl, solo, 18 years old female, anime bust portrait, chest-up, three-quarter view, plain solid black background, ash blonde hair in messy twin tails with blunt bangs, flashy star-shaped hair clips, round expressive hazel eyes, light skin tone, trendy Harajuku street fashion, oversized pastel jacket, cheerful confident expression, anime otome style, visual novel clean lineart soft shading, highly detailed, masterpiece, official art.",
+      "portraitPromptNegative": "text, watermark, signature, ugly, poorly drawn, bad anatomy, lowres, monochrome, 3d, realistic, photorealistic, multiple girls, poorly drawn face, poorly drawn hands, cropped."
+    }
+  },
+  {
+    "id": "wp_00047",
+    "nameRomaji": "Kobayashi Yui",
+    "nameJp": "小林 結衣",
+    "age": 17,
+    "gender": "female",
+    "potential": 29,
+    "tier": "E",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 15,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 15
+    },
+    "hidden": {
+      "consistency": 4,
+      "ambition": 16,
+      "loyalty": 18,
+      "temperament": 16,
+      "personalLife": 4
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.golden_heart",
+    "visualSeed": 615677,
+    "regionId": "tokyo",
+    "entryMonth": 174,
+    "talentAverage": 15.0,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00047",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Kobayashi Yui",
+      "nameJp": "小林 結衣",
+      "background": {
+        "pt": "Nascida em Tóquio, Yui sempre teve um coração de ouro e uma vontade imensa de cuidar dos outros, o que a levou a buscar a carreira de idol para espalhar sorrisos. Apesar de sua lealdade inabalável à agência e aos fãs, sua vida pessoal é bastante caótica e ela tem muita dificuldade em manter uma rotina consistente. Sendo uma novata sem treinamento formal, ela tenta compensar a falta de habilidade técnica com pura dedicação e compaixão.",
+        "ja": "東京出身の結衣は、常に黄金の心を持ち、人々を笑顔にするためにアイドルを志しました。事務所やファンに対する忠誠心は非常に高いですが、私生活は少しだらしなく、安定したパフォーマンスを保つのが大の苦手です。正式なトレーニングを受けたことがない新人ですが、その優しさと献身的な態度で技術不足を補おうと日々奮闘しています。"
+      },
+      "physical": {
+        "hairStyle": "Messy twin tails with slightly uneven bangs",
+        "hairColor": "Warm chestnut brown",
+        "eyeShape": "Large, round, innocent eyes",
+        "eyeColor": "Amber",
+        "skinTone": "Fair",
+        "accessories": "Colorful band-aids on her fingers and simple hair ribbons",
+        "outfitNotes": "Casual, slightly mismatched but cute streetwear"
+      },
+      "portraitPromptPositive": "1girl, 17 years old, anime bust portrait, chest-up, three-quarter view, plain solid black background, warm chestnut brown messy twin tails with slightly uneven bangs, large round innocent amber eyes, fair skin, colorful band-aids on fingers, wearing casual slightly mismatched but cute streetwear with simple hair ribbons, sweet gentle clumsy smile, kind aura, anime otome, visual novel clean lineart soft shading, no text, no watermark",
+      "portraitPromptNegative": "worst quality, low quality, bad anatomy, missing fingers, extra digits, signature, watermark, text, background details, 3d, realistic, mature, harsh lighting"
+    }
+  },
+  {
+    "id": "wp_00048",
+    "nameRomaji": "Mori Shiori",
+    "nameJp": "森 詩織",
+    "age": 16,
+    "gender": "female",
+    "potential": 56,
+    "tier": "C",
+    "visible": {
+      "vocal": 15,
+      "dance": 15,
+      "acting": 15,
+      "variety": 15,
+      "visual": 15,
+      "charisma": 15,
+      "communication": 15,
+      "aura": 15,
+      "stamina": 17,
+      "discipline": 15,
+      "mentality": 15,
+      "adaptability": 17
+    },
+    "hidden": {
+      "consistency": 15,
+      "ambition": 5,
+      "loyalty": 9,
+      "temperament": 4,
+      "personalLife": 6
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.silent_pillar",
+    "visualSeed": 590292,
+    "regionId": "tokyo",
+    "entryMonth": 200,
+    "talentAverage": 15.33,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00048",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Mori Shiori",
+      "nameJp": "森 詩織",
+      "background": {
+        "pt": "Nascida em Tóquio, Shiori nunca sonhou em ser o centro das atenções, preferindo observar e apoiar os outros nos bastidores. Ela entrou para a agência apenas para acompanhar uma amiga, mas sua impressionante resistência e capacidade de adaptação chamaram a atenção dos olheiros. Como uma presença silenciosa e confiável, ela raramente reclama das longas horas de ensaio ou mudanças de rotina. Embora não tenha grande ambição para o estrelato solo, sua dedicação constante a torna um pilar essencial para qualquer grupo.",
+        "ja": "東京で生まれた詩織は、スポットライトを浴びるよりも裏方で他人をサポートすることを好む控えめな少女です。友人の付き添いでオーディションに参加しましたが、その並外れた体力と適応力がスカウトの目に留まりました。物静かで頼りになる存在として、長時間のレッスンや急なスケジュールの変更にも決して文句を言いません。ソロとしての野心は低いものの、その揺るぎない献身性はどんなグループにとっても不可欠な柱となっています。"
+      },
+      "physical": {
+        "hairStyle": "straight, shoulder-length bob with blunt bangs",
+        "hairColor": "muted dark ash brown",
+        "eyeShape": "slightly downturned, gentle eyes",
+        "eyeColor": "deep hazel",
+        "skinTone": "fair",
+        "accessories": "simple silver hair clips",
+        "outfitNotes": "modest oversized cardigan over a plain blouse"
+      },
+      "portraitPromptPositive": "1girl, 16 years old, female, chest-up bust portrait, three-quarter view, plain solid black background, anime otome visual novel style, clean lineart, soft shading, straight shoulder-length bob with blunt bangs, muted dark ash brown hair, slightly downturned gentle eyes, deep hazel eyes, fair skin, simple silver hair clips, modest oversized cardigan over a plain blouse, quiet stoic expression, subtle reliable vibe",
+      "portraitPromptNegative": "text, watermark, signature, ugly, bad anatomy, bad proportions, missing fingers, extra digits, poorly drawn face, messy lines, 3d render, realistic, complex background"
+    }
+  },
+  {
+    "id": "wp_00049",
+    "nameRomaji": "Ishikawa Fuyumi",
+    "nameJp": "石川 冬美",
+    "age": 25,
+    "gender": "female",
+    "potential": 56,
+    "tier": "C",
+    "visible": {
+      "vocal": 15,
+      "dance": 44,
+      "acting": 15,
+      "variety": 22,
+      "visual": 34,
+      "charisma": 40,
+      "communication": 34,
+      "aura": 19,
+      "stamina": 20,
+      "discipline": 15,
+      "mentality": 20,
+      "adaptability": 17
+    },
+    "hidden": {
+      "consistency": 11,
+      "ambition": 18,
+      "loyalty": 14,
+      "temperament": 16,
+      "personalLife": 4
+    },
+    "activityState": "active",
+    "personalityLabelKey": "personality.balanced",
+    "visualSeed": 142828,
+    "regionId": "sapporo",
+    "entryMonth": 232,
+    "talentAverage": 24.58,
+    "enrichment": {
+      "schemaVersion": 2,
+      "idolId": "wp_00049",
+      "promptVersion": "2026-04-gemini-v2",
+      "nameRomaji": "Ishikawa Fuyumi",
+      "nameJp": "石川 冬美",
+      "background": {
+        "pt": "Fuyumi cresceu na vibrante cena de clubes e dança de Sapporo, chamando atenção desde cedo por seus movimentos precisos e carisma natural. Apesar de seu talento inegável nos palcos e sua personalidade aparentemente equilibrada, sua falta de disciplina e uma vida pessoal um tanto caótica frequentemente a impedem de alcançar o estrelato. Ela tenta manter uma postura profissional durante o dia, mas os constantes rumores sobre suas saídas noturnas e escândalos amorosos continuam a assombrá-la.",
+        "ja": "冬美は札幌の活気あるクラブやダンスシーンで育ち、その正確な動きと天性のカリスマ性で早くから注目を集めていました。ステージ上での才能と一見バランスの取れた性格とは裏腹に、規律のなさと波乱万丈な私生活が災いし、なかなかブレイクしきれずにいます。日中はプロとしての態度を保とうとしていますが、夜遊びや恋愛スキャンダルの噂が絶えず彼女の足を引っ張っています。"
+      },
+      "physical": {
+        "hairStyle": "asymmetrical bob with side-swept bangs",
+        "hairColor": "icy blonde",
+        "eyeShape": "sharp and slightly narrow",
+        "eyeColor": "amber",
+        "skinTone": "fair",
+        "accessories": "black velvet choker and multiple silver ear piercings",
+        "outfitNotes": "urban streetwear jacket worn slightly off one shoulder over a tight crop top"
+      },
+      "portraitPromptPositive": "1girl, 25 years old, female, anime bust portrait, chest-up, three-quarter view, plain solid black background, asymmetrical icy blonde bob hair with side-swept bangs, sharp narrow amber eyes, fair skin, black velvet choker, multiple silver ear piercings, wearing an urban streetwear jacket slightly off one shoulder over a tight crop top. Confident and slightly mischievous expression, clean lineart, soft shading, visual novel style, otome game art, highly detailed, no text, no watermark.",
+      "portraitPromptNegative": "text, watermark, ugly, bad anatomy, worst quality, low quality, messy drawing, extra limbs, poorly drawn face, background elements, scenery, multiple people"
+    }
+  }
+]

@@ -1,0 +1,5 @@
+[project]
+name = "star-idol-world-pack"
+version = "0.1.0"
+description = "Gera world pack JSON (P1-10) — executar: python generate_world_pack.py"
+requires-python = ">=3.11"
