@@ -666,3 +666,504 @@ Each Decision Process defines:
 - Promessa cumprida: afinidade +5. Promessa quebrada: afinidade −10, happiness −10.
 
 **OUTPUT:** `{ type: 'idolConversation', idolId: string, tone: ConversationTone, promises: Promise[], expectedImpact: WellnessDelta }` | `null`
+
+---
+
+## PAPEL 2: VICE-PRODUCER
+
+> Braço direito do Head Producer. Generalista que cobre qualquer cargo vazio
+> com qualidade reduzida (×0.7 do seu atributo relevante). No FM é o Assistant Manager.
+
+### Cargo 2.1: Substituição Geral
+
+---
+
+#### Decisão 2.1.1: Cobrir Cargo Vazio Temporariamente
+
+**CONTEXTO (o que a IA avalia):**
+- Lista de cargos sem NPC E sem o Head Producer cobrindo
+- Atributos do Vice-Producer (todos 19 — é generalista)
+- Time budget do Vice (usa o mesmo sistema do Head Producer: 100 pontos/semana)
+- Quanto tempo já consumiu cobrindo outros cargos esta semana
+- Prioridade de cada cargo vazio (consequências)
+- Se o Head Producer pediu explicitamente para cobrir algo
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Adaptability** | Core skill do Vice — determina quão bem cobre cargos fora da sua expertise |
+| **Industry Knowledge** | Priorizar quais cargos cobrir quando há vários vazios |
+| **(Variável)** | Ao cobrir um cargo, usa o atributo primário desse cargo × 0.7 (penalidade generalista) |
+
+**FLOWCHART:**
+
+```
+1. IDENTIFICAR CARGOS A COBRIR
+   ├─ Listar cargos sem NPC, sem Head Producer, sem outro staff
+   ├─ Se nenhum → return null (tudo coberto)
+   └─ Priorizar:
+      └─ Skill: Industry Knowledge
+         ├─ Elite (20):      Prioriza por impacto contextual esta semana.
+         │                    "Temos show quinta → Show Director vazio é prioridade."
+         │                    "Nenhum evento urgente → Wellness monitoring é prioridade porque
+         │                    3 idols com stress > 65."
+         │                    Pode cobrir até 3 cargos se time budget permite.
+         ├─ Outstanding (18-19): Prioriza por consequência documentada. Até 2 cargos.
+         ├─ Very Good (15-17): Lista fixa de prioridade. 2 cargos max.
+         ├─ Good (12-14):    Top-1 cargo mais urgente.
+         ├─ Average (10-11): Cargo vazio mais óbvio (idol reclamando, budget caindo).
+         ├─ Competent (7-9): Primeiro cargo vazio da lista.
+         ├─ Reasonable (4-6): Só cobre se Head Producer pediu explicitamente.
+         └─ Unsuited (1-3):  Não cobre nada. "Não é meu trabalho."
+
+2. AVALIAR CAPACIDADE DE COBERTURA
+   └─ Skill: Adaptability
+      ├─ Elite (20):      Sabe exatamente em quais cargos é "Good" (attr × 0.7 ≥ 12)
+      │                    e em quais seria "Reasonable" (attr × 0.7 < 6).
+      │                    Só cobre cargos onde opera como "Competent" ou melhor.
+      │                    "Meu Vocal Technique é 8. × 0.7 = 5.6 → Reasonable.
+      │                    Melhor não cobrir treino vocal — faz mais mal que bem."
+      ├─ Outstanding (18-19): Avalia primary attr do cargo × 0.7.
+      │                        Evita cargos onde ficaria "Unsuited" ou "Reasonable".
+      ├─ Very Good (15-17): Avalia primary attr do cargo. Evita cargos com attr < 5
+      │                      (seria Unsuited após penalty).
+      ├─ Good (12-14):    Cobre se primary attr ≥ 8 (pelo menos "Competent" pós-penalty).
+      ├─ Average (10-11): Cobre sem avaliar capacidade. Qualidade varia.
+      ├─ Competent (7-9): Idem Average.
+      ├─ Reasonable (4-6): Cobre sem avaliar. Pode piorar as coisas.
+      └─ Unsuited (1-3):  Cobre aleatoriamente. Alta chance de resultado negativo.
+
+3. EXECUTAR DECISÕES DO CARGO COBERTO
+   ├─ Para cada cargo que vai cobrir:
+   │   → Executa o flowchart da(s) decisão(ões) desse cargo
+   │   → Usa effectiveAttr = viceAttr[primaryAttrDoCargo] × 0.7
+   │   → O label resultante determina o comportamento na tabela daquele cargo
+   │   → Ex: Vice com Vocal Technique 14 ("Good") cobrindo treino vocal:
+   │     14 × 0.7 = 9.8 → opera como "Competent" no flowchart de treino
+   └─ Time budget consumed: custo do cargo × 0.8 (vice é ligeiramente mais eficiente
+      que o Head Producer cobrindo — é o papel dele ser polivalente)
+
+4. DECISÃO FINAL
+   ├─ Se cargos identificados E capacidade aceitável:
+   │   → return delegatedActions[] (ações geradas pelos flowcharts dos cargos cobertos)
+   └─ Se nenhum cargo precisa de cobertura OU capacidade insuficiente:
+       → return null
+```
+
+**OUTPUT:** `AgencyAction[]` (variável — depende dos cargos cobertos) | `null`
+
+---
+
+### Cargo 2.2: Conselheiro
+
+---
+
+#### Decisão 2.2.1: Recomendar Ação ao Head Producer
+
+**CONTEXTO (o que a IA avalia):**
+- Estado geral da agência: KPIs (receita, despesa, balance, avg wellness, avg fame)
+- Decisões pendentes do player (se Head Producer é o player)
+- Problemas não-resolvidos: cargos vazios, contratos expirando, idols em risco
+- Oportunidades não-aproveitadas: idol pronta para promoção, mercado favorável, show opportunity
+- Histórico de sugestões anteriores (para não repetir a mesma sugestão 5 semanas seguidas)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Industry Knowledge** | Identificar problemas e oportunidades que o Head Producer pode estar a perder |
+| **Financial Acumen** | Identificar riscos financeiros antes que se tornem crises |
+| **Judging Idol Potential** | Identificar oportunidades de desenvolvimento que não estão a ser aproveitadas |
+| **People Management** | Identificar problemas de moral e dinâmica de grupo que estão a escalar |
+
+**FLOWCHART:**
+
+```
+1. SCAN DE PROBLEMAS
+   ├─ Financeiro:
+   │   └─ Skill: Financial Acumen
+   │      ├─ Elite (20):      Identifica: "receita caiu 12% este mês por causa da queda
+   │      │                    em jobs de TV — a nossa PR não está a promover idols para
+   │      │                    canais certos. Sugestão: rever PR strategy ou contratar
+   │      │                    Communications Director."
+   │      │                    Conecta causa → efeito → solução.
+   │      ├─ Outstanding (18-19): "Receita caindo há 2 meses. Sugiro rever strategy."
+   │      ├─ Very Good (15-17): "Balance vai ficar negativo em 2 meses se continuar assim."
+   │      ├─ Good (12-14):    "Despesas estão a subir. Considerar cortes."
+   │      ├─ Average (10-11): "Budget está apertado." (sem solução)
+   │      ├─ Competent (7-9): Nota só se balance já é negativo.
+   │      ├─ Reasonable (4-6): Nota só em crise (debt state ≥ crisis).
+   │      └─ Unsuited (1-3):  Sem input financeiro.
+   │
+   ├─ Wellness:
+   │   └─ Skill: People Management
+   │      ├─ Elite (20):      "3 idols com stress crescendo consistentemente há 3 semanas.
+   │      │                    Se não aliviar agenda na próxima semana, teremos burnout.
+   │      │                    Sugiro: reduzir 2 jobs/semana + agendar psicólogo."
+   │      ├─ Outstanding (18-19): "Idol X e Y com stress > 70. Sugiro rest days."
+   │      ├─ Very Good (15-17): "Idol X com stress alto. Atenção."
+   │      ├─ Good (12-14):    "Alguma idol parece cansada." (vago)
+   │      ├─ Average−:        Não identifica problemas de wellness.
+   │
+   ├─ Roster/Desenvolvimento:
+   │   └─ Skill: Judging Idol Potential
+   │      ├─ Elite (20):      "Idol Z tem PT 85 mas está estagnada em tier C porque
+   │      │                    não tem dev plan. Com treino focado, chega a B em 8 semanas
+   │      │                    e A em 20. Vale o investimento."
+   │      ├─ Outstanding (18-19): "Idol Z tem potencial não explorado. Sugiro dev plan."
+   │      ├─ Very Good (15-17): "Temos 3 idols sem dev plan."
+   │      ├─ Good (12-14):    "Considere investir em treino para novatas."
+   │      ├─ Average−:        Sem insights de desenvolvimento.
+
+2. SCAN DE OPORTUNIDADES
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Identifica oportunidades cross-system:
+      │                    "Idol X teve show S-grade + música no top 20 + fan mood 90.
+      │                    É o momento perfeito para: release de single, show solo,
+      │                    PR campaign, merch special edition. Tudo junto amplifica."
+      ├─ Outstanding (18-19): Identifica oportunidades por sistema:
+      │                        "Music release esta semana — coordenar com marketing."
+      ├─ Very Good (15-17): Identifica oportunidades óbvias: "contrato X expira em 2 sem."
+      ├─ Good (12-14):    Identifica 1 oportunidade por semana.
+      ├─ Average (10-11): Identifica só urgências (contrato a expirar).
+      ├─ Competent−:      Sem identificação de oportunidades.
+
+3. COMPILAR SUGESTÕES
+   ├─ Priorizar por: urgência × impacto
+   ├─ Filtrar: não repetir sugestão dada nas últimas 3 semanas
+   ├─ Max 3 sugestões por semana (evitar overwhelm)
+   └─ Para cada sugestão incluir:
+      - Problema/oportunidade identificada
+      - Ação recomendada
+      - Nível de confiança (baseado nos attrs que usou para diagnosticar)
+
+4. DECISÃO FINAL
+   ├─ Se há sugestões relevantes:
+   │   → return { type: 'suggestion', suggestions: [{ area, problem, action, confidence }] }
+   └─ Se tudo está ok (raro com bom conselheiro):
+       → return null
+```
+
+**NOTA:** Sugestões são INFORMATIVAS — não são ações executadas. O player (ou Head Producer NPC) decide se age. No UI, aparecem como notificações no inbox com botão "Aceitar sugestão" → que então dispara a ação real.
+
+**OUTPUT:** `{ type: 'suggestion', suggestions: Suggestion[] }` | `null`
+
+---
+
+## PAPEL 3: TALENT DIRECTOR
+
+> Equivalente ao Director of Football do FM. Quem entra e sai do roster.
+> Responsável por contratos, composição do roster, e transferências.
+
+### Cargo 3.1: Negociação de Contratos
+
+---
+
+#### Decisão 3.1.1: Renovar Contrato Expirando
+
+**CONTEXTO (o que a IA avalia):**
+- Contratos com expiração em ≤4 semanas (lista de contratos + idol associada)
+- Para cada idol com contrato expirando:
+  - Stats atuais, tier, fame, wellness
+  - ROI dos últimos 3 meses (receita gerada − custo total: salary + treino + marketing)
+  - Archetype e se há outra idol que cobre o mesmo archetype
+  - Afinidade com a agência (Lealdade, happiness, histórico)
+  - Fame trend (subindo, estável, caindo)
+  - Potencial futuro (stats vs ceiling)
+- Budget disponível para salários (após economias e outros compromissos)
+- Propostas de rivais pendentes para esta idol (se houver)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Industry Knowledge** | Avaliar o valor de mercado justo e timing de renovação |
+| **Financial Acumen** | Calcular se a renovação é financeiramente sustentável |
+| **Judging Idol Ability** | Avaliar o nível real da idol (stats, consistency) vs o que a fame sugere |
+| **Judging Idol Potential** | Projetar se a idol ainda vai crescer ou já atingiu o ceiling |
+
+**FLOWCHART:**
+
+```
+1. IDENTIFICAR CONTRATOS A RENOVAR
+   ├─ Listar todos com expiração ≤ 4 semanas
+   ├─ Se nenhum → return null
+   └─ Decidir timing de abordagem:
+      └─ Skill: Industry Knowledge
+         ├─ Elite (20):      Inicia renovação 8 semanas antes (não espera 4).
+         │                    Mais tempo = mais leverage na negociação.
+         │                    "Se começar cedo, idol sente-se valorizada e pede menos."
+         │                    Identifica que alguns contratos convém deixar expirar (idol dispensável).
+         ├─ Outstanding (18-19): Inicia 6 semanas antes. Identifica quais renovar vs deixar.
+         ├─ Very Good (15-17): Inicia 4 semanas antes (dentro do warning). Renova todos os
+         │                      que valem a pena.
+         ├─ Good (12-14):    Inicia com 4 semanas. Pode perder timing em 1-2.
+         ├─ Average (10-11): Reage ao warning de 4 semanas. Tenta renovar todos.
+         ├─ Competent (7-9): Nota o warning mas pode demorar 1-2 semanas a agir.
+         │                    Restam 2-3 semanas quando começa — leverage reduzido.
+         ├─ Reasonable (4-6): Só percebe quando faltam 1-2 semanas. Renovação apressada.
+         └─ Unsuited (1-3):  Não percebe o warning. Contrato expira. Idol vai para o mercado.
+
+2. AVALIAR SE VALE RENOVAR (por idol)
+   ├─ Skill: Judging Idol Ability
+   │   ├─ Elite (20):      Análise completa: stats reais (não os estimados),
+   │   │                    consistency de performance (variância nos últimos 12 jobs),
+   │   │                    chemistry com o grupo, impacto na dinâmica do roster,
+   │   │                    comparativo com idols disponíveis no mercado do mesmo archetype.
+   │   │                    "Ela é tier A mas inconsistente — nos últimos 10 jobs, 3 foram D.
+   │   │                    No mercado há uma tier B estável que custaria 40% menos."
+   │   ├─ Outstanding (18-19): Stats reais + performance trend + archetype coverage.
+   │   ├─ Very Good (15-17): Stats + fame trend. "Fame subindo → vale. Caindo → avaliar."
+   │   ├─ Good (12-14):    Stats + ROI. "ROI positivo → renovar. Negativo → avaliar."
+   │   ├─ Average (10-11): ROI simples. "Gera mais do que custa? Sim → renovar."
+   │   ├─ Competent (7-9): Fame > 500? → renovar. Fame ≤ 500? → não.
+   │   ├─ Reasonable (4-6): Renova todos sem avaliar.
+   │   └─ Unsuited (1-3):  Renova todos sem avaliar (ou não percebe e deixa expirar).
+   │
+   └─ Skill: Judging Idol Potential
+      ├─ Elite (20):      Projeta career arc: "PT 82, stats atuais avg 55, idade 17.
+      │                    Peak estimado: tier S aos 22. Investir agora = retorno de 5 anos.
+      │                    RENOVAR com contrato de 2 anos."
+      │                    vs "PT 65, stats avg 60, idade 26. Já no ceiling.
+      │                    Declínio em 2-3 anos. Renovar por 1 ano MAX ou não renovar."
+      ├─ Outstanding (18-19): "Ainda vai crescer" vs "já atingiu ceiling". Ajusta duração.
+      ├─ Very Good (15-17): Avalia PT vs stats atuais. Gap grande → potencial.
+      │                      Gap pequeno → perto do ceiling.
+      ├─ Good (12-14):    Avalia idade: jovem → potencial. Velha → menos.
+      ├─ Average−:         Não avalia potencial. Decide só por ROI atual.
+
+3. DEFINIR TERMOS DE RENOVAÇÃO
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      Calcula oferta ótima: salary atual × fame_trend_mult ×
+      │                    market_rate_adjustment × contract_duration_discount.
+      │                    "Ofereço 10% acima do atual porque fame subiu 15%. Mas peço
+      │                    2 anos em vez de 1 — desconto de duração de 5%."
+      │                    Negocia: exclusividade ON em troca de salary +15%.
+      │                    Optimiza cada cláusula para maximizar value da agência.
+      ├─ Outstanding (18-19): Salary × 1.2-1.5 baseado em fame. Ajusta 2-3 cláusulas.
+      ├─ Very Good (15-17): Salary × 1.3 (flat increase). Ajusta duração.
+      ├─ Good (12-14):    Salary × 1.3. Mantém outras cláusulas iguais.
+      ├─ Average (10-11): Salary × 1.3. Sem ajuste de cláusulas.
+      ├─ Competent (7-9): Salary × 1.2. Cláusulas iguais.
+      ├─ Reasonable (4-6): Salary × 1.1. Pode sub-oferecer e idol recusar.
+      └─ Unsuited (1-3):  Mesmo salary (0% aumento). Idol quase certamente recusa
+                           (idol famosa exige mais na renovação).
+
+4. DECISÃO FINAL
+   ├─ Se vale renovar E termos definidos:
+   │   → return { type: 'renewContract', contractId, newClauses }
+   ├─ Se não vale renovar:
+   │   → return null (contrato expira, idol vai para mercado)
+   └─ Se não percebeu a expiração (Unsuited):
+       → return null (contrato expira por negligência)
+```
+
+**OUTPUT:** `{ type: 'renewContract', contractId: string, newClauses: ContractClauses }` | `null`
+
+---
+
+#### Decisão 3.1.2: Responder a Proposta de Buyout
+
+**CONTEXTO (o que a IA avalia):**
+- Proposta recebida: agência rival (id, tier, reputação), idol alvo (id), valor oferecido (¥)
+- Valor de mercado da idol (calculado por economy system)
+- Importância da idol para a agência:
+  - Revenue share (% da receita total que ela gera)
+  - Archetype coverage (é a única deste archetype?)
+  - Fan club size e mood (fãs vão reagir negativamente?)
+  - Grupo: é membro de algum grupo? Saída dela afeta o grupo?
+- Custo de replacement: quanto custaria encontrar + contratar + treinar substituta
+- Relação com a agência rival (histórico: buyouts anteriores, collabs, rivalidade)
+- Contrato atual: meses restantes (afeta fee de rescisão)
+- Idol personal: a idol QUER sair? (Lealdade, happiness, Ambição)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Industry Knowledge** | Avaliar se a oferta é justa comparada com o mercado |
+| **Financial Acumen** | Calcular se vender é financeiramente melhor que manter |
+| **Judging Idol Ability** | Avaliar o valor real da idol (não apenas fame — mas consistência, versatilidade) |
+| **Authority** | Negociar counter-offer com firmeza. Blefar se necessário |
+
+**FLOWCHART:**
+
+```
+1. AVALIAR OFERTA vs VALOR DE MERCADO
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Conhece o mercado com precisão. Sabe que a idol vale X ± 5%.
+      │                    Avalia TIMING: "rival está desesperado (perdeu idol chave semana passada)
+      │                    — podemos pedir premium de 30-50%."
+      │                    Avalia MOTIVAÇÃO do rival: "rival tier Nacional quer nossa idol tier A
+      │                    para competir no Kouhaku — oferta vai subir se rejeitarmos."
+      ├─ Outstanding (18-19): Valor de mercado ± 10%. Identifica se rival está sob pressão.
+      ├─ Very Good (15-17): Valor de mercado ± 15%. Compara oferta com transações recentes.
+      ├─ Good (12-14):    Valor ± 20%. "Oferta acima ou abaixo do esperado?"
+      ├─ Average (10-11): Compara oferta com salary da idol × meses restantes. Rough estimate.
+      ├─ Competent (7-9): "Oferta é grande? Parece grande." Baseado em intuição, não cálculo.
+      ├─ Reasonable (4-6): Não avalia. Qualquer oferta "parece boa" ou "parece má" aleatoriamente.
+      └─ Unsuited (1-3):  Não entende a oferta. Pode aceitar valor ridiculamente baixo.
+
+2. AVALIAR IMPORTÂNCIA DA IDOL PARA A AGÊNCIA
+   └─ Skill: Judging Idol Ability
+      ├─ Elite (20):      Análise multi-dimensional:
+      │                    → Revenue: "gera 35% da receita — se sair, crise financeira em 2 meses"
+      │                    → Archetype: "única Center no roster — grupo Aurora depende dela"
+      │                    → Fans: "fan club de 80K — se sair, mass exodus + toxicidade"
+      │                    → Development: "mentora de 2 novatas — saída dela atrasa desenvolvimento"
+      │                    → Replaceability: "no mercado, ninguém no mesmo nível por < 2× o custo"
+      │                    Pesa todos factores e dá score de insubstituibilidade 0-100.
+      ├─ Outstanding (18-19): Revenue share + archetype + fan impact. Score simplificado.
+      ├─ Very Good (15-17): Revenue share + archetype. "É essencial ou não?"
+      ├─ Good (12-14):    Revenue share. "Gera mais de 20% da receita? Essencial."
+      ├─ Average (10-11): Fame. "É a mais famosa? Então é importante."
+      ├─ Competent (7-9): Tier. "É tier A+? Não vender."
+      ├─ Reasonable (4-6): Não avalia importância. Decide só pelo valor da oferta.
+      └─ Unsuited (1-3):  Não avalia.
+
+3. CALCULAR SE VENDER É MELHOR QUE MANTER
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      NPV completo: valor_oferta vs (receita_futura − salary − treino)
+      │                    ao longo do contrato restante, descontado a taxa de risco.
+      │                    "Oferta de ¥45M. Ela gera ¥8M/mês líquido. Contrato restante 18 meses.
+      │                    Receita projetada: ¥144M. Mas fame está a cair 3%/mês — projeção
+      │                    real: ¥110M. Aceitar ¥45M é mau negócio AGORA. Counter com ¥80M."
+      ├─ Outstanding (18-19): Projeção 12 meses simplificada. Compara com oferta.
+      ├─ Very Good (15-17): Receita dos últimos 3 meses × meses restantes vs oferta.
+      ├─ Good (12-14):    Receita mensal × 6 vs oferta. Rough estimate.
+      ├─ Average (10-11): "Oferta > salary anual? Parece bom negócio."
+      ├─ Competent (7-9): "Oferta parece alta → aceitar. Parece baixa → rejeitar."
+      ├─ Reasonable (4-6): Aceita se número "parece grande" (sem referência).
+      └─ Unsuited (1-3):  Não faz conta. Decisão quase aleatória.
+
+4. NEGOCIAR / RESPONDER
+   └─ Skill: Authority
+      ├─ Elite (20):      Master negotiator:
+      │                    → Se quer vender: aceita se oferta ≥ target price.
+      │                      Se oferta < target mas close (80-99%): counter com target + 10%.
+      │                    → Se não quer vender: rejeita COM mensagem estratégica:
+      │                      "Agradecemos o interesse mas [idol] é central nos nossos planos.
+      │                      Não estamos a considerar ofertas neste momento."
+      │                      (Rival pode interpretar como "ofereçam mais" → leverage.)
+      │                    → Se quer criar bidding war: demora 1 semana a responder
+      │                      (sinalizando a outros rivais que idol está "em jogo").
+      ├─ Outstanding (18-19): Counter-offer calculado. Rejeição educada. Timing consciente.
+      ├─ Very Good (15-17): Counter com marketValue × 1.2 se quer vender. Rejeição firme se não.
+      ├─ Good (12-14):    Counter com +15% sobre oferta se quer vender. Rejeição simples.
+      ├─ Average (10-11): Aceita ou rejeita (binário). Sem counter-offer.
+      ├─ Competent (7-9): Aceita ou rejeita.
+      ├─ Reasonable (4-6): Aceita oferta que "parece boa" sem negociar.
+      └─ Unsuited (1-3):  Resposta tardia ou confusa. Pode aceitar sem querer
+                           (interpreta mal a proposta).
+
+5. DECISÃO FINAL
+   ├─ Se aceitar:
+   │   → return { type: 'respondBuyout', proposalId, response: 'accept' }
+   ├─ Se counter-offer:
+   │   → return { type: 'respondBuyout', proposalId, response: 'counter', counterOffer: ¥ }
+   ├─ Se rejeitar:
+   │   → return { type: 'respondBuyout', proposalId, response: 'reject' }
+   └─ Se não processou (Unsuited/timeout):
+       → proposta expira após deadline → idol pode ficar insatisfeita se queria sair
+```
+
+**OUTPUT:** `{ type: 'respondBuyout', proposalId: string, response: 'accept' | 'reject' | 'counter', counterOffer?: number }` | `null`
+
+---
+
+#### Decisão 3.1.3: Rescindir Contrato Proativamente
+
+**CONTEXTO (o que a IA avalia):**
+- Roster completo com ROI por idol (últimos 3 meses)
+- Idols com ROI consistentemente negativo
+- Multa de rescisão de cada contrato (salário × meses restantes × RESCISSION_FACTOR)
+- Custo de manter a idol até o fim do contrato (salary × meses restantes)
+- Archetype coverage: se rescindir, fica com gap no archetype?
+- Estado financeiro: agência em crise? Cada yen conta?
+- Possibilidade de transfer em vez de rescisão (listar para venda = receita em vez de custo)
+- Idol happiness e Lealdade: idol infeliz pode aceitar rescisão mútua (multa −50%)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Financial Acumen** | Comparar custo de manter vs custo de rescindir — qual cenário é mais barato |
+| **Judging Idol Ability** | Avaliar se idol tem chance de recovery (stats subindo?) ou é caso perdido |
+| **Judging Idol Potential** | Avaliar se idol está estagnada permanentemente ou é fase temporária |
+| **Industry Knowledge** | Avaliar se é melhor rescindir agora ou tentar vender (transfer) |
+
+**FLOWCHART:**
+
+```
+1. IDENTIFICAR CANDIDATAS A RESCISÃO
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      Analisa ROI de CADA idol no roster dos últimos 3 meses.
+      │                    Categoriza: "ROI negativo e piorando" vs "ROI negativo mas estabilizando"
+      │                    vs "ROI negativo porque investimos em treino (custo alto, retorno futuro)."
+      │                    Só marca para rescisão as que são "negativo e piorando" SEM potencial.
+      │                    Calcula: custo_de_manter = salary × meses_restantes + treino_estimado.
+      │                    Calcula: custo_de_rescindir = multa.
+      │                    Se manter > rescindir × 1.5 → candidata a rescisão.
+      ├─ Outstanding (18-19): ROI 3 meses. "Negativo e piorando" = candidata.
+      │                        Compara custo manter vs multa.
+      ├─ Very Good (15-17): ROI 3 meses. Todas com ROI < -20% são candidatas.
+      │                      Calcula multa vs salary restante.
+      ├─ Good (12-14):    ROI 2 meses. Candidatas: ROI negativo + tier ≤ C.
+      ├─ Average (10-11): ROI 1 mês. Candidatas: ROI negativo.
+      ├─ Competent (7-9): Só identifica candidatas se agência em crise financeira.
+      │                    Escolhe a idol mais cara com ROI negativo.
+      ├─ Reasonable (4-6): Só rescinde se board forçar ou debt = crisis.
+      └─ Unsuited (1-3):  Nunca rescinde proativamente. Paga salários até o fim.
+
+2. AVALIAR SE IDOL PODE RECUPERAR
+   └─ Skill: Judging Idol Potential
+      ├─ Elite (20):      "ROI negativo AGORA, mas stats crescendo 2%/semana, PT = 78,
+      │                    idade 17. Em 8 semanas será tier B e ROI positivo.
+      │                    NÃO RESCINDIR — é investimento."
+      │                    vs "ROI negativo, stats estagnados há 12 semanas, PT = 55,
+      │                    idade 24, ceiling praticamente atingido. Rescindir."
+      │                    Diferencia investimento de custo afundado.
+      ├─ Outstanding (18-19): Avalia PT vs stats atuais + growth trend.
+      │                        "Gap grande + growing → investimento. Gap pequeno + flat → rescindir."
+      ├─ Very Good (15-17): Avalia PT vs tier. "PT alto + tier baixo → pode melhorar."
+      ├─ Good (12-14):    Avalia growth trend: "stats subindo → manter. Flat → rescindir."
+      ├─ Average (10-11): Avalia idade: "jovem → manter. Velha → rescindir."
+      ├─ Competent (7-9): Não avalia recovery. Se ROI negativo, é candidata.
+      ├─ Reasonable (4-6): Idem Competent.
+      └─ Unsuited (1-3):  Idem.
+
+3. CONSIDERAR ALTERNATIVA: TRANSFER EM VEZ DE RESCISÃO
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      "Em vez de pagar multa de ¥15M, posso listar para transfer.
+      │                    Idol tem fame 2000 → marketValue ~¥30M.
+      │                    Se vender: RECEBO ¥30M. Se rescindir: PAGO ¥15M.
+      │                    Delta: ¥45M. Sempre tentar transfer primeiro."
+      │                    Avalia se há mercado (rivais precisam deste archetype?).
+      │                    Se sim: lista. Se não: rescisão.
+      ├─ Outstanding (18-19): Compara: "vender = receita. Rescindir = custo. Preferir vender."
+      │                        Verifica se marketValue > 0 (idol tem valor de mercado).
+      ├─ Very Good (15-17): "Se idol tem fame > 500, tentar vender antes de rescindir."
+      ├─ Good (12-14):    "Se idol tem fame > 1000, tentar vender."
+      ├─ Average (10-11): Não pensa em transfer. Rescisão direta.
+      ├─ Competent−:      Não pensa em transfer.
+
+4. VERIFICAR RESCISÃO MÚTUA
+   └─ Skill: Judging Idol Ability (leitura de Lealdade e happiness)
+      ├─ Elite (20):      "Idol com happiness 25 e Lealdade 4 — ela QUER sair.
+      │                    Propor rescisão mútua: multa reduzida em 50%.
+      │                    Economia de ¥7.5M."
+      ├─ Outstanding (18-19): Identifica se idol quer sair (happiness < 30 + Lealdade < 8).
+      │                        Propõe mútua.
+      ├─ Very Good (15-17): Se idol pediu rescisão recentemente → propõe mútua.
+      ├─ Good−:           Não considera mútua. Rescisão unilateral (multa cheia).
+
+5. DECISÃO FINAL
+   ├─ Se melhor vender → return { type: 'listForTransfer', idolId, askingPrice }
+   │   (transfere para decisão 3.3.1 de Transfer)
+   ├─ Se rescisão mútua possível → return { type: 'terminateContract', contractId, mutual: true }
+   ├─ Se rescisão unilateral necessária → return { type: 'terminateContract', contractId, mutual: false }
+   └─ Se não há candidatas ou idol pode recuperar → return null
+```
+
+**OUTPUT:** `{ type: 'terminateContract', contractId: string, mutual: boolean }` | `{ type: 'listForTransfer', idolId: string, askingPrice: number }` | `null`
