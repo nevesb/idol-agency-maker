@@ -1,7 +1,7 @@
 # ADR-005: Performance Budget Allocation
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-07

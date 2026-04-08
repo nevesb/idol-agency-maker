@@ -63,31 +63,115 @@ Staff {
   role:           enum (ver tabela acima)
   region:         enum (sede, pode afetar scouting)
 
-  // Atributos (escala 1-20)
-  skill:          1-20   // Competencia tecnica no cargo
-  dedication:     1-20   // Empenho, afeta qualidade do trabalho delegado
-  adaptability:   1-20   // Lida com situacoes imprevistas
-  people_skills:  1-20   // Relacao com idols e colegas
+  // --- COACHING (técnica de treinamento) --- escala 1-20 cada
+  vocalTechnique:     1-20   // Treino vocal (Vocal Coach)
+  danceTechnique:     1-20   // Treino de dança (Dance Coach)
+  actingVariety:      1-20   // Treino de atuação/variety (Acting Coach)
+  stagePresence:      1-20   // Preparação de palco (Show Dir, Coaches)
+  mentalCoaching:     1-20   // Desenvolvimento mental (Dev Dir, Wellness)
+  physicalTraining:   1-20   // Treino físico/stamina (Dance Coach, Wellness)
 
-  // Meta
+  // --- MENTAL (personalidade do NPC) --- escala 1-20 cada
+  determination:      1-20   // Consistência, drive pessoal
+  discipline:         1-20   // Rigor, qualidade mínima garantida
+  motivating:         1-20   // Impacto na motivação das idols
+  peopleManagement:   1-20   // Impacto na felicidade das idols
+  adaptability:       1-20   // Performance em situações imprevistas
+  authority:          1-20   // Gestão de conflitos, decisões sob pressão
+
+  // --- KNOWLEDGE (expertise) --- escala 1-20 cada
+  judgingIdolAbility:   1-20 // Precisão de avaliação de stats atuais
+  judgingIdolPotential: 1-20 // Identificar ceiling real (PT)
+  musicalKnowledge:     1-20 // Decisões musicais (compositor, género, timing)
+  industryKnowledge:    1-20 // Negociações, market intel, relações com mídia
+  mediaSavvy:           1-20 // PR, social media, gestão de escândalos
+  financialAcumen:      1-20 // Decisões financeiras, ROI, projeções
+  fanPsychology:        1-20 // Gestão de fan clubs, engagement, toxicidade
+
+  // --- META ---
   salary:         yen/mes
   contract_end:   date
   workload:       0-100  // % da capacidade em uso
-  morale:         0-100  // Satisfacao do staff
+  morale:         0-100  // Satisfação do staff
 
-  // Especializacao (opcional)
-  specialty:      string? // ex: "vocal pop", "danca contemporanea", "crise de midia"
+  // Especialização (opcional)
+  specialty:      string? // ex: "vocal pop", "dança contemporânea", "crise de mídia"
 }
 ```
 
-#### 3. Atributos de Staff -- Impacto
+**Visualização ao jogador (FM26 standard):** O jogador NUNCA vê os números 1-20.
+Todos atributos são mostrados como **labels qualitativos** com cor:
 
-| Atributo | Impacto |
+| Label | Cor | Range Interno |
+|---|---|---|
+| **Elite** | Roxo | 20 |
+| **Outstanding** | Dourado | 18-19 |
+| **Very Good** | Verde escuro | 15-17 |
+| **Good** | Verde | 12-14 |
+| **Average** | Verde claro | 10-11 |
+| **Competent** | Amarelo | 7-9 |
+| **Reasonable** | Cinza | 4-6 |
+| **Unsuited** | Vermelho | 1-3 |
+
+Referência visual: Wireframe 21 (Staff Profile), Wireframe 22 (Staff Quick Profile Modal).
+
+#### 3. Atributos de Staff — Impacto por Categoria
+
+**COACHING (6 atributos):**
+
+| Atributo | Quem Usa | Impacto |
+|---|---|---|
+| **Vocal Technique** | Vocal Coach | Crescimento de stats vocais (vocal, communication) |
+| **Dance Technique** | Dance Coach | Crescimento de stats de dança (dance, expression) |
+| **Acting/Variety** | Acting Coach | Crescimento de atuação, variety, comunicação para TV |
+| **Stage Presence** | Show Director, Coaches | Qualidade de preparação de palco, presença cénica das idols |
+| **Mental Coaching** | Development Dir, Wellness | Crescimento de stats mentais (mentality, focus, discipline) |
+| **Physical Training** | Dance Coach, Wellness | Crescimento de stamina, resistência, saúde física |
+
+**MENTAL (6 atributos):**
+
+| Atributo | Quem Usa | Impacto |
+|---|---|---|
+| **Determination** | Todos | Consistência do trabalho. Staff com baixa determination tem "dias maus" onde qualidade cai 50% |
+| **Discipline** | Todos | Rigor na rotina. Afeta qualidade mínima — staff disciplinado nunca entrega abaixo de um limiar |
+| **Motivating** | Coaches, Dev Dir | Impacto na motivação das idols ao interagir. Coach motivador = +motivation nas idols |
+| **People Management** | Todos com contato | Impacto na felicidade. Staff com people_management baixo pode treinar bem mas desmotivar |
+| **Adaptability** | Todos | Performance em situações não-rotineiras (crise, idol difícil, multi-role). Reduz penalidade de multi-role |
+| **Authority** | Show Dir, Head Producer | Gestão de conflitos entre idols, decisões mid-show, respeito do roster |
+
+**KNOWLEDGE (7 atributos):**
+
+| Atributo | Quem Usa | Impacto |
+|---|---|---|
+| **Judging Idol Ability** | Scout, Talent Dir | Precisão de scout reports. Elite = margem ±2. Unsuited = margem ±15 |
+| **Judging Idol Potential** | Scout, Dev Dir | Identificar ceiling real vs aparente. Afeta DevPlan quality |
+| **Musical Knowledge** | Music Director | Qualidade de decisões: escolha de compositor, género, timing de lançamento |
+| **Industry Knowledge** | PR Dir, Operations Dir | Resposta a crises, negociações de contrato, market intelligence |
+| **Media Savvy** | Communications Dir | Eficácia de PR, social media, gestão de escândalos. Elite = spin master |
+| **Financial Acumen** | Operations Dir | Qualidade de decisões financeiras, ROI analysis, projeções, budget |
+| **Fan Psychology** | Communications Dir | Gestão de fan clubs, engagement campaigns, detecção de toxicidade |
+
+**Perfil típico por papel:**
+
+Cada papel tem 3-5 atributos "primários" (os que mais importam) e os restantes
+são secundários. O jogador avalia staff pelo perfil completo, não por um número único.
+
+| Papel | Atributos Primários |
 |---|---|
-| **Skill** | Fator multiplicador na eficacia do trabalho. Coach skill 18 = crescimento muito mais rapido que skill 5 |
-| **Dedication** | Afeta consistencia. Staff com dedication baixa pode "esquecer" tarefas delegadas ou fazer com qualidade variavel |
-| **Adaptability** | Afeta performance em situacoes nao-rotineiras (crise, idol dificil, evento inesperado) |
-| **People Skills** | Afeta moral das idols ao interagir. Coach com people_skills baixo pode treinar bem mas desmotivar |
+| Head Producer | Authority, Industry Knowledge, People Management, Determination |
+| Vice-Producer | Adaptability, People Management, Motivating, Industry Knowledge |
+| Talent Director | Judging Idol Ability, Industry Knowledge, Financial Acumen, Authority |
+| Chief Scout | Judging Idol Ability, Judging Idol Potential, Adaptability, Determination |
+| Development Director | Judging Idol Potential, Mental Coaching, Motivating, People Management |
+| Vocal Coach | Vocal Technique, Motivating, Discipline, People Management |
+| Dance Coach | Dance Technique, Physical Training, Stage Presence, Discipline |
+| Acting/Variety Coach | Acting/Variety, Motivating, People Management, Adaptability |
+| Music Director | Musical Knowledge, Industry Knowledge, Judging Idol Ability, Financial Acumen |
+| Show Director | Stage Presence, Authority, Adaptability, Musical Knowledge |
+| Communications Director | Media Savvy, Fan Psychology, People Management, Adaptability |
+| Operations Director | Financial Acumen, Industry Knowledge, Discipline, Determination |
+| Wellness Director | Mental Coaching, People Management, Motivating, Physical Training |
+| Intelligence Analyst | Judging Idol Ability, Judging Idol Potential, Financial Acumen, Industry Knowledge |
 
 #### 4. Contratacao de Staff
 

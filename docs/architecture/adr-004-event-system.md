@@ -1,7 +1,7 @@
 # ADR-004: Event System & Cross-System Integration
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-07

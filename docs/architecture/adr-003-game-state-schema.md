@@ -1,7 +1,7 @@
 # ADR-003: Game State Schema & Persistence
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-07
