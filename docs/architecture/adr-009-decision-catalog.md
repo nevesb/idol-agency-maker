@@ -3604,3 +3604,569 @@ Flowchart simplificado:
 ```
 
 **OUTPUT:** `{ type: 'fanClubReport', ... }` + `{ type: 'planFanEvent', ... }` se demand atendida
+
+---
+
+## PAPEL 12: OPERATIONS DIRECTOR
+
+> Dinheiro, facilities, merch, marketing, eventos. O lado business.
+
+### Cargo 12.1: Gestão Financeira
+
+---
+
+#### Decisão 12.1.1: Rever e Ajustar Budget
+
+**CONTEXTO:** Income/expense breakdown, projections, debt state, ROI per category
+**Primary skill:** Financial Acumen
+
+```
+Flowchart:
+1. DIAGNOSTICAR SAÚDE FINANCEIRA
+   └─ Skill: Financial Acumen
+      ├─ Elite: Full P&L analysis: receita por fonte (6 streams) × 3 meses.
+      │         Despesa por categoria (11 types) × 3 meses. Margem de lucro.
+      │         Projeção 3 meses: "se manter trajectory, balance = X."
+      │         Identifica: "receita de shows subindo mas merch caindo.
+      │         Problema não é revenue geral — é mix. Realocar marketing de
+      │         merch genérico para merch de shows (cross-sell)."
+      ├─ Outstanding: P&L 3 meses. Projeta 2 meses. Identifica maior custo.
+      ├─ Very Good: Receita vs despesa trend 2 meses.
+      ├─ Good: Receita deste mês vs mês passado. "Subindo" ou "descendo."
+      ├─ Average: Balance positivo ou negativo.
+      ├─ Competent: "Temos dinheiro" ou "não temos."
+      ├─ Reasonable: Não diagnostica.
+      └─ Unsuited: Não diagnostica.
+
+2. REALOCAR SE NECESSÁRIO
+   └─ Skill: Financial Acumen
+      ├─ Elite: Reallocation por ROI: cada yen para onde rende mais.
+      │         "Marketing tem ROI 3:1, facilities ROI 1.5:1. Shift 20% de
+      │         facilities para marketing."
+      ├─ Outstanding: Corta categoria com pior ROI. Move para melhor.
+      ├─ Very Good: Corta maior despesa se balance negativo.
+      ├─ Good: Corta 10% de todas categorias se deficit.
+      ├─ Average: Não realoca. Mantém split atual.
+      ├─ Competent−: Nunca realoca.
+
+3. FLAG RISCOS
+   └─ Elite: Projeta meses até caixa zero. Flag se < 3 meses.
+      Outstanding: Flag se balance negativo 2+ meses.
+      Very Good: Flag se balance negativo este mês.
+      Good−: Só flag se debt state muda.
+```
+
+**OUTPUT:** `{ type: 'adjustBudget', changes: BudgetChange[] }` | `{ type: 'financialAlert', risk, severity }` | `null`
+
+---
+
+#### Decisão 12.1.2: Flag Risco Financeiro
+
+**Contexto e skills similares a 12.1.1 — executado como parte do mesmo scan.**
+**Elite prevê 3 meses ahead. Unsuited não prevê nada.**
+
+**OUTPUT:** `{ type: 'financialAlert', risk: 'deficit'|'overspend'|'debt', severity: 'low'|'medium'|'high'|'critical', recommendation: string }` | `null`
+
+---
+
+### Cargo 12.2: Gestão de Facilities
+
+---
+
+#### Decisão 12.2.1: Recomendar Upgrade de Facility
+
+**CONTEXTO:** Facilities atuais (tipo, level), roster needs, budget, staff que precisa de facility
+**Primary skill:** Financial Acumen × Industry Knowledge
+
+```
+Flowchart:
+1. IDENTIFICAR FACILITIES CRÍTICAS EM FALTA
+   └─ Skill: Industry Knowledge
+      ├─ Elite: Cross-ref com todos sistemas:
+      │         "Sem Psicólogo → 3 idols stress > 70, custo de burnout projetado: ¥5M.
+      │         Psicólogo level 1: ¥2M install + ¥200K/mês. ROI positivo em 2 meses."
+      │         "Sem Dance Studio → música pipeline stalled em coreografia.
+      │         Studio level 1: ¥3M. Desbloqueia 2 projetos musicais stalled = ¥8M revenue."
+      │         Prioriza por ROI combinado (custo evitado + receita desbloqueada).
+      ├─ Outstanding: Identifica gap por sistema (wellness, music, shows).
+      ├─ Very Good: Checa: psicólogo existe? Studio existe? Recording? Prioriza por lista.
+      ├─ Good: "Precisamos de [facility mais pedida por outros sistemas]."
+      ├─ Average: Só upgrade se alguém pedir (Head Producer, staff).
+      ├─ Competent−: Não identifica necessidade.
+
+2. AVALIAR ROI
+   └─ Skill: Financial Acumen
+      ├─ Elite: Full ROI: (custo evitado + receita desbloqueada) / (install + mensal × 12).
+      ├─ Outstanding: ROI rough. "Paga-se em X meses."
+      ├─ Very Good: "Cabe no budget?" + "É urgente?"
+      ├─ Good: "Cabe no budget?" Sim/não.
+      ├─ Average−: Não calcula ROI.
+```
+
+**OUTPUT:** `{ type: 'upgradeFacility', facilityType: string, toLevel: number, estimatedROI?: number }` | `null`
+
+---
+
+### Cargo 12.3: Merchandising
+
+---
+
+#### Decisão 12.3.1: Decidir Produção de Merch
+
+**CONTEXTO:** Roster fame, fan clubs, shows próximos, inventário, budget, demand signals
+**Primary skill:** Financial Acumen × Fan Psychology (cross-papel com Communications)
+
+```
+Flowchart:
+1. IDENTIFICAR OPORTUNIDADE DE MERCH
+   └─ Skill: Financial Acumen
+      ├─ Elite: "Show em 2 semanas + novo single lançado + fan mood 85 =
+      │         oportunidade de merch premium. Produzir: T-shirt do show (limited),
+      │         photocard pack do novo single, lightstick limited edition.
+      │         Demanda projetada: fanClub.size × (dedicated% + hardcore%) × mood/100
+      │         = 25K × 0.55 × 0.85 = ~11.7K unidades. Print-run: 12K."
+      ├─ Outstanding: Match show/release com merch específico. Demanda por formula.
+      ├─ Very Good: "Show próximo → produzir T-shirt e photocard." Print-run médio.
+      ├─ Good: "Show próximo → T-shirt." Print-run conservador.
+      ├─ Average: Produz T-shirt genérica periodicamente.
+      ├─ Competent: Produz só se Head Producer pedir.
+      ├─ Reasonable: Raramente produz.
+      └─ Unsuited: Sem merch.
+
+2. PRICING
+   └─ Skill: Financial Acumen
+      ├─ Elite: Price elasticity: "preço ¥2000 → demanda 12K. ¥2500 → demanda 9K.
+      │         Revenue: ¥24M vs ¥22.5M. Margem: ¥18M vs ¥18M. Same margin,
+      │         mais unidades vendidas no preço baixo = mais fãs felizes. ¥2000."
+      ├─ Outstanding: Preço por tier do merch (standard pricing).
+      ├─ Very Good: Preço padrão para o tipo.
+      ├─ Good−: Preço fixo.
+
+3. SPECIAL EDITIONS
+   └─ Skill: Fan Psychology (cross-papel)
+      ├─ Elite: "Milestone 1 ano de grupo Aurora → edição comemorativa.
+      │         Limited 3000 unidades. Hype factor builds 2 semanas antes.
+      │         Premium price ¥5000 (fãs pagam por exclusividade)."
+      ├─ Outstanding: Special edition para milestones.
+      ├─ Very Good: Special edition para shows grandes.
+      ├─ Good−: Sem special editions.
+```
+
+**OUTPUT:** `{ type: 'produceMerch', products: [{type, theme, idolId, printRun, price, special: boolean}] }` | `null`
+
+---
+
+### Cargo 12.4: Marketing
+
+---
+
+#### Decisão 12.4.1: Lançar Campanha de Marketing
+
+**Similar ao 11.1.2 (PR Proativa) mas focado em ROI não em imagem.**
+**Primary skill:** Media Savvy × Financial Acumen
+
+```
+Flowchart simplificado:
+1. Oportunidades: release, show, trending idol.
+   → Media Savvy: Elite identifica todas. Competent: só releases.
+2. Budget: Financial Acumen com diminishing returns.
+   → Elite: sweet spot calculation. Competent: 5% flat.
+3. Duration: 1-4 semanas dependendo do tipo.
+4. Channel: online, TV, press, outdoor.
+   → Elite: multi-channel. Average: online only.
+```
+
+**OUTPUT:** `{ type: 'launchCampaign', targetId: string, type: string, budget: number, duration: number, channels: string[] }` | `null`
+
+---
+
+### Cargo 12.5: Planeamento de Eventos
+
+---
+
+#### Decisão 12.5.1: Planear Evento Custom
+
+**CONTEXTO:** Calendar, budget, roster, strategy, fan demands, rival events
+**Primary skill:** Industry Knowledge × Financial Acumen
+
+```
+Flowchart:
+1. IDENTIFICAR RAZÃO PARA EVENTO
+   └─ Skill: Industry Knowledge
+      ├─ Elite: Múltiplos triggers: charity (reputation), collab (networking),
+      │         celebration (milestone), fan meeting (demand), festival (season).
+      │         "Charity event pós-escândalo = reputation recovery. Timing perfeito."
+      │         "Collab event com rival X (relationship > 50) = exposure mútua."
+      │         Planeja 1 evento por temporada minimum.
+      ├─ Outstanding: 1 evento por trigger óbvio (milestone, season).
+      ├─ Very Good: Evento se fan demand ou strategy says so.
+      ├─ Good: Evento se Head Producer pede.
+      ├─ Average−: Não planeia eventos proativamente.
+
+2. CONFIGURAR EVENTO
+   └─ Skill: Financial Acumen
+      ├─ Elite: Full budget: venue + produção + convidados + marketing.
+      │         ROI: ticket revenue + merch + fame boost + reputation.
+      │         "Charity: custo ¥5M, revenue ¥2M (tickets), reputation +15.
+      │         Reputation 15 = vale ~¥3M em media coverage orgânico. Break-even."
+      ├─ Outstanding: Budget + revenue estimate.
+      ├─ Very Good: "Cabe no budget?"
+      ├─ Good−: Budget mínimo. Evento básico.
+
+3. CONVIDAR ARTISTAS EXTERNOS
+   └─ Skill: Industry Knowledge
+      ├─ Elite: "Convidar idol tier S+ de rival (se relationship > 60).
+      │         Cross-promotion: nossos fãs vêem ela, fãs dela vêem as nossas.
+      │         Custo: guest fee + share de receita. Benefit: fame boost para todos."
+      ├─ Outstanding: Convida se faz sentido para cross-promotion.
+      ├─ Very Good: Convida se Head Producer sugeriu.
+      ├─ Good−: Evento in-house apenas.
+```
+
+**OUTPUT:** `{ type: 'planCustomEvent', eventType: string, date: number, budget: number, lineup: string[], invites: string[] }` | `null`
+
+---
+
+## PAPEL 13: WELLNESS DIRECTOR
+
+> Equivalente ao Physio + Sports Scientist do FM. Protege as idols.
+
+### Cargo 13.1: Monitoramento de Wellness
+
+---
+
+#### Decisão 13.1.1: Scan Semanal de Wellness
+
+**CONTEXTO (o que a IA avalia):**
+- Todas idols do roster: 4 wellness bars (Health, Happiness, Stress, Motivation)
+- Trends: como cada barra mudou nas últimas 2-4 semanas (subindo/descendo/estável)
+- Schedule da semana: carga de trabalho agendada (quantos jobs, quantos rest days)
+- Injury history: idols com lesões recentes (re-injury window de 2 semanas)
+- Burnout history: idols que já tiveram burnout (recidiva mais provável)
+- Facility: Psicólogo existe? Sala de Convivência existe? Afeta opções
+- Eventos recentes: escândalos, falhas em jobs, conflitos de grupo (afetam wellness)
+- Ocultos relevantes: Temperamento (stress sensitivity), Mentalidade (stress resilience)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Mental Coaching** | Core: ler o estado mental/emocional de cada idol com profundidade |
+| **Physical Training** | Avaliar saúde física: risco de lesão, fadiga acumulada |
+| **People Management** | Entender factores sociais: conflito de grupo, solidão, pressão de fãs |
+| **Judging Idol Ability** | Ler ocultos (Temperamento, Mentalidade) para prever vulnerabilidades |
+
+**FLOWCHART:**
+
+```
+1. TRIAGE — CLASSIFICAR CADA IDOL POR URGÊNCIA
+   └─ Skill: Mental Coaching
+      ├─ Elite (20):      Scan completo de CADA idol. Classifica em 5 níveis:
+      │                    🔴 CRÍTICO: stress > 85 OU happiness < 20 (2+ semanas) OU health < 25
+      │                    → Ação imediata: cancel all jobs, schedule psychologist, rest days.
+      │                    🟠 ALERTA: stress > 65 OU happiness < 35 OU health < 40
+      │                    → Reduzir carga: max 3 jobs/semana, 2 rest days minimum.
+      │                    🟡 ATENÇÃO: stress > 50 OU happiness declining 3+ semanas OU health < 55
+      │                    → Monitorar. Agendar psicólogo preventivo. 1 rest day extra.
+      │                    🟢 BOM: stress < 50 E happiness > 50 E health > 55
+      │                    → Normal. Sem intervenção.
+      │                    🔵 EXCELENTE: stress < 30 E happiness > 70 E motivation > 70
+      │                    → Oportunidade: pode treinar intensive, aceitar jobs demanding.
+      │                    
+      │                    PROJETA: "Yui está 🟢 agora mas stress subiu 5/semana nas últimas
+      │                    3 semanas (8 jobs sem descanso). Se mantiver ritmo, 🟠 em 2 semanas,
+      │                    🔴 em 4. Intervir AGORA antes de ser tarde."
+      │                    
+      │                    Cross-ref com ocultos: "Mei tem Temperamento 5 (stress-sensitive).
+      │                    Stress 55 para ela é equivalente a stress 70 para idol com Temp 15.
+      │                    Classificar como 🟡 em vez de 🟢."
+      │                    
+      ├─ Outstanding (18-19): Classificação 4 níveis (sem 🔵). Projeta trend 2 semanas.
+      │                        Checa Temperamento para idols conhecidas.
+      ├─ Very Good (15-17): Classificação 3 níveis (🔴🟠🟢). Flag trend descendente.
+      ├─ Good (12-14):    Flag 🔴 (stress > 80) e 🟠 (stress > 65). Sem trend.
+      ├─ Average (10-11): Flag só 🔴 (stress > 80 OU happiness < 25).
+      ├─ Competent (7-9): Flag stress > 90. Tarde demais para prevenir burnout.
+      ├─ Reasonable (4-6): Flag burnout (stress = 100). Já aconteceu — reativo.
+      └─ Unsuited (1-3):  Não faz scan. Burnout é surpresa.
+
+2. GERAR ALERTAS E RECOMENDAÇÕES
+   └─ Skill: Physical Training (para idols com risco físico)
+      ├─ Elite (20):      Para cada idol 🔴 ou 🟠:
+      │                    Alerta específico: "Idol Riko: 🟠 ALERTA.
+      │                    Causa: 6 jobs consecutivos + show sábado + escândalo terça.
+      │                    Health 45 (declining). Risco de lesão: 12% esta semana se não descansar.
+      │                    Recomendação: cancelar 2 jobs (quarta e quinta), agendar psicólogo
+      │                    (sexta), rest sábado em vez do show secundário."
+      │                    Para cada idol 🟡:
+      │                    "Agendar 1 psicólogo preventivo + 1 rest day extra."
+      │                    Para idols pós-lesão (< 4 semanas): "Re-injury window.
+      │                    Max 2 physical jobs/semana. Sem treino intensive."
+      ├─ Outstanding (18-19): Alertas + recomendações por idol. Injury risk check.
+      ├─ Very Good (15-17): Alertas com "reduzir carga" genérico.
+      ├─ Good (12-14):    "Idol X precisa de descanso."
+      ├─ Average (10-11): "Alguma idol está cansada."
+      ├─ Competent−:      Sem recomendações proativas.
+
+3. DECISÃO FINAL
+   → return { type: 'wellnessAlerts', alerts: [{idolId, level, causes,
+     recommendations: [{action, urgency}]}] }
+   (Alertas alimentam: Scheduling — para ajustar agenda.
+   Head Producer — para awareness geral.
+   Player inbox — para decisão manual se quiser.)
+```
+
+**OUTPUT:** `{ type: 'wellnessAlerts', alerts: WellnessAlert[] }`
+
+---
+
+#### Decisão 13.1.2: Conduzir Sessão de Wellness
+
+**CONTEXTO:** Idol com wellness preocupante, wellness advisor disponível
+**Primary skill:** Mental Coaching × People Management
+
+```
+Flowchart:
+1. SELECIONAR IDOL
+   └─ Prioriza: idol mais urgente (🔴 > 🟠 > 🟡). Max 2-3 sessões/semana.
+
+2. DEFINIR FOCO
+   └─ Skill: Mental Coaching
+      ├─ Elite: Personaliza: stress alto → relaxamento guiado (−20 stress).
+      │         Happiness baixa → motivational counseling (+15 happiness, +5 motivation).
+      │         Combinação: "stress 70 + happiness 30 → sessão mista: 30 min relaxamento
+      │         + 30 min conversa sobre objectivos. −12 stress, +8 happiness."
+      ├─ Outstanding: Foco no bar mais crítico. −15 stress OU +10 happiness.
+      ├─ Very Good: Stress reduction (−12) OU morale boost (+8).
+      ├─ Good: Sessão genérica. −8 stress.
+      ├─ Average: −5 stress (mínimo eficaz).
+      ├─ Competent: −3 stress.
+      ├─ Reasonable: −2 stress.
+      └─ Unsuited: Sessão ineficaz. Pode estressar mais (−1 stress, −2 happiness).
+
+3. MODIFICADORES SECONDARY
+   → motivating: idol.motivation += (motivating − 10) × 0.5
+   → people_management: idol.happiness += (peopleMgmt − 10) × 0.3
+   → Se wellness advisor e idol têm afinidade alta: efeito × 1.3
+```
+
+**OUTPUT:** `{ type: 'wellnessSession', idolId: string, focus: string, effect: WellnessDelta }`
+
+---
+
+### Cargo 13.2: Gestão de Lesões
+
+---
+
+#### Decisão 13.2.1: Avaliar Risco e Coordenar Reabilitação
+
+**CONTEXTO:** Schedule, consecutive work days, age, health, injury history, medical facility
+**Primary skill:** Physical Training × Mental Coaching
+
+```
+Flowchart:
+1. AVALIAR RISCO DE LESÃO POR IDOL
+   └─ Skill: Physical Training
+      ├─ Elite: Risk model multi-factor:
+      │         risk = (consecutive_days × 3) + (25 − health) × 2 + (age > 25 ? (age − 25) × 2 : 0)
+      │                + (recent_injury < 4 weeks ? 20 : 0) + (stamina < 40 ? 10 : 0)
+      │         risk > 30: 🔴. risk > 15: 🟠. risk > 5: 🟡.
+      │         "Riko: 5 dias seguidos + health 38 + age 26 + stamina 42 = risk 32. 🔴.
+      │         Recomendação: 2 dias rest IMEDIATO."
+      ├─ Outstanding: Checa: consecutive days, health, recent injury. Flag se risk alto.
+      ├─ Very Good: Checa consecutive days + health. Flag se 5+ dias OU health < 35.
+      ├─ Good: Flag se 5+ dias consecutivos.
+      ├─ Average: Flag se health < 25.
+      ├─ Competent: Flag se health < 15 (quase injury).
+      ├─ Reasonable: Não avalia.
+      └─ Unsuited: Não avalia. Lesões são surpresa.
+
+2. COORDENAR REABILITAÇÃO (se idol com lesão ativa)
+   └─ Skill: Physical Training × Mental Coaching
+      ├─ Elite: Plan de rehab completo:
+      │         "Lesão tipo: vocal cord strain. Severidade: 2/3. Recovery base: 3 semanas.
+      │         Medical Center level 2: −20% recovery = 2.4 semanas.
+      │         Restrições: zero vocal jobs. Training: só stats mentais a 50%.
+      │         Semana 1: full rest. Semana 2: light mental training. Semana 3: gradual vocal.
+      │         Re-injury risk window: 2 semanas após recovery. Max 2 vocal jobs/semana."
+      │         Coordena com Talent Manager para bloquear slots.
+      ├─ Outstanding: Recovery plan. Restrições por tipo de lesão.
+      ├─ Very Good: "Idol lesionada. Descanso por X semanas. Sem jobs físicos."
+      ├─ Good: "Descanso até recuperar."
+      ├─ Average−: Sem plan. Idol volta quando health recupera (pode ser cedo demais).
+
+3. POST-BURNOUT RECOVERY
+   └─ Skill: Mental Coaching
+      ├─ Elite: Gradual return: "Semana 1: 1 job leve + 2 rest + 1 psicólogo.
+      │         Semana 2: 2 jobs + 1 rest. Semana 3: normal se stress < 40."
+      │         Coordena com coach: "treino leve para manter skills sem pressão."
+      ├─ Outstanding: 3 semanas gradual. Monitor stress diário.
+      ├─ Very Good: 2 semanas light schedule.
+      ├─ Good: 1 semana light. Depois normal.
+      ├─ Average−: Return direto. Alto risco de re-burnout.
+```
+
+**OUTPUT:** `{ type: 'injuryAssessment', idolId: string, risk: number, rehabPlan?: RehabPlan }` | `{ type: 'postBurnoutPlan', idolId: string, weeklyLimits: number[], duration: number }`
+
+---
+
+## PAPEL 14: INTELLIGENCE ANALYST
+
+> Equivalente ao Data Analyst do FM. Informação e previsões.
+
+### Cargo 14.1: Analytics de Performance
+
+---
+
+#### Decisão 14.1.1: Análise Pós-Mortem de Jobs/Shows
+
+**CONTEXTO:** Resultados da semana (jobs, shows), expected vs actual performance
+**Primary skill:** Judging Idol Ability × Industry Knowledge
+
+```
+Flowchart:
+1. ANALISAR CADA RESULTADO
+   └─ Skill: Judging Idol Ability
+      ├─ Elite: Para cada job/show:
+      │         "Job: TV variety. Idol: Mei. Expected: 0.78. Actual: 0.62. Gap: −0.16.
+      │         Top factor positivo: Charisma (78 vs required 60 = +0.12 contribution).
+      │         Top factor negativo: Stress (72 entering job = −0.18 performance penalty).
+      │         Secondary: Communication (55 vs required 70 = −0.08).
+      │         Root cause: não foi falta de skill — foi wellness. Stress penalty killed it.
+      │         Prescription: less jobs this week, psychologist before next TV appearance."
+      │         Correlation analysis: "Mei's TV performances drop when stress > 60.
+      │         Pattern across last 8 TV jobs: stress < 50 → avg 0.82. Stress > 60 → avg 0.61."
+      ├─ Outstanding: Top-3 positive + top-3 negative factors. Key factor identified.
+      ├─ Very Good: Top-2 positive + top-2 negative. "Wellness or skill?"
+      ├─ Good: "Good" or "bad" + 1 reason.
+      ├─ Average: "Performance X. Expected Y." Numbers only.
+      ├─ Competent: "Went well" or "went badly."
+      ├─ Reasonable: Raw data only.
+      └─ Unsuited: No analysis.
+```
+
+**OUTPUT:** `{ type: 'postMortem', results: [{jobId, idolId, expected, actual, positives, negatives, rootCause, prescription}] }`
+
+---
+
+### Cargo 14.2: Inteligência Competitiva
+
+---
+
+#### Decisão 14.2.1: Monitorar Rivais
+
+**CONTEXTO:** Rival agencies visible state, market movements, news
+**Primary skill:** Industry Knowledge × Judging Idol Ability
+
+```
+Flowchart:
+1. SCAN RIVAL ACTIVITY
+   └─ Skill: Industry Knowledge
+      ├─ Elite: Monitora top-10 rivais:
+      │         "Crown Entertainment: contratou Vocalist tier A (market value ¥60M).
+      │         Provável target: Kouhaku this year. Ameaça: podem tirar slot do nosso grupo.
+      │         Heartbeat Agency: 2 idols com contrato expirando. Oportunidade de buyout.
+      │         Silver Star: perdeu show director — produção de shows vai cair. Não são
+      │         ameaça em shows este trimestre."
+      │         Identifica: threats + opportunities + neutral.
+      ├─ Outstanding: Top-5 rivais. Threats + opportunities.
+      ├─ Very Good: Top-3 rivais. Flag movimentos grandes.
+      ├─ Good: Flag contratações de tier A+ por rivais.
+      ├─ Average: Nota se rival contratou idol muito famosa.
+      ├─ Competent: Não monitora ativamente.
+      ├─ Reasonable: "Existem outras agências."
+      └─ Unsuited: Zero intel.
+
+2. PREVER BUYOUT ATTEMPTS
+   └─ Skill: Judging Idol Ability
+      ├─ Elite: "Rival Crown tem budget alto + gap em Vocalist. Nossa Yui é
+      │         Vocalist tier A com contrato a expirar em 8 semanas. ALTA probabilidade
+      │         de buyout attempt. Recomendar: renovar contrato de Yui AGORA."
+      ├─ Outstanding: Flag se rival budget alto + nosso contrato expirando.
+      ├─ Very Good: Flag contratos expirando de idols valiosas.
+      ├─ Good−: Não prevê.
+```
+
+**OUTPUT:** `{ type: 'rivalIntel', insights: RivalInsight[], threats: Threat[], opportunities: Opportunity[] }`
+
+---
+
+### Cargo 14.3: Relatórios
+
+---
+
+#### Decisão 14.3.1: Gerar Relatório Semanal
+
+**CONTEXTO:** Todos KPIs, comparativo semanal
+**Primary skill:** Judging Idol Ability (para qualidade da análise)
+
+```
+Este relatório é SEMPRE gerado (mesmo sem Intelligence Analyst).
+Sem NPC: dados brutos sem análise (números). Com NPC: análise qualitativa.
+
+1. COMPILAR KPIs
+   → Sempre: receita, despesa, lucro, balance, roster size, avg wellness,
+     avg fame, shows, jobs, scandals, fan mood avg.
+   → Com NPC Good+: comparativo com semana anterior, trends de 4 semanas.
+   → Com NPC Very Good+: projections 4 semanas, flag tendências preocupantes.
+   → Com NPC Elite: executive summary 3 linhas + 3 insights + 3 recomendações.
+
+2. ALERTAS
+   └─ Skill: Judging Idol Ability
+      ├─ Elite: "KPI that matters most this week: fan mood dropping 5/week
+      │         across 3 clubs. Not a single-idol issue — systemic.
+      │         Likely cause: no fan events in 6 weeks + 2 scandals.
+      │         Impact if unchecked: merch revenue −20% in 4 weeks.
+      │         Action: schedule fan meeting ASAP."
+      ├─ Outstanding: Flag top-2 KPI concerns.
+      ├─ Very Good: Flag KPIs with > 20% week-over-week change.
+      ├─ Good: Flag negative trends.
+      ├─ Average: "Tudo ok" or "algumas preocupações."
+      ├─ Competent−: Numbers only, no alerts.
+```
+
+**OUTPUT:** `{ type: 'weeklyReport', kpis: KPI[], trends: Trend[], alerts: Alert[], insights?: Insight[] }`
+
+---
+
+## Summary
+
+### Complete Inventory
+
+| Papel | Cargos | Decisões | Status |
+|-------|--------|----------|--------|
+| 1. Head Producer | 4 | 7 | ✅ Full flowcharts |
+| 2. Vice-Producer | 2 | 2 | ✅ Full flowcharts |
+| 3. Talent Director | 3 | 5 | ✅ Full flowcharts |
+| 4. Chief Scout | 2 | 2 | ✅ Full flowcharts |
+| 5. Development Director | 3 | 3 | ✅ Full flowcharts |
+| 6. Vocal Coach | 1 | 2 | ✅ Full flowcharts |
+| 7. Dance Coach | 1 | 3 | ✅ Full flowcharts |
+| 8. Acting/Variety Coach | 1 | 3 | ✅ Full flowcharts |
+| 9. Music Director | 3 | 4 | ✅ Full flowcharts |
+| 10. Show Director | 5 | 6 | ✅ Full flowcharts |
+| 11. Communications Director | 3 | 4 | ✅ Full flowcharts |
+| 12. Operations Director | 5 | 5 | ✅ Full flowcharts |
+| 13. Wellness Director | 3 | 3 | ✅ Full flowcharts |
+| 14. Intelligence Analyst | 3 | 3 | ✅ Full flowcharts |
+| **Total** | **39 cargos** | **52 decisões** | **All complete** |
+
+### Every Decision References Specific Skills
+
+No decision uses generic "skill" — each step names the exact attribute
+(from the 19 staff attrs) being evaluated, and each of the 8 label levels
+produces a distinct output.
+
+### Related Decisions
+
+- [ADR-002](adr-002-simulation-pipeline.md) — unified pipeline consumes ActionLists
+- [ADR-003](adr-003-game-state-schema.md) — state slices feed TaskContext
+- [ADR-004](adr-004-event-system.md) — events trigger reactive tasks
+- [ADR-005](adr-005-performance-budgets.md) — decision phase budget
+- [ADR-007](adr-007-show-pipeline.md) — show pipeline (formations, setlist)
+- [ADR-008](adr-008-music-production.md) — music pipeline (composition, release)
+- [ADR-011](adr-011-multiplayer-ready.md) — same decisions for local and remote
+- design/gdd/agency-staff-operations.md — 19 attributes definition
+- design/gdd/staff-functional.md — staff functions and quality mechanics
+- design/wireframes/14-responsibilities.md — delegation UI
+- design/wireframes/21-staff-profile.md — staff attribute labels UI
