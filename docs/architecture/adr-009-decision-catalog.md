@@ -1585,3 +1585,289 @@ Each Decision Process defines:
 ```
 
 **OUTPUT:** `{ type: 'recommendSigning', idolId: string, urgency: 'low' | 'medium' | 'high' | 'critical', assessment: CandidateAssessment }[]` | `null`
+
+---
+
+## PAPEL 5: DEVELOPMENT DIRECTOR
+
+> Equivalente ao Head of Youth Development do FM. Responsável pelo crescimento a
+> longo prazo das idols: planos de desenvolvimento, mentoria, avaliação de potencial.
+
+### Cargo 5.1: Planos de Desenvolvimento
+
+---
+
+#### Decisão 5.1.1: Criar ou Ajustar Plano de Desenvolvimento
+
+**CONTEXTO (o que a IA avalia):**
+- Todas idols do roster: stats atuais (16 visíveis + 6 ocultos se revelados), tier, PT (potencial), age
+- Ceiling por stat (derivado de PT + seed variance) — quanto cada stat pode crescer
+- Gap entre stats atuais e ceiling: quanto espaço de crescimento existe
+- Growth rate recente: velocidade de crescimento nas últimas 4-8 semanas
+- Archetype atual vs archetype ideal (baseado em pontos fortes naturais)
+- Wellness: stress, motivation (afeta se pode treinar intensive)
+- Coaches disponíveis: quais coaches existem e suas skills (limita qualidade do treino)
+- Dev plans ativos: quais idols já têm plano, progresso de cada um
+- Schedule: slots disponíveis para treino (vs jobs que geram receita)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Judging Idol Potential** | Core: projetar ceiling de cada idol e decidir onde investir treino |
+| **Mental Coaching** | Adaptar plano à capacidade mental da idol (stress tolerance, learning speed) |
+| **Judging Idol Ability** | Ler stats atuais com precisão para identificar gaps reais vs aparentes |
+| **Industry Knowledge** | Saber que tipo de idol o mercado valoriza — alinhar desenvolvimento com demanda |
+
+**FLOWCHART:**
+
+```
+1. IDENTIFICAR IDOLS QUE PRECISAM DE PLANO
+   └─ Skill: Judging Idol Potential
+      ├─ Elite (20):      Avalia CADA idol no roster:
+      │                    Para cada uma calcula: gap_ratio = (ceiling − current_avg) / ceiling.
+      │                    Se gap_ratio > 0.3 → "espaço significativo de crescimento."
+      │                    Prioriza por: gap_ratio × (1 / age) × PT.
+      │                    "Idol 16 anos, PT 85, avg stats 40 = ouro. Prioridade #1."
+      │                    "Idol 25 anos, PT 65, avg stats 58 = perto do ceiling. Skip."
+      │                    Diferencia: "sem plano porque ninguém criou" vs "sem plano porque
+      │                    já atingiu ceiling e não precisa."
+      │                    Limite: cria plano para max 5 idols simultaneamente (recursos de coach).
+      ├─ Outstanding (18-19): Gap ratio calculation. Prioriza jovens com PT alto. Max 4 planos.
+      ├─ Very Good (15-17): Identifica idols com stats < 60% do ceiling. Prioriza por PT. Max 3.
+      ├─ Good (12-14):    Identifica idols com tier < C e PT > 60. Max 3 planos.
+      ├─ Average (10-11): Identifica idols com menor tier no roster. Max 2 planos.
+      ├─ Competent (7-9): Identifica a idol mais fraca. 1 plano.
+      ├─ Reasonable (4-6): Cria plano só se alguém pedir (Head Producer ou idol).
+      └─ Unsuited (1-3):  Não cria planos. Idols crescem sem direção.
+
+2. DEFINIR FOCO DO PLANO (por idol)
+   └─ Skill: Judging Idol Ability
+      ├─ Elite (20):      Análise multi-stat: identifica o stat que mais impacta o archetype
+      │                    ideal da idol. "Idol tem vocal 72 mas dance 35. Archetype natural é
+      │                    Vocalist. Treinar vocal para 85 = tier S. Treinar dance para 50 =
+      │                    irrelevante para o archetype. FOCO: vocal + communication (secondary)."
+      │                    Define 1 stat primary + 1 stat secondary.
+      │                    Se idol está em grupo: "grupo precisa de Dancer. Idol tem Dance
+      │                    Technique 55 e PT permite 75. Pode ser re-roled para Dancer do grupo."
+      │                    Alignment: personal archetype vs group need.
+      ├─ Outstanding (18-19): Identifica stat mais fraco PARA O ARCHETYPE (não overall).
+      │                        Define primary stat. Secondary opcional.
+      ├─ Very Good (15-17): Stat mais fraco para archetype. 1 foco.
+      ├─ Good (12-14):    Stat mais baixo da idol overall. 1 foco.
+      ├─ Average (10-11): Stat mais baixo visível. Genérico.
+      ├─ Competent (7-9): Stat aleatório do domínio do coach disponível.
+      ├─ Reasonable (4-6): "Treinar tudo um pouco." Sem foco.
+      └─ Unsuited (1-3):  Stat aleatório. Pode focar num stat já no ceiling.
+
+3. DEFINIR INTENSIDADE E DURAÇÃO
+   └─ Skill: Mental Coaching
+      ├─ Elite (20):      Avalia capacidade mental da idol:
+      │                    → Mentalidade alta + stress baixo + motivation alta:
+      │                      intensive (×3 growth, +stress) por 4 semanas, depois normal.
+      │                      "Ela aguenta pressão — aproveitamos a janela."
+      │                    → Mentalidade baixa + stress > 50:
+      │                      light (×1.5 growth, −stress) por 4 semanas, depois escalar.
+      │                      "Se forçar, vai quebrar. Ir devagar e construir confiança."
+      │                    → Personaliza: periodização por blocos (intensive → recovery → intensive).
+      │                    Duração: adaptada ao gap (gap grande = 16 semanas, pequeno = 8).
+      ├─ Outstanding (18-19): Checa stress + motivation. Intensive se stress < 40 E motiv > 60.
+      │                        Normal caso contrário. 12 semanas padrão.
+      ├─ Very Good (15-17): Intensive se stress < 40. Normal se 40-70. Skip se > 70. 12 semanas.
+      ├─ Good (12-14):    Normal sempre. 12 semanas. Intensive nunca (risco demais).
+      ├─ Average (10-11): Normal, 12 semanas. Sem adaptar à idol.
+      ├─ Competent (7-9): Normal, 12 semanas. Template fixo.
+      ├─ Reasonable (4-6): 12 semanas, sem intensidade definida.
+      └─ Unsuited (1-3):  Se cria plano: duração e intensidade arbitrárias.
+
+4. DECISÃO FINAL
+   ├─ Se idol precisa de plano E foco definido:
+   │   → return { type: 'createDevPlan', idolId, focusStat, secondaryStat?,
+   │     intensity, durationWeeks, goals }
+   ├─ Se plano existente precisa de ajuste (progresso < 40% na metade do prazo):
+   │   → return { type: 'adjustDevPlan', planId, changes: { focusStat?, intensity? } }
+   └─ Se nenhuma idol precisa:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'createDevPlan', ... }` | `{ type: 'adjustDevPlan', ... }` | `null`
+
+---
+
+### Cargo 5.2: Mentoria
+
+---
+
+#### Decisão 5.2.1: Atribuir Mentor a Mentee
+
+**CONTEXTO (o que a IA avalia):**
+- Idols junior (tier F-C, age < 20, ou recém contratadas) sem mentor atribuído
+- Idols senior (tier A+, ou age > 22 com experience) disponíveis como mentores
+- Workload de cada senior: se workload > 80%, não pode ser mentora (GDD)
+- Stats de cada senior: mentor precisa ter stats altos nas áreas onde a mentee precisa crescer
+- Pairwise affinity entre candidatos: mentor-mentee com afinidade alta = melhor resultado
+- Ocultos: People Management do senior (afeta qualidade da mentoria)
+- Dev plans: mentee tem plano ativo? Mentor deveria complementar o plano
+- Grupos: mentor e mentee no mesmo grupo = bonus natural (convivência diária)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Mental Coaching** | Core: avaliar compatibilidade mentor-mentee e projetar resultado da mentoria |
+| **Judging Idol Ability** | Identificar quais stats da senior complementam as fraquezas da junior |
+| **People Management** | Avaliar dinâmica interpessoal — personalidades compatíveis? |
+
+**FLOWCHART:**
+
+```
+1. IDENTIFICAR MENTEES QUE PRECISAM DE MENTOR
+   └─ Skill: Mental Coaching
+      ├─ Elite (20):      Identifica mentees por critérios múltiplos:
+      │                    → Idol nova no roster (< 4 semanas) sem mentor: alta prioridade
+      │                    → Idol com dev plan ativo mas growth rate abaixo do esperado: mentor ajuda
+      │                    → Idol com motivation < 40 que poderia se beneficiar de role model
+      │                    → Idol em grupo mas isolada (baixa afinidade com membros): mentor-bridge
+      │                    Prioriza pelo impacto estimado da mentoria.
+      ├─ Outstanding (18-19): Idols novas + idols com growth lento. Prioriza novas.
+      ├─ Very Good (15-17): Idols tier F-C sem mentor. Prioriza menor tier.
+      ├─ Good (12-14):    Idols tier F-D sem mentor.
+      ├─ Average (10-11): Idol com menor tier no roster.
+      ├─ Competent (7-9): Só atribui se Head Producer pedir.
+      ├─ Reasonable (4-6): Não identifica necessidade.
+      └─ Unsuited (1-3):  Não atribui mentores.
+
+2. ENCONTRAR MELHOR MENTOR PARA CADA MENTEE
+   └─ Skill: Judging Idol Ability
+      ├─ Elite (20):      Para cada mentee, avalia TODAS seniors disponíveis:
+      │                    Score = stat_complementarity × affinity × personality_match × availability.
+      │                    stat_complementarity: mentor forte onde mentee é fraca (ex: mentor
+      │                    Vocal 85 para mentee com Vocal 35 = perfeito).
+      │                    personality_match: Temperamentos compatíveis (ambos calmos, ou
+      │                    mentor paciente + mentee intensa).
+      │                    Verifica oculto People Management da mentor: > 12 = boa mentora natural.
+      │                    Evita combos tóxicas: "mentor com Temperamento 4 + mentee com Ambição 18
+      │                    = conflito certo."
+      ├─ Outstanding (18-19): stat_complementarity × affinity. Verifica personality básica.
+      │                        Evita combos com affinity < 0.3.
+      ├─ Very Good (15-17): Senior com stats mais altos onde mentee é mais fraca.
+      │                      Verifica workload < 80%.
+      ├─ Good (12-14):    Senior com maior overall stats + workload ok.
+      ├─ Average (10-11): Senior com maior fame (role model). Sem verificar complementarity.
+      ├─ Competent (7-9): Senior mais livre (menor workload).
+      ├─ Reasonable (4-6): Primeira senior disponível da lista.
+      └─ Unsuited (1-3):  Match aleatório. Pode juntar personalidades incompatíveis.
+
+3. AVALIAR DINÂMICA INTERPESSOAL
+   └─ Skill: People Management
+      ├─ Elite (20):      "Mentor Yui (paciente, Temperamento 15, People 14) com mentee
+      │                    Riko (ansiosa, Temperamento 6, Ambição 16). Yui vai estabilizar
+      │                    Riko sem sufocar a ambição. Match: Excelente."
+      │                    Projeta resultado: "em 8 semanas, mentee ganha +10 em Vocal
+      │                    (mentor forte) e +5 em Mentalidade (estabilidade do mentor)."
+      ├─ Outstanding (18-19): Avalia Temperamento de ambas. Evita conflitos óbvios.
+      ├─ Very Good (15-17): Verifica affinity > 0.5. Se baixa, escolhe outra.
+      ├─ Good (12-14):    Verifica affinity > 0.3.
+      ├─ Average−:        Não avalia dinâmica interpessoal.
+
+4. DECISÃO FINAL
+   ├─ Se mentee + mentor matched:
+   │   → return { type: 'assignMentor', mentorId, menteeId, focusArea, duration }
+   │   (Efeito: mentee ganha bônus de growth = mentor_stat/100 × mentor_comm/100 × 0.5
+   │   por semana de mentoria — conforme GDD talent-development-plans)
+   └─ Se nenhuma mentee precisa OU nenhuma senior disponível/compatível:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'assignMentor', mentorId: string, menteeId: string, focusArea: string, duration: number }` | `null`
+
+---
+
+### Cargo 5.3: Avaliação de Potencial
+
+---
+
+#### Decisão 5.3.1: Projetar Timeline de Desenvolvimento de Idol
+
+**CONTEXTO (o que a IA avalia):**
+- Idol: stats atuais (16 visíveis), PT (potencial), age, tier atual
+- Growth rate das últimas 4-12 semanas (velocidade de crescimento por stat)
+- Ceiling por stat (derivado de PT) — máximo teórico que a idol pode atingir
+- Dev plan ativo: progresso, foco, intensidade
+- Coach quality: skill do coach responsável (afeta growth rate)
+- Age curve: em que ponto da carreira a idol está (growth phase, peak, decline)
+- Comparação com idols similares: "idols com PT similar, o que alcançaram?"
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Judging Idol Potential** | Core: projetar a curva de carreira inteira da idol — peak, plateau, decline |
+| **Judging Idol Ability** | Ler stats atuais com precisão para ter base correta na projeção |
+| **Mental Coaching** | Avaliar se fatores mentais (motivation, stress resilience) vão ajudar ou limitar growth |
+
+**FLOWCHART:**
+
+```
+1. AVALIAR POSIÇÃO ATUAL NA CURVA DE CARREIRA
+   └─ Skill: Judging Idol Ability
+      ├─ Elite (20):      Lê stats com precisão ±1. Calcula: avg_stats / ceiling = completion_ratio.
+      │                    "Completion 45% + age 16 = early growth phase. Muito espaço."
+      │                    "Completion 85% + age 24 = approaching peak. Pouco espaço."
+      │                    Identifica: quais stats estão a crescer, quais estagnaram, quais declinaram.
+      │                    "Vocal cresceu 3 pontos/mês nos últimos 3 meses. Dance estável. 
+      │                    Stamina caiu 1 ponto (age-related decline começou)."
+      ├─ Outstanding (18-19): Completion ratio. Identifica stats em crescimento vs flat.
+      ├─ Very Good (15-17): Compara stats atuais com ceiling. "X% do potencial atingido."
+      ├─ Good (12-14):    Tier atual vs tier estimado pelo PT. "Está abaixo do potencial."
+      ├─ Average (10-11): "Stats crescendo" ou "stats flat" (binário).
+      ├─ Competent (7-9): Vê tier atual. "Tier C, pode melhorar?"
+      ├─ Reasonable (4-6): "Parece ter potencial" ou "parece fraca" (feeling).
+      └─ Unsuited (1-3):  Sem avaliação.
+
+2. PROJETAR PEAK
+   └─ Skill: Judging Idol Potential
+      ├─ Elite (20):      Full career projection:
+      │                    → Growth model: current_growth_rate × age_curve_multiplier × coach_quality.
+      │                    → Peak age: quando growth rate cai para zero (função de age + PT).
+      │                    → Peak tier: tier que stats atingem no peak age.
+      │                    → "Riko: growth rate 2.5/stat/mês. Peak age: 22. Peak tier: S.
+      │                    Timeline: tier B aos 18, A aos 20, S aos 22. Plateau 22-26. Decline 27+."
+      │                    → Identifica limiting factors: "Mental Coaching do nosso coach é 'Competent' —
+      │                    se upgradear para 'Good', growth rate sobe 15% e peak chega 6 meses antes."
+      │                    → Recomendação: investir ou não, e quanto tempo até ROI.
+      ├─ Outstanding (18-19): Projeta peak tier + peak age. Timeline simplificada (3 milestones).
+      │                        Identifica se coach quality está a limitar.
+      ├─ Very Good (15-17): Projeta peak tier baseado em PT. Estima "X meses até tier Y."
+      ├─ Good (12-14):    "Potencial para tier [X]." Sem timeline.
+      ├─ Average (10-11): "Tem potencial" ou "perto do ceiling." Sem projeção.
+      ├─ Competent (7-9): Avalia PT: > 70 = "bom potencial." ≤ 70 = "potencial limitado."
+      ├─ Reasonable (4-6): "Não sei o potencial dela." (report vazio)
+      └─ Unsuited (1-3):  Sem projeção.
+
+3. AVALIAR FATORES MENTAIS
+   └─ Skill: Mental Coaching
+      ├─ Elite (20):      "Riko tem Mentalidade 72 e Foco 65 — boa base mental.
+      │                    Mas Ambição 18 (oculto): se não subir de tier a cada 6 meses,
+      │                    motivation vai cair e growth stagna.
+      │                    Recomendação: manter jobs de visibilidade crescente para alimentar
+      │                    a ambição enquanto treina."
+      │                    Identifica: mental blocks, burnout risk durante treino intensivo,
+      │                    personality traits que aceleram ou travam crescimento.
+      ├─ Outstanding (18-19): Avalia Mentalidade + motivation trend. Flag burnout risk.
+      ├─ Very Good (15-17): Avalia stress tolerance. "Aguenta treino intensivo?" Sim/não.
+      ├─ Good (12-14):    "Motivação alta → vai crescer. Motivação baixa → problema."
+      ├─ Average−:        Não avalia fatores mentais.
+
+4. DECISÃO FINAL
+   → return { type: 'potentialAssessment', idolId, currentPhase, projectedPeakTier,
+     projectedPeakAge, limitingFactors, recommendation }
+   
+   (Este output é INFORMATIVO. Alimenta:
+   - Dev Plan decisions (onde investir treino)
+   - Talent Director (renovar ou não — idol com peak S vale renovar)
+   - Strategy (roster com muitas idols pre-peak = patience strategy)
+   - Player inbox (relatório de potencial visível no perfil da idol))
+```
+
+**OUTPUT:** `{ type: 'potentialAssessment', idolId: string, currentPhase: 'early_growth' | 'growth' | 'approaching_peak' | 'peak' | 'plateau' | 'decline', projectedPeakTier: IdolTier, projectedPeakAge: number, limitingFactors: string[], recommendation: string }`
