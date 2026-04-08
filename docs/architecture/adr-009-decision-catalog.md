@@ -2384,3 +2384,430 @@ PASSO 1 — APTIDÃO:
   (motivation/Mentalidade), não de técnica."
 
 **OUTPUT:** Mesmo — `trainingAssessment`
+
+---
+
+## PAPEL 9: MUSIC DIRECTOR (A&R)
+
+> Responsável por toda produção musical: composição, lançamentos, compositores.
+> Música tem 3 partes criativas (Composição Musical, Letra, Arranjo) que podem ser
+> feitas em paralelo se existem NPCs diferentes, ou sequencial se 1 NPC faz tudo.
+> Coreografia é para um número específico de idols (não precisa ser todo o grupo).
+> Cover só precisa de arranjo (ou "as is" onde performers decidem na gravação).
+
+### Cargo 9.1: Produção Musical
+
+---
+
+#### Decisão 9.1.1: Encomendar Música Nova
+
+**CONTEXTO (o que a IA avalia):**
+- Projetos musicais ativos: quantos em pipeline, em que stage (composição/arranjo/coreografia/gravação)
+- Catálogo atual da agência: quantas músicas gravadas, géneros, recency (última gravação há X semanas)
+- Compositores NPC disponíveis no mercado: cada um com tier, fee, agenda, specialty (música/letra/arranjo)
+  - Composer tem até 3 partes que pode cobrir: composição musical, letra, arranjo
+  - Idol pode substituir NPC compositor em qualquer das 3 partes
+- Roster: quais idols/grupos precisam de material novo (sem single há 3+ meses)
+- Charts: que géneros estão em alta (trend analysis)
+- Budget: custo de compositor + estúdio + produção
+- Strategy: focus da agência (commercial → pop hits, artistic → experimentar)
+- Fan expectations: fan clubs pedindo "música nova" (demand signal)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Musical Knowledge** | Core: escolher género, selecionar compositores, avaliar fit com o roster |
+| **Financial Acumen** | Avaliar custo total (3 compositores em paralelo custa mais mas é mais rápido) |
+| **Industry Knowledge** | Timing: quando lançar, que géneros o mercado quer, chart trends |
+| **Judging Idol Ability** | Avaliar quais idols podem substituir um NPC compositor (idol que compõe letra, por ex) |
+
+**FLOWCHART:**
+
+```
+1. IDENTIFICAR NECESSIDADE DE MÚSICA NOVA
+   └─ Skill: Musical Knowledge
+      ├─ Elite (20):      Mantém "release calendar" mental:
+      │                    "Grupo Aurora: último single há 10 semanas. Chart position caindo.
+      │                    Fãs no fan club pediram música nova há 3 semanas. SE não encomendarmos
+      │                    esta semana, single sai no mínimo em 8 semanas (pipeline). Muito tempo."
+      │                    Avalia cada grupo/solo: próximo marco, fan demand, chart window.
+      │                    Prioriza por: fan_demand × chart_window × revenue_impact.
+      ├─ Outstanding (18-19): "Grupo/solo sem single há 3+ meses → precisa." Prioriza por fame.
+      ├─ Very Good (15-17): "Sem música nova no pipeline E último single > 2 meses → encomenda."
+      ├─ Good (12-14):    "Nenhum projeto ativo → encomenda." Sem timing analysis.
+      ├─ Average (10-11): Encomenda quando Head Producer pede ou quando não há nada no pipeline.
+      ├─ Competent (7-9): Encomenda 1 música por trimestre. Ritmo fixo.
+      ├─ Reasonable (4-6): Encomenda raramente. Agência fica sem material novo.
+      └─ Unsuited (1-3):  Não encomenda. Agência depende de covers ou músicas antigas.
+
+2. DEFINIR TIPO E GÉNERO
+   └─ Skill: Musical Knowledge
+      ├─ Elite (20):      Cross-analysis:
+      │                    → Pontos fortes do idol/grupo alvo (vocal range, dance ability,
+      │                      persona) → género que maximiza esses strengths
+      │                    → Chart trends (ex: "city pop revival está em alta este trimestre")
+      │                    → Gap no catálogo ("já temos 3 ballads, falta uptempo dance track")
+      │                    → Fan preference (hardcore fãs querem X, casual querem Y)
+      │                    Decide: original vs cover
+      │                    → Se cover: seleciona música clássica que faria sentido com este grupo
+      │                      "Cover do hit de 2005 da idol lendária → nostalgia marketing."
+      │                      Cover só precisa de arranjo (ou as is).
+      │                    → Se original: define género + mood + target audience
+      ├─ Outstanding (18-19): Match genre com strengths do grupo + 1 trend analysis.
+      │                        Decide original vs cover com razão.
+      ├─ Very Good (15-17): Genre match com strengths. Sempre original (não pensa em cover).
+      ├─ Good (12-14):    Genre = o que o grupo já faz. Sem explorar novos.
+      ├─ Average (10-11): Genre default para a agência (strategy focus).
+      ├─ Competent (7-9): Pop genérico sempre. Safe.
+      ├─ Reasonable (4-6): Genre aleatório.
+      └─ Unsuited (1-3):  Genre aleatório. Pode encomendar heavy metal para grupo de J-Pop.
+
+3. SELECIONAR COMPOSITORES (até 3 NPCs para as 3 partes)
+   └─ Skill: Musical Knowledge × Financial Acumen
+      ├─ Elite (20):      Estratégia de composição:
+      │                    "3 partes: Composição Musical, Letra, Arranjo.
+      │                    PARALELO: Se contrato 3 NPCs diferentes, as 3 partes são feitas
+      │                    simultaneamente → música pronta em ~3 semanas em vez de ~8.
+      │                    Custo: ¥3M (3 compositores × ¥1M cada) vs ¥1.5M (1 compositor × 3 partes).
+      │                    Tradeoff: 2× mais caro mas 2.5× mais rápido."
+      │                    → Se budget bom E urgência: 3 NPCs em paralelo.
+      │                    → Se budget apertado E sem urgência: 1 NPC sequencial.
+      │                    → Se idol sabe compor letra: "Idol Yui como letrista (economia de ¥1M
+      │                      + letra mais autêntica — fãs valorizam idol que escreve)."
+      │                    Seleciona cada NPC por: specialty fit + tier + fee + availability.
+      ├─ Outstanding (18-19): Avalia paralelo vs sequencial. Usa idol compositor se disponível.
+      │                        Seleciona por tier × fee ratio.
+      ├─ Very Good (15-17): 2 NPCs se budget permite (composição + arranjo paralelo, letra sequencial).
+      │                      Senão 1 NPC.
+      ├─ Good (12-14):    1 NPC (sequencial). Melhor tier dentro do budget.
+      ├─ Average (10-11): 1 NPC. Melhor tier disponível.
+      ├─ Competent (7-9): 1 NPC. Primeiro disponível.
+      ├─ Reasonable (4-6): 1 NPC. Mais barato.
+      └─ Unsuited (1-3):  Se chega aqui: compositor aleatório. Pode reservar compositor
+                           de heavy metal para música pop.
+
+4. NEGOCIAR CONTRATO COM COMPOSITOR
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      Negocia royalties e deadline:
+      │                    "Compositor tier A pede 20% royalties + ¥2M fee.
+      │                    Counter: 15% royalties + ¥2.5M fee (menos royalty recorrente,
+      │                    mais fee upfront — melhor para nós a longo prazo se música
+      │                    vira hit). Deadline: 3 semanas."
+      │                    Verifica agenda do compositor: "ele tem 2 projetos ativos,
+      │                    max concurrent = 2. Pode nos atender MAS vai ser apertado."
+      ├─ Outstanding (18-19): Negocia royalties ±5%. Verifica agenda.
+      ├─ Very Good (15-17): Aceita fee padrão. Negocia deadline razoável.
+      ├─ Good (12-14):    Aceita termos padrão do compositor.
+      ├─ Average (10-11): Aceita tudo. Pode aceitar royalties excessivos (30%+).
+      ├─ Competent−:      Aceita tudo sem negociar.
+
+5. DECISÃO FINAL
+   ├─ Se música necessária E compositores selecionados E contrato negociado:
+   │   → return { type: 'commissionMusic', composers: [{npcId, part, fee, royalties, deadline}],
+   │     idolComposers?: [{idolId, part}], genre, targetGroup, type: 'original'|'cover',
+   │     parallelExecution: boolean }
+   └─ Se sem necessidade OU sem compositor disponível OU sem budget:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'commissionMusic', composers: ComposerContract[], idolComposers?: IdolComposerAssignment[], genre: string, targetGroup: string, type: 'original' | 'cover', parallelExecution: boolean }` | `null`
+
+---
+
+#### Decisão 9.1.2: Resolver Pipeline Stalled
+
+**CONTEXTO (o que a IA avalia):**
+- Projetos com stalled = true: qual stage (composição/letra/arranjo/coreografia/gravação), qual stall reason
+- Stall reasons possíveis:
+  - 'composer_unavailable': NPC compositor atingiu max_concurrent ou saiu do mercado
+  - 'idol_composer_busy': idol atribuída como compositora está com agenda cheia
+  - 'no_dance_studio': coreografia requer Dance Studio facility que não existe
+  - 'no_recording_studio': gravação requer Recording Studio facility
+  - 'idol_schedule_conflict': idols intérpretes não têm slots livres na mesma semana
+  - 'budget_insufficient': custo da próxima stage excede budget disponível
+- Alternativas: outros compositores no mercado, re-schedule de idols, upgrade de facility
+- Duração do stall: há quantas semanas está parado (urgência cresce com tempo)
+- Release date planejada (se definida): stall pode comprometer o lançamento
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Musical Knowledge** | Identificar soluções alternativas específicas à stage parada |
+| **Adaptability** | Encontrar workarounds criativos (compositor alternativo, redistribuir partes) |
+| **Industry Knowledge** | Saber se existe recurso alternativo no mercado ou na agência |
+| **Financial Acumen** | Avaliar se vale pagar mais para desbloquear (ex: compositor premium urgente) |
+
+**FLOWCHART:**
+
+```
+1. DIAGNOSTICAR STALL
+   └─ Skill: Musical Knowledge
+      ├─ Elite (20):      Para cada projeto stalled, analisa root cause:
+      │                    "Projeto 'Starlight' stalled em Arranjo há 3 semanas.
+      │                    Razão: compositor de arranjo (NPC Tanaka) atingiu max_concurrent
+      │                    (2 projetos simultâneos, ambos para rivais).
+      │                    Liberação prevista: 2 semanas (quando um dos projetos dele termina).
+      │                    MAS temos release date em 5 semanas. Se esperar 2 semanas,
+      │                    pipeline fica apertado: arranjo (2sem) + coreografia (2sem) +
+      │                    gravação (1sem) = 5 semanas = no margin.
+      │                    Solução: trocar para compositor alternativo AGORA."
+      │                    Diferencia stalls temporários (resolver-se-ão sozinhos) de
+      │                    stalls que precisam de intervenção.
+      ├─ Outstanding (18-19): Identifica root cause. Estima duração do stall.
+      │                        Flag se compromete release date.
+      ├─ Very Good (15-17): Identifica causa. "Compositor indisponível → buscar outro."
+      ├─ Good (12-14):    Identifica causa. Tenta solução óbvia.
+      ├─ Average (10-11): "Está parado porque [razão]." Espera resolver sozinho.
+      ├─ Competent (7-9): "Está parado." Sem diagnóstico de causa.
+      ├─ Reasonable (4-6): Não nota stall até 4+ semanas.
+      └─ Unsuited (1-3):  Não nota stall. Projeto fica parado indefinidamente.
+
+2. ENCONTRAR SOLUÇÃO POR TIPO DE STALL
+   └─ Skill: Adaptability × Industry Knowledge
+   
+   A) 'composer_unavailable' ou 'idol_composer_busy':
+      ├─ Elite:      Busca compositor alternativo no mercado com specialty match.
+      │              Se nenhum disponível: "redistribuir — compositor da parte Musical
+      │              pode fazer Arranjo também (sequencial), desde que termine a sua
+      │              parte primeiro." Ou: "idol X sabe fazer arranjos (hidden skill
+      │              derivado de Vocal Technique + Musical Knowledge). Atribuir como
+      │              idol_composer para esta parte."
+      ├─ Outstanding: Busca alternativo. Se não há: espera.
+      ├─ Very Good:  Busca alternativo do mesmo tier ou 1 tier abaixo.
+      ├─ Good:       Busca qualquer alternativo disponível.
+      ├─ Average:    Espera. Não busca alternativo.
+      ├─ Competent−: Espera indefinidamente.
+   
+   B) 'no_dance_studio' ou 'no_recording_studio':
+      ├─ Elite:      "Facility não existe. 2 opções: 1) recomendar upgrade ao Operations
+      │              Director (custo ¥X, delay 2 semanas para construir). 2) se cover,
+      │              skip coreografia (cover 'as is'). 3) se original sem dança
+      │              (ballad), coreografia N/A → redistribuir peso da qualidade."
+      ├─ Very Good+: Recomenda upgrade de facility. Se ballad: skip coreografia.
+      ├─ Good:       Recomenda upgrade. Espera até facility existir.
+      ├─ Average−:   Projeto fica stalled até alguém resolver facility.
+   
+   C) 'idol_schedule_conflict':
+      ├─ Elite:      Coordena com Talent Manager: "preciso de 4 idols com slot livre
+      │              na mesma semana. Atualmente 2 têm conflito. Posso mover 1 job
+      │              de cada para a semana seguinte? Custo: adiar 2 jobs vs adiar release."
+      │              Se impossível: "gravar com os membros disponíveis agora (partial
+      │              recording), completar na próxima semana. Penalty de −5% qualidade."
+      ├─ Very Good:  Pede re-schedule ao Talent Manager. Se não possível: espera 1 semana.
+      ├─ Good:       Espera semana com todos livres.
+      ├─ Average−:   Espera indefinidamente.
+   
+   D) 'budget_insufficient':
+      ├─ Elite:      "Stage custa ¥2M mas só temos ¥500K. 3 opções:
+      │              1) Adiar até ter budget (receita da próxima semana).
+      │              2) Negociar com compositor: dividir fee em 2 pagamentos.
+      │              3) Cancelar projeto se ROI projetado não justifica."
+      ├─ Very Good:  Adia 1-2 semanas até budget estar disponível.
+      ├─ Good:       Adia.
+      ├─ Average−:   Não resolve. Projeto stalled por budget para sempre.
+
+3. DECISÃO FINAL
+   ├─ Se solução encontrada:
+   │   → return { type: 'resolveStall', projectId, action: 'swap_composer'|'skip_stage'|
+   │     'partial_recording'|'request_facility'|'defer'|'cancel', details }
+   └─ Se sem solução viável (ou não diagnosticou):
+       → return null (stall continua)
+```
+
+**OUTPUT:** `{ type: 'resolveStall', projectId: string, action: string, details: StallResolution }` | `null`
+
+---
+
+### Cargo 9.2: Gestão de Compositores
+
+---
+
+#### Decisão 9.2.1: Gerir Relações com Compositores
+
+**CONTEXTO (o que a IA avalia):**
+- Pool de compositores NPC: cada com tier, fee, specialty (composição/letra/arranjo),
+  max_concurrent, projetos ativos, agenda (semanas até slot livre)
+- Compositores com contrato ativo com a agência vs freelancers
+- Histórico: quais compositores deram bons resultados (músicas que foram hit)
+- Relação: frequência de trabalho com cada compositor (loyalty que gera descontos)
+- Competição: quais compositores estão a ser usados por rivais (indisponíveis)
+- Budget: custo de manter exclusividade vs first-come-first-serve
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Musical Knowledge** | Avaliar qualidade de cada compositor e match com o estilo da agência |
+| **Industry Knowledge** | Saber quem mais está a usar quais compositores (competição) |
+| **Financial Acumen** | Avaliar se vale pagar premium por compositor exclusivo ou top-tier |
+
+**FLOWCHART:**
+
+```
+1. AVALIAR POOL DE COMPOSITORES
+   └─ Skill: Musical Knowledge
+      ├─ Elite (20):      Mantém "rolodex" mental de todos compositores relevantes:
+      │                    "Compositor Tanaka: tier S, specialty composição + arranjo.
+      │                    Trabalhou connosco 3× nos últimos 6 meses. 2 de 3 músicas
+      │                    entraram no top 20. Fee alto (¥3M) mas ROI excelente.
+      │                    Actualmente: 1/1 slots ocupados (projeto para rival Crown).
+      │                    Disponível em: 3 semanas."
+      │                    Ranking: top-5 compositores por fit × quality × availability.
+      │                    Identifica "rising stars": compositores tier C com últimas 2 músicas
+      │                    surpreendentemente boas. Contratar antes que fique caro.
+      ├─ Outstanding (18-19): Top-5 compositores ranqueados. Sabe availability de cada.
+      ├─ Very Good (15-17): Conhece top-3 por specialty. Sabe quem está disponível.
+      ├─ Good (12-14):    Conhece compositores que já usou. Não prospecta novos.
+      ├─ Average (10-11): Usa sempre o mesmo compositor (se disponível).
+      ├─ Competent (7-9): Usa quem estiver disponível.
+      ├─ Reasonable (4-6): Usa o mais barato.
+      └─ Unsuited (1-3):  Não gere compositores.
+
+2. MANTER RELAÇÕES
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Estratégia de loyalty: "Se usarmos Tanaka 4+ vezes num ano,
+      │                    ele nos dá prioridade de booking e −10% fee. Investir em
+      │                    relação de longo prazo com 2-3 compositores top."
+      │                    Diversifica: não depender de 1 compositor (risco se ficar indisponível).
+      │                    Networking: "Compositor novo Yamada (tier B) quer entrar no mercado.
+      │                    Se lhe dermos oportunidade agora, teremos loyalty dele quando subir de tier."
+      ├─ Outstanding (18-19): Mantém relação com top-3. Diversifica entre 2-3.
+      ├─ Very Good (15-17): Usa preferencialmente compositores que já deram bons resultados.
+      ├─ Good (12-14):    Repete compositor que funcionou.
+      ├─ Average−:        Sem gestão de relações.
+
+3. DECISÃO FINAL
+   → return { type: 'composerManagement', preferredComposers: [{npcId, priority, nextAvailable}],
+     relationshipActions?: [{composerId, action: 'maintain'|'invest'|'drop'}] }
+   (Informativo — alimenta decisão 9.1.1 quando precisa selecionar compositor.)
+```
+
+**OUTPUT:** `{ type: 'composerManagement', preferredComposers: ComposerPreference[], relationshipActions?: RelationshipAction[] }`
+
+---
+
+### Cargo 9.3: Planeamento de Lançamento
+
+---
+
+#### Decisão 9.3.1: Planear Release de Música
+
+**CONTEXTO (o que a IA avalia):**
+- Projeto musical com gravação completa (pronto para lançamento)
+- Composição da música: estrutura (Intro-Verso-PréRefrão-Refrão-Verso-Refrão-Ponte-Refrão-Final),
+  ranking de qualidade por parte, qualidade final composta
+- Coreografia: para quantas idols foi desenhada, quais posições/roles por parte da música
+- Calendar: datas disponíveis, feriados, eventos sazonais, launches de rivais
+- Charts: posições atuais, que géneros estão em alta, slot de chart disponível
+- Marketing budget: quanto pode investir em promoção
+- Fan state: fan clubs das idols envolvidas — expectativa, mood, demanda
+- Catálogo existente: tracklist se é álbum, single anterior e gap temporal
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Musical Knowledge** | Core: definir tracklist order (afeta chart entry score), tipo de release (single/álbum/EP) |
+| **Industry Knowledge** | Timing: quando lançar para maximizar chart performance e media coverage |
+| **Financial Acumen** | Budget de marketing: quanto investir, diminishing returns |
+| **Media Savvy** | Hype strategy: quais atividades pré-lançamento fazer e quando |
+
+**FLOWCHART:**
+
+```
+1. DEFINIR TIPO DE RELEASE
+   └─ Skill: Musical Knowledge
+      ├─ Elite (20):      Avalia contexto completo para decidir formato:
+      │                    → 1 música boa → single (maximiza chart position de 1 faixa)
+      │                    → 3-4 músicas boas → mini-album/EP (diversifica sem diluir)
+      │                    → 5+ músicas → full album (milestone, mais receita, mais PR)
+      │                    "Temos 2 músicas prontas mas a segunda é qualidade C.
+      │                    Melhor lançar single da música A (qualidade A) e guardar B
+      │                    como B-side ou para próximo release."
+      │                    Avalia qualidade por parte: "Refrão desta música é Outstanding,
+      │                    mas Bridge é apenas Average. Overall: Very Good. Worth releasing."
+      ├─ Outstanding (18-19): Avalia qualidade overall + decide single vs EP.
+      ├─ Very Good (15-17): Single se 1 música, EP se 3+. Avalia qualidade basic.
+      ├─ Good (12-14):    Sempre single. Sem consideration de álbum.
+      ├─ Average (10-11): Lança o que tiver pronto.
+      ├─ Competent−:      Lança imediatamente sem pensar em formato.
+
+2. ESCOLHER DATA DE LANÇAMENTO
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Analisa calendar com profundidade:
+      │                    → Evita semanas com rival launches (competição por chart slots)
+      │                    → Prefere semanas com boost sazonal (Natal +25%, Golden Week +20%,
+      │                      Valentine +15%, Summer Festival +10%)
+      │                    → Alinha com shows: "release na semana ANTES do show → fãs ouvem
+      │                      a música nova e querem ver ao vivo = ticket sales up"
+      │                    → Avalia: "se lançar em 2 semanas, hype activities cabem.
+      │                      Se lançar na próxima semana, sem tempo para hype."
+      │                    Data ótima: 3-4 semanas no futuro com boost sazonal e sem competição.
+      ├─ Outstanding (18-19): Evita competição rival. Alinha com boost sazonal se possível.
+      │                        2-4 semanas no futuro.
+      ├─ Very Good (15-17): 3 semanas no futuro. Evita feriados que não são boost.
+      ├─ Good (12-14):    2-3 semanas. Sem analysis de competição.
+      ├─ Average (10-11): 2 semanas. Data fixa.
+      ├─ Competent (7-9): Próxima semana. Sem planeamento.
+      ├─ Reasonable (4-6): Imediatamente.
+      └─ Unsuited (1-3):  Data aleatória. Pode lançar em semana com 3 rivais a lançar.
+
+3. DEFINIR TRACKLIST E LEAD SINGLE
+   └─ Skill: Musical Knowledge
+      ├─ Elite (20):      "Track order afeta chart entry score. Lead single abre o release
+      │                    e recebe a maior parte da promoção.
+      │                    Track 1 (lead): música com melhor Refrão (hook) → chart impact.
+      │                    Track 2: música upbeat → mantém energia.
+      │                    Track 3 (se EP): ballad → contraste → emotional close.
+      │                    Lead single selection: a música cujo Refrão tem qualidade ≥ Very Good
+      │                    E cujo género está em alta no chart."
+      ├─ Outstanding (18-19): Lead single = melhor qualidade overall. Order = build energy.
+      ├─ Very Good (15-17): Lead single = música com melhor qualidade.
+      ├─ Good (12-14):    Primeira música gravada = lead single. Sem curadoria.
+      ├─ Average−:        Ordem de gravação. Sem tracklist curation.
+
+4. PLANEAR HYPE PRÉ-LANÇAMENTO
+   └─ Skill: Media Savvy
+      ├─ Elite (20):      Staggered campaign completa:
+      │                    → 4 semanas antes: teaser (snippet de 15 segundos) → building anticipation
+      │                    → 3 semanas: MV teaser (behind the scenes da gravação) → engagement
+      │                    → 2 semanas: fan exclusive preview (fan club only → reward loyalty)
+      │                    → 1 semana: press listening (media reviews) → credibility
+      │                    → Release day: full MV + streaming + physical sale
+      │                    Hype stacks: cada atividade soma ao hype_factor (cap 1.5).
+      │                    "4 atividades → hype 1.4. Custo total: ¥5M. Chart boost: +40%."
+      ├─ Outstanding (18-19): 3 atividades (teaser + MV + press). Hype ~1.3.
+      ├─ Very Good (15-17): 2 atividades (teaser + MV). Hype ~1.2.
+      ├─ Good (12-14):    1 atividade (teaser ou MV). Hype ~1.1.
+      ├─ Average (10-11): Sem hype. Release direto. Hype 1.0 (base).
+      ├─ Competent−:      Sem hype.
+
+5. DEFINIR MARKETING BUDGET
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      Diminishing returns calculation:
+      │                    "real_effect = campaign_effect × (1 / (1 + investment / ¥50M)).
+      │                    Sweet spot para esta música: ¥10M de marketing.
+      │                    Acima disso, cada yen extra rende 40% menos.
+      │                    Abaixo, estamos a sub-investir num potencial hit."
+      │                    Ajusta por genre fit com market: "se genre está em alta,
+      │                    investir mais (ROI multiplicado)."
+      ├─ Outstanding (18-19): Calcula sweet spot rough. 8-12% da receita mensal.
+      ├─ Very Good (15-17): 10% da receita mensal. Ajusta ±20% por importância.
+      ├─ Good (12-14):    5-10% da receita mensal. Flat.
+      ├─ Average (10-11): 5% flat.
+      ├─ Competent (7-9): Mínimo (token marketing).
+      ├─ Reasonable (4-6): Zero marketing.
+      └─ Unsuited (1-3):  Zero ou pode alocar budget excessivo sem retorno.
+
+6. DECISÃO FINAL
+   ├─ Se release planejado:
+   │   → return { type: 'planRelease', projectId, releaseDate, releaseType,
+   │     tracklist, leadSingle, marketingBudget, hypeActivities,
+   │     projectedChartPosition, physicalMedia: boolean }
+   └─ Se nenhum projeto pronto:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'planRelease', projectId: string, releaseDate: number, releaseType: 'single' | 'ep' | 'album', tracklist: TrackOrder[], leadSingle: string, marketingBudget: number, hypeActivities: HypeActivity[], projectedChartPosition: number }` | `null`
