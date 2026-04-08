@@ -1,7 +1,7 @@
 # ADR-002: Simulation Pipeline & Threading
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-07
