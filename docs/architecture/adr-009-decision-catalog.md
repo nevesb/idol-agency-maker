@@ -1871,3 +1871,516 @@ Each Decision Process defines:
 ```
 
 **OUTPUT:** `{ type: 'potentialAssessment', idolId: string, currentPhase: 'early_growth' | 'growth' | 'approaching_peak' | 'peak' | 'plateau' | 'decline', projectedPeakTier: IdolTier, projectedPeakAge: number, limitingFactors: string[], recommendation: string }`
+
+---
+
+## PAPEL 6: VOCAL COACH
+
+> Especialista em treino vocal. Conduz sessões e avalia progresso.
+> Pode acumular com Dance Coach / Acting Coach (mesmo domínio: treino).
+
+### Cargo 6.1: Treino Vocal
+
+---
+
+#### Decisão 6.1.1: Conduzir Sessão de Treino Vocal
+
+**CONTEXTO (o que a IA avalia):**
+- Idol atribuída ao slot de treino vocal nesta semana (pode ser múltiplas idols)
+- Stats vocais da idol: Vocal, Communication, Charisma (domínio do vocal coach)
+- Ceiling de cada stat (derivado de PT — máximo que pode atingir)
+- DevPlan ativo: se existe, qual stat é o foco e qual intensidade
+- Wellness: stress, health, motivation da idol (afeta se pode treinar intensive)
+- Age curve: idol em growth phase ou decline? (decline = crescimento mais lento)
+- Mastery: se idol tem show próximo com músicas que exigem vocal forte, pode focar nessas
+- Histórico de sessões: o que foi treinado nas últimas 4 semanas (evitar repetição sem variedade)
+- VocalProfile da idol: tessitura, textura — influencia que tipo de exercício funciona melhor
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Vocal Technique** | Core: qualidade da sessão. Determina growth rate × multiplicador do coach |
+| **Motivating** | Impacto na motivation da idol durante e após a sessão |
+| **Discipline** | Consistência: coach disciplinado mantém rotina de exercícios que compound over time |
+| **People Management** | Relação com a idol: sessão é agradável ou estressante |
+
+**FLOWCHART:**
+
+```
+1. VERIFICAR SE IDOL ESTÁ APTA A TREINAR
+   └─ Skill: People Management (ler estado da idol)
+      ├─ Elite (20):      Checa stress, motivation, health, E mood (derivado de happiness + recent events).
+      │                    → stress > 60 E motivation < 40: "Hoje não é dia. Sessão leve — 30 min de
+      │                      aquecimento vocal relaxante. Crescimento mínimo mas protege a idol."
+      │                    → stress < 30 E motivation > 70: "Momento perfeito para intensive.
+      │                      Idol está focada e descansada. Aproveitar."
+      │                    → Pós-show da semana: "Vocal cords precisam de recovery. Exercícios
+      │                      de respiração apenas, sem forçar."
+      │                    Adapta a sessão ao estado, nunca força quando não deve.
+      ├─ Outstanding (18-19): Checa stress + motivation. Adapta intensidade.
+      │                        Cancela se stress > 75.
+      ├─ Very Good (15-17): Checa stress. Skip se > 80. Reduz intensidade se > 60.
+      ├─ Good (12-14):    Skip se stress > 80 OU health < 30. Resto normal.
+      ├─ Average (10-11): Skip se stress > 85. Resto normal.
+      ├─ Competent (7-9): Skip se stress > 90 (quase burnout). Não adapta sessão.
+      ├─ Reasonable (4-6): Nunca cancela. Treina mesmo com stress 95. Risco de burnout.
+      └─ Unsuited (1-3):  Treina sempre independente de tudo. Ignora sinais de exaustão.
+                           Pode causar: +15 stress, −10 motivation, injury risk +5%.
+
+2. ESCOLHER STAT A TREINAR
+   └─ Skill: Vocal Technique
+      ├─ Elite (20):      Análise por sessão:
+      │                    → Se DevPlan ativo com foco vocal → segue o plano
+      │                    → Se sem plano: identifica o stat vocal mais impactante para o archetype:
+      │                      "Idol é Vocalist. Vocal 68, Comm 55, Charisma 62. Vocal está mais
+      │                      perto do ceiling (85). Communication tem mais espaço (ceiling 80).
+      │                      Mas Vocal é o primary stat do archetype. Foco em Vocal até ceiling,
+      │                      DEPOIS shift para Communication."
+      │                    → Se show próximo (≤2 semanas) com música que exige range alto:
+      │                      "Sessão focada no range da música. Performance-oriented, não growth."
+      │                    → Micro-targeting: "Esta semana foco em breath control (sub-aspecto de Vocal).
+      │                      Próxima semana foco em range. Variedade compound melhor."
+      ├─ Outstanding (18-19): Se DevPlan → segue. Senão: stat mais fraco do archetype.
+      │                        Se show próximo → prioriza performance readiness.
+      ├─ Very Good (15-17): Se DevPlan → segue. Senão: stat mais fraco do domínio vocal.
+      │                      Verifica ceiling (não treina stat já no máximo).
+      ├─ Good (12-14):    Se DevPlan → segue. Senão: stat vocal mais baixo overall.
+      │                    Verifica ceiling.
+      ├─ Average (10-11): Se DevPlan → segue. Senão: Vocal (sempre o primary). Sem verificar ceiling.
+      ├─ Competent (7-9): Treina Vocal sempre. Ignora DevPlan.
+      ├─ Reasonable (4-6): Stat aleatório do domínio vocal. Pode treinar stat que já está no ceiling.
+      └─ Unsuited (1-3):  Stat aleatório. Pode treinar stat de OUTRO domínio por erro
+                           (ex: Dance num vocal coach — crescimento 10% do normal).
+
+3. DEFINIR INTENSIDADE DA SESSÃO
+   └─ Skill: Discipline
+      ├─ Elite (20):      Periodização micro: alterna intensidades por semana.
+      │                    Semana 1: intensive → semana 2: normal → semana 3: intensive → semana 4: recovery.
+      │                    Growth compound é 20% maior que intensive constante (GDD confirmed).
+      │                    Ajusta baseado na resposta da idol: "growth acelerou? Manter. Estagnou? Mudar."
+      ├─ Outstanding (18-19): Alterna intensive/normal a cada 2 semanas. Recovery se stress subir.
+      ├─ Very Good (15-17): Intensive se idol aguenta (stress < 40 E gap > 15). Normal senão.
+      ├─ Good (12-14):    Intensive só se stress < 30 E DevPlan diz intensive. Senão normal.
+      ├─ Average (10-11): Normal sempre. Safe.
+      ├─ Competent (7-9): Normal sempre.
+      ├─ Reasonable (4-6): Intensidade inconsistente: às vezes intensive, às vezes light, sem padrão.
+      │                    (Discipline baixa = sem rotina = crescimento errático.)
+      └─ Unsuited (1-3):  Intensidade aleatória. Pode ser intensive com idol stressada.
+
+4. EXECUTAR SESSÃO (efeitos calculados)
+   ├─ Growth aplicado:
+   │   growth = base_growth × vocal_technique_mult × intensity_mult × age_mult × idol_learning
+   │   
+   │   vocal_technique_mult (coach quality):
+   │     Elite (20):       × 2.0 (máximo)
+   │     Outstanding:      × 1.7
+   │     Very Good:        × 1.4
+   │     Good:             × 1.2
+   │     Average:          × 1.0 (baseline)
+   │     Competent:        × 0.8
+   │     Reasonable:       × 0.5
+   │     Unsuited:         × 0.2 (quase inútil)
+   │   
+   │   intensity_mult: intensive ×3, normal ×2, light ×1.5, recovery ×0.5
+   │   
+   ├─ Wellness impact (secondary modifiers):
+   │   → motivating do coach: idol.motivation += (motivating − 10) × 0.5
+   │     Elite motivating: +5 motivation por sessão
+   │     Unsuited motivating: −4.5 motivation por sessão
+   │   → people_management do coach: idol.happiness += (peopleMgmt − 10) × 0.3
+   │     Elite PM: +3 happiness. Unsuited PM: −2.7 happiness.
+   │   → Se intensidade intensive: idol.stress += 5-10
+   │   → Se intensidade recovery: idol.stress −= 3-5
+
+5. DECISÃO FINAL
+   ├─ Se sessão conduzida:
+   │   → return { type: 'conductTraining', idolId, stat, intensity, day,
+   │     growthMultiplier, wellnessImpact }
+   └─ Se idol não apta (cancelada no passo 1):
+       → return { type: 'cancelTraining', idolId, day, reason }
+       (slot fica livre — idol descansa em vez de treinar)
+```
+
+**OUTPUT:** `{ type: 'conductTraining', idolId: string, stat: string, intensity: TrainingIntensity, day: number, growthMultiplier: number, wellnessImpact: WellnessDelta }` | `{ type: 'cancelTraining', idolId: string, day: number, reason: string }`
+
+---
+
+#### Decisão 6.1.2: Avaliar Progresso Vocal
+
+**CONTEXTO (o que a IA avalia):**
+- Idol com 4+ semanas de treino vocal sob este coach
+- Growth history: stat values semana a semana nas últimas 4-12 semanas
+- Expected growth rate: baseado em ceiling, intensity, coach quality, age curve
+- Actual growth rate: observado
+- Comparação: actual vs expected — está acima, dentro, ou abaixo do esperado?
+- Possíveis causas de divergência: stress alto? motivation baixa? coach match ruim? ceiling atingido?
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Vocal Technique** | Avaliar o que o progresso significa: "crescimento de 2 pontos em Vocal é bom ou mau para este nível?" |
+| **Judging Idol Ability** | Ler stats com precisão para medir progresso real (não ruído) |
+| **Mental Coaching** | Identificar se fatores mentais estão a travar o crescimento |
+
+**FLOWCHART:**
+
+```
+1. MEDIR PROGRESSO
+   └─ Skill: Judging Idol Ability
+      ├─ Elite (20):      Mede growth rate por stat com precisão de ±0.5 pontos/mês.
+      │                    "Vocal: +2.3/mês (esperado: +2.8). Ligeiramente abaixo.
+      │                    Communication: +1.8/mês (esperado: +1.5). Acima — talento natural."
+      │                    Identifica se crescimento está a desacelerar (approaching ceiling)
+      │                    ou a acelerar (break-through moment).
+      ├─ Outstanding (18-19): Mede growth rate por stat. Compara com expected. ±1 precisão.
+      ├─ Very Good (15-17): "Crescendo" vs "estagnado" vs "caindo" por stat.
+      │                      Se estagnado: flag para atenção.
+      ├─ Good (12-14):    "Crescendo" ou "estagnado" (binário). Para o stat principal.
+      ├─ Average (10-11): Compara tier de 4 semanas atrás vs agora. Mudou? Sim/não.
+      ├─ Competent (7-9): "Parece melhor" ou "parece igual." (impressão).
+      ├─ Reasonable (4-6): Sem medição.
+      └─ Unsuited (1-3):  Sem medição.
+
+2. DIAGNOSTICAR DIVERGÊNCIA (se abaixo do esperado)
+   └─ Skill: Mental Coaching
+      ├─ Elite (20):      Diagnóstico root-cause:
+      │                    → Stress alto (> 60): "crescimento travado por stress. Não é o treino
+      │                      que está errado — é a agenda. Precisa de mais rest days."
+      │                    → Motivation baixa (< 40): "idol desengajada. Sessões não inspiram.
+      │                      Mudar abordagem: mais prática, menos teoria. Ou mentoria."
+      │                    → Ceiling atingido: "stat no ceiling. Crescimento zero é NORMAL.
+      │                      Mudar foco para outro stat."
+      │                    → Coach mismatch: "meu Vocal Technique é 'Competent' e idol precisa
+      │                      de 'Very Good+' para crescer neste nível. Recomendo upgrade de coach."
+      │                    Apresenta diagnóstico com ação recomendada.
+      ├─ Outstanding (18-19): Checa stress + motivation + ceiling. Identifica causa principal.
+      ├─ Very Good (15-17): Checa stress + ceiling. "Estagnação por stress" ou "ceiling atingido."
+      ├─ Good (12-14):    Checa ceiling. "Está no máximo — mudar foco."
+      ├─ Average (10-11): "Talvez esteja cansada." (genérico, pode estar errado).
+      ├─ Competent (7-9): "Não sei por que não está a crescer."
+      ├─ Reasonable (4-6): Sem diagnóstico.
+      └─ Unsuited (1-3):  Sem diagnóstico. Pode continuar a treinar stat no ceiling indefinidamente.
+
+3. RECOMENDAR AJUSTES
+   └─ Skill: Vocal Technique
+      ├─ Elite (20):      Recomendação específica e actionable:
+      │                    → "Mudar de Vocal para Communication. Vocal está a 90% do ceiling.
+      │                      Communication tem 40% de espaço. ROI de treino 3× maior."
+      │                    → "Manter Vocal por mais 4 semanas — está num plateau temporário
+      │                      (normal no range 70-80). Break-through estimado em 2-3 semanas."
+      │                    → "Reduzir intensidade. Idol está overtraining — growth inverte."
+      │                    → "Transferir idol para Dance Coach por 4 semanas. Vocal precisa
+      │                      de descanso e cross-training melhora overall."
+      ├─ Outstanding (18-19): "Mudar foco" ou "manter" com razão.
+      ├─ Very Good (15-17): "Mudar para stat X" se ceiling atingido.
+      ├─ Good (12-14):    "Mudar foco" se estagnado. Sem especificar para qual stat.
+      ├─ Average (10-11): "Continuar" (sem ajustar nada).
+      ├─ Competent−:      Sem recomendação.
+
+4. DECISÃO FINAL
+   → return { type: 'trainingAssessment', idolId, stat, growthRate, expectedRate,
+     diagnosis, recommendation }
+   (Informativo — vai para Development Director e para o inbox do player.)
+```
+
+**OUTPUT:** `{ type: 'trainingAssessment', idolId: string, stat: string, growthRate: number, expectedRate: number, diagnosis: string, recommendation: string }`
+
+---
+
+## PAPEL 7: DANCE COACH
+
+> Mesmo padrão do Vocal Coach, adaptado ao domínio Dance.
+> Stats do domínio: Dance, Expression, Stamina.
+> Diferença chave: treino de dança tem risco de lesão física e interage
+> com o show system (coreografia readiness).
+
+### Cargo 7.1: Treino de Dança
+
+---
+
+#### Decisão 7.1.1: Conduzir Sessão de Treino de Dança
+
+**Segue o mesmo flowchart da Decisão 6.1.1 (Vocal Coach) com as seguintes diferenças:**
+
+**Stats treinados:** Dance, Expression, Stamina (em vez de Vocal, Communication, Charisma)
+
+**Primary skill:** Dance Technique (em vez de Vocal Technique)
+
+**Diferenças específicas por passo:**
+
+```
+PASSO 1 — VERIFICAR APTIDÃO:
+  Diferença: Dance Coach checa HEALTH além de stress.
+  └─ Skill: People Management + Physical Training (secondary)
+     ├─ Elite: Checa health + recent injury history + age.
+     │         "Idol teve lesão no joelho há 6 semanas. Adapta exercícios
+     │         para zero impacto na articulação. Treino continua seguro."
+     │         → Previne re-injury via adaptação, não cancellamento.
+     ├─ Good+: Cancela se health < 30 OU recent injury (< 4 semanas).
+     ├─ Average: Cancela se health < 20.
+     ├─ Competent−: Não checa health. Risco de lesão +10% se health < 40.
+     ├─ Unsuited: Treina com health 10. Injury risk: +25%.
+
+PASSO 2 — ESCOLHER STAT:
+  Diferença: Se show ≤ 2 semanas com coreografia do grupo:
+  └─ Skill: Dance Technique
+     ├─ Elite: "Show em 10 dias. Idol é membro do grupo Aurora. Setlist tem
+     │         3 músicas com coreografia complexa. Mastery da idol nessas músicas: 
+     │         40, 55, 30. Focar rehearsal na música com mastery 30 —
+     │         é o bottleneck do show."
+     │         Sessão vira rehearsal de coreografia em vez de growth training.
+     ├─ Very Good+: Identifica músicas fracas e prioriza rehearsal.
+     ├─ Good: Rehearsal genérico da setlist (não específico por música).
+     ├─ Average−: Treina stat normal. Ignora show próximo.
+
+PASSO 3 — INTENSIDADE:
+  Diferença: Treino de dança tem INJURY RISK na intensidade intensive.
+  └─ Skill: Physical Training (secondary)
+     ├─ Elite: Calcula injury risk: age × consecutive_days × (20 - stamina) / 400.
+     │         Se risk > 5%: "Intensive demais. Normal com aquecimento prolongado."
+     │         Se risk < 2%: "Seguro para intensive."
+     ├─ Very Good: Intensive só se health > 70 E stamina > 50.
+     ├─ Good: Intensive só se health > 80.
+     ├─ Average−: Não calcula injury risk. Pode causar lesão.
+
+PASSO 4 — EFEITOS:
+  Mesmo padrão mas com:
+  → dance_technique_mult igual ao vocal_technique_mult da tabela
+  → Bônus adicional: se sessão é rehearsal de coreografia:
+    mastery += dance_technique_mult × 2 (para as músicas rehearsadas)
+  → Injury check pós-sessão se intensive + health < 50:
+    injury_chance = base_injury × (1 - physical_training/20)
+```
+
+**OUTPUT:** Mesmo do Vocal Coach — `conductTraining` ou `cancelTraining`
+
+---
+
+#### Decisão 7.1.2: Preparar Grupo para Coreografia de Show
+
+**CONTEXTO (o que a IA avalia):**
+- Grupo com show agendado nas próximas 2 semanas
+- Setlist do show: quais músicas, com quais coreografias
+- Mastery de cada membro por música (mastery table: idol × music)
+- Membros com mastery baixa (<50) em músicas da setlist
+- Slots de rehearsal disponíveis esta semana para o grupo
+- Número de idols na coreografia vs número de membros do grupo
+  (grupo de 8 pode ter músicas com coreografia para 5 — os outros descansam)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Dance Technique** | Core: identificar qual membro em qual música está a limitar a performance do grupo |
+| **Stage Presence** | Entender quais posições na formação são mais exigentes (center > back) |
+| **People Management** | Gerir frustração de membros que precisam de mais rehearsal |
+
+**FLOWCHART:**
+
+```
+1. ANALISAR MASTERY MATRIX (grupo × setlist)
+   └─ Skill: Dance Technique
+      ├─ Elite (20):      Para cada música da setlist, identifica O membro mais fraco:
+      │                    "Música 3: coreografia para 6 idols. Membro Riko tem mastery 28 —
+      │                    ela é o bottleneck. Se Riko não ensaiar, música 3 derruba o score
+      │                    do show todo."
+      │                    Prioriza rehearsal por impacto: música_na_setlist ×
+      │                    (1 / mastery_membro_mais_fraco).
+      │                    Planeja: "Dia 1: grupo todo ensaia música 3. Dia 2: Riko sozinha
+      │                    ensaia música 3 e 5 (suas mais fracas). Dia 3: run-through completo."
+      ├─ Outstanding (18-19): Identifica membro mais fraco por música. Prioriza top-3 músicas.
+      ├─ Very Good (15-17): Identifica músicas com mastery médio < 50. Rehearsal genérico nelas.
+      ├─ Good (12-14):    Identifica músicas com mastery < 40 em qualquer membro.
+      ├─ Average (10-11): "Ensaiar a setlist toda." Sem priorização por música/membro.
+      ├─ Competent (7-9): "Ensaiar." Sem direção específica.
+      ├─ Reasonable (4-6): "Cantem as músicas." Rehearsal sem foco.
+      └─ Unsuited (1-3):  Não prepara. Grupo vai sem rehearsal.
+
+2. ADAPTAR COREOGRAFIA AO GRUPO
+   └─ Skill: Stage Presence
+      ├─ Elite (20):      "Coreografia desta música é para 5 dancers. Temos 8 membros.
+      │                    3 podem descansar nesta música — rotacionar quem descansa
+      │                    para gerenciar fadiga across the setlist."
+      │                    Identifica membros que podem simplificar moves sem perder visual:
+      │                    "Membro com Dance 35 pode ficar na posição de support em vez de
+      │                    center dance — mesmo efeito visual, menos exigência técnica."
+      ├─ Outstanding (18-19): Identifica quem descansa em quais músicas (fatigue management).
+      ├─ Very Good (15-17): "Membros com stamina baixa → posições menos exigentes."
+      ├─ Good (12-14):    Membros fixos em posições fixas. Sem rotação.
+      ├─ Average−:        Todos dançam tudo. Sem adaptação.
+
+3. DECISÃO FINAL
+   ├─ Se grupo precisa de rehearsal:
+   │   → return { type: 'groupChoreoPrep', groupId, showId,
+   │     rehearsalPlan: [{ day, musicians, focusSongs }],
+   │     choreographyAdaptations: [{ songId, memberRotation }] }
+   └─ Se grupo está pronto (todos mastery > 70):
+       → return null (não precisa de prep extra)
+```
+
+**OUTPUT:** `{ type: 'groupChoreoPrep', groupId: string, showId: string, rehearsalPlan: RehearsalDay[], choreographyAdaptations: ChoreographyAdaptation[] }` | `null`
+
+---
+
+#### Decisão 7.1.3: Avaliar Progresso de Dança
+
+**Segue o mesmo flowchart da Decisão 6.1.2 (Vocal Coach assessment) com:**
+- Primary skill: **Dance Technique** em vez de Vocal Technique
+- Stats avaliados: Dance, Expression, Stamina
+- Diferença adicional no diagnóstico (Passo 2):
+  - **Physical Training** como skill secondary para avaliar se limitação é física
+    (stamina, health, injury history) ou técnica (dance skill plateau)
+  - Elite: "Idol estagnou em Dance 72. Não é ceiling (ceiling é 88).
+    Problema é físico: stamina 45 está a limitar a capacidade de manter
+    rotinas de dança longas. Foco em stamina por 4 semanas, depois voltar a Dance."
+
+**OUTPUT:** Mesmo do Vocal Coach — `trainingAssessment`
+
+---
+
+## PAPEL 8: ACTING/VARIETY COACH
+
+> Mesmo padrão dos coaches anteriores, adaptado ao domínio Acting/Variety.
+> Stats do domínio: Acting, Variety, Communication.
+> Diferença chave: treino interage com jobs de TV (preparação pré-programa).
+
+### Cargo 8.1: Treino de Atuação
+
+---
+
+#### Decisão 8.1.1: Conduzir Sessão de Treino de Atuação
+
+**Segue o mesmo flowchart da Decisão 6.1.1 (Vocal Coach) com as seguintes diferenças:**
+
+**Stats treinados:** Acting, Variety, Communication
+
+**Primary skill:** Acting/Variety
+
+**Diferenças específicas por passo:**
+
+```
+PASSO 2 — ESCOLHER STAT:
+  Diferença: Acting Coach adapta o stat ao TIPO DE JOB vindouro.
+  └─ Skill: Acting/Variety
+     ├─ Elite: Analisa jobs agendados na próxima semana:
+     │         → TV variety show: foco Variety + Communication
+     │         → Drama/movie: foco Acting
+     │         → Talk show: foco Communication + Charisma
+     │         → Radio: foco Communication
+     │         → No job planned: foco no stat mais fraco do archetype
+     │         "Idol tem drama na quinta. Acting 55. Se treinar segunda e terça
+     │         com intensive, pode subir 2-3 pontos. Diferença entre C+ e B−."
+     ├─ Very Good+: Adapta ao job type. Sem intensidade calculada por deadline.
+     ├─ Good: Adapta ao job type se variety → variety, drama → acting.
+     ├─ Average−: Sempre treina stat mais baixo. Ignora jobs vindouros.
+
+PASSO 1 — APTIDÃO:
+  Sem diferença significativa dos outros coaches (não tem injury risk como Dance).
+  Acting/Variety coaching é mental, não físico.
+  Diferença: motivation é MAIS importante que stress para acting.
+  └─ Skill: People Management
+     ├─ Elite: "Idol desmotivada (motivation 30). Acting training com idol
+     │         sem vontade é contraproducente — sessão vira negativa.
+     │         Em vez de treinar, faço exercício leve de improviso que é DIVERTIDO.
+     │         Growth 50% do normal mas motivation +5."
+     ├─ Good+: Adapta sessão se motivation < 40 (light + fun).
+     ├─ Average−: Treina normal independente de motivation.
+```
+
+**OUTPUT:** Mesmo dos outros coaches — `conductTraining` ou `cancelTraining`
+
+---
+
+#### Decisão 8.1.2: Preparar Idol para Programa de TV
+
+**CONTEXTO (o que a IA avalia):**
+- Idol com job de TV/radio/drama agendado nos próximos 3 dias
+- Tipo de programa: variety show, talk show, drama, radio, news show
+- Stats da idol: Acting, Variety, Communication, Charisma
+- Apresentador/host do programa: personality, style, known preferences
+  (se intel disponível — requer Intelligence Analyst ou Industry Knowledge)
+- Histórico da idol em programas similares: notas anteriores, pontos fracos recorrentes
+- Público-alvo do programa: fan demographic match com a idol?
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Acting/Variety** | Core: qualidade da preparação. Simulação de cenários, técnicas de resposta |
+| **Industry Knowledge** | Conhecer formatos de programa, hosts, e o que funciona em cada tipo |
+| **Motivating** | Boost de confiança pré-programa. Impacto direto na performance |
+
+**FLOWCHART:**
+
+```
+1. ANALISAR O PROGRAMA
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Conhece o programa, o host, e o formato:
+      │                    "Music Monday — host é Yamada-san, estilo descontraído.
+      │                    Ela faz perguntas pessoais. Idol precisa ter 2-3 anedotas
+      │                    preparadas. Segmento de 8 min, últimos 2 min é performance."
+      │                    Identifica: "viral moments" potenciais:
+      │                    "Se idol conseguir fazer o Yamada-san rir, clip vai virar trend."
+      ├─ Outstanding (18-19): Conhece formato e host. Prepara pontos-chave para a conversa.
+      ├─ Very Good (15-17): Conhece tipo de programa. Adapta preparação ao formato.
+      ├─ Good (12-14):    Variety → prática de comédia. Drama → prática de linhas. Talk → prática de conversa.
+      ├─ Average (10-11): Preparação genérica: "fala com confiança, sorri."
+      ├─ Competent (7-9): "Boa sorte." (sem preparação específica)
+      ├─ Reasonable (4-6): Sem preparação.
+      └─ Unsuited (1-3):  Sem preparação.
+
+2. SIMULAR CENÁRIOS
+   └─ Skill: Acting/Variety
+      ├─ Elite (20):      Simula cenários específicos ao programa:
+      │                    → Perguntas difíceis (sobre escândalo recente, vida pessoal)
+      │                    → Momentos de improviso (host muda de assunto, co-guest interrompe)
+      │                    → Performance sob pressão (cantar ao vivo com público)
+      │                    Cada cenário com 2-3 respostas prepared.
+      │                    Performance bonus: +20-25% no job result.
+      ├─ Outstanding (18-19): Simula 2-3 cenários. +15-20% performance.
+      ├─ Very Good (15-17): Simula 1-2 cenários do formato. +10-15% performance.
+      ├─ Good (12-14):    Prática geral de respostas. +8-10% performance.
+      ├─ Average (10-11): Exercícios básicos de comunicação. +5% performance.
+      ├─ Competent (7-9): Breve pep talk. +2% performance.
+      ├─ Reasonable (4-6): Nada. +0%.
+      └─ Unsuited (1-3):  Nada. Pode desmotivar idol (motivation −3) com "você não está pronta."
+
+3. CONFIDENCE BOOST
+   └─ Skill: Motivating
+      ├─ Elite (20):      Pep talk personalizado baseado nos strengths da idol:
+      │                    "O teu Charisma é o teu superpoder. Quando entrares em palco,
+      │                    sê tu mesma. O público vai adorar a tua energia."
+      │                    idol.motivation += 5. idol.stress −= 3 (descompressão pré-show).
+      ├─ Outstanding (18-19): Pep talk adaptado. motivation +4, stress −2.
+      ├─ Very Good (15-17): Pep talk positivo. motivation +3.
+      ├─ Good (12-14):    "Vai correr bem." motivation +2.
+      ├─ Average (10-11): "Boa sorte." motivation +1.
+      ├─ Competent (7-9): Sem boost.
+      ├─ Reasonable (4-6): Sem boost.
+      └─ Unsuited (1-3):  "Não tenho a certeza de que estás pronta." motivation −2.
+
+4. DECISÃO FINAL
+   ├─ Se idol tem job TV em ≤ 3 dias:
+   │   → return { type: 'tvPreparation', idolId, jobId, focusAreas,
+   │     performanceBonus, wellnessImpact }
+   └─ Se sem job TV próximo:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'tvPreparation', idolId: string, jobId: string, focusAreas: string[], performanceBonus: number, wellnessImpact: WellnessDelta }`
+
+---
+
+#### Decisão 8.1.3: Avaliar Progresso de Atuação
+
+**Segue o mesmo flowchart da Decisão 6.1.2 (Vocal Coach assessment) com:**
+- Primary skill: **Acting/Variety** em vez de Vocal Technique
+- Stats avaliados: Acting, Variety, Communication
+- Diferença no diagnóstico: Acting Coach avalia TAMBÉM o histórico de jobs de TV
+  (notas em programas) como métrica de progresso — não só stat growth.
+  "Stats subiram 3 pontos mas notas em TV não melhoraram → problema é de confiança
+  (motivation/Mentalidade), não de técnica."
+
+**OUTPUT:** Mesmo — `trainingAssessment`
