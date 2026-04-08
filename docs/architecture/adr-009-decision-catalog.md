@@ -3360,3 +3360,247 @@ Flowchart simplificado (referência aos outros flowcharts de compra):
 ```
 
 **OUTPUT:** `{ type: 'purchaseCostume', costumeType: string, theme: string, tier: number, custom: boolean }` | `null`
+
+---
+
+## PAPEL 11: COMMUNICATIONS DIRECTOR
+
+> PR, social media, e fan club management. Gere a imagem pública da agência.
+
+### Cargo 11.1: PR e Gestão de Crise
+
+---
+
+#### Decisão 11.1.1: Responder a Escândalo
+
+**CONTEXTO (o que a IA avalia):**
+- Escândalo ativo: tipo, severidade (leve/médio/grave), idol envolvida, triggers que causaram
+- Idol personality: Temperamento, Profissionalismo, Lealdade (ocultos, se revelados)
+- Fan club state: mood, loyalty, toxicidade. Fãs leais toleram mais; fãs irritados amplificam
+- Media attention: fama da idol (mais famosa = mais cobertura = mais impacto)
+- PR facility level: amplifica eficácia da resposta (0→nenhum, 3→máximo)
+- Histórico: escândalos anteriores da mesma idol (reincidência = menos tolerância)
+- Timing: quanto tempo passou desde o escândalo (resposta rápida = mais eficaz)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Media Savvy** | Core: escolher a estratégia de resposta correta para este tipo de escândalo |
+| **People Management** | Ler a personalidade da idol para adaptar a resposta (idol sincera vs defensiva) |
+| **Fan Psychology** | Prever como os fãs vão reagir a cada estratégia de resposta |
+| **Authority** | Coordenar a mensagem: garantir que idol, staff, e agência falam a mesma coisa |
+
+**FLOWCHART:**
+
+```
+1. CLASSIFICAR URGÊNCIA
+   └─ Skill: Media Savvy
+      ├─ Elite (20):      Avalia em MINUTOS (timing é tudo em PR):
+      │                    "Escândalo de namoro exposto. Severidade: média. Idol: Mei (fame 4000).
+      │                    Trending no Twitter há 30 minutos. Cada hora sem resposta =
+      │                    narrativa controlada por media e anti-fans.
+      │                    URGÊNCIA: responder em 1 dia in-game (= esta semana)."
+      │                    Classifica: respond-NOW vs respond-this-week vs let-it-blow-over.
+      ├─ Outstanding (18-19): Classifica urgência. "Grave = NOW. Médio = esta semana. Leve = optional."
+      ├─ Very Good (15-17): "Grave = urgente. Resto pode esperar."
+      ├─ Good (12-14):    "É grave? Então responder." Sem timing analysis.
+      ├─ Average (10-11): Responde "quando der." Pode demorar 2 semanas (tarde).
+      ├─ Competent (7-9): Responde se lembrar. Sem senso de urgência.
+      ├─ Reasonable (4-6): Pode não responder. Escândalo evolui sem PR.
+      └─ Unsuited (1-3):  Não percebe o escândalo como problema. Zero PR.
+
+2. ESCOLHER ESTRATÉGIA
+   └─ Skill: Media Savvy × People Management
+      ├─ Elite (20):      Match estratégia ao contexto:
+      │                    
+      │                    LEVE (fama sobe, happiness desce pouco):
+      │                    → 'spin': "Transformar em press positiva. 'Idol vista com amigo —
+      │                      evidência de que tem vida social saudável.' Fama +20, happiness −2
+      │                      (em vez de −5 sem PR)."
+      │                    
+      │                    MÉDIO — avalia PERSONALIDADE da idol:
+      │                    → Idol Temperamento > 12 + Profissionalismo alto:
+      │                      'apologize' (sincero): "Idol emite statement pessoal. Fãs
+      │                      respeitam honestidade. Impacto: fama +30 (instead of +50 sem PR
+      │                      mas happiness −8 em vez de −15)."
+      │                    → Idol Temperamento < 8 (defensiva):
+      │                      'deny': "Desmentir com elegância. 'Informação incorreta.'
+      │                      Funciona se fãs são leais (loyalty > 60). Risco se provas surgem."
+      │                    → Fan mood > 70 + loyalty > 60:
+      │                      'spin': "Fãs vão defender sozinhos. Só precisamos dar o narrative."
+      │                    → Fan mood < 40 (já irritados):
+      │                      'apologize' obrigatório. Qualquer outra estratégia piora.
+      │                    
+      │                    GRAVE:
+      │                    → SEMPRE 'apologize' + damage control campaign.
+      │                    → "Emitir statement formal + idol faz aparição pública humilde
+      │                      + agência anuncia medidas (pausa temporária, reflexão)."
+      │                    → Follow-up: PR campaign de recovery na semana seguinte.
+      │                    
+      ├─ Outstanding (18-19): Match por severidade + personalidade. Sem cross-ref com fan state.
+      ├─ Very Good (15-17): Leve→spin. Médio→apologize. Grave→apologize + damage control.
+      │                      Sem personalização pela idol.
+      ├─ Good (12-14):    Leve→silence. Médio→apologize. Grave→apologize.
+      ├─ Average (10-11): Tudo→apologize (safe mas não optimal para leves).
+      ├─ Competent (7-9): Tudo→silence (esperar passar). Funciona para leves, péssimo para graves.
+      ├─ Reasonable (4-6): Não responde (silence forçado por inação).
+      └─ Unsuited (1-3):  Pode emitir statement que PIORA a situação.
+                           "Disse algo que não devia." Fama −50 extra, happiness −10 extra.
+
+3. AVALIAR REAÇÃO DOS FÃS (pré-execução)
+   └─ Skill: Fan Psychology
+      ├─ Elite (20):      Simula reação de cada segmento:
+      │                    "Se apologize: hardcore fãs (20% do fan club) aceitam em 1 semana.
+      │                    Casuals (50%) esquecem em 2 semanas. Anti-fans (5%) vão usar contra.
+      │                    Net effect: mood −8 esta semana, recovery +5/semana.
+      │                    Em 3 semanas, mood volta ao normal."
+      │                    vs "Se deny: hardcore aceitam imediatamente. Casuals ficam 50-50.
+      │                    MAS se prova surge: mood crash −20 e recovery 6+ semanas."
+      │                    Avalia risco de cada estratégia.
+      ├─ Outstanding (18-19): Avalia fan mood trend. "Fãs leais → spin ok. Fãs irritados → apologize."
+      ├─ Very Good (15-17): "Fan mood alta → mais tolerância." Ajusta confiança da estratégia.
+      ├─ Good (12-14):    "Fãs vão ficar chateados." (sem segmentação).
+      ├─ Average−:        Não avalia reação dos fãs.
+
+4. DECISÃO FINAL
+   ├─ Se escândalo ativo E estratégia definida:
+   │   → return { type: 'respondScandal', eventId, strategy: 'deny'|'apologize'|'spin'|'silence',
+   │     idol statement, followUpCampaign?, estimatedImpact }
+   └─ Se sem escândalo OU não percebeu:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'respondScandal', eventId: string, strategy: ScandalStrategy, idolStatement: string, followUpCampaign?: CampaignConfig, estimatedImpact: { fameDelta: number, happinessDelta: number, fanMoodDelta: number } }` | `null`
+
+---
+
+#### Decisão 11.1.2: Campanha PR Proativa
+
+**CONTEXTO:** Oportunidades de PR (job S-grade, release, trending positivo, fan mood alta)
+**Primary skill:** Media Savvy × Industry Knowledge
+
+```
+Flowchart simplificado:
+1. Scan oportunidades:
+   → Media Savvy: Elite identifica 5+ oportunidades/semana. Unsuited: zero.
+   → Types: viral_push (pós-success), image_boost (pré-release), damage_control (pós-crisis)
+2. Priorizar por ROI:
+   → Industry Knowledge: Elite calcula fame × media coverage × cost. Competent: reage só a crises.
+3. Alocar budget:
+   → Financial Acumen: Elite usa diminishing returns. Reasonable: 0 budget.
+4. Coordenar timing:
+   → Elite: "PR campaign + release + show na mesma semana = amplificação 3×."
+   → Good: "PR campaign esta semana." Sem coordenação.
+```
+
+**OUTPUT:** `{ type: 'launchPRCampaign', idolId: string, campaignType: string, budget: number }` | `null`
+
+---
+
+### Cargo 11.2: Social Media
+
+---
+
+#### Decisão 11.2.1: Gerir Presença Online
+
+**CONTEXTO:** Roster, fan moods, trending topics, social media state por idol
+**Primary skill:** Media Savvy × Fan Psychology
+
+```
+Flowchart simplificado:
+1. Priorizar urgências:
+   → Media Savvy: Elite detecta negative trending em 1 dia. Unsuited: nunca detecta.
+   → Urgente: negative trending → manage. Positivo: capitalize (post engagement content).
+2. Planear conteúdo por idol:
+   → Fan Psychology: Elite personaliza por fan segment. Competent: post genérico.
+   → Elite: "Idol X tem hardcore fãs que querem behind-the-scenes. Post BTS do estúdio."
+   → Average: "Post foto com legenda genérica."
+3. Gerir alcance:
+   → Elite: gere todas idols, content calendar semanal, cross-promotion entre idols.
+   → Good: top-5 idols. Average: top-3. Competent: só se há crise online.
+```
+
+**OUTPUT:** `{ type: 'socialMediaAction', idolId: string, action: 'post'|'engage'|'manage_negative'|'promote', content?: string }[]` | `null`
+
+---
+
+### Cargo 11.3: Fan Club Management
+
+---
+
+#### Decisão 11.3.1: Analisar e Gerir Fan Clubs
+
+**CONTEXTO (o que a IA avalia):**
+- Fan clubs de cada idol/grupo: size, mood (0-100), loyalty (0-100), toxicidade (0-100)
+- Segmentos: casual%, dedicated%, hardcore% — cada segmento tem demandas diferentes
+- Demandas pendentes: "queremos fan meeting", "queremos merch novo", "queremos mais shows"
+- Eventos de fan club recentes: fan meeting, signing, online event (quando foi o último)
+- Escândalos recentes: impacto no fan mood
+- Idol activity: idol tem sido activa (jobs, posts) ou ausente (injury, rest)?
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Fan Psychology** | Core: ler o que cada segmento de fãs quer e o que os faz felizes/infelizes |
+| **People Management** | Mediar conflitos entre segmentos (hardcore vs casual, anti-fans) |
+| **Media Savvy** | Engagement campaigns que amplificam mood positivo |
+
+**FLOWCHART:**
+
+```
+1. SCAN FAN CLUB HEALTH
+   └─ Skill: Fan Psychology
+      ├─ Elite (20):      Dashboard mental de cada fan club:
+      │                    "Fan club Mei: 25K members. Mood 72. Loyalty 68. Toxicidade 15.
+      │                    Segmentos: 45% casual, 35% dedicated, 20% hardcore.
+      │                    Demandas: hardcore pedem fan meeting há 4 semanas (urgente).
+      │                    Casual segment crescendo (bom sinal — idol gaining mainstream appeal).
+      │                    Risk: se não atender demand de hardcore, loyalty cai → segment shift
+      │                    para casual (menos merch revenue, menos ticket sales)."
+      │                    Prioriza: toxicidade > 60 = emergência. Demand > 3 semanas = atenção.
+      │                    Mood < 40 = crise. Tudo ok = manutenção.
+      ├─ Outstanding (18-19): Mood + toxicidade + demands. Flag crises e urgências.
+      ├─ Very Good (15-17): Mood + toxicidade. Flag se mood < 50 ou toxicidade > 50.
+      ├─ Good (12-14):    Mood por fan club. Flag se < 40.
+      ├─ Average (10-11): "Fan clubs estão ok" ou "estão mal" (binário, média do roster).
+      ├─ Competent (7-9): Só nota se mood < 30 (crise óbvia).
+      ├─ Reasonable (4-6): Não analisa.
+      └─ Unsuited (1-3):  Sem awareness de fan state.
+
+2. ATENDER DEMANDAS
+   └─ Skill: Fan Psychology × People Management
+      ├─ Elite (20):      Match demand com acção:
+      │                    "Hardcore querem fan meeting → planear fan meeting intimate (50 pessoas,
+      │                    ¥2000/ticket, signing + photo). Satisfaz hardcore, loyalty +10.
+      │                    Casual querem mais conteúdo → social media campaign + behind-the-scenes.
+      │                    Dedicated querem merch → sinalizar ao Operations Director: merch order."
+      │                    Cada segmento recebe atenção diferenciada.
+      │                    Prioriza: demanda mais antiga primeiro (FIFO com peso por loyalty impact).
+      ├─ Outstanding (18-19): Match demand top-3 com acções. 1 acção por segmento.
+      ├─ Very Good (15-17): Atende demand mais antiga. Acção genérica.
+      ├─ Good (12-14):    Atende se demand > 4 semanas. Genérico.
+      ├─ Average (10-11): "Precisamos fazer algo para os fãs." Sem especificar.
+      ├─ Competent−:      Não atende demandas.
+
+3. GERIR TOXICIDADE
+   └─ Skill: People Management
+      ├─ Elite (20):      Root cause analysis:
+      │                    "Toxicidade 55 no fan club de Yui. Causa: inter-fan war entre
+      │                    fãs da Yui e fãs da Mei (ambas no grupo Aurora, fans disputam
+      │                    quem é a 'main'). Solução: push narrative de 'unidade' —
+      │                    post conjunto Yui+Mei + música collab + fan event together.
+      │                    Deescalar sem censurar (censura piora)."
+      ├─ Outstanding (18-19): Identifica causa. Engagement campaign targeted.
+      ├─ Very Good (15-17): Engagement campaign genérica se toxicidade > 50.
+      ├─ Good (12-14):    "Moderar comentários negativos." (superficial).
+      ├─ Average−:        Não gere toxicidade. Problemas escalam.
+
+4. REPORTAR ESTADO AO DECISION PHASE
+   → return { type: 'fanClubReport', clubs: [{idolId, mood, loyalty, toxicity,
+     demandsMet, risks}], actionsRecommended: [{action, targetClub, urgency}] }
+   (Informativo — alimenta Head Producer, Events, Merch decisions.)
+```
+
+**OUTPUT:** `{ type: 'fanClubReport', ... }` + `{ type: 'planFanEvent', ... }` se demand atendida
