@@ -1167,3 +1167,204 @@ Each Decision Process defines:
 ```
 
 **OUTPUT:** `{ type: 'terminateContract', contractId: string, mutual: boolean }` | `{ type: 'listForTransfer', idolId: string, askingPrice: number }` | `null`
+
+---
+
+### Cargo 3.2: Gestão de Roster
+
+---
+
+#### Decisão 3.2.1: Avaliar Composição do Roster
+
+**CONTEXTO (o que a IA avalia):**
+- Roster completo: todas idols contratadas com stats, tier, age, archetype, fame, ROI
+- 12 archetypes possíveis (center, ace, visual, leader, mood_maker, rapper, dancer, vocalist, variety, mysterious, cute, cool) — quantas idols por archetype
+- Distribuição de idade: quantas por faixa (15-17, 18-21, 22-25, 26-30, 30+)
+- Revenue concentration: % da receita gerada por top-1, top-3 idols
+- Groups: quais grupos existem, composição, synergy scores
+- Pipeline: quantas idols em desenvolvimento (tier F-C com dev plans ativos)
+- Mercado: archetypes disponíveis no mercado que cobririam gaps
+- Contratos expirando nos próximos 3 meses (quem pode sair)
+- Tier da agência (determina roster size ideal)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Judging Idol Ability** | Avaliar o nível real de cada idol — não apenas tier mas consistência, versatilidade, trajectory |
+| **Judging Idol Potential** | Identificar quais idols no pipeline vão cobrir gaps futuros sem precisar recrutar |
+| **Industry Knowledge** | Benchmark: como é um roster saudável para o tier da agência |
+| **Financial Acumen** | Avaliar revenue concentration e dependency risk |
+
+**FLOWCHART:**
+
+```
+1. ANÁLISE DE ARCHETYPE COVERAGE
+   └─ Skill: Judging Idol Ability
+      ├─ Elite (20):      Mapa completo: 12 archetypes × idols por cada.
+      │                    Não conta só primary archetype — avalia secondary também.
+      │                    "Center: 2 idols (Yui primary, Mei secondary). Mas Mei está a
+      │                    evoluir para Vocalist — em 6 semanas só teremos 1 Center."
+      │                    Avalia QUALIDADE dentro do archetype: "temos 3 Dancers mas
+      │                    2 são tier D — efetivamente só 1 contribui."
+      │                    Flag: archetypes com 0 idols competitivas (gap real).
+      ├─ Outstanding (18-19): Mapa de 12 archetypes por primary. Qualidade por tier.
+      │                        Identifica gaps: archetypes com 0 ou com apenas tier D-F.
+      ├─ Very Good (15-17): Conta idols por archetype. Flag archetypes com 0.
+      │                      Diferencia: "0 = gap crítico, 1 = risco."
+      ├─ Good (12-14):    Conta por archetype. Flag archetypes com 0 idols.
+      ├─ Average (10-11): Identifica os 2-3 archetypes mais comuns e os 2-3 em falta.
+      ├─ Competent (7-9): Nota se falta "vocalist" ou "dancer" (os mais óbvios).
+      ├─ Reasonable (4-6): "Temos muitas idols parecidas" (vago, sem especificar).
+      └─ Unsuited (1-3):  Sem análise. "O roster está bom" (mesmo com gaps gritantes).
+
+2. ANÁLISE DE DISTRIBUIÇÃO DE IDADE
+   └─ Skill: Judging Idol Potential
+      ├─ Elite (20):      Projeta: "60% do roster tem 22-25 anos. Peak é 20-24.
+      │                    Em 3 anos, 60% estará em declínio simultâneo.
+      │                    Precisamos recrutar 3-4 idols de 15-17 AGORA para pipeline."
+      │                    Calcula: when each idol hits peak, plateau, decline.
+      │                    Identifica "graduation cliff": múltiplas idols retiring no mesmo ano.
+      ├─ Outstanding (18-19): Identifica concentração de idade. Projeta 2 anos.
+      │                        Flag se >50% na mesma faixa.
+      ├─ Very Good (15-17): Distribui por 3 faixas (jovem/prime/veterana).
+      │                      Flag se alguma faixa tem >60%.
+      ├─ Good (12-14):    Conta jovens vs veteranas. "Roster envelhecendo" ou "roster jovem."
+      ├─ Average (10-11): Nota idade média. "Alta" ou "baixa."
+      ├─ Competent (7-9): Nota se a idol mais velha está "velha" (>28).
+      ├─ Reasonable (4-6): Não analisa idade.
+      └─ Unsuited (1-3):  Sem análise.
+
+3. ANÁLISE DE REVENUE CONCENTRATION
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      Revenue por idol nos últimos 3 meses.
+      │                    Herfindahl index: sum of (share_i)^2.
+      │                    "Top-1 idol gera 42% da receita. Se ela sair ou se lesionar,
+      │                    agência perde quase metade da receita. Risco: CRÍTICO."
+      │                    "Top-3 geram 78%. Diversificação INSUFICIENTE."
+      │                    Compara com benchmark do tier (regional: top-1 deveria ser <30%).
+      ├─ Outstanding (18-19): Top-1 e top-3 revenue share. Flag se top-1 > 35%.
+      ├─ Very Good (15-17): Top-1 revenue share. Flag se > 40%.
+      ├─ Good (12-14):    Identifica idol que "ganha mais". Flag se parece dominante.
+      ├─ Average (10-11): Nota que "uma idol carrega a agência" se óbvio.
+      ├─ Competent (7-9): Não analisa concentração.
+      ├─ Reasonable (4-6): Não analisa.
+      └─ Unsuited (1-3):  Não analisa.
+
+4. GERAR RECOMENDAÇÕES
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Recomendações priorizadas e actionable:
+      │                    "1. Recrutar Center tier B+ (gap crítico, grupo Aurora sem Center).
+      │                    2. Iniciar dev plans para 3 novatas da pipeline (cobertura futura).
+      │                    3. Considerar vender Idol Z (ROI negativo, archetype super-coberto).
+      │                    4. Renovar Idol W antecipadamente (única Vocalist tier A, contrato
+      │                    expira em 8 sem — rival pode tentar buyout)."
+      │                    Cada recomendação com: urgência, custo estimado, e quem deve executar.
+      ├─ Outstanding (18-19): Top-3 recomendações priorizadas com urgência.
+      ├─ Very Good (15-17): Top-2 recomendações: "recrutar archetype X" + "atenção ao contrato Y."
+      ├─ Good (12-14):    1 recomendação principal: o gap mais crítico.
+      ├─ Average (10-11): "Precisamos de mais [archetype]."
+      ├─ Competent (7-9): "Roster podia ser melhor." (genérico)
+      ├─ Reasonable (4-6): Sem recomendações.
+      └─ Unsuited (1-3):  Sem output.
+
+5. DECISÃO FINAL
+   → return { type: 'rosterAssessment', gaps, ageDistribution, revenueConcentration, recommendations }
+   (Este output é INFORMATIVO — alimenta decisões de Scouting, Transfer, e Strategy.
+   Não é uma ação direta.)
+```
+
+**OUTPUT:** `{ type: 'rosterAssessment', gaps: ArchetypeGap[], ageDistribution: AgeDist, revenueConcentration: RevenueConc, recommendations: Recommendation[] }`
+
+**NOTA:** Esta decisão roda 1× por mês (não semanalmente). O assessment é cacheado e consumido por: Chief Scout (para direcionar missões), Head Producer (para ajustar strategy), e Talent Director (para priorizar renovações/rescisões).
+
+---
+
+### Cargo 3.3: Transferências
+
+---
+
+#### Decisão 3.3.1: Listar Idol para Transferência (Venda)
+
+**CONTEXTO (o que a IA avalia):**
+- Roster assessment mais recente (da decisão 3.2.1): gaps, concentração, recomendações
+- Idols com ROI negativo persistente (3+ meses)
+- Idols em archetypes super-cobertos (3+ idols no mesmo archetype)
+- Roster size vs limite do tier da agência (se acima → precisa vender)
+- Market value de cada idol (fame × tier × age × contract_remaining)
+- Contratos: meses restantes (mais meses = mais valor de transfer)
+- Happiness e Lealdade de cada idol (idol infeliz → vender antes de rescisão forçada)
+- Demanda de mercado: rivais procuram este archetype? (baseado em intel se disponível)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Financial Acumen** | Calcular asking price correto e avaliar timing de venda |
+| **Judging Idol Ability** | Identificar quais idols são dispensáveis sem prejudicar o roster |
+| **Industry Knowledge** | Avaliar demanda de mercado — tem comprador? Quando é o melhor timing? |
+
+**FLOWCHART:**
+
+```
+1. IDENTIFICAR CANDIDATAS À VENDA
+   └─ Skill: Judging Idol Ability
+      ├─ Elite (20):      Avaliação holística de cada idol no roster:
+      │                    → ROI negativo + archetype super-coberto + potencial atingido → VENDER
+      │                    → ROI negativo + archetype raro + potencial alto → MANTER (investir)
+      │                    → ROI positivo + archetype super-coberto + contrato longo → considerar
+      │                      (vender no pico de valor para reinvestir em gap)
+      │                    → Idol infeliz com Lealdade < 5 → vender antes que force rescisão
+      │                      (transferência dá receita, rescisão dá custo)
+      │                    Identifica as top-3 candidatas por "disposability score":
+      │                    (archetype_coverage × roi_trend × potential_gap × happiness).
+      ├─ Outstanding (18-19): Candidatas: ROI negativo E archetype coberto por outra.
+      │                        Avalia se idol infeliz pode forçar rescisão em breve.
+      ├─ Very Good (15-17): Candidatas: ROI negativo 3+ meses. Verifica archetype coverage.
+      ├─ Good (12-14):    Candidatas: ROI negativo 3+ meses. Sem avaliação de archetype.
+      ├─ Average (10-11): Candidatas: idol com menor fame no roster.
+      ├─ Competent (7-9): Só lista se roster acima do limite do tier. A mais barata sai.
+      ├─ Reasonable (4-6): Só lista se forçado (board pede, ou debt crisis).
+      └─ Unsuited (1-3):  Nunca lista. Não identifica necessidade de vender.
+
+2. AVALIAR DEMANDA DE MERCADO
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Cruza com intel de rivais: "Rival Crown Entertainment perdeu
+      │                    sua única Vocalist tier A na semana passada. Se listarmos a nossa
+      │                    Vocalist tier B agora, Crown vai pagar premium."
+      │                    Timing: lista QUANDO há demanda, não quando precisa vender.
+      │                    "Melhor esperar 2 semanas — mercado vai ter mais rivais procurando
+      │                    após a janela de transfers."
+      ├─ Outstanding (18-19): Avalia se rivais do mesmo tier precisam deste archetype.
+      │                        Timing consciente (antes vs depois de events).
+      ├─ Very Good (15-17): Avalia: "idols deste tier/archetype vendem rápido ou lento?"
+      ├─ Good (12-14):    "Idol com fame > 1000 vai ter interessados." Não analisa timing.
+      ├─ Average (10-11): Não avalia demanda. Lista e espera.
+      ├─ Competent−:      Não avalia demanda.
+
+3. DEFINIR ASKING PRICE
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      Pricing strategy:
+      │                    askingPrice = marketValue × demandMultiplier × urgencyDiscount.
+      │                    demandMultiplier: se rival precisa desesperadamente → × 1.5.
+      │                    urgencyDiscount: se precisamos vender rápido → × 0.85.
+      │                    Sabe que asking price alto demora mais mas dá mais receita.
+      │                    Asking price baixo vende rápido.
+      │                    Escolhe baseado na urgência financeira da agência.
+      ├─ Outstanding (18-19): marketValue × 1.2 (pedir acima, espaço para negociar).
+      ├─ Very Good (15-17): marketValue × 1.1.
+      ├─ Good (12-14):    marketValue × 1.0 (preço justo).
+      ├─ Average (10-11): marketValue × 0.95 (ligeiramente abaixo — quer vender rápido).
+      ├─ Competent (7-9): marketValue × 0.85 (subvaloriza para despachar).
+      ├─ Reasonable (4-6): Preço arbitrário (pode ser muito abaixo do valor real).
+      └─ Unsuited (1-3):  Se chegar aqui: preço aleatório. Pode listar por ¥1M
+                           uma idol que vale ¥50M.
+
+4. DECISÃO FINAL
+   ├─ Se candidata identificada E demanda existe (ou urgência financeira):
+   │   → return { type: 'listForTransfer', idolId, askingPrice }
+   └─ Se ninguém para vender OU timing ruim (sem demanda E sem urgência):
+       → return null
+```
+
+**OUTPUT:** `{ type: 'listForTransfer', idolId: string, askingPrice: number }` | `null`
