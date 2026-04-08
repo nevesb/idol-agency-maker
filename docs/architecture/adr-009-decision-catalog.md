@@ -1368,3 +1368,220 @@ Each Decision Process defines:
 ```
 
 **OUTPUT:** `{ type: 'listForTransfer', idolId: string, askingPrice: number }` | `null`
+
+---
+
+## PAPEL 4: CHIEF SCOUT
+
+> Equivalente ao Chief Scout do FM. Coordena a rede de olheiros e avalia candidatos.
+
+### Cargo 4.1: Gestão de Olheiros
+
+---
+
+#### Decisão 4.1.1: Enviar Scout em Missão
+
+**CONTEXTO (o que a IA avalia):**
+- Scouts contratados: cada scout com região de origem, skill, specialty, status (idle/em missão)
+- Scouts ociosos (sem missão ativa) — candidatos para envio
+- Roster assessment (da decisão 3.2.1): gaps de archetype, necessidades
+- Regiões do Japão: cada uma com pool de idols diferente, density diferente
+- Histórico de missões: quais regiões já foram exploradas recentemente
+- Budget: custo de cada missão (proporcional a duração × scout salary)
+- Strategy focus: se agency focus = 'scouting', missões são prioridade
+- Tier da agência: determina quantos scouts ideal (garagem 1, elite 5+)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Judging Idol Potential** | Core: decidir ONDE procurar e O QUE procurar — qual archetype, qual região |
+| **Industry Knowledge** | Saber quais regiões têm mais talento e quais estão sobre-exploradas por rivais |
+| **Adaptability** | Ajustar plano quando scout reports voltam vazios — pivotar região/foco |
+
+**FLOWCHART:**
+
+```
+1. VERIFICAR SE HÁ SCOUTS OCIOSOS
+   ├─ Listar scouts com status = 'idle'
+   ├─ Se nenhum idle → return null (todos em missão)
+   └─ Se budget não permite mais missões → return null
+
+2. DEFINIR O QUE PROCURAR (foco da missão)
+   └─ Skill: Judging Idol Potential
+      ├─ Elite (20):      Cross-ref roster assessment com pipeline de desenvolvimento:
+      │                    "Temos gap em Center E em 6 meses a nossa única Vocalist
+      │                    aposenta. Preciso de: 1 Center imediato (tier B+) E
+      │                    1 Vocalist jovem (tier D-C com PT > 75 para desenvolver)."
+      │                    Define 2 focos simultâneos se tem 2+ scouts.
+      │                    Especifica: tier mínimo, idade range, PT estimado desejado.
+      ├─ Outstanding (18-19): Usa roster assessment para definir archetype prioritário.
+      │                        Define tier mínimo. 1 foco principal + 1 secundário.
+      ├─ Very Good (15-17): Usa roster gaps. Foco: archetype com 0 idols.
+      │                      Tier mínimo: C (para tier da agência).
+      ├─ Good (12-14):    Foco no gap mais óbvio do roster. Sem tier mínimo específico.
+      ├─ Average (10-11): Foco genérico: "encontrar idols boas." Sem archetype específico.
+      ├─ Competent (7-9): Foco genérico sem direção.
+      ├─ Reasonable (4-6): Sem foco. Missão genérica ("vá olhar").
+      └─ Unsuited (1-3):  Não envia missão. Scout fica idle.
+
+3. ESCOLHER REGIÃO
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Cruza: foco desejado × região com maior probability de encontrar.
+      │                    "Center costuma vir de Tokyo/Osaka. Vocalist de Nagoya/Fukuoka."
+      │                    Evita regiões onde rival tem scout ativo (competição reduz pool).
+      │                    Sabe timing: "feira de talentos em Osaka semana que vem —
+      │                    enviar scout para Osaka agora maximiza chance."
+      ├─ Outstanding (18-19): Match archetype × região. Evita sobre-exploradas (missões recentes).
+      ├─ Very Good (15-17): Usa especialidade do scout: scout de Osaka → enviar para Osaka
+      │                      (bônus de familiaridade).
+      ├─ Good (12-14):    Região com maior density de idols. Sem considerar competição.
+      ├─ Average (10-11): Região que nunca explorou (diversificar).
+      ├─ Competent (7-9): Região padrão (Tokyo — sempre há gente).
+      ├─ Reasonable (4-6): Região aleatória.
+      └─ Unsuited (1-3):  N/A (não chega aqui).
+
+4. DEFINIR DURAÇÃO
+   └─ Skill: Judging Idol Potential
+      ├─ Elite (20):      Duração adaptada à necessidade:
+      │                    Urgente (gap crítico): 2 semanas (rápido, menos idols encontradas).
+      │                    Pipeline (longo prazo): 4 semanas (mais idols, melhor avaliação).
+      │                    "Se tenho tempo, 4 semanas é sempre melhor — scout avalia com
+      │                    mais precisão e encontra candidatas que passam despercebidas."
+      ├─ Outstanding (18-19): 4 semanas se budget permite. 2 se urgente.
+      ├─ Very Good (15-17): 4 semanas default. 2 se budget apertado.
+      ├─ Good (12-14):    2 semanas (padrão). 4 se strategy focus = scouting.
+      ├─ Average (10-11): 2 semanas sempre.
+      ├─ Competent (7-9): 2 semanas sempre.
+      ├─ Reasonable (4-6): 2 semanas.
+      └─ Unsuited (1-3):  N/A.
+
+5. ATRIBUIR SCOUT À MISSÃO
+   └─ Skill: Adaptability (matching scout → missão)
+      ├─ Elite (20):      Match perfeito: scout com specialty no archetype buscado +
+      │                    região de origem = região da missão + skill alto.
+      │                    Se não há match perfeito, calcula quem é o "menos mau":
+      │                    "Scout A tem specialty Vocalist mas mando procurar Center.
+      │                    Bônus de specialty perdido, mas skill 17 compensa."
+      ├─ Outstanding (18-19): Prioriza specialty match. Se empate: maior skill.
+      ├─ Very Good (15-17): Scout com maior skill vai para missão mais importante.
+      ├─ Good (12-14):    Scout idle com maior skill.
+      ├─ Average (10-11): Primeiro scout idle da lista.
+      ├─ Competent (7-9): Primeiro idle.
+      ├─ Reasonable (4-6): Primeiro idle.
+      └─ Unsuited (1-3):  N/A.
+
+6. DECISÃO FINAL
+   ├─ Se scout atribuído + região + foco + duração definidos:
+   │   → return { type: 'sendScoutMission', scoutId, regionId, duration, focus: { archetype?, tierMin?, ageRange? } }
+   └─ Se nenhum scout idle OU sem budget:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'sendScoutMission', scoutId: string, regionId: string, duration: number, focus: ScoutingFocus }` | `null`
+
+---
+
+### Cargo 4.2: Avaliação de Candidatos
+
+---
+
+#### Decisão 4.2.1: Avaliar Candidatos e Recomendar Contratação
+
+**CONTEXTO (o que a IA avalia):**
+- Scout reports recebidos esta semana (lista de candidatos descobertos)
+- Para cada candidato: stats visíveis (com margem de erro do scout), tier estimado, age, region, archetype estimado
+- Margem de erro dos stats: depende do scout skill + pipeline de scouting usada
+  (olheiro de rua ±15, festival ±10, online ±20, transfer ±0)
+- Roster assessment: gaps atuais, necessidades
+- Budget: salário estimado do candidato (proporcional ao tier)
+- Rivais interessados no mesmo candidato (se intel disponível)
+- Shortlist atual: candidatos já marcados em avaliações anteriores
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Judging Idol Ability** | Core: avaliar stats reais através da margem de erro do report — "ela realmente é Good ou o scout errou?" |
+| **Judging Idol Potential** | Projetar: "stats baixos mas PT estimado alto = diamante bruto que vale o investimento" |
+| **Financial Acumen** | Avaliar se o custo (salary + treino + tempo de desenvolvimento) compensa o retorno projetado |
+| **Industry Knowledge** | Saber se há competição rival pelo candidato — velocidade de decisão |
+
+**FLOWCHART:**
+
+```
+1. PROCESSAR SCOUT REPORTS
+   ├─ Listar todos candidatos descobertos em reports não-lidos
+   ├─ Se nenhum report → return null
+   └─ Marcar reports como lidos
+
+2. FILTRAR CANDIDATOS (primeiro corte)
+   └─ Skill: Judging Idol Ability
+      ├─ Elite (20):      Lê stats com margem de erro reduzida (±1-2 em vez do base do scout).
+      │                    "Report diz Vocal 65 ±15. Com meu JIA Elite, leio como 65 ±3.
+      │                    Provavelmente entre 62-68. Suficiente para tier B."
+      │                    Filtra por: tier estimado real ≥ agência mínimo,
+      │                    archetype fit com roster gaps, age no range desejado,
+      │                    personality traits compatíveis (se report inclui hints).
+      │                    Mantém candidatas "hidden gem" (tier baixo mas sinais de PT alto).
+      ├─ Outstanding (18-19): Margem ±3-4. Filtra por tier + archetype fit + age.
+      │                        Mantém 1-2 hidden gems.
+      ├─ Very Good (15-17): Margem ±5. Filtra por tier ≥ agência min + archetype gap.
+      ├─ Good (12-14):    Margem ±7. Filtra por tier ≥ C. Shortlist top-5.
+      ├─ Average (10-11): Margem ±10. Filtra por tier estimado ≥ C. Top-3.
+      ├─ Competent (7-9): Margem ±12. Filtra só por "parece boa" (tier ≥ D). Top-3.
+      ├─ Reasonable (4-6): Margem ±15 (base do scout, sem redução). Top-1 mais famosa.
+      └─ Unsuited (1-3):  Não filtra. Ou aceita tudo ou rejeita tudo.
+      │                    Pode recomendar candidata tier F como se fosse A.
+
+3. AVALIAR POTENCIAL DE DESENVOLVIMENTO
+   └─ Skill: Judging Idol Potential
+      ├─ Elite (20):      Para cada candidata shortlistada:
+      │                    "Stats atuais avg 45, mas idade 15 e sinais de PT > 80.
+      │                    Se investir 24 semanas de treino focado, projecto tier A.
+      │                    Custo de desenvolvimento: ~¥2M/mês × 6 meses = ¥12M.
+      │                    Revenue projetada após tier A: ¥5M/mês.
+      │                    ROI positive em 8 meses. RECOMENDO."
+      │                    Identifica: candidata agora vs candidata investimento.
+      ├─ Outstanding (18-19): Avalia PT hints vs stats atuais. "Gap grande = potencial alto."
+      │                        Projeta timeline de desenvolvimento.
+      ├─ Very Good (15-17): "Stats baixos + jovem = potencial." vs "Stats altos + velha = o que vês é o que tens."
+      ├─ Good (12-14):    Avalia idade. Jovem = vale investir. Velha = precisa ser boa agora.
+      ├─ Average (10-11): Não avalia potencial. Só stats atuais.
+      ├─ Competent−:      Sem avaliação de potencial.
+
+4. AVALIAR CUSTO-BENEFÍCIO
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      Full cost model: salary_estimado × contract_duration +
+      │                    treino_custo + oportunidade_custo (slot no roster ocupado).
+      │                    vs revenue_projetada baseada em tier atingido × fame estimada.
+      │                    "Candidata A: ROI +30% em 12 meses. Candidata B: ROI +60% em 18
+      │                    meses. Se budget apertado: A. Se pode investir: B."
+      ├─ Outstanding (18-19): Salary estimado vs budget disponível + ROI rough.
+      ├─ Very Good (15-17): "Cabe no budget de salários? Revenue esperada > salary?"
+      ├─ Good (12-14):    "Cabe no budget? Sim/não."
+      ├─ Average (10-11): "É cara?" Sim/não baseado em percepção.
+      ├─ Competent−:      Não avalia custo. Recomenda baseado só em stats.
+
+5. CHECAR COMPETIÇÃO RIVAL
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      "2 rivais já mandaram scout para a mesma região na mesma semana.
+      │                    Provavelmente viram a mesma candidata. Se quisermos, precisamos
+      │                    agir ESTA SEMANA — propor contrato antes deles."
+      │                    Usa intel de rival activity para acelerar decisão.
+      ├─ Outstanding (18-19): Sabe que candidatas boas não ficam no mercado muito tempo.
+      │                        Flag urgência se candidata é tier B+.
+      ├─ Very Good (15-17): "Se candidata é muito boa, propor rápido."
+      ├─ Good−:            Não considera competição. Pode perder candidata por lentidão.
+
+6. DECISÃO FINAL
+   ├─ Para cada candidata aprovada (passou filtro + custo ok):
+   │   → return { type: 'recommendSigning', idolId, urgency, assessment }
+   │   (recomendação vai para Talent Director → se aceita, inicia negociação)
+   ├─ Se nenhuma candidata passa filtros:
+   │   → return null
+   └─ Se competição detectada em candidata top:
+       → return { type: 'recommendSigning', idolId, urgency: 'critical', assessment }
+```
+
+**OUTPUT:** `{ type: 'recommendSigning', idolId: string, urgency: 'low' | 'medium' | 'high' | 'critical', assessment: CandidateAssessment }[]` | `null`
