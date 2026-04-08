@@ -2811,3 +2811,552 @@ PASSO 1 — APTIDÃO:
 ```
 
 **OUTPUT:** `{ type: 'planRelease', projectId: string, releaseDate: number, releaseType: 'single' | 'ep' | 'album', tracklist: TrackOrder[], leadSingle: string, marketingBudget: number, hypeActivities: HypeActivity[], projectedChartPosition: number }` | `null`
+
+---
+
+## PAPEL 10: SHOW DIRECTOR
+
+> Tudo sobre performances ao vivo. Combina Stage Manager + Coreógrafo do GDD.
+> IMPORTANTE: Não existe substituição de idols mid-show. O grupo entra e canta
+> inteiro. O que muda entre músicas é a **escalação** — quem está no vocal
+> principal, quem está na frente, quem descansa atrás. A IA pode fazer estas
+> rotações automaticamente durante o show para optimizar performance e fadiga.
+
+### Cargo 10.1: Planeamento de Shows
+
+---
+
+#### Decisão 10.1.1: Planear Show
+
+**CONTEXTO (o que a IA avalia):**
+- Roster/grupo: fame, tier, últimas performances, fama trend
+- Venues disponíveis: capacidade, custo, requirements mínimos de produção
+- Calendar: datas livres, eventos sazonais, feriados, shows de rivais
+- Budget: custo total estimado (venue + produção + staff + travel)
+- Strategy: growthPosture (aggressive = mais shows, organic = menos)
+- Músicas disponíveis: catálogo com mastery por membro (prontas para performance?)
+- Fan clubs: mood, demanda ("fãs pedem show ao vivo há 4 semanas")
+- Contexto: release recente (release concert), milestone (100th show), season finale
+- Shows recentes: quando foi o último show desta idol/grupo (evitar show fatigue)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Stage Presence** | Core: avaliar se roster/grupo está PRONTO para um show nesta venue e escala |
+| **Industry Knowledge** | Timing: quando fazer show para maximizar impacto (pós-release, season, etc.) |
+| **Financial Acumen** | ROI: custo do show vs receita esperada (tickets + merch + fame boost) |
+
+**FLOWCHART:**
+
+```
+1. AVALIAR SE HÁ RAZÃO PARA SHOW
+   └─ Skill: Industry Knowledge
+      ├─ Elite (20):      Analisa múltiplos triggers simultaneamente:
+      │                    → Release recente (< 2 semanas): "release concert — timing perfeito.
+      │                      Fãs compraram o single, querem ouvir ao vivo."
+      │                    → Milestone (fame atingiu nova faixa, aniversário do grupo):
+      │                      "celebration show — media coverage natural."
+      │                    → Estratégia: growthPosture aggressive E sem show há 4+ semanas.
+      │                    → Fan demand: fan club mood > 80 E pedindo show > 3 semanas.
+      │                    → Season: summer festival season → participar como convidado ou host.
+      │                    Avalia COMBOS: "release + milestone + summer = show GRANDE.
+      │                    Não desperdiçar com show pequeno — ir para arena."
+      │                    Planeja 2-3 shows no trimestre: "show pequeno mês 1,
+      │                    médio mês 2, grande mês 3 (season finale)."
+      ├─ Outstanding (18-19): Avalia top-3 triggers. 1 show planeado por vez.
+      ├─ Very Good (15-17): Release → show. Fan demand alta → show. Strategy → show. 1 trigger.
+      ├─ Good (12-14):    Show se release recente OU strategy aggressive.
+      ├─ Average (10-11): Show se Head Producer pediu ou strategy diz.
+      ├─ Competent (7-9): Show só se explicitamente solicitado.
+      ├─ Reasonable (4-6): Raramente planeia. Perde oportunidades.
+      └─ Unsuited (1-3):  Nunca planeia shows.
+
+2. ESCOLHER VENUE
+   └─ Skill: Stage Presence
+      ├─ Elite (20):      Match fame × ambição × capacidade com precisão:
+      │                    "Grupo fame 3500. Venue ideal: Hall 2000 seats (80% lotação
+      │                    garantida com fan club de 15K). Arena 10K seria arriscado
+      │                    (fill rate ~35% = mau visual, media negativa).
+      │                    MAS se release concert de single que está no top 10 →
+      │                    arena pode funcionar (buzz mediático atrai casual fans)."
+      │                    Considera: "venue stretch" deliberado para milestone shows
+      │                    (aceita fill rate 60% em troca de "primeiro show em arena").
+      ├─ Outstanding (18-19): Fame → venue bracket + ajuste por contexto (release = stretch).
+      ├─ Very Good (15-17): Fame → venue bracket fixo.
+      │                      fame < 500: café, 500-2K: house, 2K-5K: hall, 5K+: arena.
+      ├─ Good (12-14):    Idem VG mas sem stretch possibility.
+      ├─ Average (10-11): Venue que "parece certo." Pode over ou under-shoot.
+      ├─ Competent (7-9): Venue mais barata que cabe no budget.
+      ├─ Reasonable (4-6): Sempre café/house (safe, barato, boring).
+      └─ Unsuited (1-3):  Venue aleatória. Pode reservar arena para grupo tier D (desastre).
+
+3. AVALIAR ROI
+   └─ Skill: Financial Acumen
+      ├─ Elite (20):      Full P&L projection do show:
+      │                    Receita = (venue.capacity × fill_rate × ticket_price) + merch_estimate
+      │                    Despesa = venue_cost + production_packages + staff_bonus + marketing
+      │                    Lucro estimado: Receita − Despesa.
+      │                    "Show no Hall: receita ¥8M, despesa ¥5M = lucro ¥3M + fame boost
+      │                    equivalente a ¥2M em marketing. Total value: ¥5M. APROVADO."
+      │                    Se lucro negativo mas fame boost alto: "investimento em visibilidade.
+      │                    Aceitável se budget permite."
+      ├─ Outstanding (18-19): Receita vs despesa rough. Inclui fame value estimate.
+      ├─ Very Good (15-17): Ticket revenue estimate vs custo total.
+      ├─ Good (12-14):    "Cabe no budget?" Sim/não.
+      ├─ Average (10-11): "Quanto custa?" Se < 20% budget mensal → ok.
+      ├─ Competent (7-9): Se tem dinheiro → ok.
+      ├─ Reasonable (4-6): Não avalia custo. Pode planejar show que gera prejuízo.
+      └─ Unsuited (1-3):  Sem avaliação.
+
+4. DECISÃO FINAL
+   ├─ Se razão + venue + ROI aprovado:
+   │   → return { type: 'planShow', venue, date, lineup, estimatedBudget,
+   │     context: 'release'|'milestone'|'season'|'regular'|'fan_demand' }
+   └─ Se sem razão OU ROI negativo E sem justificativa:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'planShow', venue: VenueConfig, date: number, lineup: string[], estimatedBudget: number, context: ShowContext }` | `null`
+
+---
+
+### Cargo 10.2: Gestão de Palco
+
+---
+
+#### Decisão 10.2.1: Selecionar Pacotes de Produção
+
+**CONTEXTO (o que a IA avalia):**
+- Show planeado: venue (tipo, capacidade), date, lineup
+- Venue requirements mínimos: arena precisa som profissional+, etc.
+- Budget alocado para produção
+- Pacotes disponíveis: Som (3 tiers), Iluminação (3), Banda (3), Cenografia (3), FX (3)
+- Stage Manager skill: desconto de −5% a −20% por negociação eficiente
+- Impacto de cada pacote: som e iluminação = maior ROI, cenografia = first impression
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Stage Presence** | Core: saber quais pacotes têm maior impacto no tipo de show |
+| **Financial Acumen** | Optimizar custo: investir onde importa, economizar onde não |
+
+**FLOWCHART:**
+
+```
+1. VERIFICAR MÍNIMOS DO VENUE
+   ├─ Cada venue tem requirements: arena precisa som Profissional+, etc.
+   └─ Abaixo do mínimo = −30% qualidade de produção
+
+2. ALOCAR PACOTES
+   └─ Skill: Stage Presence
+      ├─ Elite (20):      Production design completo:
+      │                    "Show no Hall 2000. Budget ¥6M.
+      │                    Som Premium (¥2M) — essencial, audiência nota diferença.
+      │                    Iluminação Premium (¥1.5M) — sync com setlist (mood por música).
+      │                    Banda Semi-live (¥1M) — melhor que backing track, não precisa full band.
+      │                    Cenografia Básica (¥800K) — ROI baixo em halls, investir em som/luz.
+      │                    FX Básico (¥500K) — 1-2 momentos de confetti/smoke. Suficiente.
+      │                    Total: ¥5.8M. Desconto −15% = ¥4.9M. Margem: ¥1.1M."
+      │                    Cada pacote escolhido para complementar o setlist específico.
+      ├─ Outstanding (18-19): Prioriza som + iluminação (maior ROI). Desconto −10%.
+      │                        Outros no mínimo do venue ou básico.
+      ├─ Very Good (15-17): Som e luz acima do mínimo. Resto no mínimo. Desconto −5%.
+      ├─ Good (12-14):    Tudo no mínimo do venue. Upgrade som se sobra budget.
+      ├─ Average (10-11): Tudo no mínimo.
+      ├─ Competent (7-9): Tudo no mínimo. Pode ficar abaixo em 1 pacote (se confuso).
+      ├─ Reasonable (4-6): Tudo no básico mesmo que venue exija profissional (−30% penalty).
+      └─ Unsuited (1-3):  Aleatório. Pode gastar ¥8M em FX Premium e ¥0 em som.
+
+3. DECISÃO FINAL
+   → return { type: 'selectPackages', showId, packages, totalCost, discount }
+```
+
+**OUTPUT:** `{ type: 'selectPackages', showId: string, packages: PackageSelection, totalCost: number, discount: number }`
+
+---
+
+### Cargo 10.3: Coreografia e Formações
+
+---
+
+#### Decisão 10.3.1: Montar Escalação por Música (Formações)
+
+> **PRINCÍPIO FUNDAMENTAL**: Não existe substituição de idols mid-show.
+> Todas as idols do grupo entram e ficam até ao fim. O que muda entre músicas
+> é a **escalação** — quem está no vocal principal, quem dança na frente, quem
+> descansa atrás. Dentro da mesma música, a coreografia pode ter rotações previstas
+> (ex: center roda entre 2 idols no verso vs refrão). Entre músicas, a posição
+> de cada idol pode mudar completamente para gerir fadiga.
+
+**CONTEXTO (o que a IA avalia):**
+- Setlist do show: lista de músicas em ordem, com estrutura por partes
+  (Intro-Verso-PréRefrão-Refrão-Verso-Refrão-Ponte-Refrão-Final)
+- Para cada música: requisitos de performance por parte (partes mais vocais vs mais dança)
+- Número de idols na coreografia vs membros do grupo (coreografia para 5 num grupo de 8:
+  3 descansam rodando entre músicas)
+- Stats de cada idol: Vocal, Dance, Stamina, Charisma, Expression
+- Fadiga acumulada: model de fadiga por idol (cresce a cada música, mais para quem
+  está em posições exigentes — center, lead vocal consomem mais)
+- Mastery: nível de domínio de cada idol em cada música (mastery table)
+- Wellness pré-show: stress, health, motivation de cada idol
+- VocalProfile: tessitura de cada idol vs tessitura da música (vocal_fit)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Dance Technique** | Core: entender quais posições são mais exigentes fisicamente e rotar adequadamente |
+| **Stage Presence** | Saber quais posições impactam mais a audiência (center, front row) |
+| **Judging Idol Ability** | Ler stats reais para match idol → posição → parte da música |
+| **Adaptability** | Planear rotações de fadiga: "se Yui está center nas músicas 1-3, precisa descansar na 4-5" |
+
+**FLOWCHART:**
+
+```
+1. ANALISAR SETLIST E REQUISITOS
+   └─ Skill: Stage Presence
+      ├─ Elite (20):      Para cada música, mapeia:
+      │                    → Partes vocais intensas (Refrão, Bridge) → quem tem melhor Vocal?
+      │                    → Partes de dança intensas (Verso com choreo) → quem tem melhor Dance?
+      │                    → Partes de charisma (MC section, audience interaction) → quem tem Charisma?
+      │                    → Número de idols na coreografia da música (ex: 5 de 8 dançam,
+      │                      3 ficam nos backing vocals/posição de support atrás)
+      │                    Mapeia a ENERGIA requerida por música:
+      │                    "Música 1: uptempo dance (energy 9/10) → precisa dos melhores dancers na frente"
+      │                    "Música 4: ballad (energy 3/10) → vocal lead, dancers descansam"
+      │                    "Música 7: finale dance (energy 10/10) → ALL IN, todos na frente"
+      ├─ Outstanding (18-19): Mapeia energy por música. Identifica exigência vocal vs dance.
+      ├─ Very Good (15-17): Classifica: "uptempo = dancers na frente. Ballad = vocalist na frente."
+      ├─ Good (12-14):    Identifica músicas de alta vs baixa energia.
+      ├─ Average (10-11): "Todas as músicas são iguais." Sem análise de requisitos.
+      ├─ Competent−:      Sem análise. Mesma formação para todas músicas.
+
+2. ATRIBUIR POSIÇÕES POR MÚSICA (escalação)
+   └─ Skill: Judging Idol Ability × Dance Technique
+      ├─ Elite (20):      Para CADA música, define posição de CADA idol:
+      │                    Posições possíveis: Center, Lead Vocal, Front Dance, Support Dance,
+      │                    Back Vocal, Rest Position (atrás, canta backup leve).
+      │                    
+      │                    "Música 1 (uptempo, choreo para 5):
+      │                     → Center: Mei (Dance 82, Charisma 78) — impacto visual máximo
+      │                     → Lead Vocal: Yui (Vocal 88, vocal_fit 1.0 para esta música)
+      │                     → Front Dance: Riko (Dance 75), Saki (Dance 70)
+      │                     → Support Dance: Hana (Dance 55) — back row, moves simplificados
+      │                     → Rest: Miki, Aya, Kana (nos backing vocals, sem coreografia)
+      │                    
+      │                    Música 2 (mid-tempo vocal):
+      │                     → Center: Yui (vocal showcase — agora é ela na frente)
+      │                     → Lead Vocal: Mei (troca — Mei cantou muito pouco na música 1)
+      │                     → Front Dance: Miki, Aya (descansaram na música 1 — fresh)
+      │                     → Rest: Riko, Saki (dançaram intenso na música 1 — descansar)"
+      │                    
+      │                    REGRA DE ROTAÇÃO DE FADIGA:
+      │                    → Idol que foi Center/Front Dance em 2 músicas seguidas DEVE
+      │                      ir para Support ou Rest na 3ª música (fadiga > threshold).
+      │                    → Idol com Stamina < 50: max 2 músicas na frente antes de rest.
+      │                    → Idol com Stamina > 70: pode 3-4 músicas na frente antes de rest.
+      │                    
+      │                    REGRA DE VOCAL FIT:
+      │                    → Se música tem tessitura alta e idol tem tessitura baixa:
+      │                      NÃO colocar como Lead Vocal (vocal_fit 0.65 = penalidade grande).
+      │                    
+      │                    Output: mapa completo N_músicas × N_idols com posição por parte.
+      │                    
+      ├─ Outstanding (18-19): Posições definidas por música. Rotação de fadiga a cada 3 músicas.
+      │                        vocal_fit verificado para Lead Vocal.
+      ├─ Very Good (15-17): Posições definidas por bloco de setlist (opener block, mid block, closer).
+      │                      Rotação: front dancers trocam a cada bloco.
+      │                      Melhor dancer sempre center em uptempo. Melhor vocal em ballad.
+      ├─ Good (12-14):    2 formações: "uptempo formation" e "ballad formation."
+      │                    Todas uptempo usam mesma formação. Todas ballads usam outra.
+      │                    Rotação mínima.
+      ├─ Average (10-11): 1 formação para todo o show. Melhor idol no center sempre.
+      │                    Sem rotação. Idols com stamina baixa cansam rápido (fadiga 80%+ no fim).
+      ├─ Competent (7-9): 1 formação. Idol mais famosa no center. Sem considerar stats.
+      │                    Não verifica vocal_fit → penalidades de performance possíveis.
+      ├─ Reasonable (4-6): Formação aleatória. Idol com Dance 35 pode ser center dancer.
+      └─ Unsuited (1-3):  Sem formação definida. Idols "se organizam sozinhas."
+                           Performance: −20% base por falta de direção.
+
+3. PLANEAR ROTAÇÕES MID-SHOW (entre músicas)
+   └─ Skill: Adaptability
+      ├─ Elite (20):      PRÉ-PLANEIA rotações condicionais:
+      │                    "Se após música 3, Mei tem fadiga > 60%: swap Mei e Miki
+      │                    para música 4. Mei vai para Rest, Miki vai para Front Dance."
+      │                    Define 2-3 rotações condicionais por show (triggers automáticos).
+      │                    DURANTE O SHOW (se NPC está a dirigir): monitora fadiga real
+      │                    e pode fazer rotações não-planeadas se situation demands.
+      │                    "Riko está com fadiga 75% após música 2 (mais do que esperado).
+      │                    Mover para Rest na música 3 mesmo que não estava planeado."
+      ├─ Outstanding (18-19): 2 rotações condicionais pré-planeadas. Monitora fadiga durante show.
+      ├─ Very Good (15-17): 1 rotação condicional (após half-time do setlist).
+      │                      Não ajusta durante show.
+      ├─ Good (12-14):    Rotação fixa: front e back trocam no meio do show (sempre).
+      ├─ Average (10-11): Sem rotações planeadas. Formação fixa do início ao fim.
+      ├─ Competent−:      Sem rotações. Fadiga não gerida → performance degrada no fim.
+
+4. DECISÃO FINAL
+   ├─ Se formações definidas:
+   │   → return { type: 'assignFormations', showId, formations: [{
+   │       songId, positions: [{idolId, role, parts: [{partName, position}]}]
+   │     }], conditionalRotations: [{trigger, swap}] }
+   └─ Se sem show planeado:
+       → return null
+```
+
+**OUTPUT:** `{ type: 'assignFormations', showId: string, formations: SongFormation[], conditionalRotations: ConditionalRotation[] }` | `null`
+
+---
+
+#### Decisão 10.3.2: Ajustar Escalação Mid-Show (decisão em tempo real)
+
+> Esta decisão acontece DURANTE o show, entre músicas. O Show Director NPC
+> (ou o player) avalia fadiga real e performance das últimas músicas para
+> decidir se rotaciona posições antes da próxima música.
+
+**CONTEXTO (o que a IA avalia):**
+- Fadiga acumulada de cada idol ATÉ ESTE MOMENTO do show
+- Performance score das últimas 1-2 músicas por idol
+- Próxima música na setlist: requisitos de energia, coreografia, vocal
+- Formação planeada vs formação actual (já houve rotações?)
+- Rotações condicionais pré-planeadas (passo 3 da decisão anterior)
+- Músicas restantes: quantas faltam? Se é a penúltima, all-in faz sentido.
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Stage Presence** | Core: ler o estado do show e decidir rotações que maximizam performance |
+| **Adaptability** | Reagir a imprevistos (idol cansou mais do que esperado, vocal falhou) |
+
+**FLOWCHART:**
+
+```
+1. AVALIAR ESTADO ACTUAL
+   └─ Skill: Stage Presence
+      ├─ Elite (20):      Lê fadiga + performance + audience energy:
+      │                    "Mei: fadiga 65%, performance última música 0.78 (abaixo do normal 0.88).
+      │                    Audiência energy 72 (boa, mas caiu desde música 2).
+      │                    Próxima música: uptempo dance (exige Mei no center idealmente).
+      │                    MAS: se Mei continuar center, fadiga vai a 80% e música 6 (finale)
+      │                    terá performance <0.6. Melhor rotacionar AGORA."
+      │                    Simula mentalmente: "se trocar Mei para Rest e Riko para Center,
+      │                    esta música perde 5% (Riko é ligeiramente pior) mas música 6
+      │                    ganha 15% (Mei descansada para o finale). Net gain: +10%."
+      ├─ Outstanding (18-19): Lê fadiga + performance. Decide por threshold:
+      │                        "fadiga > 65% E não é última música → rotacionar."
+      ├─ Very Good (15-17): Lê fadiga. "Idol fadiga > 70% → mover para Rest."
+      │                      Não calcula impacto net.
+      ├─ Good (12-14):    Segue rotações condicionais pré-planeadas. Não improvisa.
+      ├─ Average (10-11): Não faz ajustes mid-show. Formação planeada até ao fim.
+      ├─ Competent (7-9): Idem Average.
+      ├─ Reasonable (4-6): Idem.
+      └─ Unsuited (1-3):  Idem. (Só Elite-Outstanding realmente ajustam mid-show.)
+
+2. EXECUTAR ROTAÇÃO (se decidiu rotar)
+   └─ Skill: Adaptability
+      ├─ Elite (20):      Rotação suave: comunica à idol o novo role entre músicas.
+      │                    "Mei, próxima música ficas no support. Riko, tu assumes center."
+      │                    Sem impacto negativo na moral (idol entende que é para o bem do show).
+      │                    Se idol tem Authority oculto baixo: pode resistir ("eu sou a center!")
+      │                    → Show Director com Authority alto override sem drama.
+      ├─ Outstanding (18-19): Rotação limpa. Pequena chance de idol resistir se Ambição alta.
+      ├─ Very Good (15-17): Rotação ok mas idol pode perder 2-3% de motivation.
+      ├─ Good−:           Não faz rotações mid-show (passo 1 não identifica necessidade).
+
+3. DECISÃO FINAL
+   ├─ Se rotação necessária:
+   │   → return { type: 'midShowRotation', showId, songIndex, rotations:
+   │     [{ idolId, fromRole, toRole }] }
+   └─ Se formação actual está ok:
+       → return null (manter plano)
+```
+
+**OUTPUT:** `{ type: 'midShowRotation', showId: string, songIndex: number, rotations: RoleRotation[] }` | `null`
+
+---
+
+### Cargo 10.4: Setlist
+
+---
+
+#### Decisão 10.4.1: Montar Setlist
+
+**CONTEXTO (o que a IA avalia):**
+- Repertório disponível: todas músicas gravadas com mastery por membro
+- Duração do show: depende do venue (café 45min/5 músicas, arena 2h/15 músicas)
+- Géneros disponíveis: variety no catálogo (uptempo, ballad, dance, rock, etc.)
+- Pacing: alternância de energia (opener high → build → peak → cool → encore)
+- Audience demographic: tipo de fã esperado no venue (hardcore wants deep cuts, casual wants hits)
+- Charts: músicas no top chart = must-play (fãs esperam ouvir)
+- Mastery: músicas que o grupo domina bem (mastery > 60) vs músicas com mastery baixo
+- Coreografia: quantas idols cada música precisa (afeta formação e fadiga)
+- Novidades: música nova a promover (release recent → play it)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Musical Knowledge** | Core: curadoria musical — pacing, contraste de géneros, setlist como "história" |
+| **Stage Presence** | Entender impacto visual: opener e closer são momentos-chave para audiência |
+| **Judging Idol Ability** | Verificar que membros conseguem executar cada música (mastery check) |
+
+**FLOWCHART:**
+
+```
+1. SELECIONAR MÚSICAS PARA O SETLIST
+   └─ Skill: Musical Knowledge
+      ├─ Elite (20):      Curadoria holística:
+      │                    → Must-play: músicas no chart top 20 (fãs vão reclamar se não tocar)
+      │                    → New release: se single recente → OBRIGATÓRIO (razão do show)
+      │                    → Fan favorites: músicas com alto merch sales ou streaming
+      │                    → Deep cuts: 1-2 músicas menos conhecidas para hardcore fãs (surprise)
+      │                    → Variety: nunca 3 do mesmo género seguidas
+      │                    Verifica mastery: se música tem mastery < 40 num membro-chave,
+      │                    substitui por outra do mesmo género com mastery melhor.
+      │                    "Temos 20 músicas mas show é de 12. Cortar 8 menos relevantes."
+      ├─ Outstanding (18-19): Must-play + release + favorites. Verifica mastery ≥ 50.
+      ├─ Very Good (15-17): Must-play + release. Mastery ≥ 40. Variety de géneros.
+      ├─ Good (12-14):    Top-N músicas por mastery descending.
+      ├─ Average (10-11): Top-N por mastery. Sem curadoria de géneros.
+      ├─ Competent (7-9): Primeiras N músicas da lista.
+      ├─ Reasonable (4-6): Aleatório.
+      └─ Unsuited (1-3):  Aleatório. Pode incluir música com mastery 10 → desastre.
+
+2. ORDENAR SETLIST (pacing)
+   └─ Skill: Musical Knowledge × Stage Presence
+      ├─ Elite (20):      "Setlist é uma história em 3 atos:
+      │                    Act 1 (opener block, 3 músicas): high energy → hook da audiência.
+      │                    → Música 1: hit mais known (uptempo). Audiência canta junto = engagement imediato.
+      │                    → Música 2: dance track (momentum continues). Coreografia impressiona.
+      │                    → Música 3: novo single (audiência curiosa, energy still high).
+      │                    
+      │                    Act 2 (mid block, 4 músicas): build + contrast.
+      │                    → Música 4: ballad (descanso vocal e físico para idols E audiência).
+      │                    → Música 5: mid-tempo (build back up). MC section after.
+      │                    → Música 6: dance feature (showcase de dança do grupo).
+      │                    → Música 7: fan favorite deep cut (hardcore fãs lose their minds).
+      │                    
+      │                    Act 3 (closer block, 3 músicas): peak → emotional close.
+      │                    → Música 8: uptempo party song (peak energy).
+      │                    → Música 9: emotional ballad (contraste = impacto máximo).
+      │                    → Música 10: anthem (final, todos cantam, lighter moment).
+      │                    
+      │                    Encore (após "falsa saída"):
+      │                    → Música 11: hit #1 (THE song everyone came to hear).
+      │                    → Música 12: goodbye ballad (emotional close, fãs choram)."
+      │                    
+      │                    Calcula pacing_score: energy_transition_quality entre adjacentes.
+      ├─ Outstanding (18-19): 3 blocos (open/mid/close) + encore. Alterna energy levels.
+      ├─ Very Good (15-17): Opener strong, closer strong, mid balanced. Encore = hit.
+      ├─ Good (12-14):    Opener = hit. Closer = hit. Meio por mastery. Sem encore.
+      ├─ Average (10-11): Sort by energy alternating (high-low-high-low). Sem narrative arc.
+      ├─ Competent (7-9): Sort by mastery descending (play best first). No pacing thought.
+      ├─ Reasonable (4-6): Ordem aleatória.
+      └─ Unsuited (1-3):  Ordem aleatória. Pode abrir com ballad lenta → audiência adormece.
+
+3. PLANEAR MC E INTERLUDES
+   └─ Skill: Stage Presence
+      ├─ Elite (20):      "2-3 MC sections estrategicamente posicionadas:
+      │                    → Após música 3: MC curto (idol com melhor Communication fala).
+      │                      Permite costume change para Act 2. Idols descansam 2 min.
+      │                    → Após música 7: MC longo (toda equipa, fan interaction).
+      │                      Costume change para Act 3 (look final). Descanso: 4 min.
+      │                    → Antes do encore: lights out, 30 seg suspense, fãs pedem encore."
+      │                    MC sections servem 3 propósitos: rest, costume change, engagement.
+      ├─ Outstanding (18-19): 2 MC sections. Costume change no MC.
+      ├─ Very Good (15-17): 1-2 MC sections. 1 costume change.
+      ├─ Good (12-14):    1 MC section no meio. Sem costume change.
+      ├─ Average−:        Sem MC. Músicas back-to-back. Idols sem descanso.
+
+4. DECISÃO FINAL
+   → return { type: 'buildSetlist', showId, songs: [{songId, order, block}],
+     mcSlots: [{afterSong, duration, speakers}], encoreSongs: [songId],
+     estimatedPacingScore }
+```
+
+**OUTPUT:** `{ type: 'buildSetlist', showId: string, songs: SetlistEntry[], mcSlots: MCSlot[], encoreSongs: string[], estimatedPacingScore: number }`
+
+---
+
+### Cargo 10.5: Figurino e Wardrobe
+
+---
+
+#### Decisão 10.5.1: Atribuir Figurinos para Show
+
+**CONTEXTO (o que a IA avalia):**
+- Inventário de figurinos: tipo, theme, tier, durabilidade restante, para quem cabe
+- Setlist do show: blocos definidos (act 1, 2, 3), MC sections (onde troca de roupa)
+- Idols do show: cada uma com perfil visual, archetype, role no grupo
+- Theme matching: figurino pop colorido para músicas uptempo, elegante para ballads
+- Grupo visual coherence: grupo deve parecer unificado (mesma paleta de cores)
+- Degradação: figurino com durabilidade < 25% pode rasgar mid-show (penalidade visual)
+
+**SKILLS REQUERIDAS:**
+
+| Skill | Para quê |
+|-------|---------|
+| **Stage Presence** | Core: visual storytelling through costume. Impacto na percepção da audiência |
+| **Adaptability** | Criar looks coerentes com o que tem no inventário (nem sempre tem figurino ideal) |
+
+**FLOWCHART:**
+
+```
+1. PLANEAR LOOKS POR BLOCO DO SETLIST
+   └─ Skill: Stage Presence
+      ├─ Elite (20):      Full costume design:
+      │                    "Act 1 (uptempo): look energético — cores vibrantes, casual chic.
+      │                    → Figurino A (tier 2, tema pop, durabilidade 80%) para todas.
+      │                    Act 2 (mixed): look transição — semi-formal, tons neutros.
+      │                    → Figurino B (tier 2, tema elegant, durabilidade 65%).
+      │                    Act 3 (finale): look de impacto — matching dresses, glitter.
+      │                    → Figurino C (tier 3 custom, tema gala, durabilidade 100% — novo!)
+      │                    Cada bloco tem visual distinto. Costume changes nos MC sections.
+      │                    Center idol tem look ligeiramente diferente (destaque visual)."
+      │                    Verifica durabilidade: "Figurino B tem 65% — aguenta mais 1 show.
+      │                    Usar agora e encomendar replacement para o próximo."
+      ├─ Outstanding (18-19): 2 looks (open + close). Theme match com setlist.
+      │                        Verifica durabilidade.
+      ├─ Very Good (15-17): 2 looks. Group coordination (mesma paleta).
+      ├─ Good (12-14):    1 look para todo o show. Melhor tier disponível. Theme match.
+      ├─ Average (10-11): 1 look. Melhor tier. Sem theme match.
+      ├─ Competent (7-9): 1 look. Qualquer disponível.
+      ├─ Reasonable (4-6): Primeiro disponível. Pode não combinar entre membros.
+      └─ Unsuited (1-3):  Sem assignment. Idols vão com roupa default (penalidade visual −15%).
+
+2. GERIR INVENTÁRIO PÓS-DECISÃO
+   └─ Skill: Adaptability
+      ├─ Elite: Flagas figurinos que precisam de reposição após este show.
+      │         Encomenda replacement antecipadamente.
+      ├─ Good+: Nota que figurino X está a degradar.
+      ├─ Average−: Não gere inventário. Figurinos degradam até quebrar.
+
+3. DECISÃO FINAL
+   → return { type: 'assignCostumes', showId, looks: [{
+       block, assignments: [{idolId, costumeId}]
+     }], inventoryFlags: [{costumeId, action: 'replace'|'repair'}] }
+```
+
+**OUTPUT:** `{ type: 'assignCostumes', showId: string, looks: CostumeLook[], inventoryFlags: InventoryFlag[] }`
+
+---
+
+#### Decisão 10.5.2: Comprar Figurinos
+
+**CONTEXTO:** Inventário < 50% capacidade E show planeado OU figurinos degradados
+**Primary skill:** Stage Presence × Financial Acumen
+
+```
+Flowchart simplificado (referência aos outros flowcharts de compra):
+1. Identificar gap: tipo/theme em falta ou degradado
+   → Stage Presence: Elite identifica gaps por setlist theme, Competent compra genérico
+2. Escolher tier: Financial Acumen avalia budget vs durabilidade (tier 3 custa 3× mas dura 3×)
+   → Elite calcula cost-per-wear. Competent compra tier 1 (barato).
+3. Custom vs off-the-shelf: Elite encomenda custom 3 semanas antes de show grande.
+   Average+ compra off-the-shelf.
+```
+
+**OUTPUT:** `{ type: 'purchaseCostume', costumeType: string, theme: string, tier: number, custom: boolean }` | `null`
