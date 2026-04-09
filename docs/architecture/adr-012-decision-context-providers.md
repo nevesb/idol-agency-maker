@@ -507,6 +507,82 @@ interface ContextRequirement {
 | idol-attribute-stats.md | Hidden stats gradually revealed | IdolSnapshot.hiddenStats with progressive unlock |
 | agency-staff-operations.md | Delegation quality depends on attrs | Context provides all data NPC needs to match attr level |
 
+## Checklist: Adding a New Decision to the Game
+
+When a new decision pipeline is created (new NPC action, new player action, new
+cargo, or new tarefa within an existing cargo), the following must be updated:
+
+### 1. Design (before implementation)
+
+| Step | Document | What to update |
+|------|----------|----------------|
+| **1a** | **GDD** (`design/gdd/[system].md`) | Define the mechanic that motivates this decision. Must include: rules, formulas, edge cases, tuning knobs, acceptance criteria. |
+| **1b** | **ADR-009** (Decision Catalog) | Add the full decision entry: CONTEXT + SKILLS REQUIRED + FLOWCHART with 8-level behaviors per skill + OUTPUT typed action. |
+| **1c** | **ADR-012** (this doc) — Context Provider mapping table | Add row: decision name → papel → primary attr → domains read. |
+| **1d** | **ADR-012** — `ROLE_CONTEXT_ACCESS` | If the role needs access to a domain it didn't have before, add it to the role's domain list. |
+
+### 2. Data model (if decision produces new action type or reads new data)
+
+| Step | Document/Code | What to update |
+|------|---------------|----------------|
+| **2a** | **`AgencyAction` union type** | Add the new action type to the discriminated union. Every decision output must be a typed action. |
+| **2b** | **ADR-003** (State Schema) — slice definitions | If the action affects a new kind of state: add field to existing slice or create new slice. |
+| **2c** | **ADR-012** — domain view interfaces | If the decision needs data not yet in any view: add field to the relevant `*View` interface. |
+| **2d** | **ADR-004** (Event System) — `SimEvent` union | If the decision emits a new event or reacts to a new event type: add to the event union. |
+
+### 3. Staff & attributes (if new role or skill usage)
+
+| Step | Document | What to update |
+|------|----------|----------------|
+| **3a** | **GDD `agency-staff-operations.md`** — staff attributes | If decision uses an attribute in a new way, document it in the "Impacto por Categoria" table. |
+| **3b** | **ADR-012** — primary attr per decision | Ensure the task → primary attribute mapping is documented. |
+| **3c** | **`draft-action-catalog.md`** — papel/cargo/tarefa structure | Add the new tarefa under the correct cargo and papel. |
+
+### 4. Pipeline integration
+
+| Step | Document/Code | What to update |
+|------|---------------|----------------|
+| **4a** | **ADR-002** (Simulation Pipeline) | If the decision runs at a specific phase (Phase 1/2/3/4), document when it executes. Most decisions run in Decision Phase (before pipeline), but some are reactive (mid-show rotations in Phase 2). |
+| **4b** | **ADR-005** (Performance Budgets) | If the decision adds measurable CPU cost, account for it in the budget table. |
+| **4c** | **Handler registration order** (ADR-004) | If the decision emits events, its handler must be registered in the correct order (owners before consumers). |
+
+### 5. Traceability
+
+| Step | Document | What to update |
+|------|----------|----------------|
+| **5a** | **TR Registry** (`docs/architecture/tr-registry.yaml`) | Add TR-IDs for the GDD requirements this decision addresses. |
+| **5b** | **Control Manifest** (`docs/architecture/control-manifest.md`) | If the decision creates new required/forbidden patterns, regenerate manifest. |
+
+### 6. Validation
+
+| Step | Action |
+|------|--------|
+| **6a** | Write unit test for the decision flowchart (deterministic: same inputs + seed = same output). |
+| **6b** | Verify context assembly includes the new data needs (no undefined reads). |
+| **6c** | Verify the action type is handled in the execution phase (action → state mutation). |
+| **6d** | Run `/architecture-review` in a fresh session to verify coverage. |
+
+### Summary flow
+
+```
+New mechanic idea
+  → GDD (design the rules)
+  → ADR-009 (decision flowchart with 8-level behaviors)
+  → ADR-012 (context mapping + role access)
+  → AgencyAction type (new action)
+  → SimEvent type (if emits events)
+  → State slice (if new state needed)
+  → TR Registry (traceability)
+  → Unit test (determinism verification)
+  → /architecture-review (coverage check)
+```
+
+If ANY step is skipped, the decision either:
+- Can't access the data it needs (missing context mapping)
+- Produces actions nobody handles (missing action type in executor)
+- Isn't traceable to a GDD requirement (audit gap)
+- Isn't testable (no determinism guarantee)
+
 ## Related Decisions
 
 - [ADR-003](adr-003-game-state-schema.md) — state slices are the data source
