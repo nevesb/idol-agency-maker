@@ -262,6 +262,145 @@ function idolContextMenu(idol: IdolRuntime): ContextMenuItem[] {
 }
 ```
 
+### 8. Drilldown Pattern — Every Number Is Explorable
+
+**Core UI principle:** Every number, score, status, or summary displayed in a card
+or table MUST be explorable. The player should never see a number and wonder
+"where does this come from?" without being able to find out.
+
+There are 3 levels of drilldown:
+
+```
+Level 0: THE NUMBER
+  "Revenue: ¥8.5M"
+  → Player sees the value. Wants to know more.
+
+Level 1: TOOLTIP (hover/tap)
+  → Hover over ¥8.5M → tooltip shows breakdown:
+    "Jobs: ¥5.2M | Royalties: ¥1.8M | Merch: ¥1.0M | Events: ¥0.5M"
+  → Quick context without leaving the screen.
+
+Level 2: MODAL (click)
+  → Click ¥8.5M → modal opens with:
+    - Full breakdown by source
+    - Trend chart (last 4 weeks)
+    - Top-3 idols by revenue contribution
+    - "View full report →" link
+  → Deep context while keeping current screen as backdrop.
+
+Level 3: NAVIGATION (link in modal or direct)
+  → "View full report →" → navigates to /finances with the relevant tab active
+  → Full screen dedicated to this data.
+```
+
+**Implementation:**
+
+```typescript
+// Every data value in the UI can declare its drilldown chain
+interface DrilldownConfig {
+  // Level 1: tooltip content (always available)
+  tooltip: string | (() => TooltipContent);
+
+  // Level 2: modal on click (optional — some values are self-explanatory)
+  modal?: {
+    title: string;
+    component: Component;  // Svelte component to render in modal
+    props: Record<string, unknown>;
+  };
+
+  // Level 3: navigation target (optional — for full-page deep dive)
+  navigateTo?: {
+    href: string;
+    tab?: string;          // activate specific tab on target page
+    highlight?: string;    // highlight specific element on target page
+  };
+}
+
+// Usage in components:
+// <DataValue value={revenue} drilldown={revenueDrilldown} />
+// → renders: ¥8.5M with hover tooltip, click opens modal, modal has "see more" link
+```
+
+**DataValue component (atomic):**
+
+```typescript
+interface DataValueProps {
+  value: string | number;
+  format?: 'currency' | 'percent' | 'number' | 'stars' | 'label';
+  trend?: 'up' | 'down' | 'stable';  // optional arrow indicator
+  drilldown?: DrilldownConfig;
+  // Visual
+  color?: 'default' | 'positive' | 'negative' | 'warning';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+// Renders as:
+// ¥8.5M ▲  (clickable, hoverable, colored by trend)
+```
+
+**Rules for drilldown:**
+
+1. **Every numeric value in a Card must have at least Level 1 (tooltip).**
+   No unexplained numbers. Tooltip shows the formula or breakdown.
+
+2. **Aggregated values (totals, averages, scores) must have Level 2 (modal).**
+   The modal shows what the aggregate is composed of.
+
+3. **Entity references (idol name, agency name, song name) must have Level 3 (navigation).**
+   Click an idol name anywhere → goes to idol profile.
+   This overlaps with the Context Menu pattern — right-click gives options,
+   left-click goes to the primary destination.
+
+4. **Star ratings (mastery, staff attributes) must have Level 1 (tooltip).**
+   Hover shows the label (Elite, Outstanding, etc.) and what it means for this context.
+
+5. **Status labels (Designed, Active, Stalled) must have Level 1 (tooltip).**
+   Hover explains what the status means and what caused it.
+
+**Drilldown in DataTable:**
+
+```typescript
+interface ColumnDef<T> {
+  key: string;
+  label: string;
+  // ... existing props ...
+
+  // Drilldown per cell
+  drilldown?: (item: T) => DrilldownConfig;
+  // Example: in job history table, the "Performance" column:
+  // drilldown: (job) => ({
+  //   tooltip: `${job.gradeLetter} (${job.performance.toFixed(2)})`,
+  //   modal: { component: PostMortemModal, props: { jobId: job.id } },
+  //   navigateTo: { href: `/operations/results`, highlight: job.id }
+  // })
+}
+```
+
+**Drilldown in Cards:**
+
+Cards are the primary container for summary data. Every card section should be
+designed with drilldown in mind:
+
+```
+┌─────────────────────────────────────────┐
+│  Agency Overview Card                    │
+│                                          │
+│  Revenue: ¥8.5M ▲  ← hover: breakdown   │
+│                      ← click: modal      │
+│  Expenses: ¥6.2M ▼  ← hover: by category│
+│  Balance: ¥15.3M    ← hover: trend 4wk  │
+│                                          │
+│  Top Idol: Yui (¥3.2M)  ← click: profile│
+│  Staff: 8/10 filled     ← click: /staff  │
+│  Mood: ☀ Otimista       ← hover: why     │
+│                                          │
+│  [View Full Report →]    ← /finances     │
+└─────────────────────────────────────────┘
+```
+
+Every item in the card is interactive. The card is never a dead-end —
+it's always an entry point to deeper information.
+
 ### Key Interfaces
 
 ```typescript
