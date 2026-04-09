@@ -382,20 +382,77 @@ interface FormationSlotAssignment {
 }
 ```
 
-**Training difficulty formula:**
+**Training difficulty and mastery (star system):**
+
+Mastery of a song is measured in **stars (0-5)**, earned through rehearsal sessions.
+Mastery growth is **exponential** — early stars come easy, later stars require
+significantly more rehearsals:
 
 ```
-uniqueFormations = count of distinct FormationType used across 9 parts
-trainingDifficulty =
-  uniqueFormations × 10           // base: each new formation adds 10
-  + totalActiveIdols × 2          // more idols = more coordination
-  + maxFormationTransitions × 5   // transitions between different formations mid-song
-
-// Example:
-// All 9 parts use 'line' → uniqueFormations = 1 → difficulty = 10 + N×2
-// 5 different formations → uniqueFormations = 5 → difficulty = 50 + N×2 + transitions×5
-// Higher difficulty = more rehearsal weeks needed before show
+Rehearsals → Stars:
+  1  rehearsal  = 0.5★
+  2  rehearsals = 1.0★
+  3  rehearsals = 1.5★
+  4  rehearsals = 2.0★
+  6  rehearsals = 2.5★
+  8  rehearsals = 3.0★
+  12 rehearsals = 3.5★
+  16 rehearsals = 4.0★
+  24 rehearsals = 4.5★
+  32 rehearsals = 5.0★ (fully mastered)
 ```
+
+**Training difficulty** acts as a **multiplier on rehearsals needed**. A harder
+song requires MORE rehearsals to reach the same star level:
+
+```
+actual_rehearsals_needed = base_rehearsals × difficulty_multiplier
+
+difficulty_multiplier is derived from choreography complexity:
+  uniqueFormations = count of distinct FormationType across 9 parts
+  formationTransitions = count of formation changes between adjacent parts
+  activeIdolCount = max idols in any formation
+
+  difficulty_multiplier =
+    1.0                                    // base (all same formation, simple)
+    + (uniqueFormations - 1) × 0.15        // each additional formation type
+    + formationTransitions × 0.10          // each transition between parts
+    + (activeIdolCount > 6 ? 0.2 : 0)     // large group coordination penalty
+
+Examples:
+  All 9 parts 'line', 4 idols:
+    multiplier = 1.0 + 0 + 0 + 0 = 1.0×
+    5★ = 32 rehearsals
+
+  3 different formations, 5 transitions, 8 idols:
+    multiplier = 1.0 + 2×0.15 + 5×0.10 + 0.2 = 2.0×
+    5★ = 64 rehearsals
+
+  5 different formations, 8 transitions, 12 idols:
+    multiplier = 1.0 + 4×0.15 + 8×0.10 + 0.2 = 2.6×
+    5★ = 83 rehearsals
+```
+
+**Star level affects show performance (ADR-007):**
+
+```
+mastery_modifier:
+  0★:   0.30 (barely knows the song)
+  0.5★: 0.40
+  1★:   0.50
+  1.5★: 0.60
+  2★:   0.70 (acceptable for small venues)
+  2.5★: 0.80
+  3★:   0.90 (good for most shows)
+  3.5★: 0.95
+  4★:   1.00 (full performance quality)
+  4.5★: 1.05 (polish bonus)
+  5★:   1.10 (perfect mastery bonus)
+```
+
+Each idol has their OWN mastery level per song. In a group, the weakest
+member's mastery is the bottleneck for ensemble-dependent parts (synchronized
+choreography). Solo vocal parts use only that idol's mastery.
 
 #### 7d. Choreography Interaction with ADR-007 (Show Pipeline)
 
