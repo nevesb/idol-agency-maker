@@ -1,7 +1,7 @@
 # ADR-009: NPC Decision Catalog
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-08
