@@ -1,7 +1,7 @@
 # ADR-011: Multiplayer-Ready Architecture
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-08
