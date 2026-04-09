@@ -24,8 +24,8 @@
 #
 # STATUS VALUES: active | deprecated | superseded-by: TR-[system]-NNN
 
-version: 2
-last_updated: "2026-04-07"
+version: 3
+last_updated: "2026-04-09"
 
 requirements:
   # ── stats (idol-attribute-stats.md) ──
