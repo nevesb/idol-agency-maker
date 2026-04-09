@@ -1,7 +1,7 @@
 # ADR-007: Show Simulation Pipeline
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-08
