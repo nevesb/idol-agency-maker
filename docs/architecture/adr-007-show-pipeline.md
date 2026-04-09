@@ -55,7 +55,17 @@ reacts dynamically and fatigue accumulating across songs.
 
 ## Decision
 
-### 1. Position Model
+### 1. Show Rules
+
+**The group leader is ALWAYS on stage.** This is an industry rule — the leader
+represents the group and must be present in every song, every part. The leader
+can be in any position (center, front, back, support) but can NEVER be removed
+from the lineup. This constrains fatigue management: the leader cannot fully rest,
+only move to lower-demand positions.
+
+For solo shows: the solo idol is both leader and only performer — always on stage by definition.
+
+### 2. Position Model
 
 Every idol in every part of every song occupies a **position**. A position
 defines HOW MUCH vocal and dance the idol performs in that moment:
@@ -92,7 +102,7 @@ This means:
 - **Rest position (back, minimal everything):**
   fatigue = (any_vocal × 0.05) + (any_dance × 0.05) = near zero
 
-### 2. Song Part Demands (from ADR-008)
+### 3. Song Part Demands (from ADR-008)
 
 Each song's composition and choreography define per-part demands:
 
@@ -115,7 +125,7 @@ interface PartDemands {
 These values are set when the song is composed (arrangement) and choreographed
 (ADR-008 creative pipeline). They are **properties of the song**, not of the show.
 
-### 3. Show Lineup: The 3D Matrix
+### 4. Show Lineup: The 3D Matrix
 
 The lineup is the complete assignment of every idol to a position in every part
 of every song:
@@ -150,7 +160,13 @@ vocalShare: 1.0 and danceShare: 1.0 (or 0.0 for non-dance parts).
 The choreography determines how many are actively dancing (danceShare > 0)
 vs resting (danceShare ≈ 0.05 = minimal movement at back).
 
-### 4. Within-Song Rotations
+**Leader constraint:** The group leader MUST have an entry in every PartLineup
+of every song. The leader's position can be anything (center, back, support) but
+the entry must exist and `danceShare + vocalShare > 0` (leader is always visibly
+participating, even if minimally). Validation: if any PartLineup is missing the
+leader, it's an error — the lineup builder must enforce this.
+
+### 5. Within-Song Rotations
 
 The choreography can define rotations WITHIN a song:
 
@@ -167,7 +183,7 @@ Song "Starlight Dreams" (group of 6):
 This is all encoded in the PartLineup — each part can have completely different
 positions for each idol. The matrix IS the choreography.
 
-### 5. Between-Song Rotations
+### 6. Between-Song Rotations
 
 Between songs, the Show Director (ADR-009 decision 10.3.2) can modify the lineup
 for the NEXT song based on accumulated fatigue:
@@ -189,7 +205,7 @@ Modified lineup applied to song 4's PartLineup.
 
 The rotation does NOT change who is on stage — only positions within the lineup.
 
-### 6. Show Pipeline (Processing)
+### 7. Show Pipeline (Processing)
 
 ```
 Show Pipeline (per Performance Event ★):
@@ -348,7 +364,7 @@ Show Pipeline (per Performance Event ★):
 └───────────────────────────────────────────────────────────┘
 ```
 
-### 7. Solo Show Support
+### 8. Solo Show Support
 
 A solo idol performing 10 songs uses the same 3D matrix, but with only 1 idol:
 
@@ -377,7 +393,7 @@ Song 5 (acoustic, sitting on stool):
    so the idol can sustain a full show.
 ```
 
-### 8. Fatigue as Emergent from Song Design
+### 9. Fatigue as Emergent from Song Design
 
 **There are no fixed fatigue costs per position.** All fatigue emerges from:
 
@@ -400,7 +416,7 @@ This means:
   If all 10 songs are high-energy dance tracks, even a top idol can't sustain it.
   The A&R must create ballads and acoustic numbers for solo setlists.
 
-### 9. Audience Dynamics
+### 10. Audience Dynamics
 
 `AudienceState` is transient — created at show start, discarded after settlement.
 
@@ -427,7 +443,7 @@ interface AudienceState {
 // Any → cold: if 2 consecutive songs scored D or F
 ```
 
-### 10. Part Weights for Song Score
+### 11. Part Weights for Song Score
 
 ```
 Part weights (sum = 1.0):
