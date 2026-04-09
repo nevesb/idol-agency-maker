@@ -454,6 +454,40 @@ Each idol has their OWN mastery level per song. In a group, the weakest
 member's mastery is the bottleneck for ensemble-dependent parts (synchronized
 choreography). Solo vocal parts use only that idol's mastery.
 
+**Rehearsal scheduling:**
+
+An idol has 14 slots per week (7 days × 2 slots). Each rehearsal slot = 1 rehearsal.
+An idol doing intensive training can dedicate ALL slots to one song:
+
+```
+Base: 14 slots/week. If all dedicated to one song = 14 rehearsals/week.
+But idols also need jobs, rest, training, etc. Realistically:
+
+Intensive focus (all slots on 1 song):
+  14 rehearsals/week → 0.5★ to 3★ in 1 week (8 rehearsals = 3★)
+  But: zero jobs, zero rest → stress +30/week, motivation risk
+
+Normal schedule (3-5 rehearsal slots/week):
+  3-5 rehearsals/week → 1 week to reach 2★, 2 weeks for 3★
+
+Light schedule (1-2 rehearsal slots/week):
+  1-2/week → slow but sustainable alongside jobs
+
+Bonuses that grant extra rehearsal value per slot:
+  - Coach with high Dance Technique: each rehearsal counts as 1.2× (VG) to 1.5× (Elite)
+  - Mentor idol rehearsing together: +0.5× per session
+  - Dance Studio facility level 2+: +0.2× per session
+  - Idol with high Learning (hidden attr via Adaptability): +0.1× to +0.3×
+
+Example with bonuses:
+  Idol does 5 rehearsals/week + Elite dance coach (1.5×) + Studio L2 (1.2×)
+  Effective: 5 × 1.5 × 1.2 = 9 effective rehearsals/week
+  Week 1: 9 rehearsals → 3★
+  Week 2: 18 total → between 4★ and 4.5★
+  Week 3: 27 total → ~4.5★
+  Week 4: 36 total → 5★ (mastered even with 2.0× difficulty multiplier: 36/2.0 = 18 base → ~4.5★)
+```
+
 #### 7d. Choreography Interaction with ADR-007 (Show Pipeline)
 
 ADR-007 uses the 3D lineup matrix: Song × Part × Idol → Position.
