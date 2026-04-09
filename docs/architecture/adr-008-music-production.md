@@ -4,13 +4,13 @@
 Proposed
 
 ## Date
-2026-04-08
+2026-04-09
 
 ## ADR Dependencies
 
 | Field | Value |
 |-------|-------|
-| **Depends On** | ADR-002 (weekly tick), ADR-003 (MusicSlice), ADR-004 (events), ADR-009 (Music Director decisions) |
+| **Depends On** | ADR-002 (weekly tick), ADR-003 (MusicSlice), ADR-004 (events), ADR-007 (show pipeline consumes songs), ADR-009 (Music Director decisions), ADR-012 (context providers) |
 | **Enables** | Music production epics, show pipeline (ADR-007 consumes finished songs) |
 | **Blocks** | None |
 
@@ -18,32 +18,28 @@ Proposed
 
 ### Problem Statement
 
-Music production is the pipeline that creates the songs performed in shows and
-released on charts. Each song has 3 creative parts (Composition, Lyrics, Arrangement)
-that can be done by different NPCs in parallel — or sequentially by a single NPC.
-After the creative phase, Choreography is designed for a specific number of idols,
-and Recording seals the performers.
+Music production creates the songs that idols perform in shows (ADR-007) and
+release on charts. The pipeline must model:
 
-Composers are first-come-first-serve NPCs with contracts (royalties + delivery date).
-Idols can substitute for any of the 3 creative NPC roles.
+- **Composition** of 3 creative parts (Music, Lyrics, Arrangement) by NPCs and/or idols
+- **Choreography** with specific formations per song part, designed for N idols
+- **Recording** by the performing idols
+- **Quality** that emerges from the creators' attributes, not from hardcoded weights
 
-A cover song only requires Arrangement (or "as is" where performers decide during recording).
-
-The finished song has a structure (Intro-Verse-PreChorus-Chorus-etc.) where each
-part has a quality ranking that determines both the overall composition quality AND
-the show performance (ADR-007 uses per-part weights).
+Composers (NPC freelancers), choreographers, and idols all share the same 19-attribute
+model as agency staff (FM26 labels). Quality depends on these attributes.
 
 ## Decision
 
-### 1. Song Structure: Parts and Quality
+### 1. Song Structure
 
-Every song — original or cover — is represented as a sequence of parts. Each part
-has a quality score determined during the creative phase:
+Every song is composed of **9 parts**. Each part has demands and quality set
+during the creative and choreography phases:
 
 ```typescript
 type SongPart =
   | 'intro' | 'verse_1' | 'pre_chorus' | 'chorus_1'
-  | 'verse_2' | 'chorus_2' | 'bridge' | 'chorus_3' | 'outro';
+  | 'verse_2' | 'chorus_2' | 'bridge' | 'chorus_3' | 'ending';
 
 interface SongComposition {
   songId: string;
@@ -52,33 +48,121 @@ interface SongComposition {
   type: 'original' | 'cover' | 'cover_as_is';
 
   // Quality per part (0-100, set during creative phase)
-  partQualities: Record<SongPart, number>;
-  // Overall quality = weighted average of parts
-  overallQuality: number;
+  // NOT hardcoded weights — quality distribution emerges from
+  // WHERE the composer(s) focused their effort
+  partQualities: Record<SongPart, {
+    musicQuality: number;      // from music composition
+    lyricsQuality: number;     // from lyrics
+    arrangementQuality: number; // from arrangement
+    overallQuality: number;     // weighted by composer focus
+  }>;
 
-  // Per-part demands (set during arrangement/composition)
+  // Per-part demands (set during arrangement + choreography)
   partDemands: Record<SongPart, {
-    vocalIntensity: 'low' | 'medium' | 'high';
-    danceIntensity: 'low' | 'medium' | 'high';
-    primaryStat: 'vocal' | 'dance' | 'charisma' | 'expression';
+    vocalIntensity: number;    // 0-10 (from arrangement)
+    danceIntensity: number;    // 0-10 (from choreography)
   }>;
 }
-
-// Part weights for overall quality (same as show weights in ADR-007):
-const PART_QUALITY_WEIGHTS: Record<SongPart, number> = {
-  intro: 0.05,
-  verse_1: 0.10,
-  pre_chorus: 0.08,
-  chorus_1: 0.18,  // hook — most important
-  verse_2: 0.08,
-  chorus_2: 0.15,
-  bridge: 0.12,    // contrast point
-  chorus_3: 0.16,  // climax
-  outro: 0.08,
-};
 ```
 
-### 2. Creative Pipeline: 3 Parts (Composition, Lyrics, Arrangement)
+**Quality weights are NOT hardcoded.** They emerge from the composition process:
+- A composer who focuses on the chorus hook produces higher chorus quality
+- A composer who creates a complex bridge produces higher bridge quality
+- The player controls this INDIRECTLY by:
+  - Choosing the genre/style (ballad = vocal-focused, dance = choreo-focused)
+  - Choosing composers with specific strengths (vocalist → strong chorus lyrics)
+  - Requesting emphasis during commission ("make the chorus the hook")
+  - The choreographer's choices for which parts are dance-heavy
+
+### 2. Composer NPC Attributes
+
+Composer NPCs use the **same 19-attribute model** as agency staff (FM26 labels,
+scale 1-20, shown to player as Elite/Outstanding/.../Unsuited):
+
+```typescript
+interface ComposerNPC {
+  id: string;
+  name: string;
+  tier: IdolTier;
+
+  // Same 19 attributes as staff, but only some are relevant:
+  // COACHING (relevant for composers):
+  vocalTechnique: number;      // quality of vocal melodies composed
+  danceTechnique: number;      // understanding of dance-friendly arrangements
+  stagePresence: number;       // composing for live performance impact
+
+  // MENTAL:
+  determination: number;       // consistency of quality, meets deadlines
+  discipline: number;          // minimum quality floor
+  adaptability: number;        // can compose outside comfort genre
+  // motivating, peopleManagement, authority — less relevant for freelancers
+
+  // KNOWLEDGE:
+  musicalKnowledge: number;    // core: overall composition skill
+  industryKnowledge: number;   // knows what charts want, trend awareness
+  // Other knowledge attrs less relevant for composers
+
+  // Composer-specific:
+  specialties: CreativePart[]; // which of the 3 parts they can do
+  preferredGenres: string[];   // genres where they're strongest
+  maxConcurrent: number;       // F-D: 3, C-A: 2, S+: 1
+  activeContracts: ComposerContract[];
+  fee: number;                 // base fee per creative part
+  royaltyExpectation: number;  // base royalty % they expect
+  schedule: { weekFree: number };
+}
+```
+
+**Quality of a composer's work** is derived from their attributes:
+
+```
+composition_quality_per_part =
+  musicalKnowledge × 0.4           // core skill
+  + genre_match_bonus × 0.2        // if composing in preferred genre: +bonus
+  + discipline × 0.1               // consistency (minimum floor)
+  + determination × 0.1            // effort (hit deadline = full quality)
+  + part_specialty × 0.2           // some composers excel at choruses, others at bridges
+  × random_variance(0.85, 1.15)    // seeded: same composer + seed = same range
+
+// Where a composer "focuses" emerges from their strengths:
+// Composer with high vocalTechnique → chorus and bridge get higher quality
+// Composer with high danceTechnique → verses with dance breaks get higher quality
+// This creates the non-hardcoded quality distribution across parts
+```
+
+### 3. Idol as Composer
+
+Idols can compose any of the 3 creative parts. Their composition quality uses
+their own attributes (the 16 visible stats map to composition ability):
+
+```
+idol_composition_quality =
+  // For music composition:
+  (idol.vocal × 0.3 + idol.communication × 0.2 + idol.aura × 0.2
+   + idol.charisma × 0.1 + idol.mentality × 0.2)
+  × mastery_factor                   // idol who has composed before gets bonus
+  × random_variance(0.85, 1.15)
+
+// For lyrics:
+  (idol.communication × 0.4 + idol.charisma × 0.2 + idol.mentality × 0.2
+   + idol.expression × 0.2)
+
+// For arrangement:
+  (idol.vocal × 0.3 + idol.dance × 0.2 + idol.adaptability × 0.2
+   + idol.communication × 0.15 + idol.mentality × 0.15)
+```
+
+**Advantages of idol composer:**
+- No fee (saves money)
+- Authenticity bonus: fans value idol-written songs → +15% fan mood on release
+- Creative control: idol writes what matches their voice/style
+
+**Disadvantages:**
+- Uses idol's schedule slot (can't do jobs while composing)
+- Quality depends on idol stats (may be lower than specialist NPC)
+- Idol Ambição oculto may affect quality (high ambition + low result = frustration)
+
+### 4. Creative Pipeline: 3 Parts
 
 An original song requires 3 creative contributions:
 
@@ -88,161 +172,276 @@ type CreativePart = 'music_composition' | 'lyrics' | 'arrangement';
 interface CreativeContribution {
   part: CreativePart;
   assignee: { type: 'npc_composer'; npcId: string }
-           | { type: 'idol_composer'; idolId: string };
-  quality: number;           // 0-100, set when contribution is delivered
-  deliveryWeek: number;      // agreed deadline
+           | { type: 'idol'; idolId: string };
+  // Quality set per song part when delivered
+  partQualities: Record<SongPart, number>;
+  deliveryWeek: number;
   status: 'contracted' | 'in_progress' | 'delivered' | 'late';
-  fee: number;               // one-time payment
-  royaltyPercent: number;    // ongoing % of song revenue
+  fee: number;
+  royaltyPercent: number;
 }
 ```
 
-**Parallel vs Sequential execution:**
+**Execution modes:**
 
 ```
-PARALLEL (3 different assignees):
+PARALLEL (3 different assignees — any mix of NPC and idol):
   Week 1: Music + Lyrics + Arrangement all start simultaneously
-  Week 2-3: All 3 delivered (each takes 2-3 weeks)
-  → Total: ~3 weeks to complete creative phase
+  ~3 weeks to complete all
+  Cost: 3× fees (if all NPCs)
 
 SEQUENTIAL (1 assignee does all 3):
-  Week 1-3: Music composition
-  Week 4-5: Lyrics
-  Week 6-7: Arrangement
-  → Total: ~7 weeks to complete creative phase
+  Week 1-3: Music → Week 4-5: Lyrics → Week 6-7: Arrangement
+  ~7 weeks total
+  Cost: 1× fee (but higher per-part because one person does everything)
 
-MIXED (2 assignees):
-  Week 1: Music starts (NPC A) + Lyrics starts (Idol)
-  Week 2-3: Music delivered, Lyrics delivered
-  Week 3-5: Arrangement (NPC A, now free)
-  → Total: ~5 weeks
+MIXED (2 assignees — e.g., NPC does music, idol does lyrics, NPC does arrangement):
+  Music + Lyrics in parallel → Arrangement after music is done
+  ~5 weeks total
 
-Decision by Music Director (ADR-009 decision 9.1.1):
-  - Budget allows 3 assignees? → Parallel (fast, expensive)
-  - Budget allows 2? → Mixed
-  - Budget for 1 only? → Sequential (slow, cheap)
-  - Idol can compose? → Replaces 1 NPC (saves fee, but idol needs schedule slot)
+IDOL-ONLY (1 or more idols compose everything):
+  Same parallel/sequential rules but:
+  - Zero fee (idol is contracted staff)
+  - Uses idol schedule slots (opportunity cost: no jobs during composition)
+  - 1 idol doing all 3 sequentially: ~7 weeks
+  - 3 idols in parallel: ~3 weeks (but 3 idols blocked from jobs)
 ```
 
-### 3. Cover Song Pipeline (simplified)
+### 5. Cover Song Pipeline
 
 ```
 COVER — Full Arrangement:
   → Only Arrangement part needed (music + lyrics exist from original)
-  → 1 NPC or idol does arrangement
-  → ~2 weeks
+  → 1 NPC or idol does arrangement (~2 weeks)
+  → Arrangement quality determines how the cover differs from original
 
 COVER — "As Is":
-  → No creative phase at all
+  → No creative phase
   → Performers interpret the original during Recording
-  → Quality depends on performers, not composers
-  → arrangement_quality = avg(performer_vocal × 0.6 + performer_expression × 0.4)
-  → 0 weeks creative phase, goes straight to choreography/recording
+  → Quality = avg(performer stats) × 0.7
+  → Goes straight to choreography/recording
 ```
 
-### 4. Composer Contracts
+### 6. Composer Contracts
 
-Composers are NPC freelancers. Each composition requires a contract:
+Composers are first-come-first-serve NPCs. Each contribution requires a contract:
 
 ```typescript
 interface ComposerContract {
   composerId: string;
   projectId: string;
-  creativePart: CreativePart;         // which of the 3 parts
-  fee: number;                         // one-time upfront payment
-  royaltyPercent: number;              // % of song revenue (ongoing)
-  deliveryDeadline: number;            // week number
+  creativePart: CreativePart;
+  fee: number;                     // one-time upfront
+  royaltyPercent: number;          // % of song revenue (ongoing)
+  deliveryDeadline: number;        // week number (based on composer schedule)
   status: 'active' | 'delivered' | 'late' | 'cancelled';
 }
 
-// Composer NPC
-interface ComposerNPC {
-  id: string;
-  name: string;
-  tier: IdolTier;
-  specialties: CreativePart[];         // what they can do (some do all 3, some only lyrics)
-  qualityBase: number;                 // 0-100, how good their work is
-  speed: number;                       // weeks to deliver (2-4 based on tier and part)
-  maxConcurrent: number;               // F-D: 3, C-A: 2, S+: 1
-  activeContracts: ComposerContract[]; // current workload
-  fee: number;                         // base fee (negotiable)
-  royaltyExpectation: number;          // base royalty % they ask for
-  schedule: { weekFree: number };      // when they next have capacity
+// Booking process:
+// 1. Check capacity: composer.activeContracts.length < maxConcurrent?
+// 2. Check schedule: when is the composer free? (weekFree)
+// 3. Negotiate: fee ± negotiation skill, royalty ± negotiation
+// 4. Sign: deduct fee from budget, composer starts on weekFree
+// 5. Delivery: composer delivers on deadline (or late with quality penalty)
+```
+
+### 7. Choreography
+
+Choreography defines the **formation** for each part of each song, designed for
+a specific number of idols. It can be done by:
+
+- **Agency choreographer** (staff NPC with Dance Technique attr)
+- **Freelance choreographer** (NPC from market, same 19-attr model as composers)
+- **An idol** (uses idol's Dance Technique equivalent: dance stat)
+
+#### 7a. Formation Types
+
+Each part of a song has a formation. There are 5 formation types, each with
+a minimum number of idols and specific position slot rules:
+
+```typescript
+type FormationType = 'line' | 'pairs' | 'v_shape' | 'circle' | 'scattered';
+
+// Minimum idols per formation type:
+const FORMATION_MINIMUMS: Record<FormationType, number> = {
+  line: 1,
+  pairs: 2,        // must be multiple of 2
+  v_shape: 3,      // must be multiple of 3
+  circle: 4,
+  scattered: 2,
+};
+
+// Maximum positions per formation: 12 (hard cap)
+const MAX_POSITIONS_PER_FORMATION = 12;
+```
+
+#### 7b. Position Slots Per Formation Type
+
+Each formation type defines which stage placements are available and in what quantities:
+
+```typescript
+interface FormationSlots {
+  front: { min: number; max: number };
+  center: { min: number; max: number };
+  mid: { min: number; max: number };
+  side: { min: number; max: number };
+  back: { min: number; max: number };
+  groupingRule: string;  // constraint on how positions are filled
 }
+
+const FORMATION_SLOTS: Record<FormationType, FormationSlots> = {
+
+  line: {
+    // 1 front, 1-3 mid, rest are back
+    front:  { min: 1, max: 1 },
+    center: { min: 0, max: 0 },
+    mid:    { min: 0, max: 3 },
+    side:   { min: 0, max: 0 },
+    back:   { min: 0, max: 8 },  // remaining go to back
+    groupingRule: 'none',
+  },
+
+  pairs: {
+    // Always in pairs (multiples of 2)
+    front:  { min: 2, max: 2 },
+    center: { min: 0, max: 4 },   // 0, 2, or 4
+    mid:    { min: 0, max: 4 },   // 0, 2, or 4
+    side:   { min: 0, max: 8 },   // 0, 2, 4, 6, or 8
+    back:   { min: 0, max: 2 },
+    groupingRule: 'all_placements_must_be_multiples_of_2',
+  },
+
+  v_shape: {
+    // Always in trios (multiples of 3), no center
+    front:  { min: 3, max: 3 },
+    center: { min: 0, max: 0 },   // no center in V
+    mid:    { min: 0, max: 3 },
+    side:   { min: 0, max: 6 },   // 0, 3, or 6
+    back:   { min: 0, max: 3 },
+    groupingRule: 'all_placements_must_be_multiples_of_3',
+  },
+
+  circle: {
+    // Encircling formation
+    front:  { min: 1, max: 3 },
+    center: { min: 0, max: 0 },   // no center (everyone is on the perimeter)
+    mid:    { min: 0, max: 0 },
+    side:   { min: 2, max: 6 },
+    back:   { min: 1, max: 3 },
+    groupingRule: 'none',
+  },
+
+  scattered: {
+    // Free-form, most flexible
+    front:  { min: 1, max: 3 },
+    center: { min: 0, max: 4 },
+    mid:    { min: 0, max: 6 },
+    side:   { min: 0, max: 6 },
+    back:   { min: 0, max: 3 },
+    groupingRule: 'none',
+  },
+};
 ```
 
-**First-come-first-serve with negotiation:**
+#### 7c. Choreography Per Song
 
-```
-1. Agency identifies desired composer
-2. Check capacity: activeContracts.length < maxConcurrent?
-   → If no: composer is busy. Wait or find another.
-3. Negotiate contract:
-   → Fee: composer.fee × tier_mult × urgency_mult (rush = +30%)
-   → Royalty: composer.royaltyExpectation ± negotiation (ADR-009 Music Director skill)
-   → Deadline: composer.speed + queue position (if another project finishes soon)
-4. Sign contract: deduct fee from agency budget
-5. Composer works on the part
-6. On delivery week: contribution.quality = composer.qualityBase × random(0.8, 1.2)
-   → Seeded random: same composer + same seed = same quality range
-```
-
-### 5. Choreography Stage
-
-Choreography is designed for a **specific number of idols** — not necessarily the
-full group. This ties directly into ADR-007's escalação system:
+The choreography defines a formation FOR EACH PART of the song. Different parts
+can have different formations and different numbers of active idols:
 
 ```typescript
 interface SongChoreography {
   songId: string;
-  activeDancers: number;               // how many idols dance this choreo
-  // Requirements per song part:
-  partChoreography: Record<SongPart, {
-    formation: 'line' | 'v_shape' | 'circle' | 'scattered' | 'pairs';
-    intensity: 'low' | 'medium' | 'high';
-    centerIdolId?: string;             // who should be center in this part
+
+  // Choreographer who designed this
+  choreographer:
+    | { type: 'staff'; npcId: string }       // agency choreographer
+    | { type: 'freelancer'; npcId: string }  // hired freelancer
+    | { type: 'idol'; idolId: string };      // idol designed the choreo
+
+  // Quality of the choreography (from choreographer's Dance Technique)
+  choreographyQuality: number;
+
+  // Per-part formation
+  partFormations: Record<SongPart, {
+    formation: FormationType;
+    activeIdolCount: number;         // how many idols are in this formation
+    slots: FormationSlotAssignment[];  // which positions exist
+    danceIntensity: number;          // 0-10, how demanding this part's choreo is
   }>;
-  // Quality of the choreography itself
-  choreographyQuality: number;         // 0-100, from choreographer NPC skill
+
+  // Training difficulty: more unique formations = harder to learn
+  // If all 9 parts use 'line': easy. If 5 different formations: hard.
+  trainingDifficulty: number;  // computed from formation variety
 }
 
-// Key design: choreography for 5 in a group of 8 means:
-// - 5 idols dance the full choreo (rotate per song in show)
-// - 3 idols are in back_vocal/rest_position during this song
-// - ADR-007 Show Director rotates WHO are the 5 and WHO are the 3
-//   between songs to manage fatigue
+interface FormationSlotAssignment {
+  slotIndex: number;
+  placement: 'front' | 'center' | 'mid' | 'side' | 'back';
+  // The idol assigned to this slot is set in the show lineup (ADR-007)
+  // The choreography defines the SLOTS, the lineup fills them with idols
+}
 ```
 
-**Choreography requires:**
-- Dance Studio facility (level 1+) — without it, stage is stalled
-- A choreographer NPC or staff member (quality = Dance Technique attr)
-- Duration: 1-2 weeks (simple) to 3-4 weeks (complex multi-formation)
+**Training difficulty formula:**
 
-### 6. Recording Stage
+```
+uniqueFormations = count of distinct FormationType used across 9 parts
+trainingDifficulty =
+  uniqueFormations × 10           // base: each new formation adds 10
+  + totalActiveIdols × 2          // more idols = more coordination
+  + maxFormationTransitions × 5   // transitions between different formations mid-song
 
-Recording seals the performers and produces the final song:
+// Example:
+// All 9 parts use 'line' → uniqueFormations = 1 → difficulty = 10 + N×2
+// 5 different formations → uniqueFormations = 5 → difficulty = 50 + N×2 + transitions×5
+// Higher difficulty = more rehearsal weeks needed before show
+```
+
+#### 7d. Choreography Interaction with ADR-007 (Show Pipeline)
+
+ADR-007 uses the 3D lineup matrix: Song × Part × Idol → Position.
+The choreography defines the SLOTS available. The lineup FILLS those slots:
+
+```
+Choreography says: "Chorus 1 uses V-shape with 6 idols:
+  3 front slots, 3 side slots"
+
+Show lineup fills: "Front slot 1 = Yui (vocalShare 0.4, danceShare 0.8)
+                    Front slot 2 = Mei (vocalShare 0.3, danceShare 0.9)
+                    Front slot 3 = Riko (vocalShare 0.2, danceShare 0.7)
+                    Side slot 1 = Saki ...
+                    Side slot 2 = Hana ...
+                    Side slot 3 = Aya ..."
+
+The remaining 2 idols (if group has 8) are NOT in this formation.
+They go to 'rest' position: vocalShare 0.05, danceShare 0.0.
+```
+
+### 8. Recording Stage
+
+Recording seals the performers and produces the final recorded song:
 
 ```typescript
 interface RecordingSession {
   songId: string;
-  performerIds: string[];              // idols who record
+  performerIds: string[];          // idols who record
   recordingWeek: number;
   // All performers need a free agenda slot in the same week
-  // Partial recording: if some idols unavailable,
-  //   recording happens with available members
-  //   quality penalty: 1.0 - (absent / total × 0.10)
-  recordingQuality: number;            // depends on performer stats + studio facility
+  // Partial: if some unavailable → quality penalty
+  partialPenalty: number;          // 1.0 - (absent / total × 0.10)
+  recordingQuality: number;
 }
 
-// Recording quality formula:
-// recording_quality = avg(performer_vocal × 0.4 + performer_expression × 0.3
-//                         + performer_communication × 0.2 + performer_charisma × 0.1)
-//                     × studio_facility_mult × partial_penalty
+// Quality:
+// recording_quality = avg_per_idol(
+//   idol.vocal × 0.4 + idol.expression × 0.3
+//   + idol.communication × 0.2 + idol.charisma × 0.1
+// ) × studio_facility_mult × partial_penalty
 //
-// studio_facility_mult: no studio: 0.6, level 1: 0.8, level 2: 1.0, level 3: 1.2
+// studio_facility_mult: none: 0.6, level 1: 0.8, level 2: 1.0, level 3: 1.2
 ```
 
-### 7. Full Pipeline State Machine
+### 9. Full Pipeline State Machine
 
 ```typescript
 interface MusicProject {
@@ -252,22 +451,20 @@ interface MusicProject {
   genre: string;
   songType: 'original' | 'cover' | 'cover_as_is';
 
-  // Current stage
   stage: 'creative' | 'choreography' | 'recording' | 'ready_for_release' | 'released' | 'cancelled';
   stalled: boolean;
   stallReason: string | null;
 
-  // Creative phase (3 parts)
+  // Creative phase
   creativeContributions: CreativeContribution[];
-  // True when all 3 parts (or just arrangement for cover) are delivered
   creativeComplete: boolean;
 
-  // Song composition (populated when creative phase completes)
+  // Song (populated when creative phase completes)
   composition: SongComposition | null;
 
   // Choreography (optional — ballads may skip)
   choreography: SongChoreography | null;
-  choreographyRequired: boolean;       // false for ballads, acoustic, etc.
+  choreographyRequired: boolean;
 
   // Recording
   recording: RecordingSession | null;
@@ -275,154 +472,108 @@ interface MusicProject {
   // Final quality
   finalQuality: number | null;
 
-  // Release config (set after recording, by Music Director ADR-009 9.3.1)
+  // Release config
   releaseConfig: ReleaseConfig | null;
 }
 ```
 
-### 8. Quality Formula (Final)
+### 10. Final Quality
+
+Quality is NOT a fixed weighted formula. It emerges from the parts:
 
 ```
-// Creative quality = weighted combination of 3 contributions
-creative_quality =
-  music_composition.quality × 0.40
-  + lyrics.quality × 0.25
-  + arrangement.quality × 0.35
+// Each song part has quality from 3 sources:
+part_quality(p) =
+  creative_quality(p)       // from composition + lyrics + arrangement
+  × choreography_match(p)   // how well choreo fits the part demands
+  × recording_quality        // uniform across all parts
 
-// Per-part quality derived from creative_quality with variance per part
-// Better composers produce more consistent parts;
-// Lower-tier composers have high variance (some parts great, others mediocre)
-partQualities[part] = creative_quality × random(0.8, 1.2) × part_specialty_bonus
+// Song overall quality = weighted average of part qualities
+// BUT the weights are NOT hardcoded — they come from the COMPOSITION ITSELF:
+// A chorus-heavy song (where the composer focused effort) naturally weights chorus more
+// because chorus_quality > verse_quality → chorus contributes more to the average.
 
-// If cover (arrangement only):
-creative_quality = arrangement.quality
+// Simple: overall = avg(part_qualities)
+// The distribution of quality across parts IS the "weight" system.
+// A song with amazing chorus and mediocre verses will score well in shows
+// during chorus parts and poorly during verses — no artificial weights needed.
 
-// If cover_as_is:
-creative_quality = avg(performer_stats) × 0.7 (performers doing arrangement themselves)
+// For chart scoring, overall quality is just the average:
+chart_quality = avg(part_quality for all 9 parts)
 
-// Choreography quality (0-100, from choreographer NPC)
-// If no choreography (ballad): redistributed to other weights
-
-// Final quality:
-final_quality =
-  creative_quality × 0.40
-  + choreography_quality × 0.15         // 0 if N/A → redistributed
-  + recording_quality × 0.30
-  + production_polish × 0.15            // from studio facility level
-
-// If choreography N/A:
-final_quality =
-  creative_quality × 0.50
-  + recording_quality × 0.35
-  + production_polish × 0.15
+// For show scoring (ADR-007), each part is scored individually.
+// The show's song_score uses ADR-007's part weights (chorus > verse > etc.)
+// which reflect AUDIENCE IMPACT, not composition quality.
 ```
 
-### 9. Weekly Tick Processing
-
-During Phase 3 of the weekly tick, the music system processes all active projects:
+### 11. Weekly Tick Processing
 
 ```
-For each MusicProject with stage != 'released' and stage != 'cancelled':
+For each MusicProject:
 
   IF stage == 'creative':
     For each creative contribution:
-      If status == 'contracted' AND composer has capacity:
-        status = 'in_progress'
-      If status == 'in_progress':
-        weeksWorked++
-        If weeksWorked >= deliveryTime:
-          status = 'delivered'
-          quality = computeContributionQuality(composer, seed)
-      If status == 'late' (past deadline):
-        penalty: quality × 0.9 per late week
+      If 'contracted' AND assignee has capacity → 'in_progress'
+      If 'in_progress' → weeksWorked++
+        If weeksWorked >= deliveryTime → 'delivered', compute quality
+      If past deadline → 'late', quality × 0.9 per late week
     If ALL contributions delivered:
       composition = buildComposition(contributions)
       stage = choreographyRequired ? 'choreography' : 'recording'
 
   IF stage == 'choreography':
-    If Dance Studio exists AND choreographer available:
+    Requirements: Dance Studio OR freelance choreographer OR idol with Dance > 50
+    If resource available:
       weeksInChoreo++
-      If weeksInChoreo >= choreoDuration:
-        choreography = buildChoreography(choreographer, activeDancers, songParts)
-        stage = 'recording'
-    Else:
-      stalled = true; stallReason = 'no_dance_studio' | 'no_choreographer'
+      If done: build choreography (formations per part), compute trainingDifficulty
+      stage = 'recording'
+    Else: stalled
 
   IF stage == 'recording':
-    If all performerIds have free agenda slot this week:
-      recording = recordSong(performers, studioLevel)
-      finalQuality = computeFinalQuality(composition, choreography, recording)
-      stage = 'ready_for_release'
-    Elif some performers available:
-      // Partial recording option (Music Director decides via ADR-009)
-      recording = recordSong(availablePerformers, studioLevel, partial=true)
-    Else:
-      stalled = true; stallReason = 'idol_schedule_conflict'
+    If all performerIds have free slot this week → record, compute quality
+    Elif some available → partial recording (penalty)
+    Else → stalled
 
   IF stage == 'ready_for_release':
-    // Waiting for Music Director to plan release (ADR-009 decision 9.3.1)
-    // No automatic processing — requires explicit release planning action
+    Awaiting Music Director release plan (ADR-009 decision 9.3.1)
 ```
-
-## Alternatives Considered
-
-### Alternative 1: 4 sequential stages (original ADR-008)
-
-- **Description**: Composition → Arrangement → Choreography → Recording, always sequential.
-- **Rejection Reason**: Doesn't model the 3 creative parts (music, lyrics, arrangement) as
-  separate contributions. Misses the parallel execution opportunity. Doesn't model
-  composer contracts with royalties and delivery dates.
-
-### Alternative 2: All creative work by a single "producer" NPC
-
-- **Description**: One Music Producer NPC creates the entire song.
-- **Rejection Reason**: Doesn't model the real idol industry where composers, lyricists,
-  and arrangers are often different people. Misses the strategic depth of assembling
-  the right creative team for each song.
 
 ## Consequences
 
 ### Positive
-- 3-part creative system creates meaningful economic decisions (cost vs speed)
-- Idols as composers adds depth (idol writes her own lyrics = authenticity bonus)
-- Cover songs are simpler/cheaper — good for new agencies
-- Choreography for N of M members ties directly into show fatigue system (ADR-007)
-- Per-part quality creates variance in songs (strong chorus + weak bridge = interesting)
-- Composer contracts create resource contention between agencies
+- Quality emerges from creator attributes — no arbitrary weights
+- Same attribute model for composers, choreographers, and staff (consistent)
+- Idol composers create authenticity + economic tradeoffs
+- Formation system creates visual variety and training depth
+- Per-part choreography ties directly into ADR-007 show scoring
 
 ### Negative
-- Complex state machine with many transitions and stall conditions
-- 3 separate contracts per song is more management overhead
-- Partial recording penalty adds another edge case
+- 19 attributes per composer NPC is more data to generate and manage
+- Formation validation (min idols, multiples, max 12) adds complexity
+- Training difficulty computation needs tuning
 
 ### Risks
-- **Risk**: Too many knobs (3 creative qualities + choreography + recording + production)
-  - **Mitigation**: Player sees only final_quality. Parts are internal for Moment Engine.
-- **Risk**: Composer pool exhaustion (all good composers booked by rivals)
-  - **Mitigation**: Pool is ~50+ composers across tiers. Idol-as-composer is fallback.
+- **Risk**: Too many formation types overwhelm the player
+  - **Mitigation**: NPC choreographer auto-selects formations. Player can override.
+- **Risk**: Idol composers always chosen to save money (dominates NPC composers)
+  - **Mitigation**: Idol uses schedule slot (opportunity cost). NPC may be better quality.
 
 ## GDD Requirements Addressed
 
-| GDD System | Requirement | How This ADR Addresses It |
-|------------|-------------|--------------------------|
-| music-production.md | Composition pipeline | 3 creative parts + choreography + recording |
-| music-production.md | Parallel execution with multiple NPCs | 3 different assignees = parallel completion |
-| music-production.md | Sequential if 1 NPC | 1 assignee does all 3 parts in sequence |
-| music-production.md | Stalled tracking with reason | stalled bool + stallReason per stage |
-| music-production.md | Choreography requires Dance Studio | Resource check in choreography stage |
-| music-production.md | Choreography for specific N of idols | activeDancers field ties to ADR-007 rotation |
-| music-production.md | Composer capacity shared across agencies | maxConcurrent with contract system |
-| music-production.md | Composer contracts (royalties, deadline) | ComposerContract with fee + royalty + deadline |
-| music-production.md | Cover needs only arrangement | cover type skips music+lyrics creative parts |
-| music-production.md | Cover "as is" | cover_as_is skips entire creative phase |
-| music-production.md | Song structure with parts | SongPart enum with per-part quality |
-| music-production.md | Quality weighted formula | creative × 0.40 + choreo × 0.15 + recording × 0.30 + polish × 0.15 |
-| music-production.md | Idol as composer | assignee type: 'idol_composer' replaces NPC |
-| music-entities.md | Part demands (vocal/dance intensity) | partDemands per SongPart feeds ADR-007 |
+| GDD | Requirement | How |
+|-----|------------|-----|
+| music-production.md | 3 creative parts | Music + Lyrics + Arrangement pipeline |
+| music-production.md | Parallel/sequential/mixed | Depends on number of assignees |
+| music-production.md | Idol as composer | assignee type: 'idol', uses idol stats |
+| music-production.md | Composer contracts | Fee + royalty + deadline + capacity |
+| music-production.md | Song structure with parts | 9 parts: intro through ending |
+| music-production.md | Choreography | Per-part formations with 5 types |
+| music-production.md | Cover songs | arrangement only, or "as is" |
+| stage-formations.md | Formation types | Line, Pairs, V-shape, Circle, Scattered |
+| stage-formations.md | Min/max idols per formation | Defined with grouping rules |
 
 ## Related Decisions
 
-- [ADR-004](adr-004-event-system.md) — stage stall and release events
-- [ADR-005](adr-005-performance-budgets.md) — music processing within Phase 3 budget
-- [ADR-007](adr-007-show-pipeline.md) — consumes finished songs; per-part demands drive show scoring
-- [ADR-009](adr-009-decision-catalog.md) — Music Director decisions (9.1-9.3) drive all pipeline actions
+- [ADR-007](adr-007-show-pipeline.md) — consumes songs; per-part demands drive show scoring
+- [ADR-009](adr-009-decision-catalog.md) — Music Director decisions (9.1-9.3)
+- [ADR-012](adr-012-decision-context-providers.md) — context for Music Director decisions
