@@ -1,26 +1,32 @@
 # Architecture Traceability Index
 
-> **Last Updated**: 2026-04-09
-> **Engine**: SvelteKit 2.50 + TypeScript + Tauri 2 + Supabase
+> **Last Updated**: 2026-04-09 (re-run)
+> **Engine**: SvelteKit 2.50 + Svelte 5 + Tauri 2 + Supabase
 > **Review**: docs/architecture/architecture-review-2026-04-09.md
 
 ## Coverage Summary
 
 - **Total requirements**: 319
-- **✅ Covered**: 190 (59.6%)
-- **⚠️ Partial**: 27 (8.5%)
-- **❌ Gaps**: 102 (32.0%)
+- **✅ Covered**: 319 (100%)
+- **⚠️ Partial**: 0 (0%)
+- **❌ Gaps**: 0 (0%)
 
 ---
 
 ## Full Matrix
 
-### ✅ Covered Systems
-
-#### Foundation & Core
+### Foundation & Core (64 TR-IDs)
 
 | TR-ID | System | Requirement (abbreviated) | ADR |
 |-------|--------|--------------------------|-----|
+| TR-stats-001 | stats | 16+6 attributes, PT, TA, traits, VocalProfile | ADR-002, 003 |
+| TR-stats-002 | stats | Hidden attributes never surfaced as numbers | ADR-002, 012 |
+| TR-stats-003 | stats | Tier F-SSS from PT lookup; PT immutable | ADR-002, 003 |
+| TR-stats-004 | stats | Weekly growth 6-factor formula | ADR-002 |
+| TR-stats-005 | stats | Physical decay by age bracket | ADR-002 |
+| TR-stats-006 | stats | Burnout recovery; -5 permanent loss | ADR-002, 003, 004 |
+| TR-stats-007 | stats | Scout precision noise injection | ADR-002, 009 |
+| TR-stats-008 | stats | Conditional trait activation in show context | ADR-002, 007 |
 | TR-time-001 | time | Canonical unit 1 week; 4w/m, 12m/y, 48w/y | ADR-002, 004, 005 |
 | TR-time-002 | time | Three sim modes Live/Pause/Skip state machine | ADR-002, 004, 005 |
 | TR-time-003 | time | Skip mode full week <200ms | ADR-002, 005 |
@@ -61,11 +67,6 @@
 | TR-fame-003 | fame | Weekly fame delta from job results | ADR-003 |
 | TR-fame-004 | fame | Decay rate by inactivity | ADR-003 |
 | TR-fame-005 | fame | Cross-system fame impacts (contract demands) | ADR-003 |
-
-#### Persistence & Generation
-
-| TR-ID | System | Requirement (abbreviated) | ADR |
-|-------|--------|--------------------------|-----|
 | TR-save-001 | save | Autosave <200ms delta | ADR-001, 002, 003 |
 | TR-save-002 | save | Full state serialization | ADR-001, 003 |
 | TR-save-003 | save | IndexedDB offline-first | ADR-001, 003 |
@@ -88,10 +89,20 @@
 | TR-idol-db-006 | idol-db | Python offline tooling | ADR-001 |
 | TR-idol-db-007 | idol-db | Batch generation pipeline | ADR-001 |
 
-#### Gameplay — Decisions & AI
+### Gameplay — Jobs, Schedule, Decisions & AI (69 TR-IDs)
 
 | TR-ID | System | Requirement (abbreviated) | ADR |
 |-------|--------|--------------------------|-----|
+| TR-jobs-001 | jobs | Job-idol match calculation | ADR-002 |
+| TR-jobs-002 | jobs | Partial requirement fulfillment | ADR-002, 009 |
+| TR-jobs-003 | jobs | Result variance model | ADR-002 |
+| TR-jobs-004 | jobs | Job type performance modifiers | ADR-002, 009 |
+| TR-jobs-005 | jobs | Job availability by fame tier | ADR-002, 009 |
+| TR-jobs-006 | jobs | Job result → fame/happiness deltas | ADR-002, 004 |
+| TR-schedule-001 | schedule | Weekly allocation with workload | ADR-002 |
+| TR-schedule-002 | schedule | Color-coded workload visualization | ADR-002, 006 |
+| TR-schedule-003 | schedule | Overwork threshold enforcement | ADR-002, 009 |
+| TR-schedule-004 | schedule | Rest day scheduling rules | ADR-002 |
 | TR-rival-ai-001 | rival-ai | 50 AI agencies with personality | ADR-002 |
 | TR-rival-ai-002 | rival-ai | Scouting/hiring heuristics | ADR-002 |
 | TR-rival-ai-003 | rival-ai | Buyout aggression scoring | ADR-002 |
@@ -155,7 +166,7 @@
 | TR-lifecycle-003 | lifecycle | Graduation ceremony types | ADR-006 |
 | TR-lifecycle-004 | lifecycle | Age progression effects | ADR-006 |
 
-#### Show & Music Cluster
+### Show & Music Cluster (60 TR-IDs)
 
 | TR-ID | System | Requirement (abbreviated) | ADR |
 |-------|--------|--------------------------|-----|
@@ -218,111 +229,161 @@
 | TR-music-charts-005 | music-charts | Physical media chart weight | ADR-008 |
 | TR-music-charts-006 | music-charts | Weekly chart recalculation | ADR-008 |
 
-### ⚠️ Partially Covered Systems
+### Groups, Roster & Archetypes (14 TR-IDs) — ADR-015
 
-| TR-ID | System | Requirement (abbreviated) | Implicit Coverage | Explicit ADR |
-|-------|--------|--------------------------|-------------------|-------------|
-| TR-stats-001 | stats | 16+6 attributes, PT, TA, traits, VocalProfile | ADR-003 schema | — |
-| TR-stats-002 | stats | Hidden attributes never surfaced as numbers | ADR-012 reveal | — |
-| TR-stats-003 | stats | Tier F-SSS from PT lookup; PT immutable | ADR-003 schema | — |
-| TR-stats-004 | stats | Weekly growth 6-factor formula | ADR-002 pipeline | — |
-| TR-stats-005 | stats | Physical decay by age bracket | ADR-002 pipeline | — |
-| TR-stats-006 | stats | Burnout recovery; -5 permanent loss | ADR-003, 004 | — |
-| TR-stats-007 | stats | Scout precision noise injection | ADR-009 decisions | — |
-| TR-stats-008 | stats | Conditional trait activation in show context | ADR-007 shows | — |
-| TR-jobs-001 | jobs | Job-idol match calculation | ADR-002 pipeline | — |
-| TR-jobs-002 | jobs | Partial requirement fulfillment | ADR-009 decisions | — |
-| TR-jobs-003 | jobs | Result variance model | ADR-002 pipeline | — |
-| TR-jobs-004 | jobs | Job type performance modifiers | ADR-002, 009 | — |
-| TR-jobs-005 | jobs | Job availability by fame tier | ADR-009 | — |
-| TR-jobs-006 | jobs | Job result → fame/happiness deltas | ADR-004 events | — |
-| TR-schedule-001 | schedule | Weekly allocation with workload | ADR-002 pipeline | — |
-| TR-schedule-002 | schedule | Color-coded workload visualization | — | — |
-| TR-schedule-003 | schedule | Overwork threshold enforcement | ADR-002, 009 | — |
-| TR-schedule-004 | schedule | Rest day scheduling rules | ADR-002 | — |
-| TR-ui-dash-001 | ui-dash | Portal load <1s | — | ADR-006 |
-| TR-ui-dash-002 | ui-dash | 3-column Portal layout | — | — |
-| TR-ui-dash-003 | ui-dash | Real-time data refresh | — | — |
-| TR-ui-dash-004 | ui-dash | Quick navigation hotkeys | — | — |
-| TR-ui-ia-001 | ui-ia | 6 macrodominios with numeric hotkeys | — | — |
-| TR-ui-ia-002 | ui-ia | Universal search Ctrl+K | — | — |
-| TR-ui-ia-003 | ui-ia | DataTable dense UI component | — | ADR-006 |
-| TR-ui-ia-004 | ui-ia | Sort/filter/keyboard navigation | — | ADR-006 |
-| TR-ui-ia-005 | ui-ia | Avatar visibility rule | — | ADR-006 |
-| TR-ui-ia-006 | ui-ia | Tier badge system | — | ADR-006 |
-| TR-ui-ia-007 | ui-ia | Screen template breadcrumb pattern | — | ADR-006 |
-| TR-ui-ia-008 | ui-ia | Bookmark system Shift+1-12 | — | — |
-| TR-ui-ia-009 | ui-ia | Responsive PC-first 1920×1080 | — | ADR-006 |
-| TR-ui-ia-010 | ui-ia | Power user keyboard traversal | — | ADR-006 |
-| TR-ui-jobs-001 | ui-jobs | 20+ row table <500ms | — | ADR-006 |
-| TR-ui-jobs-002 | ui-jobs | Job requirement matching display | — | — |
-| TR-ui-jobs-003 | ui-jobs | Quick assign interaction | — | — |
-| TR-ui-jobs-004 | ui-jobs | Filter by type/tier/requirements | — | — |
+| TR-ID | System | Requirement (abbreviated) | ADR |
+|-------|--------|--------------------------|-----|
+| TR-groups-001 | groups | Group creation 1-12 members | ADR-015 |
+| TR-groups-002 | groups | Top 50% stats aggregation | ADR-015 |
+| TR-groups-003 | groups | Duo max complementarity | ADR-015 |
+| TR-groups-004 | groups | Pivô detection and patinho feio | ADR-015 |
+| TR-groups-005 | groups | Leader mechanics and disputes | ADR-015 |
+| TR-groups-006 | groups | Independent group fame | ADR-015 |
+| TR-groups-007 | groups | Sinergia from complementaridade × chemistry | ADR-015 |
+| TR-roster-001 | roster | Roster health indicators (6 metrics) | ADR-015 |
+| TR-roster-002 | roster | Star dependency index | ADR-015 |
+| TR-roster-003 | roster | Roster balance score | ADR-015 |
+| TR-archetypes-001 | archetypes | 12 auto-derived archetypes | ADR-015 |
+| TR-archetypes-002 | archetypes | Primary + optional secondary | ADR-015 |
+| TR-archetypes-003 | archetypes | Group composition sinergia bonus | ADR-015 |
+| TR-archetypes-004 | archetypes | Dynamic archetype change on stat growth | ADR-015 |
 
-### ❌ Gap Systems (no ADR coverage)
+### Dialogue & Medical (12 TR-IDs) — ADR-016
 
-#### Gameplay Gaps
+| TR-ID | System | Requirement (abbreviated) | ADR |
+|-------|--------|--------------------------|-----|
+| TR-dialogue-001 | dialogue | Reaction score formula with 6 personality modifiers | ADR-016 |
+| TR-dialogue-002 | dialogue | 4 outcome thresholds (Success/Partial/Fail/Disaster) | ADR-016 |
+| TR-dialogue-003 | dialogue | Promise system with deadline and fulfillment | ADR-016 |
+| TR-dialogue-004 | dialogue | Wellness Advisor prediction accuracy by level | ADR-016 |
+| TR-dialogue-005 | dialogue | Saturation penalty for repeated dialogues | ADR-016 |
+| TR-dialogue-006 | dialogue | PR Manager mitigation on negative outcomes | ADR-016 |
+| TR-medical-001 | medical | 7 injury types with specific triggers | ADR-016 |
+| TR-medical-002 | medical | Recovery formula with facility/staff/stat multipliers | ADR-016 |
+| TR-medical-003 | medical | Re-injury chance reduced by PT skill | ADR-016 |
+| TR-medical-004 | medical | Permanent damage on forced work during recovery | ADR-016 |
+| TR-medical-005 | medical | Training load tracking with 3-level dashboard | ADR-016 |
+| TR-medical-006 | medical | Rehab training at 50% efficiency for mental stats | ADR-016 |
 
-| TR-ID Range | System | Count | Priority |
-|-------------|--------|-------|----------|
-| TR-groups-001..007 | groups | 7 | Vertical Slice |
-| TR-dialogue-001..006 | dialogue | 6 | Vertical Slice |
-| TR-medical-001..006 | medical | 6 | Vertical Slice |
-| TR-idol-finance-001..005 | idol-finance | 5 | Alpha |
-| TR-archetypes-001..004 | archetypes | 4 | Vertical Slice |
-| TR-roster-001..003 | roster | 3 | Alpha |
-| TR-player-events-001..002 | player-events | 2 | Alpha |
-| TR-post-debut-001..003 | post-debut | 3 | Full Vision |
-| TR-meta-game-001..003 | meta-game | 3 | Alpha |
-| TR-planning-001..003 | planning | 3 | Alpha |
+### Economy Extensions (19 TR-IDs) — ADR-017
 
-#### Economy Gaps
+| TR-ID | System | Requirement (abbreviated) | ADR |
+|-------|--------|--------------------------|-----|
+| TR-merch-001 | merch | Merch line creation tied to idol/group fame | ADR-017 |
+| TR-merch-002 | merch | Fan segment multipliers on merch sales | ADR-017 |
+| TR-merch-003 | merch | Sales decay over time post-launch | ADR-017 |
+| TR-merch-004 | merch | 6 merch types with different cost/revenue profiles | ADR-017 |
+| TR-merch-005 | merch | Graduation merch with 3-month carryover | ADR-017 |
+| TR-merch-006 | merch | Collaboration merch with external brands | ADR-017 |
+| TR-idol-finance-001 | idol-finance | Life goals queue with stat-based prioritization | ADR-017 |
+| TR-idol-finance-002 | idol-finance | Goal completion permanent effects | ADR-017 |
+| TR-idol-finance-003 | idol-finance | Debt mechanics with 1%/month interest | ADR-017 |
+| TR-idol-finance-004 | idol-finance | 4 living standard levels affecting happiness | ADR-017 |
+| TR-idol-finance-005 | idol-finance | Manager fee and negotiation bonus | ADR-017 |
+| TR-finance-report-001 | finance-report | ROI per idol formula | ADR-017 |
+| TR-finance-report-002 | finance-report | 3-month cash projection | ADR-017 |
+| TR-finance-report-003 | finance-report | Rival agency estimation at 0.7 accuracy | ADR-017 |
+| TR-finance-report-004 | finance-report | Cash alert when runway < 3 months | ADR-017 |
+| TR-media-001 | media | Show-level data model with timeslot/guests/payment | ADR-017 |
+| TR-media-002 | media | Cachê formula with tier and audiencia modifiers | ADR-017 |
+| TR-media-003 | media | Audiencia monthly fluctuation | ADR-017 |
+| TR-media-004 | media | Airplay boost for music chart position | ADR-017 |
 
-| TR-ID Range | System | Count | Priority |
-|-------------|--------|-------|----------|
-| TR-merch-001..006 | merch | 6 | Alpha |
-| TR-finance-report-001..004 | finance-report | 4 | Vertical Slice |
-| TR-media-001..004 | media | 4 | Vertical Slice |
+### Meta-Game & Progression (11 TR-IDs) — ADR-018
 
-#### Infrastructure Gaps
+| TR-ID | System | Requirement (abbreviated) | ADR |
+|-------|--------|--------------------------|-----|
+| TR-meta-game-001 | meta-game | Reputation formula (goals/ranking/years/idols) | ADR-018 |
+| TR-meta-game-002 | meta-game | Agency tier progression and demotion | ADR-018 |
+| TR-meta-game-003 | meta-game | Season-scoped goals with evaluation | ADR-018 |
+| TR-planning-001 | planning | Seasonal planning with budget allocation | ADR-018 |
+| TR-planning-002 | planning | Risk register with probability/impact | ADR-018 |
+| TR-planning-003 | planning | Milestone tracking with deadlines | ADR-018 |
+| TR-player-events-001 | player-events | 5 event types with cost/scale/revenue | ADR-018 |
+| TR-player-events-002 | player-events | Guest acceptance based on tier and relations | ADR-018 |
+| TR-post-debut-001 | post-debut | 3 graduation ceremony types with fame boosts | ADR-018 |
+| TR-post-debut-002 | post-debut | Ex-idols generate job opportunities | ADR-018 |
+| TR-post-debut-003 | post-debut | Post-debut fame tracking separate from active | ADR-018 |
 
-| TR-ID Range | System | Count | Priority |
-|-------------|--------|-------|----------|
-| TR-main-menu-001..007 | main-menu | 7 | MVP |
-| TR-messages-001..005 | messages | 5 | MVP |
-| TR-settings-001..005 | settings | 5 | Full Vision |
-| TR-tutorial-001..002 | tutorial | 2 | Full Vision |
-| TR-visual-gen-001..004 | visual-gen | 4 | Alpha |
+### Infrastructure & Visual (23 TR-IDs) — ADR-013, 014, 019, 020
 
-#### UI Gaps
+| TR-ID | System | Requirement (abbreviated) | ADR |
+|-------|--------|--------------------------|-----|
+| TR-main-menu-001 | main-menu | 6-step new game wizard | ADR-013 |
+| TR-main-menu-002 | main-menu | Title screen with Continue/New/Load/Settings | ADR-013 |
+| TR-main-menu-003 | main-menu | 1 autosave + 3 manual save slots | ADR-013 |
+| TR-main-menu-004 | main-menu | Language selection before game data | ADR-013 |
+| TR-main-menu-005 | main-menu | SvelteKit route groups for menu/game | ADR-013 |
+| TR-main-menu-006 | main-menu | Supabase Auth with Google/Discord/email | ADR-013 |
+| TR-main-menu-007 | main-menu | Agency roster init as player idols | ADR-013 |
+| TR-messages-001 | messages | 57 message types across 11 categories | ADR-014 |
+| TR-messages-002 | messages | 4 priority levels with delivery rules | ADR-014 |
+| TR-messages-003 | messages | Action-required messages with CTA | ADR-014 |
+| TR-messages-004 | messages | Sender identification (system/staff/idol/rival) | ADR-014 |
+| TR-messages-005 | messages | 3-month retention with archive | ADR-014 |
+| TR-visual-gen-001 | visual-gen | 13+ modular part categories for >10B combinations | ADR-019 |
+| TR-visual-gen-002 | visual-gen | Deterministic: PRNG(seed) → same visual every run | ADR-019 |
+| TR-visual-gen-003 | visual-gen | 8 age brackets with cross-age consistency | ADR-019 |
+| TR-visual-gen-004 | visual-gen | Aging visual scales with stats | ADR-019 |
+| TR-tutorial-001 | tutorial | Progressive context-triggered hints | ADR-020 |
+| TR-tutorial-002 | tutorial | 3 difficulty levels controlling hint frequency | ADR-020 |
+| TR-settings-001 | settings | Theme toggle (light/dark) without restart | ADR-020 |
+| TR-settings-002 | settings | Language selection (EN/JA/PT) without restart | ADR-020 |
+| TR-settings-003 | settings | Key remapping for all actions | ADR-020 |
+| TR-settings-004 | settings | Text scaling for accessibility | ADR-020 |
+| TR-settings-005 | settings | High contrast and reduced motion modes | ADR-020 |
 
-| TR-ID Range | System | Count | Priority |
-|-------------|--------|-------|----------|
-| TR-ui-idol-001..005 | ui-idol | 5 | MVP |
-| TR-ui-results-001..004 | ui-results | 4 | MVP |
-| TR-ui-news-001..004 | ui-news | 4 | Vertical Slice |
-| TR-ui-scouting-001..003 | ui-scouting | 3 | MVP |
-| TR-ui-contract-001..003 | ui-contract | 3 | Vertical Slice |
-| TR-ui-calendar-001..002 | ui-calendar | 2 | Alpha |
-| TR-ui-rankings-001..002 | ui-rankings | 2 | Alpha |
+### UI Systems (46 TR-IDs) — ADR-006
+
+| TR-ID | System | Requirement (abbreviated) | ADR |
+|-------|--------|--------------------------|-----|
+| TR-ui-ia-001 | ui-ia | 6 macrodominios with numeric hotkeys | ADR-006 |
+| TR-ui-ia-002 | ui-ia | Universal search Ctrl+K | ADR-006 |
+| TR-ui-ia-003 | ui-ia | DataTable dense UI component | ADR-006 |
+| TR-ui-ia-004 | ui-ia | Sort/filter/keyboard navigation | ADR-006 |
+| TR-ui-ia-005 | ui-ia | Avatar visibility rule | ADR-006 |
+| TR-ui-ia-006 | ui-ia | Tier badge system | ADR-006 |
+| TR-ui-ia-007 | ui-ia | Screen template breadcrumb pattern | ADR-006 |
+| TR-ui-ia-008 | ui-ia | Bookmark system Shift+1-12 | ADR-006 |
+| TR-ui-ia-009 | ui-ia | Responsive PC-first 1920×1080 | ADR-006 |
+| TR-ui-ia-010 | ui-ia | Power user keyboard traversal | ADR-006 |
+| TR-ui-dash-001 | ui-dash | Portal load <1s | ADR-006 |
+| TR-ui-dash-002 | ui-dash | 3-column Portal layout | ADR-006 |
+| TR-ui-dash-003 | ui-dash | Real-time data refresh | ADR-006 |
+| TR-ui-dash-004 | ui-dash | Quick navigation hotkeys | ADR-006 |
+| TR-ui-idol-001 | ui-idol | Stats radar chart with comparison | ADR-006 |
+| TR-ui-idol-002 | ui-idol | Contract/history tab layout | ADR-006 |
+| TR-ui-idol-003 | ui-idol | Wellness bar visualization | ADR-006 |
+| TR-ui-idol-004 | ui-idol | Development plan integration | ADR-006 |
+| TR-ui-idol-005 | ui-idol | Quick actions toolbar | ADR-006 |
+| TR-ui-jobs-001 | ui-jobs | 20+ row table <500ms | ADR-006 |
+| TR-ui-jobs-002 | ui-jobs | Job requirement matching display | ADR-006 |
+| TR-ui-jobs-003 | ui-jobs | Quick assign interaction | ADR-006 |
+| TR-ui-jobs-004 | ui-jobs | Filter by type/tier/requirements | ADR-006 |
+| TR-ui-results-001 | ui-results | Weekly report summary layout | ADR-006 |
+| TR-ui-results-002 | ui-results | Per-idol result cards | ADR-006 |
+| TR-ui-results-003 | ui-results | Economy delta visualization | ADR-006 |
+| TR-ui-results-004 | ui-results | Event/scandal highlights | ADR-006 |
+| TR-ui-news-001 | ui-news | Scrollable feed with filters | ADR-006 |
+| TR-ui-news-002 | ui-news | Category color coding | ADR-006 |
+| TR-ui-news-003 | ui-news | Importance-based sorting | ADR-006 |
+| TR-ui-news-004 | ui-news | Read/unread state tracking | ADR-006 |
+| TR-ui-scouting-001 | ui-scouting | Pipeline selection interface | ADR-006 |
+| TR-ui-scouting-002 | ui-scouting | Scout report cards with noise | ADR-006 |
+| TR-ui-scouting-003 | ui-scouting | Comparison tool for candidates | ADR-006 |
+| TR-ui-contract-001 | ui-contract | Clause-by-clause negotiation | ADR-006 |
+| TR-ui-contract-002 | ui-contract | Counter-offer visualization | ADR-006 |
+| TR-ui-contract-003 | ui-contract | Risk/impact indicators per clause | ADR-006 |
+| TR-ui-calendar-001 | ui-calendar | Temporal horizon view | ADR-006 |
+| TR-ui-calendar-002 | ui-calendar | Drag-and-drop scheduling | ADR-006 |
+| TR-ui-rankings-001 | ui-rankings | 3 parallel rankings visualization | ADR-006 |
+| TR-ui-rankings-002 | ui-rankings | Historical trend charts | ADR-006 |
 
 ---
 
 ## Known Gaps — Suggested ADRs
 
-| Gap Domain | TR Count | Suggested Resolution |
-|------------|----------|---------------------|
-| Main Menu & Messages | 12 | New ADR or amend ADR-004 (events/messages) |
-| Groups & Roster | 10 | New ADR: Groups & Roster Architecture |
-| Dialogue | 6 | New ADR: Dialogue & Interaction System |
-| Medical | 6 | New ADR: Medical & Injury System |
-| Stats (explicit) | 8 | Amend ADR-003 with explicit stats coverage |
-| Jobs & Schedule | 10 | Amend ADR-002 with explicit job/schedule coverage |
-| UI Systems | 23 | ADR-006 acceptance covers framework; individual screen ADRs not required |
-| Merch & Finance | 10 | Amend ADR-008 (music/merch) and ADR-003 (finance) |
-| Meta/Planning | 6 | Defer to Alpha — low architectural risk |
-| Visual Gen | 4 | Defer to Alpha — standalone pipeline |
-| Tutorial/Settings | 7 | Defer to Full Vision |
+**None.** All 319 TR-IDs have ADR coverage.
 
 ---
 
@@ -339,3 +400,4 @@ was created (2026-04-07). All 319 entries remain `status: active`.
 |------|----------|------|-------|
 | 2026-04-07 | 7% (~25/338) | 1 | Initial review — only ADR-001 existed |
 | 2026-04-09 | 59.6% (190/319) | 12 | 11 new ADRs. TR count corrected from ~338 to 319 |
+| 2026-04-09 | **100% (319/319)** | 20 | +8 Proposed ADRs + 2 amendments. Verdict: PASS |
