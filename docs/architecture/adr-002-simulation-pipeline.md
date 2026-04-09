@@ -572,6 +572,24 @@ LIVE MODE:
 | rival-agency-ai.md | Shared scout and composer pools | Cross-agency resolution handles contention |
 | rival-agency-ai.md | Memory of player interactions | RivalMemory updated in AgencyTick post-resolution |
 | save-load.md | Autosave <200ms | Post-tick delta save from orchestrator |
+| idol-attribute-stats.md | 16+6 attributes per idol, PT/TA/traits/VocalProfile from seed | Pipeline Phase 3 runs stat growth; Phase 2 reads stats for job resolution |
+| idol-attribute-stats.md | Hidden attributes never surfaced as numbers | Worker sends projection without hidden values; UI stores filter |
+| idol-attribute-stats.md | Tier F-SSS from PT lookup; PT immutable | Tier derived in Phase 3 stat tick; PT set at generation, never mutated |
+| idol-attribute-stats.md | Weekly growth via 6-factor multiplicative formula | Phase 3 stat update applies growth formula per idol per week |
+| idol-attribute-stats.md | Physical attribute decay by age bracket | Phase 3 stat update applies decay after growth; 4 non-decaying excluded |
+| idol-attribute-stats.md | Burnout recovery; permanent -5 if forced work | Phase 2 wellness check; if burnout + work scheduled → permanent stat loss |
+| idol-attribute-stats.md | Scout precision noise injection per pipeline type | Phase 1 scouting reads stats with noise; noise applied by scouting system |
+| idol-attribute-stats.md | Conditional trait activation in show context | Phase 2 show processing passes context metadata; traits activate per ADR-007 |
+| job-assignment.md | Job-idol match calculation with stat requirements | Phase 1 generates available jobs; match score computed from idol stats vs requirements |
+| job-assignment.md | Partial requirement fulfillment with penalty | Match score allows partial: ratio of met/total requirements × penalty multiplier |
+| job-assignment.md | Result variance model with seeded RNG | Phase 2 daily job resolution uses seeded PRNG for performance variance |
+| job-assignment.md | Job type performance modifiers | Each job type (TV, recording, live, etc.) applies type-specific stat weight formula |
+| job-assignment.md | Job availability gated by fame tier | Phase 1 job generation filters pool by agency/idol fame tier thresholds |
+| job-assignment.md | Job result → fame and happiness deltas | Phase 2 job completion emits events; Phase 3 fame/wellness systems consume |
+| schedule-agenda.md | Weekly allocation with workload tracking | Decision Phase: NPC/player assigns idols to 7-day slots before execution |
+| schedule-agenda.md | Color-coded workload visualization | UI reads schedule slice; workload level → color mapping in ADR-006 components |
+| schedule-agenda.md | Overwork threshold enforcement | Phase 2 checks daily workload; refuses job if threshold exceeded (wellness guard) |
+| schedule-agenda.md | Rest day scheduling rules | Minimum 1 rest day/week enforced; 0 rest → stress penalty in Phase 2 wellness |
 
 ## Performance Implications
 

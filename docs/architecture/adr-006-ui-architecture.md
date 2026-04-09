@@ -485,6 +485,37 @@ interface SearchPaletteProps {
 | ui-job-board.md | Table 20+ rows loads in <500ms | DataTable with virtual scroll when >100 rows |
 | ui-idol-profile.md | Profile navigable by keyboard | Tab navigation via use:keyboard-nav |
 | main-menu-flow.md | Route groups separate menu from game | (menu)/ and (game)/ SvelteKit groups |
+| ui-information-architecture.md | 6 macrodominios with numeric hotkeys | Global layout registers 1-6 hotkeys → macro navigation |
+| ui-information-architecture.md | Bookmark system Shift+1-12 | UIState.bookmarks[] persisted in IndexedDB; 12 customizable slots |
+| ui-information-architecture.md | Universal search Ctrl+K across all entities | SearchPalette indexes idols, staff, jobs, news, screens |
+| ui-dashboard.md | Real-time data refresh from simulation | Slice-derived Svelte stores auto-update on delta projection |
+| ui-dashboard.md | Quick navigation hotkeys per macro domain | Hotkey map in layout; domain-specific shortcuts in tab components |
+| ui-idol-profile.md | Stats radar chart with tier visualization | Chart component reads idol stats; tier-colored segments |
+| ui-idol-profile.md | Contract details with clause breakdown | ContractCard component bound to contracts slice |
+| ui-idol-profile.md | Career history timeline | TimelineView component reads fame/job history arrays |
+| ui-idol-profile.md | Happiness/wellness bar indicators | WellnessBars atomic component with 4-bar visualization |
+| ui-idol-profile.md | Cross-reference links to related entities | Entity links use drilldown pattern (tooltip → modal → navigate) |
+| ui-week-results.md | Week results summary with moment headlines | MomentCard components rendering top 5 headlines from Moment Engine |
+| ui-week-results.md | Per-idol job result breakdown | DataTable of job results with note grade, positives, negatives |
+| ui-week-results.md | Agency mood indicator | MoodBadge component reads moral média from simulation |
+| ui-week-results.md | Drill-down from headline to detailed result | Drilldown pattern: headline click → modal with full result data |
+| ui-scouting.md | Scout pipeline selection interface | PipelineSelector component with 5 pipeline types |
+| ui-scouting.md | Idol evaluation cards with noise indicator | ScoutCard shows estimated stats with precision indicator |
+| ui-scouting.md | Scouting mission management | MissionList DataTable with status, cost, pipeline, duration |
+| ui-contract-negotiation.md | Clause-by-clause negotiation interface | NegotiationPanel with 9 clause sliders + counter-offer logic |
+| ui-contract-negotiation.md | Counter-offer visualization | OfferComparison side-by-side component showing deltas |
+| ui-contract-negotiation.md | Acceptance probability indicator | ProbabilityMeter component reads negotiation formula output |
+| ui-news-feed.md | Scrollable feed with category filters | NewsFeed component with CategoryFilter bar + infinite scroll |
+| ui-news-feed.md | Veículo-based visual styling per news tier | NewsCard applies CSS variant based on veículo tier (TV/magazine/blog) |
+| ui-news-feed.md | Expandable news detail with related entities | NewsCard expand → detail view with entity links (drilldown) |
+| ui-news-feed.md | News archive and search | NewsFeed supports text search + date filter; archive after 3 months |
+| ui-rankings.md | 3 parallel rankings visualization (idol/group/agency) | RankingsView with 3-tab layout; DataTable per ranking type |
+| ui-rankings.md | Tier badge and trend indicator per entry | RankingRow shows tier badge + arrow (up/down/steady) |
+| ui-calendar-planning.md | Temporal horizon view with week/month/season | CalendarGrid component with zoom levels (week/month/quarter) |
+| ui-calendar-planning.md | Event markers and scheduling overlay | CalendarGrid renders event markers; click to assign/view |
+| ui-job-board.md | Job requirement matching display | JobCard shows stat requirements vs idol stats with match % |
+| ui-job-board.md | Quick assign interaction from board | QuickAssign modal: select idol → confirm → schedule update |
+| ui-job-board.md | Filter by type, tier, and stat requirements | DataTable filter bar with type/tier/requirement range filters |
 
 ## Performance Implications
 
