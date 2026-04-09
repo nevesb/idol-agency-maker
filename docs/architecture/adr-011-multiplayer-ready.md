@@ -31,19 +31,39 @@ new transport layer — not a rewrite of the simulation.
 
 ### Multiplayer Vision
 
-- 2-4 players in the same world, each controlling one agency
-- Same 50 NPC agencies exist alongside player agencies
+**3 modes, same SimOrchestrator:**
+
+| Mode | Description | Transport |
+|------|-------------|-----------|
+| **Single-player** | 1 player, 1 agency (or multiple via hot-seat with self) | Local Web Worker |
+| **Local multiplayer** | 2-4 players on the SAME PC, each controls a different agency. Turn-based: each player submits decisions, then week processes. Same as FM "add manager" feature. Also supports 1 player controlling 2+ agencies simultaneously. | Local Web Worker (same machine, no network) |
+| **Online multiplayer** | 2-4 players on different devices, same world. Turn-based weekly. | Remote server (Supabase Edge Function) |
+
+All 3 modes:
+- Same 50 NPC agencies exist alongside player-controlled agencies
 - Simulation tick waits for ALL player decisions before processing
 - One player's actions can affect others (buyout their idol, compete for same job)
-- Turn-based (weekly): all players submit decisions → server processes week → results broadcast
+- Turn-based (weekly): all players submit decisions → tick processes → results delivered
+
+**Local multiplayer specifics (FM-style):**
+- Players take turns on the same screen (hot-seat)
+- Each player sees ONLY their agency's data when it's their turn (fog of war)
+- "Continue" button advances the week only when ALL players have confirmed
+- 1 player can control 2+ agencies (managing rival agencies simultaneously for fun/challenge)
+- No network required — everything runs in the same Web Worker
+- Save file contains all player-controlled agencies
 
 ### Design Principle
 
 **The SimOrchestrator is transport-agnostic.** It receives `ActionList[]` from
 agencies and produces `StateProjection[]`. It does not know or care whether:
-- It runs in a Web Worker (single-player)
-- It runs on a Supabase Edge Function (multiplayer)
+- It runs in a Web Worker (single-player or local multiplayer)
+- It runs on a Supabase Edge Function (online multiplayer)
 - It runs in a test harness (CI)
+
+**Player count is a configuration, not a code path.** The SimOrchestrator sees
+N player-controlled agencies (1 in single-player, 2-4 in multiplayer). The only
+difference is HOW decisions arrive (same screen vs network) — not how they're processed.
 
 ## Decision
 
@@ -81,15 +101,38 @@ interface TransportAdapter {
 ### 2. Transport Implementations
 
 ```
-SINGLE-PLAYER (current — Web Worker):
+SINGLE-PLAYER (1 player, 1 agency — Web Worker):
 ┌──────────┐     postMessage      ┌──────────────────┐
 │  Client   │ ──────────────────► │  SimWorker        │
 │  (UI)     │                     │  (Web Worker)     │
 │           │ ◄────────────────── │  SimOrchestrator  │
 └──────────┘     postMessage      └──────────────────┘
   LocalTransportAdapter            SimulationHost
+  playerAgencies: [agencyA]
 
-MULTIPLAYER (future — Server):
+LOCAL MULTIPLAYER (2-4 players OR 1 player with 2+ agencies — same PC):
+┌──────────┐     postMessage      ┌──────────────────┐
+│  Client   │ ──────────────────► │  SimWorker        │
+│  (UI)     │                     │  (Web Worker)     │
+│           │ ◄────────────────── │  SimOrchestrator  │
+└──────────┘     postMessage      └──────────────────┘
+  LocalMultiplayerTransport        SimulationHost
+  playerAgencies: [agencyA, agencyB, ...]
+  activePlayer: 0  ← rotates on "end turn"
+
+  Turn flow:
+  1. Player A sees their agency view. Makes decisions. Clicks "End Turn."
+  2. Screen transitions. Player B sees THEIR agency view. Decides. "End Turn."
+  3. When ALL players confirmed → SimOrchestrator.processWeek()
+  4. Each player sees their week results in turn order.
+  5. Repeat.
+
+  Same player controlling 2+ agencies:
+  → No screen transition needed (same person)
+  → UI shows agency selector tab (switch between agencies freely)
+  → "Continue" only when ALL controlled agencies have confirmed
+
+ONLINE MULTIPLAYER (future — Server):
 ┌──────────┐                      ┌──────────────────┐
 │ Client A  │ ──── WebSocket ───► │  Server           │
 └──────────┘                      │  (Edge Function)  │
@@ -97,6 +140,8 @@ MULTIPLAYER (future — Server):
 │ Client B  │ ──── WebSocket ───► │  (same code!)     │
 └──────────┘                      └──────────────────┘
   RemoteTransportAdapter           SimulationHost
+  playerAgencies: [agencyA, agencyB]
+  Each client submits independently. Server waits for all.
 
 TEST (CI):
 ┌──────────────────┐
@@ -123,8 +168,10 @@ interface AgencyDecisionBatch {
   status: 'pending' | 'submitted' | 'timeout';
 }
 
-// Single-player: only 1 player batch + 50 NPC batches
-// Multiplayer: 2-4 player batches + 47-49 NPC batches
+// Single-player: 1 player batch + 50 NPC batches = 51
+// Local multi (2 players): 2 player batches + 49 NPC batches = 51
+// Local multi (1 player, 2 agencies): 2 player batches + 49 NPC = 51
+// Online multi: 2-4 player batches + 47-49 NPC batches = 51
 // The SimOrchestrator doesn't distinguish — it just needs all 51 batches
 ```
 
@@ -204,7 +251,39 @@ urgent events for player agencies are forwarded to the correct client:
 - UI components bind to stores, not to the transport directly
 - Future: lobby screen, "waiting for other player" state, spectate mode
 
-### 7. Implementation Rules (for current single-player development)
+### 7. Local Multiplayer UI Flow
+
+```
+SETUP (New Game or Load):
+  1. "How many players?" → 1, 2, 3, 4
+  2. For each player: select agency from available agencies
+     (same agency cannot be controlled by 2 different players)
+  3. "Same player controlling multiple agencies?" toggle
+     → If yes: player selects 2+ agencies (FM style "add manager")
+
+IN-GAME (Hot-Seat Turn Flow):
+  1. Current player's agency loaded into UI
+  2. Fog of war: can ONLY see own agency data
+     (rival agencies show public info only, even if rival is other player)
+  3. Player makes decisions (scheduling, contracts, etc.)
+  4. Player clicks "End Turn" (or "Ready")
+  5. IF more players need to decide:
+     → Screen shows "Pass to Player B" / "Player B's turn"
+     → Brief transition screen (prevents screen peeking)
+     → Player B's agency loaded
+  6. WHEN all players confirmed:
+     → Week processes
+     → Results shown per player in turn order
+     → Each player sees ONLY their results + public news
+
+SINGLE PLAYER + MULTIPLE AGENCIES:
+  → No "pass to player" screen
+  → Agency selector tabs always visible
+  → Switch freely between agencies
+  → "Continue" enabled when ALL agencies have decisions confirmed
+```
+
+### 8. Implementation Rules (for current single-player development)
 
 These rules prevent single-player assumptions from creeping in:
 
