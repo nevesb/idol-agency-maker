@@ -1,7 +1,7 @@
 # ADR-012: Decision Context Providers
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-08
