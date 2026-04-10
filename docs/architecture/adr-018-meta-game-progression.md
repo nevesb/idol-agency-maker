@@ -77,6 +77,14 @@ interface MetaGameState {
 
 // Tier progression: automatic based on sustained performance metrics.
 // Demotion possible if metrics drop below threshold for 2+ seasons.
+
+// IMPROVEMENT DECISIONS: What to improve in the agency is decided by the
+// board AI, which evaluates the agency as a whole. No board "skill" is involved —
+// only agency state, budget, and agency profile. The agency profile indicates
+// weaknesses; the board AI selects improvement areas automatically based on:
+// - Lowest-scoring metric in the reputation formula
+// - Budget available for investment
+// - Agency tier requirements for the next level
 ```
 
 ### Part B: Planning Board (TR-planning-001..003)
@@ -117,8 +125,8 @@ interface PlayerEvent {
   status: 'planning' | 'confirmed' | 'completed' | 'cancelled';
 }
 
-// Revenue: bilheteria - custo_producao - caches_convidados
-// Fame gain: sucesso × visibilidade × participantes
+// Revenue: ticket_sales - production_cost - guest_fees
+// Fame gain: success × visibility × participants
 // Guest acceptance: conditioned on event tier, availability, rival relations
 ```
 
@@ -126,15 +134,36 @@ interface PlayerEvent {
 
 ```typescript
 interface PostDebutState {
-  careerType: 'solo-artist' | 'actress' | 'model' | 'trainer' | 'producer' | 'retired';
+  careerType: PostDebutCareer;
   graduationWeek: number;
   graduationType: 'simple' | 'special-show' | 'final-tour';
   postDebutFame: number;       // separate from active fame
   jobsGenerated: string[];     // IDs of jobs this ex-idol creates
+  canHireAsComposer: boolean;  // true if idol composed any music during active career
+  canHireAsChoreographer: boolean; // true if idol choreographed during active career
 }
 
-// Ex-idols generate jobs for active idols (e.g. ex-idol becomes drama producer
-// → creates drama job opportunities). 
+type PostDebutCareer = 'solo-artist' | 'actress' | 'model' | 'trainer'
+  | 'composer' | 'choreographer' | 'producer' | 'retired';
+
+// CAREER DERIVATION: At graduation, careerType is derived from the idol's
+// strongest attribute at time of graduation:
+//   Vocal → 'solo-artist'
+//   Dança → 'model' or 'choreographer' (if choreographed)
+//   Visual → 'model' or 'actress'
+//   Comunicação → 'actress'
+//   Mentalidade → 'trainer' or 'producer'
+//   No clear strength → 'retired'
+//
+// COMPOSER/CHOREOGRAPHER ELIGIBILITY:
+// If the idol composed any music during their active career (has credits in
+// MusicSlice), canHireAsComposer = true → they enter the composer pool as an
+// NPC and can be hired by any agency (including the player's).
+// Same logic for choreography credits → canHireAsChoreographer = true.
+// These flags are additive to careerType (an ex-idol can be both 'actress'
+// AND available as a composer NPC).
+//
+// Ex-idols generate jobs for active idols based on careerType.
 // Graduation fame boost: Simple +50, Special Show +200-500, Final Tour +500-1000.
 // Merch carryover: 3-month revenue from graduation products (ADR-017).
 ```

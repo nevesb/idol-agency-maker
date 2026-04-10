@@ -230,14 +230,33 @@ interface InboxSlice {
 **Retention policy:** Messages older than `retentionWeeks` are auto-archived
 at end-of-month processing. Starred messages are exempt from auto-archive.
 
-### Content Generation Strategy
+### Content Generation Strategy — Development-Time String Generator
 
-**MVP**: Template-based with i18n keys. Each message type has a fixed title/body
-template with parameter interpolation. Templates live in locale files
-(`en.json`, `ja.json`, `pt.json`) per ADR-010.
+All parameterizable message strings are produced by a **development-time string
+generator** (`tools/generate-strings.ts`). The generator:
+
+1. Reads the message type catalog (`design/gdd/message-types-catalog.md`)
+2. Extracts all 57 message type templates with their parameter slots
+3. Produces typed locale files (`en.json`, `ja.json`, `pt.json`) per ADR-010
+4. Generates a TypeScript `MessageKeys` type with all valid key + param combinations
+5. Validates that every message type has templates in every supported language
+
+**Why dev-time generation:**
+- Adding a new language requires only running the generator with new translations —
+  no code changes needed
+- The generator enforces that all message types have complete coverage in all locales
+- Type-safe: `bodyParams` must match the generated parameter slots at compile time
+- The generator is reusable for any future parameterizable string system (news,
+  dialogue, events)
+
+**Running the generator:**
+```bash
+npx tsx tools/generate-strings.ts --catalog design/gdd/message-types-catalog.md --out src/lib/i18n/messages/
+```
 
 **Future (post-MVP)**: LLM enrichment for personality-flavored messages (idol
-personality affects phrasing). This is additive — templates remain the fallback.
+personality affects phrasing). This is additive — generated templates remain the
+fallback.
 
 ---
 

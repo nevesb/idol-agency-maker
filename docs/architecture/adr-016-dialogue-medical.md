@@ -51,6 +51,10 @@ both consume hidden stat data (Temperamento, Ambição, etc.) for their formulas
 - Dialogue: reaction score formula, affinity deltas, promise system, saturation penalty
 - Medical: 7 injury types, recovery formula, re-injury risk, permanent damage, training load tracking
 - Both integrate with wellness system via ADR-004 events
+- **NPC parity rule**: Every dialogue/medical action the player can take, an NPC
+  producer must also be able to take. NPC producers (rival agencies and delegated
+  NPCs) use the same `computeReactionScore()` with tone chosen by their personality.
+  NPC dialogue decisions and message responses must be declared in ADR-009.
 
 ---
 
@@ -65,9 +69,15 @@ interface DialogueContext {
   tone: 'encouraging' | 'neutral' | 'competitive' | 'aggressive' | 'calm';
   topic: string;
   idol: IdolRuntime;
-  producerTraits: string[];
+  producerId: string;           // ID of the producer initiating dialogue
+  producerTraits: string[];     // traits of the acting producer
   wellnessAdvisorLevel: 0 | 1 | 2 | 3;
 }
+// NOTE: producerId is the entity ID of whoever initiates the dialogue —
+// this can be the human player's producer OR an NPC producer (rival agency
+// or delegated NPC). Every action a player can do, an NPC must also be able
+// to do (see ADR-009). NPC producers use the same dialogue system with
+// tone selected by their personality profile.
 
 function computeReactionScore(ctx: DialogueContext): number {
   const base = TONE_BASE[ctx.tone];  // e.g. encouraging=60, aggressive=40
@@ -80,7 +90,7 @@ function computeReactionScore(ctx: DialogueContext): number {
   const loyaltyMod = ctx.idol.hiddenStats.lealdade > 12 ? 5 : 0;
   const profMod = ctx.idol.hiddenStats.profissionalismo > 14 ? 8 : 0;
   const wellnessMod = ctx.idol.wellness.happiness < 30 ? -10 : 0;
-  const affinityMod = (getAfinidade(ctx.idol.id, 'producer') - 0.5) * 20;
+  const affinityMod = (getAffinity(ctx.idol.id, ctx.producerId) - 0.5) * 20;
   const relevanceMod = TOPIC_RELEVANCE[ctx.topic] ?? 0;
 
   return Math.max(0, Math.min(100,

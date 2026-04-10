@@ -15,8 +15,8 @@ user + architecture-review
 ## Summary
 Groups, roster balance, and archetypes are tightly coupled systems that need a
 unified state ownership model. This ADR defines the GroupsSlice, archetype
-derivation as pure function, pairwise afinidade storage, and the formulas that
-connect them (top-50% stats, sinergia, chemistry, pivô detection).
+derivation as pure function, pairwise affinity storage, and the formulas that
+connect them (top-50% stats, synergy, chemistry, pivô detection).
 
 ---
 
@@ -47,33 +47,33 @@ connect them (top-50% stats, sinergia, chemistry, pivô detection).
 ### Problem Statement
 Three interrelated GDDs — group management, roster balance, and idol archetypes —
 have no architectural coverage. They share data dependencies (archetypes feed group
-sinergia; groups feed roster balance) and need coordinated state ownership. ADR-003
+synergy; groups feed roster balance) and need coordinated state ownership. ADR-003
 defines 18 state slices but none for groups or archetypes. Without this ADR,
 developers must invent group state storage, archetype computation strategy, and
-afinidade data structures ad hoc.
+affinity data structures ad hoc.
 
 ### Current State
 - ADR-003 defines `RosterSlice` with idols and `FameSlice` with rankings
 - No `GroupsSlice` exists in the state schema
 - Archetypes are defined in GDD but have no architectural home
-- Pairwise afinidade between idols has no storage strategy
+- Pairwise affinity between idols has no storage strategy
 - Group fame is independent of member fame (K-pop model) but FameSlice only tracks individual fame
 
 ### Constraints
 - Groups contain 1-12 members; one idol can belong to multiple groups
 - Stats aggregation uses top-50% rule (must be efficient for 400+ groups across 50 agencies)
-- Afinidade is pairwise (O(N²) pairs) but sparse in practice
+- Affinity is pairwise (O(N²) pairs) but sparse in practice
 - Archetype derivation must be deterministic and pure (same stats → same archetype)
-- Chemistry grows monthly; sinergia is derived from chemistry × complementaridade
+- Chemistry grows monthly; synergy is derived from chemistry × complementarity
 - All formulas from GDDs are normative — implement exactly as specified
 
 ### Requirements
 - State slice for groups with clear ownership
 - Archetype derivation as cacheable pure function
-- Pairwise afinidade storage that scales to 3000 idols
-- Group performance formula (top-50% × sinergia) for show pipeline (ADR-007)
+- Pairwise affinity storage that scales to 3000 idols
+- Group performance formula (top-50% × synergy) for show pipeline (ADR-007)
 - Roster balance analysis with health indicators
-- Crisis detection (patinho feio, leadership disputes) as deterministic checks
+- Crisis detection (underperformer, leadership disputes) as deterministic checks
 - Group fame tracked independently in FameSlice
 
 ---
@@ -87,9 +87,9 @@ rankings. Archetypes are **not stored in state** — they are derived on demand.
 
 ```
 GameState (ADR-003 + this ADR)
-├── roster: RosterSlice        # owns idols + pairwise afinidade
+├── roster: RosterSlice        # owns idols + pairwise affinity
 │   ├── idols: Map<id, IdolRuntime>
-│   └── afinidade: SparseSymmetricMap<idolId, idolId, number>
+│   └── affinity: SparseSymmetricMap<idolId, idolId, number>
 ├── groups: GroupsSlice        # NEW — owns group entities + chemistry
 │   ├── groups: Map<id, Group>
 │   └── groupStatCache: Map<id, CachedGroupStats>
@@ -103,8 +103,8 @@ GameState (ADR-003 + this ADR)
 **Ownership rules:**
 - `GroupsSlice` is **owned by the groups system**. Only the groups system writes
   to it. Readers: show pipeline, fame system, UI, rival AI.
-- `afinidade` lives in `RosterSlice` because it's idol-to-idol, not group-specific.
-  The same afinidade pair benefits multiple groups. Owner: stats system (writes on
+- `affinity` lives in `RosterSlice` because it's idol-to-idol, not group-specific.
+  The same affinity pair benefits multiple groups. Owner: stats system (writes on
   activity events). Readers: groups system (chemistry calc), happiness system.
 - `groupFame` and `groupRankings` live in `FameSlice` because fame system owns all
   rankings. Groups system emits events; fame system processes them.
@@ -132,11 +132,11 @@ interface Group {
 
   // Chemistry (group-specific, grows over time)
   chemistry: number;           // 0.0-0.2
-  complementaridade: number;   // 0.0-0.3 (cached, recomputed on membership change)
+  complementarity: number;   // 0.0-0.3 (cached, recomputed on membership change)
 
   // State
   state: 'active' | 'locked' | 'conflict' | 'dissolved';
-  conflictType?: 'patinho-feio' | 'leadership-dispute';
+  conflictType?: 'underperformer' | 'leadership-dispute';
   conflictMemberId?: string;   // idol involved in crisis
   conflictStartWeek?: number;
 
@@ -157,19 +157,19 @@ interface CachedGroupStats {
 }
 ```
 
-#### Afinidade Storage (Sparse Symmetric Map)
+#### Affinity Storage (Sparse Symmetric Map)
 
 ```typescript
 // Key: canonical pair "min(idA,idB):max(idA,idB)" for symmetry
-// Only pairs with afinidade != 0.10 (default) are stored
-type AfinidadeMap = Map<string, number>;
+// Only pairs with affinity != 0.10 (default) are stored
+type AffinityMap = Map<string, number>;
 
-function afinidadeKey(a: string, b: string): string {
+function affinityKey(a: string, b: string): string {
   return a < b ? `${a}:${b}` : `${b}:${a}`;
 }
 
-function getAfinidade(map: AfinidadeMap, a: string, b: string): number {
-  return map.get(afinidadeKey(a, b)) ?? 0.10;  // default for strangers
+function getAffinity(map: AffinityMap, a: string, b: string): number {
+  return map.get(affinityKey(a, b)) ?? 0.10;  // default for strangers
 }
 ```
 
@@ -244,15 +244,41 @@ function detectPivots(
 }
 ```
 
-#### Sinergia
+#### Complementarity
+
+Measures how well group members' strengths cover each other's weaknesses.
+Recomputed on membership change (not every tick).
 
 ```typescript
-function computeSinergia(group: Group): number {
-  return group.complementaridade * group.chemistry;
+function computeComplementarity(members: IdolRuntime[], attributes: string[]): number {
+  if (members.length <= 1) return 0;
+
+  // For each attribute, measure the spread (max - min) among members.
+  // High spread = members complement each other (one strong where another is weak).
+  let totalSpread = 0;
+  for (const attr of attributes) {
+    const values = members.map(m => m.stats[attr]);
+    const max = Math.max(...values);
+    const min = Math.min(...values);
+    totalSpread += (max - min) / 100;  // normalize to 0-1 per attribute
+  }
+
+  // Average spread across all attributes, capped at 0.3
+  return Math.min(totalSpread / attributes.length, 0.3);
+}
+// Duo with specialist + generalist → high complementarity
+// Group of clones (same stats) → 0 complementarity
+```
+
+#### Synergy
+
+```typescript
+function computeSynergy(group: Group): number {
+  return group.complementarity * group.chemistry;
 }
 
 // Group performance for shows (ADR-007 integration):
-// performance = mean(top50%_individual_performance) × (1 + sinergia)
+// performance = mean(top50%_individual_performance) × (1 + synergy)
 ```
 
 #### Chemistry Growth (Monthly)
@@ -325,7 +351,7 @@ function deriveArchetypes(idol: IdolRuntime): ArchetypeResult {
 }
 ```
 
-#### Group Composition Sinergia Bonus
+#### Group Composition Synergy Bonus
 
 ```typescript
 function compositionBonus(
@@ -375,11 +401,11 @@ function computeRosterBalance(
   rookies: number,
   ageStdDev: number
 ): number {
-  const cobertura = (archetypeCoverage / 12) * 100;
+  const coverage = (archetypeCoverage / 12) * 100;
   const pipeline = (Math.min(trainees + rookies, 4) / 4) * 100;
-  const diversidade = Math.max(0, (1 - ageStdDev / 10)) * 100;
+  const diversity = Math.max(0, (1 - ageStdDev / 10)) * 100;
 
-  return cobertura * 0.4 + pipeline * 0.3 + diversidade * 0.3;
+  return coverage * 0.4 + pipeline * 0.3 + diversity * 0.3;
 }
 ```
 
@@ -402,12 +428,12 @@ function starDependency(
 
 ### 4. Crisis Detection (Deterministic)
 
-#### Patinho Feio Crisis
+#### Underperformer Crisis
 
 Checked at end-of-week (Phase 3) after show results are available:
 
 ```typescript
-function checkPatinhoFeo(
+function checkUnderperformer(
   group: Group,
   cachedStats: CachedGroupStats,
   showResult: ShowResult | null,
@@ -425,7 +451,7 @@ function checkPatinhoFeo(
       (showResult.grade === 'D' || showResult.grade === 'F')
     ) {
       return {
-        type: 'group:patinhoFeioCrisis',
+        type: 'group:underperformerCrisis',
         groupId: group.id,
         memberId: idolId,
       };
@@ -488,11 +514,11 @@ function checkLeadershipDispute(
 |-------|---------------------|
 | Phase 1 (init) | — (no group actions at week start) |
 | Phase 2 (daily) | Leader crisis check → emit `group:leaderCrisis` if leader wellness low |
-| Phase 3 (end-of-week) | Recompute group stats cache. Check patinho feio post-show. Check leadership disputes. Update chemistry (monthly). Emit group events. |
+| Phase 3 (end-of-week) | Recompute group stats cache. Check underperformer post-show. Check leadership disputes. Update chemistry (monthly). Emit group events. |
 | Phase 4 (report) | — (consumed by Moment Engine for headlines) |
 
 **Show integration (ADR-007):** When a group performs, show pipeline calls
-`computeGroupStats()` and applies `(1 + sinergia)` multiplier. The group
+`computeGroupStats()` and applies `(1 + synergy)` multiplier. The group
 system provides the data; the show system owns the calculation.
 
 ### 6. Event Contracts (ADR-004 Integration)
@@ -506,7 +532,7 @@ type GroupEvent =
   | { type: 'group:memberRemoved'; groupId: string; memberId: string }
   | { type: 'group:leaderChanged'; groupId: string; newLeaderId: string }
   | { type: 'group:leaderCrisis'; groupId: string; leaderId: string }
-  | { type: 'group:patinhoFeioCrisis'; groupId: string; memberId: string }
+  | { type: 'group:underperformerCrisis'; groupId: string; memberId: string }
   | { type: 'group:leadershipDispute'; groupId: string; leaderId: string; challengerId: string | null }
   | { type: 'group:chemistryChanged'; groupId: string; newValue: number }
   | { type: 'idol:archetypeChanged'; idolId: string; from: ArchetypeId; to: ArchetypeId };
@@ -530,12 +556,12 @@ type GroupEvent =
   6 stat checks). At 3000 idols = ~216K ops ≈ <5ms. Pure function with UI-side
   caching is simpler and always consistent.
 
-### Alternative 2: Afinidade Per-Group Instead of Per-Idol-Pair
-- **Description**: Store afinidade inside Group entity per member pair
+### Alternative 2: Affinity Per-Group Instead of Per-Idol-Pair
+- **Description**: Store affinity inside Group entity per member pair
 - **Pros**: Simpler data locality
-- **Cons**: Same idol pair in 2 groups has 2 separate afinidade values (wrong —
-  GDD says afinidade is idol-to-idol, not group-specific). Duplicate data.
-- **Rejection Reason**: GDD is explicit: afinidade is pairwise between idols,
+- **Cons**: Same idol pair in 2 groups has 2 separate affinity values (wrong —
+  GDD says affinity is idol-to-idol, not group-specific). Duplicate data.
+- **Rejection Reason**: GDD is explicit: affinity is pairwise between idols,
   not scoped to groups. One idol pair benefits all their shared groups.
 
 ### Alternative 3: Merge Groups Into RosterSlice
@@ -552,16 +578,16 @@ type GroupEvent =
 ## Consequences
 
 ### Positive
-- Clear state ownership: GroupsSlice for groups, RosterSlice for afinidade,
+- Clear state ownership: GroupsSlice for groups, RosterSlice for affinity,
   FameSlice for group rankings
 - Archetypes as pure functions guarantee consistency — no stale state
-- Sparse afinidade storage scales to 3000 idols without excessive memory
+- Sparse affinity storage scales to 3000 idols without excessive memory
 - Deterministic crisis detection enables reproducible saves
 - Group performance integrates cleanly with ADR-007 show pipeline
 
 ### Negative
 - New state slice increases delta projection complexity slightly
-- Pairwise afinidade can grow large in long campaigns (mitigated by sparse storage)
+- Pairwise affinity can grow large in long campaigns (mitigated by sparse storage)
 - Archetype recomputation on every UI access (mitigated by UI-side memo/cache)
 
 ### Neutral
@@ -575,7 +601,7 @@ type GroupEvent =
 | Risk | Probability | Impact | Mitigation |
 |------|------------|--------|------------|
 | Group stat cache invalidation missed | MEDIUM | MEDIUM | Invalidate on any membership or stat change; stale check by week number |
-| Afinidade map grows unbounded in 20-year saves | LOW | LOW | Prune pairs with default value (0.10) at month boundary |
+| Affinity map grows unbounded in 20-year saves | LOW | LOW | Prune pairs with default value (0.10) at month boundary |
 | Crisis detection non-deterministic | LOW | HIGH | All checks use only state + seeded RNG; unit test every path |
 | Archetype threshold tuning causes mass reclassification | MEDIUM | LOW | Threshold is a tuning knob; GDD specifies default 2.0; adjustable |
 
@@ -589,7 +615,7 @@ type GroupEvent =
 | Archetype derivation (3000 idols) | <5ms | Only on stat change (~300 idols/week) |
 | Chemistry update (400 groups, monthly) | <1ms | Single arithmetic per group |
 | Crisis detection (400 groups) | <1ms | 2 checks per group, early exit |
-| Afinidade lookup | O(1) | Map.get with canonical key |
+| Affinity lookup | O(1) | Map.get with canonical key |
 | Roster balance score | <1ms | 3 formula components, 1 agency |
 | **Total Phase 3 budget** | **<5ms** | Within ADR-005 allocation |
 
@@ -599,7 +625,7 @@ type GroupEvent =
 
 1. Add `GroupsSlice` to GameState interface (ADR-003 extension)
 2. Extend `FameSlice` with `groupFame` and `groupRankings`
-3. Add `afinidade` sparse map to `RosterSlice`
+3. Add `affinity` sparse map to `RosterSlice`
 4. Implement `deriveArchetypes()` pure function
 5. Implement `computeGroupStats()` with cache
 6. Register group event types in ADR-004 event union
@@ -613,20 +639,20 @@ slices. Groups feature can be disabled by skipping Phase 3 group processing.
 
 ## Validation Criteria
 
-- [ ] Group created with 1-12 members; solo acts have no chemistry/sinergia
+- [ ] Group created with 1-12 members; solo acts have no chemistry/synergy
 - [ ] Top-50% stats match GDD examples (duo = max, 12-member = top 6 avg)
 - [ ] Pivô detection correct: idol in top ceil(N/2) for ≥1 attribute
 - [ ] Patinho feio crisis fires when: not pivô + bad show + 4+ weeks in group
 - [ ] Leadership dispute fires on: stat dominance path OR 3 consecutive failures
 - [ ] Chemistry grows +0.01/month, +0.02 with healthy leader, -0.05 per conflict
-- [ ] Sinergia = complementaridade × chemistry
+- [ ] Synergy = complementarity × chemistry
 - [ ] Group fame independent of member departure
 - [ ] Archetypes derive correctly for all 12 types from GDD stat thresholds
 - [ ] All-Rounder assigned when no archetype exceeds threshold
 - [ ] Composition bonus: +0.15 (5 core), -0.10 (no center), -0.05 (dupes)
 - [ ] Roster balance score in 0-100 range with correct weights (0.4/0.3/0.3)
 - [ ] Star dependency index flags >60 as critical
-- [ ] Afinidade defaults to 0.10 for unknown pairs
+- [ ] Affinity defaults to 0.10 for unknown pairs
 - [ ] All crisis events are deterministic (same state + seed = same result)
 
 ---
@@ -638,16 +664,16 @@ slices. Groups feature can be disabled by skipping Phase 3 group processing.
 | group-management.md | TR-groups-001 | Group creation 1-12 members | Group entity with memberIds array |
 | group-management.md | TR-groups-002 | Top 50% stats aggregation | computeGroupStats() with topN = ceil(N/2) |
 | group-management.md | TR-groups-003 | Duo max complementarity | topN = 1 for 2-member groups |
-| group-management.md | TR-groups-004 | Pivô detection and patinho feio | detectPivots() + checkPatinhoFeo() |
+| group-management.md | TR-groups-004 | Pivô detection and underperformer | detectPivots() + checkUnderperformer() |
 | group-management.md | TR-groups-005 | Leader mechanics and disputes | checkLeadershipDispute() with 2 paths |
 | group-management.md | TR-groups-006 | Independent group fame | groupFame in FameSlice, decoupled from members |
-| group-management.md | TR-groups-007 | Sinergia from complementaridade × chemistry | computeSinergia() + monthly chemistry update |
+| group-management.md | TR-groups-007 | Synergy from complementarity × chemistry | computeSynergy() + monthly chemistry update |
 | roster-balance.md | TR-roster-001 | Roster health indicators (6 metrics) | Health indicator thresholds codified |
 | roster-balance.md | TR-roster-002 | Star dependency index | starDependency() formula: top1×60 + top3×40 |
 | roster-balance.md | TR-roster-003 | Roster balance score | computeRosterBalance() with 0.4/0.3/0.3 weights |
 | idol-archetypes-roles.md | TR-archetypes-001 | 12 auto-derived archetypes | deriveArchetypes() pure function |
 | idol-archetypes-roles.md | TR-archetypes-002 | Primary + optional secondary | Threshold 2.0 primary, ×0.7 secondary |
-| idol-archetypes-roles.md | TR-archetypes-003 | Group composition sinergia bonus | compositionBonus() with core-five/dupes/veteran/chaos |
+| idol-archetypes-roles.md | TR-archetypes-003 | Group composition synergy bonus | compositionBonus() with core-five/dupes/veteran/chaos |
 | idol-archetypes-roles.md | TR-archetypes-004 | Dynamic archetype change on stat growth | Pure function re-derived on stat change |
 
 ---
