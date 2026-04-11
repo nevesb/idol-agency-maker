@@ -12,8 +12,8 @@ O Save/Load System serializa e restaura o estado completo do jogo: todas idols
 facilities), rankings, charts de música, entidades de mídia, calendário, news
 feed, e estado da agência do jogador. Autosave confiável garante que o
 jogador pode fechar o jogo a qualquer momento sem perder progresso. O estado é
-armazenado em SQLite (mesmo formato do World Pack), permitindo que saves sejam
-inspecionados e potencialmente editados pela comunidade.
+armazenado em IndexedDB (persistência local, ADR-001/003), com JSONB serialization
+e delta saves via structuredClone. Cloud save sincroniza com Supabase Storage.
 
 ## Player Fantasy
 
@@ -120,13 +120,13 @@ SaveState {
 ```
 CLIENT (dispositivo do jogador):
   ├── Simulação inteira roda local (toda lógica do jogo)
-  ├── Save local (SQLite, funciona 100% offline)
+  ├── Save local (IndexedDB, funciona 100% offline — ADR-001/003)
   ├── Jogo funciona sem internet
   └── Performance: zero latência, zero custo de servidor
 
 SERVIDOR (leve, só metadados):
-  ├── Autenticação de conta
-  ├── Cloud save sync -- upload/download do SQLite comprimido (requer conta)
+  ├── Autenticação de conta (Supabase Auth)
+  ├── Cloud save sync -- upload/download via Supabase Storage (requer conta)
   ├── Leaderboards globais (ranking de agências entre jogadores)
   ├── Catálogo de World Packs da comunidade
   └── Achievements e estatísticas agregadas
@@ -138,21 +138,22 @@ custo de servidor em $100-500/mês pra escala inicial.
 
 #### 5. Formato de Armazenamento
 
-- **SQLite** como formato principal (consistente com World Pack)
-- Save = SQLite database file no storage do dispositivo
-- Tabelas espelham as structs acima
-- Índices em: idol_id, agency_id, song_id pra queries rápidas
-- Compressão: SQLite com WAL mode pra writes rápidos
-- **Cloud sync** (requer conta): Upload SQLite comprimido (~1MB) após cada semana
-  se online. Download ao logar em dispositivo novo
+- **IndexedDB** como formato local principal (ADR-001/003 — web-native, funciona
+  offline, suporta Tauri e browser sem dependência nativa)
+- Save = objeto JSONB serializado em IndexedDB object store
+- Chaves: idol_id, agency_id, song_id pra lookups eficientes
+- Delta saves via `structuredClone` — só grava entidades modificadas desde o
+  último save (reduz I/O significativamente)
+- **Cloud sync** (requer conta): Upload do save serializado (~1MB comprimido) via
+  Supabase Storage após cada semana se online. Download ao logar em dispositivo novo
 
 #### 6. Performance Budget
 
 | Operação | Target PC | Target mínimo |
 |---|---|---|
-| **Autosave** (incremental) | <500ms | <200ms |
+| **Autosave** (incremental) | <150ms | <100ms |
 | **Save completo** (novo slot) | <2s | <1s |
-| **Load** (iniciar jogo) | <3s | <1.5s |
+| **Load** (iniciar jogo) | <1.5s | <1s |
 | **Tamanho do save** | <50MB | <100MB |
 
 - Autosave usa **delta save**: só grava o que mudou desde o último save
@@ -172,8 +173,8 @@ Quando o jogo atualiza e o formato do save muda:
 | Estado | Descrição | Transição |
 |---|---|---|
 | **Idle** | Nenhuma operação de save/load em curso | → Saving, → Loading |
-| **Saving** | Gravando estado no SQLite | → Idle (sucesso), → Error |
-| **Loading** | Lendo estado do SQLite | → Idle (sucesso), → Error |
+| **Saving** | Gravando estado no IndexedDB | → Idle (sucesso), → Error |
+| **Loading** | Lendo estado do IndexedDB | → Idle (sucesso), → Error |
 | **Migrating** | Convertendo save de versão antiga | → Loading (migrou), → Error |
 | **Error** | Falha na operação | → Idle (retry ou abort) |
 
@@ -215,8 +216,8 @@ tamanho_delta = num_modified × avg_bytes_per_entity
 
 ## Edge Cases
 
-- **App fecha durante autosave**: WAL mode do SQLite garante atomicidade.
-  Save ou completa ou não acontece. Sem corrupção
+- **App fecha durante autosave**: IndexedDB usa transações atômicas — o write
+  ou completa ou não acontece. Sem corrupção parcial
 - **Save de versão muito antiga (5+ versions atrás)**: Migrations rodam
   em sequência. Se migration intermediária falha, save original preservado
 - **Save com World Pack diferente do instalado**: Erro claro -- "Este save
@@ -247,7 +248,7 @@ persistência.
 | Knob | Default | Range | Efeito |
 |---|---|---|---|
 | `AUTOSAVE_FREQUENCY` | Toda semana | Toda semana / Todo mês | Frequência de autosave |
-| `AUTOSAVE_MAX_MS` | 500ms | 200-1000ms | Budget de performance |
+| `AUTOSAVE_MAX_MS` | 150ms | 100-500ms | Budget de performance (ADR-005) |
 | `SAVE_SLOTS` | 4 (1 auto + 3 manual) | 2-10 | Total de slots de save |
 | `NEWS_HISTORY_MONTHS` | 3 | 1-12 | Meses de news feed no save |
 | `IDOL_HISTORY_MONTHS` | 6 | 3-12 | Meses de event log por idol |

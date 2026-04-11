@@ -44,18 +44,20 @@ a combinação de tom errado + personalidade volátil gera drama emergente.
 
 #### 2. Seleção de Tom
 
-O jogador escolhe um dos 3 tons antes de confirmar a resposta. O tom modifica
+O jogador escolhe um dos 5 tons antes de confirmar a resposta. O tom modifica
 a probabilidade de sucesso e a magnitude dos outcomes.
 
 | Tom | Descrição | Modificador de sucesso | Risco |
 |---|---|---|---|
-| **Calmo** | Mentor, empático, paciente | +0% base (neutro, seguro) | Baixo — raramente causa reação negativa |
-| **Assertivo** | Direto, firme, profissional | +15% se contexto correto | Médio — idol com Temperamento baixo pode reagir mal |
+| **Encorajador** | Entusiasta, motivador, celebratório | Alto em contexto de conquista ou moral baixa | Baixo — raramente causa reação negativa |
+| **Neutro** | Informativo, objetivo, sem carga emocional | Seguro em qualquer contexto | Nenhum — previsível, sem surpresas |
+| **Competitivo** | Desafiador, ambicioso, orientado a resultado | +15% se idol tem Ambição alta | Médio — pode intimidar idols com Temperamento baixo |
 | **Agressivo** | Duro, confrontacional, pressão | +25% se idol respeita autoridade | Alto — falha causa dano severo em afinidade e stress |
+| **Calmo** | Mentor, empático, paciente | +0% base (seguro, suavizante) | Muito baixo — raramente causa reação negativa |
 
-**Regra de ouro**: Calmo nunca é desastroso mas nunca é espetacular. Assertivo
-recompensa quem conhece a idol. Agressivo é aposta alta — prêmio grande ou
-desastre.
+**Regra de ouro**: Neutro/Calmo nunca são desastrosos mas nunca são espetaculares.
+Encorajador e Competitivo recompensam quem conhece a idol. Agressivo é aposta
+alta — prêmio grande ou desastre.
 
 #### 3. Topic Triggers (Quando Conversas Ficam Disponíveis)
 
@@ -323,9 +325,11 @@ reaction_score = TONE_BASE[tom]
                + affinity_mod
 
 TONE_BASE:
-  calmo     = 50
-  assertivo = 45
-  agressivo = 35
+  encorajador = 60  // alto base, recompensa contextos de moral baixa
+  neutro      = 50
+  competitivo = 45
+  calmo       = 45
+  agressivo   = 40  // baixo base, alto risco/recompensa
 
 TYPE_RELEVANCE (contexto correto = +15, neutro = 0, errado = -10):
   ex: Motivacional quando Motivação < 40 = +15
@@ -337,28 +341,23 @@ temperamento_mod:
   Temperamento < 8:  -15 (agressivo), -5 (assertivo), +5 (calmo)
 
 lealdade_mod:
-  Lealdade > 14: +5
-  Lealdade 8-14: +0
-  Lealdade < 8:  -5
+  Lealdade > 12: +5
+  Lealdade <= 12: +0
 
 profissionalismo_mod:
-  Se tipo = Disciplinar:
-    Profissionalismo > 14: -5 (já sabe, sente-se infantilizada)
-    Profissionalismo < 8:  -5 (resiste correção)
-    Profissionalismo 8-14: +5 (aceita feedback)
-  Senão: +0
+  Profissionalismo > 14: +8 (aceita feedback e instrução com maturidade)
+  Profissionalismo <= 14: +0
 
 wellness_mod:
-  Felicidade > 60: +5
-  Felicidade < 30: -5
-  Stress > 70:     -5
-  Motivação < 30:  -3
-  (cumulativo — idol pode ter múltiplas penalidades)
+  Felicidade < 30: -10
+  Senão: +0
 
 affinity_mod:
-  Afinidade > 70:  +10
-  Afinidade 40-70: +0
-  Afinidade < 40:  -10
+  (getAffinity() - 0.5) × 20
+  // Afinidade normalizada (0.0-1.0). Exemplos:
+  // Afinidade 1.0 (máx): (1.0 - 0.5) × 20 = +10
+  // Afinidade 0.5 (meia): (0.5 - 0.5) × 20 = 0
+  // Afinidade 0.0 (mín): (0.0 - 0.5) × 20 = -10
 ```
 
 #### Affinity Delta

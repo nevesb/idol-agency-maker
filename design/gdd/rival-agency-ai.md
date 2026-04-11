@@ -57,7 +57,8 @@ RivalAgency {
 
 #### 3. Decisões Semanais da IA (processadas no Week Simulation)
 
-Cada agência IA executa estas decisões por semana (heurísticas, não pipeline completa):
+Cada agência IA executa estas decisões por semana via `AgencyTick()` — a mesma
+pipeline unificada do jogador (ADR-002). Não há heurísticas separadas:
 
 ```
 1. CONTRATAÇÃO
@@ -155,11 +156,11 @@ o jogador.
 #### Budget de Performance (por agência por tick)
 
 ```
-target: 2ms por agência, 100ms total pra 50 agências
+target: 2ms por agência, 100ms total pra 51 agências (ADR-002)
 
-Heurísticas simplificadas:
-  contratacao: avaliar top 5 idols no mercado (não todas 500)
-  escalacao: match top 3 idols × top 5 jobs (não N×M completo)
+AgencyTick() unificada — mesma pipeline do jogador, otimizada pra Web Worker:
+  contratacao: avaliar top 5 idols no mercado (bounded search pra performance)
+  escalacao: match top 3 idols × top 5 jobs (bounded, não N×M completo)
   gestao: checar só idols com wellness <40% ou contrato vencendo
 ```
 

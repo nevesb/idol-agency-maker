@@ -141,16 +141,18 @@ nota_show = media_ponderada(performance_por_musica)
   × mult_producao_global   // Produção técnica geral
   × mult_engagement_final  // Audiência ao fim do show
 
-Pesos: músicas do meio e finale pesam mais que abertura
-  abertura: ×0.8, meio: ×1.0, finale: ×1.3
+// Pesos por posição na setlist (ADR-007):
+  // opener ×1.2 (mais importante — define o tom), meio ×1.0,
+  // closer ×1.3, encore ×1.5
+  abertura: ×1.2, meio: ×1.0, finale/closer: ×1.3, encore: ×1.5
 
-Nota convertida em letter grade:
-  S  ≥ 0.95   Lendário
-  A  0.85-0.94 Excelente
-  B  0.70-0.84 Bom
-  C  0.55-0.69 Regular
-  D  0.40-0.54 Fraco
-  F  < 0.40    Desastre
+// Nota convertida em letter grade (ADR-007):
+  S  > 0.90   Lendário
+  A  > 0.80   Excelente
+  B  > 0.70   Bom
+  C  > 0.60   Regular
+  D  > 0.45   Fraco
+  F  ≤ 0.45   Desastre
 ```
 
 ### 5. Tipos de Show e Suas Particularidades
@@ -175,18 +177,25 @@ Para cada música na setlist:
   custo_fadiga = demanda_fisica(musica) × (1 / Resistência_normalizada)
   fadiga_acumulada += custo_fadiga
 
+  // Fatigue brackets (ADR-007 — 4-bracket system):
   mult_fadiga =
-    fadiga < 30: 1.0      // Fresca
-    fadiga 30-60: 0.95     // Cansando
-    fadiga 60-80: 0.85     // Visivelmente cansada
-    fadiga > 80: 0.70      // Exausta (audiência nota)
+    fadiga <  30: 1.00     // Fresca
+    fadiga 30-50: 0.95     // Cansando
+    fadiga 50-70: 0.85     // Visivelmente cansada
+    fadiga 70-90: 0.70     // Exausta (audiência nota)
+    fadiga >= 90: 0.50     // À beira do colapso
 
   performance_musica × mult_fadiga
 ```
 
+// Between-song fatigue recovery (ADR-007):
+//   between_song_rest: fadiga -= 2 (BETWEEN_SONG_REST = 2)
+//   MC/interlude rest:  fadiga -= 5 (MC_REST_RECOVERY = 5)
+
 **Implicação tática**: Músicas fisicamente intensas no início desgastam a
 idol para o finale. Colocar a ballad depois do bloco de dança dá tempo de
-recuperar. A ordem da setlist importa.
+recuperar. Inserir um MC/interlúdio permite recuperação mais significativa (−5
+fadiga). A ordem da setlist importa.
 
 ### 7. Papéis no Show (para Grupos)
 
@@ -289,57 +298,32 @@ SHOW_XP_FACTOR = 2.0  // Shows dão mais XP que treino
 mult_papel: center ×1.3, main ×1.2, support ×1.0, backing ×0.8
 ```
 
-### Substituição Mid-Show
+### Rotação de Posição Mid-Show (em vez de substituição)
 
-O jogador pode substituir performers durante o show em momentos específicos:
+> **ADR-007**: Mid-show idol substitution was explicitly **rejected**. The show
+> uses **position rotation** instead — center/front/back shifts between songs.
+> There is no substitution mechanic (no `max_substituicoes`, no backup roster
+> slots, no substitution penalties). If an idol is injured or collapses, the
+> group continues with fewer members and the deficit is reflected in sinergia
+> and performance penalties.
 
-#### Quando pode substituir
+Entre músicas, o produtor pode ajustar papéis: uma idol que estava no centro
+pode passar para backing, e vice-versa. Isso é **rotação de posição**, não
+substituição de performer.
 
-Substituições só são permitidas durante **MC/Interlúdio** entre músicas.
-Não é possível substituir durante uma música em execução.
-
-#### Regras
-
-```
-max_substituicoes = 2 por show (3 se Stage Manager skill > 15)
-
-elegibilidade_substituto:
-  - Deve estar no roster do grupo (ou trainee designada como backup)
-  - Deve estar presente no venue (definido pré-show)
-  - Não pode estar em burnout ou incapacitada
-  - Backup slots por tipo de show:
-    Solo Concert: 0 (não há substituto)
-    Group Concert: 2-3 backups
-    Festival: 1 backup
-    TV Live: 0 (formação fixa)
-    Award Show: 1 backup
-
-penalidade_substituicao:
-  - Sinergia do grupo: -0.05 por substituição (perda de chemistry)
-  - Audiência: engagement -3% (momento de transição)
-  - Substituto: performance × 0.85 na primeira música (adaptação)
-  - Se substituto nunca ensaiou a setlist: performance × 0.60
-
-bonus_substituicao:
-  - Idol substituída descansa (stress não aumenta mais)
-  - Se substituto tem mastery > 70 nas músicas restantes: sem penalidade de adaptação
-  - Se idol substituída estava com fadiga > 80: audiência aplaude a decisão
-    (+2% engagement)
-```
-
-#### Substituição Forçada (automática)
+#### Regras de Rotação
 
 ```
-Se idol.fadiga_acumulada > 95 durante show:
-  - Sistema alerta jogador: "Idol à beira do colapso"
-  - Se jogador ignora: 20% chance de Idol Gets Injured (evento de momento)
-  - Se não há backup: idol continua com performance × 0.50
+// Rotação de posição (center/front/back shifts) entre músicas:
+// - Permitida apenas durante MC/Interlúdio entre músicas
+// - Não altera o roster — as mesmas idols permanecem no palco
+// - Sem limite de rotações por show
+// - Efeito: redistribui multiplicadores de papel (center ×1.2, backing ×0.9)
 
-Se idol entra em crise emocional mid-show (Temperamento < 4 + evento trigger):
-  - Idol para de performar (sai do palco)
-  - Substituição automática se backup disponível
-  - Se não há backup: grupo continua com menos 1 membro
-  - Headline negativa garantida
+// Se idol colapse (fadiga > 95 ou crise emocional mid-show):
+//   - Grupo continua com menos 1 membro (sem backup automático)
+//   - Penalidade de sinergia aplicada ao grupo
+//   - Headline negativa gerada
 ```
 
 ## Edge Cases

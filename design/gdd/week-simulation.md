@@ -83,9 +83,11 @@ No passo 3.6, TODAS as 50 agências IA processam sua semana:
 - Encomendam músicas, produzem merch
 - Respondem a eventos/escândalos de suas idols
 
-**Performance**: IA usa heurísticas simplificadas (não roda a mesma pipeline
-completa do jogador). Decisões são: contratar idol com melhor custo-benefício
-no tier, escalar idol com melhor match de stats, manter wellness acima de 40%.
+**Pipeline**: Todas as 51 agências (50 rivais + jogador) rodam a mesma função
+`AgencyTick()` — pipeline unificada por decisão ADR-002. Não há heurísticas
+simplificadas separadas: a IA executa o mesmo tick que o jogador, com os mesmos
+sistemas (contratação, escalação, gestão de roster, investimentos). O budget de
+performance é controlado pelo `AI_BUDGET_MS_PER_AGENCY` e pelo Web Worker.
 
 #### 3. Geração de Eventos Aleatórios
 
@@ -94,7 +96,7 @@ No passo 2.8, cada dia tem chance de gerar eventos:
 ```
 chance_evento_dia = BASE_EVENT_CHANCE + modifier_por_idol
 
-BASE_EVENT_CHANCE = 0.05 (5% por dia por idol ativa)
+BASE_EVENT_CHANCE = 0.03 (3% por dia por idol ativa)
 
 Tipos de evento possíveis:
 - Escândalo (Temperamento baixo + Vida Pessoal alta aumentam chance)
@@ -166,7 +168,7 @@ target_skip_time = <200ms no PC
   Fase 3 (fim semana + IA): <200ms
   Fase 4 (relatório): <50ms
 
-// Rival AI: 50 agências × heurística simplificada
+// Rival AI: 51 agências × AgencyTick() unificada (ADR-002)
   target_ai_time = <100ms total (2ms por agência)
 ```
 
@@ -182,7 +184,7 @@ risk_modifiers:
   + fama / 5000                   // Mais famosa = mais atenção da mídia
 
 Exemplo: idol com Temperamento 5, Vida Pessoal 15, stress 60, fama 3000
-  chance = 0.05 × (1 + 0.15 + 0.15 + 0.30 + 0.60) = 0.05 × 2.20 = 11%/dia
+  chance = 0.03 × (1 + 0.15 + 0.15 + 0.30 + 0.60) = 0.03 × 2.20 = 6.6%/dia
 ```
 
 ## Moment Engine — Fazendo o Jogador SENTIR os Resultados
@@ -398,8 +400,9 @@ pra cada headline:
 
 ## Edge Cases
 
-- **50 agências IA + 3000 idols no Skip**: Precisa rodar em <500ms.
-  IA usa heurísticas, não pipeline completa. Profiling obrigatório
+- **51 agências + 3000 idols no Skip**: Precisa rodar em <500ms.
+  Todas agências rodam AgencyTick() unificada (ADR-002). Profiling obrigatório
+  pra garantir budget de 2ms/agência no Web Worker
 - **Evento urgente no último dia da semana (domingo)**: Processa fim de
   semana, DEPOIS apresenta o evento. Jogador resolve antes de avançar
 - **Jogador pausa no meio do Live e muda agenda**: Mudanças na agenda
@@ -434,7 +437,7 @@ Week Results UI, News Feed, todos sistemas que dependem de tick semanal
 
 | Knob | Default | Range | Efeito |
 |---|---|---|---|
-| `BASE_EVENT_CHANCE` | 0.05/dia | 0.01-0.15 | Frequência de eventos aleatórios |
+| `BASE_EVENT_CHANCE` | 0.03/dia | 0.01-0.10 | Frequência de eventos aleatórios |
 | `SKIP_TARGET_MS` | 500ms | 200-2000ms | Budget de performance pro Skip |
 | `AI_BUDGET_MS_PER_AGENCY` | 2ms | 1-5ms | Budget de IA por agência |
 | `URGENT_EVENT_TYPES` | escândalo, burnout, proposta rival, buyout | Configurável | Quais eventos forçam Pause |
