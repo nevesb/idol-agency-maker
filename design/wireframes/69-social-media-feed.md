@@ -4,7 +4,7 @@
 > **Referência visual**: FM26 Social Feed / Twitter Integration  
 > **Resolução alvo**: 1920×1080 (PC-first) ou Painel Lateral Expansível  
 > **Rota**: `/agency/social` ou componente global  
-> **GDDs**: social-system, agency-growth
+> **GDDs**: fan-club-system.md, news-feed.md
 
 ---
 

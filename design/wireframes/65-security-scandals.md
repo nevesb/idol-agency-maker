@@ -4,7 +4,7 @@
 > **Referência visual**: FM26 Board Confidence / Fan Reaction / Press Officer  
 > **Resolução alvo**: 1920×1080 (PC-first)  
 > **Rota**: `/agency/rankings/security`  
-> **GDDs**: social-system, agency-staff-operations
+> **GDDs**: event-scandal-generator.md, agency-staff-operations.md
 
 ---
 

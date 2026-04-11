@@ -4,7 +4,7 @@
 > **Referência visual**: FM26 Competition Rules / Game Setup Info  
 > **Resolução alvo**: 1920×1080 (PC-first) ou Modal/Sidebar  
 > **Rota**: `/game/rules`  
-> **GDDs**: finance-economy, agency-growth
+> **GDDs**: finance-economy, agency-economy.md, agency-meta-game.md
 
 ---
 

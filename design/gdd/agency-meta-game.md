@@ -44,7 +44,22 @@ qualidade, prestígio. Cumprir = bônus. Falhar 6+ meses = demissão.
 - Se reputação muito baixa: só garagem aceita
 - NUNCA é game over permanente -- sempre tem recomeço
 
-#### 4. Reputação do Jogador
+#### 4. Tiers da Agência
+
+A agência progride por 6 níveis baseados em métricas sustentadas de desempenho:
+
+| Tier | Nome | Descrição |
+|---|---|---|
+| 1 | **garage** | Agência iniciante, recursos mínimos |
+| 2 | **small** | Pequena agência estabelecida |
+| 3 | **mid** | Agência de médio porte com presença no mercado |
+| 4 | **large** | Grande agência com múltiplos grupos e recursos |
+| 5 | **major** | Agência de primeiro escalão com alcance nacional |
+| 6 | **elite** | Agência de topo, referência do setor |
+
+Rebaixamento é possível se as métricas caírem abaixo do threshold por 2+ temporadas.
+
+#### 5. Reputação do Jogador
 
 ```
 reputacao = (metas_cumpridas / metas_totais × 0.4)
@@ -75,3 +90,4 @@ reputacao = (metas_cumpridas / metas_totais × 0.4)
 2. Demissão após 6 meses falhando, com oferta de agência menor
 3. Afinidade com idols persiste após troca
 4. Metas escalam corretamente com tier da agência
+5. 6 tiers de agência (garage → small → mid → large → major → elite) com progressão e rebaixamento

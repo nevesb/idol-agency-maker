@@ -94,7 +94,7 @@ qualidade_composicao =
   SE idol compõe:
     (Vocal × 0.4 + Aura × 0.3 + Comunicação × 0.2 + Adaptabilidade × 0.1)
     × mult_experiencia_composicao
-    × random(0.7, 1.3)
+    × random(0.85, 1.15)
     × mult_a_and_r
 
   SE cover:
@@ -122,7 +122,7 @@ duracao_composicao =
 outro projeto (próprio ou de agência rival), o estágio fica **stalled** até
 que ele termine ou o jogador atribua outro compositor.
 
-#### Estágio 2: Arranjo
+**Parte: Arranjo** (corre em paralelo com Música e Letra)
 
 | Aspecto | Valor |
 |---|---|
@@ -152,7 +152,12 @@ duracao_arranjo =
 automaticamente (sem arranjador separado) com qualidade 90% do que faria
 um arranjador dedicado. Economiza tempo e custo.
 
-#### Estágio 3: Coreografia
+**Nota sobre Letra**: A letra corre em paralelo com Música e Arranjo. Se o
+compositor NPC também escreve letras (skill ≥ 10), a parte de Letra é incluída
+automaticamente na fase criativa sem custo extra. Caso contrário, um letrista
+separado (NPC ou idol com Comunicação ≥ 60) pode ser atribuído.
+
+#### Estágio 2: Coreografia *(após fase criativa concluída)*
 
 | Aspecto | Valor |
 |---|---|
@@ -194,7 +199,7 @@ promovidas a coreógrafa (ocupa slot de agenda como Support Activity).
 Skill = Dance / 5 (range: 14-20). Bônus: +10% se a coreógrafa é
 membro do grupo que vai performar (chemistry).
 
-#### Estágio 4: Gravação
+#### Estágio 3: Gravação *(após coreografia concluída ou dispensada)*
 
 | Aspecto | Valor |
 |---|---|
@@ -227,9 +232,9 @@ mult_producer =
   1.0 + (skill_producer - 10) / 40  (proporcional, cap 1.25 com skill 20)
 
 mult_studio =
-  0.8  (gravação externa — sem Studio de Gravação)
-  1.0  (Studio nível 1)
-  1.1  (Studio nível 2)
+  0.6  (gravação externa — sem Studio de Gravação)
+  0.8  (Studio nível 1)
+  1.0  (Studio nível 2)
   1.2  (Studio nível 3)
 
 mult_wellness_medio = media(wellness_factor(idol)) para cada idol

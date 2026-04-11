@@ -4,7 +4,7 @@
 > **Referência visual**: FM26 Offer to Clubs / Transfer List
 > **Resolução alvo**: 1920×1080 (PC-first)
 > **Rota**: `/agency/market/showcase`
-> **GDDs**: contract-system, idol-lifecycle, finance-economy
+> **GDDs**: contract-system, market-transfer.md, finance-economy
 
 ---
 

@@ -4,7 +4,7 @@
 > **Referência visual**: FM26 Quick Sub / Player Hover Card  
 > **Resolução alvo**: Tooltip/Popover (Tamanho Fixo)  
 > **Rota**: Componente global ativado no Hover (Hover sobre Avatar)  
-> **GDDs**: player-manager-system
+> **GDDs**: ui-idol-profile.md, idol-attribute-stats.md
 
 ---
 

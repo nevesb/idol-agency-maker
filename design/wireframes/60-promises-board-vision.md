@@ -4,7 +4,7 @@
 > **Referência visual**: FM26 Promises / Board Vision Tracker  
 > **Resolução alvo**: 1920×1080 (PC-first)  
 > **Rota**: `/agency/producer/promises`  
-> **GDDs**: player-manager-system
+> **GDDs**: dialogue-system.md
 
 ---
 
