@@ -22,8 +22,8 @@ abordagens genéricas ou agressivas sem contexto.
 A fantasia é de **líder carismático e gestor de pessoas**. Você entra na sala
 sabendo que Aiko está furiosa porque não foi escalada como Center. Você vê o
 Temperamento dela (se já descobriu), sabe que a Motivação está baixa, e precisa
-escolher: elogiar o esforço dela (Calmo) ou ser direto e explicar a decisão
-(Assertivo)? Errar o tom pode custar a relação de meses. Serve o **Pilar 2**:
+escolher: elogiar o esforço dela (Encorajador) ou ser direto e explicar a decisão
+(Neutro/Competitivo)? Errar o tom pode custar a relação de meses. Serve o **Pilar 2**:
 a conversa é uma decisão com consequência real e imediata. Serve o **Pilar 4**:
 a combinação de tom errado + personalidade volátil gera drama emergente.
 
@@ -195,9 +195,10 @@ Combinações perigosas de tom + contexto + personalidade:
 | **Confronto + Calmo + Temperamento > 14** | Idol com temperamento alto não respeita tom passivo. reaction_score -10 |
 | **Negociação + Agressivo + Lealdade < 12** | Idol interpreta como ameaça. affinity -12, pode recusar renovação |
 
-**Regra visual**: Quando o jogador seleciona um tom arriscado, o modal de conversa
-(Wireframe 68) mostra um **indicador de risco** (ícone amarelo ou vermelho) ao
-lado da opção, se o Wellness Advisor estiver presente (ver seção 8).
+**Regra visual**: Quando o jogador seleciona um tom arriscado (Agressivo ou
+Competitivo em contexto desfavorável), o modal de conversa (Wireframe 68)
+mostra um **indicador de risco** (ícone amarelo ou vermelho) ao lado da opção,
+se o Wellness Advisor estiver presente (ver seção 8).
 
 #### 8. Staff Mediation
 
@@ -339,9 +340,9 @@ TYPE_RELEVANCE (contexto correto = +15, neutro = 0, errado = -10):
       Elogio quando performance recente ruim = -10
 
 temperamento_mod:
-  Temperamento > 14: +10 (tom assertivo/agressivo), +0 (calmo)
+  Temperamento > 14: +10 (tom competitivo/agressivo), +0 (encorajador/neutro/calmo)
   Temperamento 8-14: +0
-  Temperamento < 8:  -15 (agressivo), -5 (assertivo), +5 (calmo)
+  Temperamento < 8:  -15 (agressivo), -5 (competitivo), +5 (calmo/encorajador)
 
 lealdade_mod:
   Lealdade > 12: +5

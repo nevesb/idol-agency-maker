@@ -432,12 +432,13 @@ explica o que aconteceu e por quê.
 
 | Nota | Performance | Descrição |
 |---|---|---|
-| **S** | ≥ 0.95 | Excepcional — momento memorável |
-| **A** | 0.85-0.94 | Excelente — acima das expectativas |
-| **B** | 0.70-0.84 | Bom — resultado sólido |
-| **C** | 0.55-0.69 | Regular — sucesso parcial |
-| **D** | 0.40-0.54 | Fraco — abaixo do esperado |
-| **F** | < 0.40 | Fracasso — dano à reputação |
+<!-- ADR-007 grade thresholds — authoritative for all grade displays -->
+| **S** | > 0.90 | Excepcional — momento memorável |
+| **A** | > 0.80 | Excelente — acima das expectativas |
+| **B** | > 0.70 | Bom — resultado sólido |
+| **C** | > 0.60 | Regular — sucesso parcial |
+| **D** | > 0.45 | Fraco — abaixo do esperado |
+| **F** | ≤ 0.45 | Fracasso — dano à reputação |
 
 - Nota visível no breakdown e no histórico
 - Notas S geram notícia especial no News Feed
