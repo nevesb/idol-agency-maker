@@ -110,13 +110,21 @@ atributo neste grupo. Risco de crise interna após shows ruins."
 sinergia = complementaridade × chemistry
 
 complementaridade = 0.0 a 0.3
-  Calculada por: quantas categorias (Performance, Presença, Resiliência)
-  têm pivôs diferentes (membros cobrindo áreas diversas)
-  Grupo com todos fortes em Vocal = 0.05 (redundante)
-  Grupo com pivôs bem distribuídos = 0.25 (complementar)
+  Calculada pelo coeficiente de variação (CV) das contagens de pivô por atributo:
+
+  complementaridade = max(0, min(0.3, 0.3 × (1 - cv / 1.0)))
+    onde cv = desvio_padrão(pivot_counts) / média(pivot_counts)
+    e pivot_counts = número de membros que são pivô em cada atributo
+
+  // cv baixo (pivôs bem distribuídos entre atributos) → complementaridade alta
+  // cv alto (pivôs concentrados em poucos atributos) → complementaridade baixa
+  // Exemplos:
+  //   Grupo com pivôs igualmente distribuídos: cv≈0 → complementaridade≈0.30
+  //   Grupo com todos fortes em Vocal, fracos no resto: cv alto → complementaridade≈0.05
 
 chemistry = 0.0 a 0.2
-  Base 0.1. Cresce +0.01 por mês trabalhando juntas
+  Base 0.0 (grupos novos começam sem chemistry estabelecida).
+  Cresce +0.01 por mês trabalhando juntas
   Líder saudável: +0.02/mês extra
   Conflito interno: -0.05 por conflito
   Max: 0.2 (2+ anos juntas sem conflitos)

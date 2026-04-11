@@ -329,7 +329,8 @@ mult_exclusividade: 1.0 (não exclusivo), 2.0 (exclusivo por 6 meses)
 3. Perfil vocal (tessitura, textura, vocal role) afeta vocal fit
 4. Match idol ↔ música calcula performance com penalidade proporcional
 5. Novelty decai com repetição (×0.95 por execução)
-6. 3 origens (original, cover, idol composed) com custos e regras distintas
+6. 4 origens (original, cover, idol_composed, cover_as_is) com custos e regras distintas
+   — cover_as_is: qualidade = avg performer stats × 0.7, pula fase criativa
 7. Compositores têm tiers que afetam qualidade e custo
 8. A&R contratado melhora qualidade de composições em 20%
 9. Músicas podem ser tocadas em show sem ser lançadas oficialmente

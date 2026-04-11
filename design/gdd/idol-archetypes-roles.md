@@ -42,7 +42,7 @@ comunidade e facilitam discussoes estrategicas -- exatamente como "regista",
 | **Chaos Magnet** | Temperamento < 6 (oculto), Carisma > 60 | Imprevisivel. Drama ambulante mas carismática | Alto risco/alto retorno. Gera noticias |
 | **Fan Magnet** | Carisma > 70, Comunicacao > 65, fan_club.size > media | Adorada pelos fas. Conexao emocional forte | Fan meets, merch, redes sociais |
 | **Crossover Actress** | Atuacao > 70, Variedade > 55 | Talento dramatico. Potencial fora do idol | Dramas, filmes, dublagem, carreira longa |
-| **Digital Native** | Comunicacao > 60, Aprendizado > 14 (visivel) | Nativa digital. Domina streaming e redes | Streaming, conteudo online, presenca digital |
+| **Digital Native** | Comunicacao > 60, Aprendizado > 70 | Nativa digital. Domina streaming e redes | Streaming, conteudo online, presenca digital |
 
 #### 2. Atribuicao Automatica de Arquetipo
 

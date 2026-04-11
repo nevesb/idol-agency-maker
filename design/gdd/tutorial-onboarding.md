@@ -35,7 +35,17 @@ tutorial respeita múltiplos estilos de jogador.
 | Mês 3 | Facilities (treino) | Quando tier sobe, mostra opções |
 | Mês 4+ | Grupos, música, etc. | Tooltips contextuais por feature |
 
-#### 2. Princípios
+#### 2. Níveis de Dificuldade do Tutorial
+
+O jogador escolhe o nível de assistência no início do jogo (pode alterar nos settings):
+
+| Nível | Nome | Comportamento |
+|---|---|---|
+| **guided** | Guiado | Todas as dicas ativas; assistente proativo; sugestões frequentes |
+| **standard** | Padrão | Dicas contextuais nas primeiras ocorrências; assistente disponível mas não intrusivo |
+| **expert** | Especialista | Tutorial desativado; sem dicas; jogador descobre os sistemas sozinho |
+
+#### 3. Princípios
 
 - **Contextual**: Dicas aparecem quando relevantes (não tudo de uma vez)
 - **Skipável**: Botão "Já sei" em todas dicas. Toggle "Desativar tutorial"
@@ -43,7 +53,7 @@ tutorial respeita múltiplos estilos de jogador.
 - **Progressivo**: Complexidade revelada a cada tier da agência
 - **Recoverable**: Pode reativar dicas a qualquer momento nos settings
 
-#### 3. Assistente vs. Tutorial
+#### 4. Assistente vs. Tutorial
 
 O assistente é um recurso integrado disponível a todos os jogadores, complementando o tutorial:
 - Tutorial: "Isso é a barra de stress" (explica o que é)
@@ -63,5 +73,8 @@ Observa todos sistemas e gera dicas contextuais. Não afeta gameplay.
 1. Primeiras 4 semanas guiam jogador novo sem bloquear
 2. Todo tutorial é skipável
 3. Tooltips aparecem contextualmente (não tudo de uma vez)
-4. Toggle "Desativar tutorial" nos settings
-5. Funciona sem tutorial (hardcore pode ignorar completamente)
+4. 3 níveis de dificuldade de tutorial configuráveis: guided, standard, expert
+5. Nível guided: dicas frequentes e assistente proativo
+6. Nível expert: zero dicas — experiência sem assistência
+7. Toggle de nível disponível nos settings (pode alterar a qualquer momento)
+8. Funciona sem tutorial (expert pode ignorar completamente)
