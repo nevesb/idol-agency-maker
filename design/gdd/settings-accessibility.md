@@ -27,9 +27,9 @@ Infraestrutura invisível. O jogador sente que o jogo **se adapta a ele**.
 | Setting | Opções | Default |
 |---|---|---|
 | **Idioma** | Japonês, Inglês, Português, + i18n | Detecta dispositivo |
-| **Velocidade Live** | ×0.5, ×1, ×2, ×4 | ×1 |
+| **Velocidade de Simulação** | normal, fast, fastest | normal |
 | **Notificações push** | On/Off, tipos selecionáveis | On (prazos + urgentes) |
-| **Tutorial** | On/Off, reset | On |
+| **Tutorial** | guided / standard / expert | standard |
 | **Música/SFX** | Volume sliders | 80%/80% |
 | **Auto-save** | Mostrar indicador | On |
 
@@ -38,10 +38,12 @@ Infraestrutura invisível. O jogador sente que o jogo **se adapta a ele**.
 | Feature | Descrição | Default |
 |---|---|---|
 | **Modo daltonismo** | Ícones + texto além de cor (🟢✅ vs 🔴❌) | Off |
-| **Tamanho de fonte** | Pequeno / Normal / Grande / Muito Grande | Normal |
-| **Contraste alto** | Bordas e fundos mais distintos | Off |
+| **Escala de texto** | Multiplicador contínuo de 0.8 a 1.5 (CSS --text-scale) | 1.0 |
+| **Contraste alto** | Bordas e fundos mais distintos (WCAG AAA) | Off |
 | **Simplificar UI** | Esconde elementos secundários, foca no essencial | Off |
 | **Velocidade de animação** | Normal / Rápido / Instantâneo | Normal |
+| **Modo leitor de tela** | Adiciona regiões ARIA live para atualizações da simulação | Off |
+| **Remapeamento de teclas** | Qualquer ação pode ser remapeada para tecla ou combinação | — |
 
 #### 3. Funcionalidades Completas (built-in para todos)
 
@@ -66,7 +68,10 @@ Aplica configurações globalmente a todos sistemas (velocidade, idioma, visual)
 
 1. Todas settings salvam e persistem entre sessões
 2. Modo daltonismo funciona (ícones + texto, não só cor)
-3. Tamanho de fonte ajustável sem quebrar layout
+3. Escala de texto contínua de 0.8 a 1.5 via CSS --text-scale sem quebrar layout
 4. Idioma troca sem restart do jogo
 5. Todas features acessíveis sem restrição (sem tier premium)
 6. Acessibilidade funciona em todas telas
+7. Velocidade de simulação tem exatamente 3 opções: normal, fast, fastest
+8. Modo leitor de tela adiciona regiões ARIA live a atualizações da simulação
+9. Remapeamento de teclas cobre todas as ações (portão, roster, mercado, etc.) com fallback para teclas padrão
