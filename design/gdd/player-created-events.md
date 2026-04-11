@@ -8,7 +8,7 @@
 ## Overview
 
 O Player-Created Events permite ao jogador criar seus próprios eventos:
-festivais, shows, meet & greets, release parties. O jogador define o tipo,
+mini-lives, concerts, festivals, fan-meetings e tours. O jogador define o tipo,
 escala, convidados (de sua agência e externas), e investe na produção.
 Convidar artistas maiores custa mais cachê e podem recusar se o evento
 for de nível baixo demais. Eventos bem-sucedidos geram receita (bilheteria),
@@ -58,7 +58,7 @@ fama_gain = sucesso × visibilidade × participantes
 | **Fame & Rankings** | Fama gerada pelo evento |
 | **Schedule/Agenda** | Idols escaladas ocupam slots |
 | **Market/Transfer** | Convite a artistas de rivais (collab) |
-| **Music Charts** | Release party promove música/disco |
+| **Music Charts** | Tour promove música/disco durante as datas |
 
 ## Dependencies
 
