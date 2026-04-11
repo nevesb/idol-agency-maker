@@ -37,7 +37,7 @@ O jogador sempre sabe: onde estou, como volto, e onde encontrar X.
 Mesma estrutura em toda tela. Submenu sempre no mesmo lugar.
 
 ### 5. Information Budget
-Max 3 alertas no Portal. Max 5 headlines no Week Results. Max 12 bookmarks.
+Max 5 alertas no Portal. Max 5 headlines no Week Results. Max 12 bookmarks.
 Disciplina brutal sobre o que ganha espaco visual.
 
 ### 6. Visual Identity — Rostos e Marcas Sempre Visíveis

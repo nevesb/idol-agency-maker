@@ -201,7 +201,7 @@ BYTES_PER_AGENCY = ~500B (tier + budget + roster refs + facilities)
 
 Exemplo: 3000 idols × 2KB + 50 agencies × 500B + overhead
        = 6MB + 25KB + ~5MB overhead ≈ 11MB (sem compressão)
-       Com compressão SQLite: ~5-8MB
+       Com compressão (JSONB/gzip): ~5-8MB
 ```
 
 #### Delta Save (incremental)
@@ -257,13 +257,13 @@ persistência.
 
 ## Acceptance Criteria
 
-1. Autosave completa em <200ms no PC após cada semana
+1. Autosave completa em <150ms no PC após cada semana (ADR-005)
 2. Load restaura estado idêntico ao momento do save (determinístico)
-3. App fechado abruptamente não corrompe o save (WAL atomicity)
+3. App fechado abruptamente não corrompe o save (IndexedDB transação atômica)
 4. Migração de versão funciona pra saves até 5 versões atrás
-5. Save/load de ~3000 idols + 50 agências em <1.5s no PC
+5. Save/load de ~3000 idols + 50 agências em <1.5s no PC (ADR-003/005)
 6. Save file <50MB com compressão
-7. Delta save (incremental) <500KB e <500ms
+7. Delta save (incremental) <500KB e <150ms
 8. Todos os jogadores têm 4 slots (1 autosave + 3 manuais)
 9. Save corrompido detectado por checksum, fallback pra backup
 10. Save de World Pack incompatível gera erro claro

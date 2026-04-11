@@ -374,8 +374,12 @@ substituição de performer.
 |---|---|---|---|
 | `SHOW_XP_FACTOR` | 2.0 | 1.0-4.0 | XP de show vs. treino |
 | `FATIGUE_BASE_RATE` | 1.0 | 0.5-2.0 | Velocidade de fadiga intra-show |
+| `BETWEEN_SONG_REST` | 2 | 1-5 | Fadiga recuperada entre músicas normais (ADR-007) |
+| `MC_REST_RECOVERY` | 5 | 3-10 | Fadiga recuperada durante MC/interlúdio (ADR-007) |
 | `CENTER_MULTIPLIER` | 1.2 | 1.1-1.5 | Bônus de performance para center |
-| `FINALE_WEIGHT` | 1.3 | 1.0-1.5 | Peso do finale na nota geral |
+| `OPENER_WEIGHT` | 1.2 | 1.0-1.5 | Peso da música de abertura na nota geral (ADR-007) |
+| `CLOSER_WEIGHT` | 1.3 | 1.0-1.5 | Peso do finale/closer na nota geral (ADR-007) |
+| `ENCORE_WEIGHT` | 1.5 | 1.2-2.0 | Peso do encore na nota geral (ADR-007) |
 | `MOMENT_CHANCE_BASE` | 0.05 | 0.02-0.10 | Chance base de eventos mid-show |
 | `SOLD_OUT_HYPE_BONUS` | 1.15 | 1.05-1.3 | Bônus de engagement para show esgotado |
 | `EMPTY_VENUE_PENALTY` | 0.7 | 0.5-0.9 | Penalidade para venue com <30% ocupação |

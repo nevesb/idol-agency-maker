@@ -46,7 +46,14 @@ Audience {
   // Estado dinâmico (muda durante o show)
   engagement:     0-100    // Nível geral de envolvimento
   energy:         0-100    // Energia atual da audiência
-  emotional_state: enum    // Neutra, Animada, Emocionada, Eufórica, Entediada, Frustrada
+  // emotional_state (ADR-007 — 4 states, replacing 6 Portuguese states):
+  //   Old model (REJECTED): Neutra, Animada, Emocionada, Eufórica, Entediada, Frustrada
+  //   New model: cold → warm → hot → euphoric
+  //   Mapping: Neutra/Entediada/Frustrada → cold
+  //            Animada → warm
+  //            Emocionada → hot
+  //            Eufórica → euphoric
+  emotional_state: "cold" | "warm" | "hot" | "euphoric"
 }
 ```
 
@@ -177,14 +184,18 @@ O tipo de resposta da audiência após cada música:
 Encore não é garantido. Acontece por mecânica emergente:
 
 ```
-chance_encore =
-  SE engagement_final < 75: 0% (não acontece)
-  SE engagement_final 75-85: 30%
-  SE engagement_final 85-95: 70%
-  SE engagement_final > 95: 95%
+// ADR-007: Continuous encore formula replaces step-function thresholds.
+// Old step-function (REJECTED): engagement <75→0%, 75-85→30%, 85-95→70%, >95→95%
 
-  × mult_hardcore_fans   // Fãs dedicados pedem mais que casual
-  × mult_venue           // Arenas grandes amplificam o pedido
+encore_chance = audience.engagement × audience.hardcore_pct × venue_mult × ENCORE_BASE_CHANCE
+
+  ENCORE_BASE_CHANCE = 0.3
+  audience.engagement   // normalized 0-1 (current engagement / 100)
+  audience.hardcore_pct // fraction of audience that are hardcore fans (0-1)
+  venue_mult            // 1.0 (small venue), 1.2 (medium), 1.5 (arena)
+
+  // Example: engagement=0.85, hardcore=0.60, venue_mult=1.2 (medium)
+  // encore_chance = 0.85 × 0.60 × 1.2 × 0.3 = 0.183 (18.3%)
 
 SE encore acontece:
   - Idol(s) volta(m) para 1-2 músicas extras
@@ -315,7 +326,7 @@ mult_visibilidade:
 |---|---|---|---|
 | `ENGAGEMENT_SENSITIVITY` | 15 | 8-25 | Delta máximo por música |
 | `ENGAGEMENT_BASE_HARDCORE` | 30 | 20-40 | Contribuição de hardcore fans ao base |
-| `ENCORE_THRESHOLD` | 75 | 60-85 | Engagement mínimo para encore possível |
+| `ENCORE_BASE_CHANCE` | 0.3 | 0.1-0.6 | Fator base da fórmula contínua de encore (ADR-007) |
 | `CONVERSION_RATE_S` | 0.15 | 0.05-0.25 | % de GP que vira fã com nota S |
 | `LOYALTY_GAIN_GOOD_SHOW` | 5-10 | 2-15 | Loyalty ganho com nota A+ |
 | `LOYALTY_LOSS_BAD_SHOW` | 5-15 | 3-20 | Loyalty perdido com nota D-F |
@@ -328,7 +339,7 @@ mult_visibilidade:
 3. Cada música gera reação com delta de engagement e resposta coletiva
 4. Feedback individual por idol por música (lightstick %) em shows de grupo
 5. Crowd response tem 6 níveis com consequências para motivação e fama
-6. Encore é emergente, baseado em engagement final (>75 para possível)
+6. Encore é emergente, baseado em fórmula contínua: engagement × hardcore% × venue_mult × ENCORE_BASE_CHANCE (ADR-007)
 7. Pós-show converte público geral em novos fãs proporcionalmente à nota
 8. Composição da audiência afeta preferências (hardcore quer deep cuts, GP quer hits)
 9. Shows de TV Live amplificam conversão de fãs (×10)

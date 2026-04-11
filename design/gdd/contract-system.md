@@ -83,7 +83,7 @@ O casual pula tudo: clica "propor auto-fill" → idol aceita → pronto.
 #### 5. Rescisão
 
 - Jogador pode rescindir pagando a multa de rescisão
-- Idol pode exigir rescisão se infelicidade > 90% por 4+ semanas
+- Idol pode exigir rescisão se Felicidade < 20 por 4+ semanas
 - Rescisão libera idol pro mercado (rivais podem pegar)
 - Rescisão mútua (ambos querem): multa reduzida em 50%
 
@@ -251,7 +251,7 @@ Music Charts, Happiness & Wellness
 | `COMPOSER_BONUS_RATE` | 0.20 | 0.10-0.40 | Extra pra idol que compõe |
 | `LOYALTY_NEGOTIATION_BONUS` | +0.1 | 0-0.3 | Quanto lealdade ajuda na aceitação |
 | `RIVAL_PROPOSAL_PENALTY` | -0.2 | -0.1 a -0.5 | Quanto proposta rival prejudica |
-| `UNHAPPINESS_RESCISSION_THRESHOLD` | 90% | 70-100% | Quando idol exige rescisão |
+| `UNHAPPINESS_RESCISSION_THRESHOLD` | Felicidade < 20 | Felicidade < 10-30 | Quando idol exige rescisão |
 | `BASE_BLOCK_RATE` | 0.15 | 0.05-0.30 | Chance base de bloqueio sem exclusividade |
 
 ## Acceptance Criteria

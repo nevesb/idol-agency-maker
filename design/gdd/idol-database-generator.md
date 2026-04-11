@@ -337,11 +337,12 @@ Market/Transfer, Fame & Rankings, Scouting, Rival Agency AI, Contract System,
 Job Assignment, Visual Generator, News Feed, Music Charts, Group Management
 
 **Formato de armazenamento:**
-- **SQLite** como banco embarcado (mesmo approach do Football Manager)
-- Relações complexas (contratos, agências, grupos) se beneficiam de SQL
-- Web app editor lê/escreve SQLite nativamente
-- Performance excelente com dados pré-carregados
-- Queries permitem filtros eficientes (por região, tier, disponibilidade)
+- **JSON/binário** empacotado no download do jogo (World Pack estático — ADR-001/003)
+- Distribuição via Supabase Storage para packs da comunidade (download sob demanda)
+- Relações complexas (contratos, agências, grupos) representadas como JSON com IDs
+- O jogo carrega o pack em memória no boot — queries por filtro (região, tier,
+  disponibilidade) são feitas sobre arrays em memória, não sobre banco SQL
+- Web app editor exporta JSON/binário; validador verifica integridade antes de publicar
 
 ## Tuning Knobs
 
@@ -366,7 +367,7 @@ Job Assignment, Visual Generator, News Feed, Music Charts, Group Management
 5. Estado inicial pós-simulação tem rankings populados com ≥100 idols rankeadas
 6. Todas agências rivais no estado inicial têm ≥5 idols contratadas
 7. Agências grandes têm 30-50 idols no estado inicial
-8. World Pack (SQLite) carrega em <1.5 segundos no PC target
+8. World Pack (JSON/binário) carrega em <1.5 segundos no PC target
 9. Validador rejeita packs com dados fora dos ranges do Stats System
 10. Web app editor produz packs válidos que o jogo carrega sem erros
 11. Background narrativo de cada idol é coerente com seus stats e região

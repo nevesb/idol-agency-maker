@@ -98,11 +98,11 @@ base_score = TONE_BASE[tom] + TYPE_MATCH[tipo][contexto]
 
 | Fator | Como afeta reaction_score |
 |---|---|
-| **Temperamento** (oculto, 1-20) | Alto (>14): tolera Assertivo/Agressivo (+10). Baixo (<8): penaliza tons duros (-15) |
-| **Lealdade** (oculto, 1-20) | Alta (>14): benefício da dúvida (+5). Baixa (<8): cética, desconfia (-5) |
-| **Profissionalismo** (oculto, 1-20) | Alto (>14): aceita Disciplinar melhor (+5). Baixo (<8): resiste correção (-5) |
-| **Wellness atual** | Felicidade > 60: mais receptiva (+5). Stress > 70: irritável (-5). Motivação < 30: apática (-3) |
-| **Afinidade com produtor** | > 70: confiança (+10). 40-70: neutro (0). < 40: desconfiança (-10) |
+| **Temperamento** (oculto, 1-20) | Alto (>14): tolera Competitivo/Agressivo (+10). Baixo (<8): penaliza tons duros (-15) |
+| **Lealdade** (oculto, 1-20) | Alta (>12): benefício da dúvida (+5). Demais: neutro (0) |
+| **Profissionalismo** (oculto, 1-20) | Alto (>14): aceita instrução e feedback com maturidade (+8). Demais: neutro (0) |
+| **Wellness atual** | Felicidade < 30: irritável e fechada (-10). Demais: neutro (0) |
+| **Afinidade com produtor** | Contínua: (afinidade_normalizada - 0.5) × 20. Range: -10 a +10 |
 | **Relevância do tópico** | Conversa alinhada com o que a idol precisa: +10. Fora de contexto: -5 |
 
 **Threshold de sucesso:**
@@ -173,9 +173,12 @@ não o contrário).
 3+ semanas consecutivas, a idol fica "saturada":
 
 ```
-SATURATION_PENALTY = -0.2 por semana consecutiva de 2 conversas
-Aplicado como multiplicador nos deltas positivos.
-Após 1 semana sem conversa, saturação reseta.
+SATURATION_DECAY halving: cada semana consecutiva de saturação reduz o
+multiplicador à metade do valor anterior.
+  semana 1 de saturação: deltas positivos × 0.5
+  semana 2 de saturação: deltas positivos × 0.25
+  semana 3+: deltas positivos × 0.125 (e assim por diante)
+Após 1 semana sem conversa, saturação reseta ao multiplicador 1.0.
 ```
 
 #### 7. Risk System
@@ -186,11 +189,11 @@ Combinações perigosas de tom + contexto + personalidade:
 |---|---|
 | **Agressivo + Temperamento < 8** | affinity -15, stress +10. Idol pode chorar/sair da sala (evento visual) |
 | **Agressivo + Felicidade < 30** | affinity -10, stress +15. Risco de idol exigir rescisão |
-| **Disciplinar + Profissionalismo > 14** | Desnecessário — idol já sabe. affinity -3 ("sente que é tratada como criança") |
+| **Competitivo + Temperamento < 8** | Idol se sente pressionada além do limite. affinity -8, stress +5 |
 | **Elogio + Performance ruim recente** | Idol percebe falsidade. affinity -5, motivação -3 |
 | **Motivacional + Motivação > 70** | Sem efeito — idol já está motivada. Desperdiça slot de conversa |
 | **Confronto + Calmo + Temperamento > 14** | Idol com temperamento alto não respeita tom passivo. reaction_score -10 |
-| **Negociação + Agressivo + Lealdade < 8** | Idol interpreta como ameaça. affinity -12, pode recusar renovação |
+| **Negociação + Agressivo + Lealdade < 12** | Idol interpreta como ameaça. affinity -12, pode recusar renovação |
 
 **Regra visual**: Quando o jogador seleciona um tom arriscado, o modal de conversa
 (Wireframe 68) mostra um **indicador de risco** (ícone amarelo ou vermelho) ao
@@ -256,7 +259,7 @@ ConversationMemory extends Memory {
   event:            string    // texto narrativo gerado
   impact:           -20 a +20 // modificador permanente na afinidade
   conversation_type: ConversationType
-  tone_used:        "calmo" | "assertivo" | "agressivo"
+  tone_used:        "encorajador" | "neutro" | "competitivo" | "agressivo" | "calmo"
   week:             uint32
   visible:          bool      // aparece no perfil como citação
   referenced_in_news: bool    // se virou notícia no news feed
@@ -381,7 +384,8 @@ Se reaction_score < 20 (Desastre):
 
 Modificadores:
   2ª conversa na semana: affinity_delta × DIMINISHING_RETURNS_FACTOR (0.5)
-  Saturação ativa: affinity_delta positivo × (1 - SATURATION_PENALTY × semanas_consecutivas)
+  Saturação ativa: affinity_delta positivo × SATURATION_DECAY^semanas_consecutivas
+    // ex: semana 1 → ×0.5; semana 2 → ×0.25; semana 3 → ×0.125
   PR Manager presente (se negativo): affinity_delta × 0.7
 ```
 
@@ -392,7 +396,8 @@ wellness_delta calculado por tipo de conversa (ver tabela na seção 5).
 
 Modificadores:
   2ª conversa na semana: wellness_delta × DIMINISHING_RETURNS_FACTOR (0.5)
-  Saturação ativa: wellness_delta positivo × (1 - SATURATION_PENALTY × semanas_consecutivas)
+  Saturação ativa: wellness_delta positivo × SATURATION_DECAY^semanas_consecutivas
+    // ex: semana 1 → ×0.5; semana 2 → ×0.25; semana 3 → ×0.125
 ```
 
 #### Wellness Advisor Prediction Accuracy
@@ -467,15 +472,17 @@ Contract System (modificador de renovação via Negociação), News Feed (memór
 
 | Knob | Default | Range | Se muito alto | Se muito baixo |
 |---|---|---|---|---|
-| `TONE_BASE_CALMO` | 50 | 40-60 | Calmo sempre sucede, sem risco | Calmo falha frequentemente, frustrante |
-| `TONE_BASE_ASSERTIVO` | 45 | 35-55 | Assertivo trivial demais | Assertivo nunca vale a pena |
-| `TONE_BASE_AGRESSIVO` | 35 | 20-45 | Agressivo sem risco real | Agressivo sempre falha, inútil |
+| `TONE_BASE_ENCORAJADOR` | 60 | 45-70 | Encorajador sempre sucede, sem risco | Encorajador falha frequentemente, frustrante |
+| `TONE_BASE_NEUTRO` | 50 | 40-60 | Neutro trivial demais | Neutro nunca vale a pena |
+| `TONE_BASE_COMPETITIVO` | 45 | 35-55 | Competitivo trivial demais | Competitivo nunca vale a pena |
+| `TONE_BASE_CALMO` | 45 | 35-55 | Calmo sempre sucede, sem risco | Calmo falha frequentemente, frustrante |
+| `TONE_BASE_AGRESSIVO` | 40 | 25-50 | Agressivo sem risco real | Agressivo sempre falha, inútil |
 | `TYPE_RELEVANCE_BONUS` | +15 | +5 a +25 | Contexto correto garante sucesso | Contexto quase irrelevante |
 | `SUCCESS_THRESHOLD` | 60 | 50-75 | Fácil demais, sem tensão | Quase impossível sem Lealdade alta + afinidade alta |
 | `DISASTER_THRESHOLD` | 20 | 10-30 | Desastres raros demais | Desastres frequentes, frustrante |
 | `MAX_CONVERSATIONS_PER_WEEK` | 2 | 1-4 | Conversa spam, sem peso | Muito restritivo, sem interação |
 | `DIMINISHING_RETURNS_FACTOR` | 0.5 | 0.3-0.8 | 2ª conversa quase inútil | 2ª conversa tão boa quanto 1ª |
-| `SATURATION_PENALTY` | 0.2 | 0.1-0.4 | Conversa constante é punida severamente | Sem custo de falar demais |
+| `SATURATION_DECAY` | 0.5 | 0.25-0.75 | Conversa constante perde eficácia rapidamente | Sem custo real de falar demais |
 | `IGNORE_AFFINITY_PENALTY` | -3 | -1 a -8 | Ignorar conversa é devastador | Sem consequência de ignorar |
 | `PR_MANAGER_MITIGATION` | 0.7 | 0.5-0.9 | PR Manager quase anula negativos | PR Manager irrelevante |
 | `PROMISE_BROKEN_AFFINITY` | -10 | -5 a -20 | Quebrar promessa é catastrófico | Promessas sem peso |
@@ -485,7 +492,7 @@ Contract System (modificador de renovação via Negociação), News Feed (memór
 ## Acceptance Criteria
 
 1. 6 tipos de conversa (Motivacional, Disciplinar, Elogio, Negociação, Social, Confronto) funcionais
-2. 3 tons (Calmo, Assertivo, Agressivo) modificam reaction_score conforme fórmula
+2. 5 tons (Encorajador, Neutro, Competitivo, Agressivo, Calmo) modificam reaction_score conforme fórmula
 3. Topic triggers disparam conversas corretamente (idol infeliz 2+ semanas, contrato expirando, escândalo, pós-show, conflito)
 4. reaction_score calculado com todos 6 fatores (tom, relevância, temperamento, lealdade, wellness, afinidade)
 5. Outcomes produzem affinity_delta (-15 a +10) e wellness_delta corretos por tipo

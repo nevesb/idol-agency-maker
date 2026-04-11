@@ -44,7 +44,7 @@ e vê os números subirem. Três anos depois ela é uma estrela e você foi quem
 construiu isso.
 
 O sistema de stats alimenta a fantasia central do jogo: **tomar decisões com
-informação imperfeita**. Você vê os 12 atributos visíveis, mas os 5 ocultos são
+informação imperfeita**. Você vê os 16 atributos visíveis, mas os 6 ocultos são
 revelados gradualmente conforme trabalha com a idol. Aquela idol com stats
 medianos pode ter Consistência 19 e ser uma máquina confiável, ou ter
 Temperamento 3 e explodir num escândalo a qualquer momento. Descobrir quem a
