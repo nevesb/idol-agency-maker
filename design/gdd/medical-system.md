@@ -33,22 +33,21 @@ se paga.
 
 ### 1. Tipos de Lesão
 
-| Lesão | Gravidade | Tempo Base Recuperação | Causa Principal |
+| Lesão | Causa Principal | Tempo Base Recuperação | Chance Dano Permanente |
 |---|---|---|---|
-| **Distensão Muscular** (muscle strain) | Leve | 1-2 semanas | Jobs físicos com Resistência < 40 |
-| **Lesão Vocal** (vocal cord damage) | Média | 2-4 semanas | Vocal intensa com Vocal < 50 + 3+ shows/semana |
-| **Fratura por Estresse** (stress fracture) | Grave | 4-8 semanas | Coreografia intensa + Resistência < 30 + 4+ semanas consecutivas sem folga |
-| **Fadiga Crônica** (chronic fatigue) | Média | 2-3 semanas forçadas | Saúde < 30 por 4+ semanas consecutivas |
-| **Colapso Mental** (mental breakdown / burnout) | Grave | 4-8 semanas | Stress = 100 (happiness-wellness.md) |
-| **Entorse de Tornozelo** (ankle sprain) | Leve-Média | 1-3 semanas | Coreografia intensa + evento mid-show "Idol se Machuca" |
-| **Tendinite** (tendinitis) | Média | 2-4 semanas | Repetitive strain: mesmo tipo de job físico 5+ semanas |
+| **Lesão Vocal** (vocal strain) | Jobs vocais > threshold de intensidade | 2-4 semanas | 25% |
+| **Lesão Muscular** (muscle injury) | Jobs de dança/físicos > threshold de intensidade | 3-6 semanas | 25% |
+| **Esgotamento Mental** (mental exhaustion) | Stress > 80 por 4+ semanas consecutivas | 4-8 semanas | 25% |
+| **Lesão nas Costas** (back injury) | Show + má postura (Resistência baixa) | 4-8 semanas | 30% |
+| **Lesão no Joelho** (knee injury) | Intensidade de dança + idade > 25 | 6-12 semanas | 35% |
+| **Transtorno de Ansiedade** (anxiety disorder) | Felicidade < 20 por 8+ semanas consecutivas | 6-12 semanas | 20% |
+| **Fadiga Geral** (general fatigue) | Carga de treino > 120% por 3+ semanas consecutivas | 1-3 semanas | 10% |
 
 ```
 Injury {
   id:              uint32
-  type:            enum (MuscleStrain, VocalCordDamage, StressFracture,
-                         ChronicFatigue, MentalBreakdown, AnkleSprain, Tendinitis)
-  severity:        enum (Light, Medium, Severe)
+  type:            enum (VocalStrain, MuscleInjury, MentalExhaustion,
+                         BackInjury, KneeInjury, AnxietyDisorder, GeneralFatigue)
   base_recovery:   uint8          // Semanas base de recuperação
   actual_recovery: uint8          // Semanas reais (com modificadores)
   weeks_elapsed:   uint8          // Semanas já em recuperação
@@ -64,61 +63,60 @@ Lesões NÃO são puramente aleatórias. Cada tipo tem **condições necessária
 e uma chance que escala com a gravidade da situação:
 
 ```
-// DISTENSÃO MUSCULAR
-trigger_muscle_strain(idol, week) =
-  Resistência < 40
-  AND job_fisico_esta_semana == true
-  AND semanas_sem_folga >= 2
+// LESÃO VOCAL (vocal strain)
+trigger_vocal_strain(idol, week) =
+  intensidade_job_vocal > VOCAL_INTENSITY_THRESHOLD
 
-  chance = (40 - Resistência) / 100 × consecutive_weeks_factor
-  consecutive_weeks_factor = 1.0 + (semanas_sem_folga - 1) × 0.3
-  // Resistência 20, 4 semanas sem folga: (40-20)/100 × 1.9 = 38%
+  chance = (intensidade_job_vocal - VOCAL_INTENSITY_THRESHOLD) / 100
+  // Jobs vocais acima do threshold escalam linearmente em risco
 
-// LESÃO VOCAL
-trigger_vocal_damage(idol, week) =
-  shows_com_vocal_intensa_semana >= 2
-  AND (Vocal < 50 OR Saúde < 40)
+// LESÃO MUSCULAR (muscle injury)
+trigger_muscle_injury(idol, week) =
+  intensidade_job_fisico_ou_danca > PHYSICAL_INTENSITY_THRESHOLD
 
-  chance = (2 - Vocal/100) × shows_vocais × 0.08
-  // Vocal 30, 3 shows: (2 - 0.3) × 3 × 0.08 = 40.8%
+  chance = (intensidade_job_fisico_ou_danca - PHYSICAL_INTENSITY_THRESHOLD) / 100
+  // Jobs físicos/dança acima do threshold escalam linearmente em risco
 
-// FRATURA POR ESTRESSE
-trigger_stress_fracture(idol, week) =
-  Resistência < 30
-  AND coreografia_intensa_ultimas_4_semanas >= 3
-  AND semanas_sem_folga >= 3
+// ESGOTAMENTO MENTAL (mental exhaustion)
+trigger_mental_exhaustion(idol, week) =
+  Stress > 80
+  AND semanas_stress_acima_80 >= 4
 
-  chance = (30 - Resistência) / 100 × (semanas_sem_folga / 3) × 0.15
-  // Resistência 15, 5 semanas: (30-15)/100 × 1.67 × 0.15 = 3.75%
+  chance = min(1.0, (semanas_stress_acima_80 - 3) × 0.20)
+  // 4 semanas: 20%, 5 semanas: 40%, 6 semanas: 60%...
 
-// FADIGA CRÔNICA
-trigger_chronic_fatigue(idol, week) =
-  Saúde < 30
-  AND Saúde_abaixo_30_por >= 4 semanas
+// LESÃO NAS COSTAS (back injury)
+trigger_back_injury(idol, week) =
+  show_esta_semana == true
+  AND Resistência < BACK_INJURY_RESIST_THRESHOLD  // má postura = Resistência baixa
 
-  chance = (30 - Saúde) / 100 × (semanas_abaixo / 4) × 0.20
-  // Saúde 15, 6 semanas: (30-15)/100 × 1.5 × 0.20 = 4.5%
+  chance = (BACK_INJURY_RESIST_THRESHOLD - Resistência) / 100
+  // Resistência baixa aumenta chance durante shows
 
-// COLAPSO MENTAL
-trigger_mental_breakdown(idol, week) =
-  Stress >= 100  // Automático (happiness-wellness.md)
-  chance = 1.0   // 100% — burnout é garantido
+// LESÃO NO JOELHO (knee injury)
+trigger_knee_injury(idol, week) =
+  intensidade_danca > KNEE_DANCE_THRESHOLD
+  AND idol.age > 25
 
-// ENTORSE
-trigger_ankle_sprain(idol, week) =
-  Durante show com coreografia intensa
-  AND Resistência < 50
+  chance = (intensidade_danca - KNEE_DANCE_THRESHOLD) / 100
+           × age_factor(idol.age)
+  // Risco amplificado por idade > 25
 
-  chance = (50 - Resistência) / 200 × coreografia_intensidade
-  // Processado dentro de show-system.md como "Idol se Machuca"
+// TRANSTORNO DE ANSIEDADE (anxiety disorder)
+trigger_anxiety_disorder(idol, week) =
+  Felicidade < 20
+  AND semanas_felicidade_abaixo_20 >= 8
 
-// TENDINITE
-trigger_tendinitis(idol, week) =
-  mesmo_tipo_job_fisico >= 5 semanas consecutivas
-  AND Resistência < 45
+  chance = min(1.0, (semanas_felicidade_abaixo_20 - 7) × 0.15)
+  // 8 semanas: 15%, 9 semanas: 30%, etc.
 
-  chance = (semanas_repetição - 4) × 0.10
-  // 7 semanas de dança consecutiva: (7-4) × 0.10 = 30%
+// FADIGA GERAL (general fatigue)
+trigger_general_fatigue(idol, week) =
+  training_load > MAX_SAFE_LOAD × 1.20  // > 120% da carga máxima segura
+  AND semanas_sobrecarga >= 3
+
+  chance = min(1.0, (semanas_sobrecarga - 2) × 0.25)
+  // 3 semanas: 25%, 4 semanas: 50%, 5 semanas: 75%
 ```
 
 ### 3. Mecânica de Recuperação
@@ -137,23 +135,25 @@ facility_multiplier:
   Medical Center Lv 2:  0.70  (×1.5 mais rápido)
   Medical Center Lv 3:  0.50  (×2.0 mais rápido)
 
-staff_multiplier:
-  Sem Physical Therapist:              1.0
-  Physical Therapist skill 1-30:       0.90
-  Physical Therapist skill 31-60:      0.80
-  Physical Therapist skill 61-80:      0.70
-  Physical Therapist skill 81-100:     0.60
+staff_multiplier (ptMult):
+  Sem Physical Therapist:  1.0
+  Com Physical Therapist:  ptMult = 0.90 - (ptSkill / 100) × 0.30
+    // ptSkill 0:   ptMult = 0.90 (10% mais rápido)
+    // ptSkill 50:  ptMult = 0.75 (25% mais rápido)
+    // ptSkill 100: ptMult = 0.60 (40% mais rápido)
 
 resilience_factor = 1.0 - (Resistência / 200)
   // Resistência 80: 1.0 - 0.4 = 0.6 (40% mais rápido)
   // Resistência 20: 1.0 - 0.1 = 0.9 (10% mais rápido)
 ```
 
-**Exemplo completo**: Fratura por estresse (base 6 semanas), Medical Center
+**Exemplo completo**: Lesão no Joelho (base 9 semanas), Medical Center
 Lv 2, Physical Therapist skill 75, Resistência 60:
 ```
-actual = ceil(6 × 0.70 × 0.70 × 0.70) = ceil(2.058) = 3 semanas
-// De 6 semanas para 3 — investimento em facilities e staff compensa
+ptMult = 0.90 - (75/100) × 0.30 = 0.90 - 0.225 = 0.675
+resilience_factor = 1.0 - (60/200) = 0.70
+actual = ceil(9 × 0.70 × 0.675 × 0.70) = ceil(2.976) = 3 semanas
+// De 9 semanas para 3 — investimento em facilities e staff compensa
 ```
 
 ### 4. Physical Therapist (Staff)
@@ -229,21 +229,26 @@ aviso explícito), há chance de **dano permanente**:
 ```
 permanent_damage_check(idol, injury) =
   se idol.status == "Recovering" AND jogador força job:
-    chance = PERMANENT_DAMAGE_CHANCE × severity_mult
+    chance = PERMANENT_DAMAGE_CHANCE[injury.type]
 
-    PERMANENT_DAMAGE_CHANCE = 0.25  // 25% base
-    severity_mult:
-      Light:  0.5  (12.5% chance)
-      Medium: 1.0  (25% chance)
-      Severe: 1.5  (37.5% chance)
+    PERMANENT_DAMAGE_CHANCE por tipo de lesão:
+      VocalStrain:      0.25  (25%)
+      MuscleInjury:     0.25  (25%)
+      MentalExhaustion: 0.25  (25%)
+      BackInjury:       0.30  (30%)
+      KneeInjury:       0.35  (35%)
+      AnxietyDisorder:  0.20  (20%)
+      GeneralFatigue:   0.10  (10%)
 
   se dano permanente:
     affected_stat -= 5 (permanente, não recuperável)
-    // Distensão: Resistência -5
-    // Vocal damage: Vocal -5
-    // Stress fracture: Dança -5 ou Resistência -5
-    // Ankle sprain: Dança -5
-    // Tendinitis: stat mais usado -5
+    // VocalStrain:      Vocal -5
+    // MuscleInjury:     Resistência -5
+    // MentalExhaustion: Mentalidade -5
+    // BackInjury:       Resistência -5
+    // KneeInjury:       Dança -5
+    // AnxietyDisorder:  Mentalidade -5
+    // GeneralFatigue:   Resistência -5
 ```
 
 **O jogo AVISA explicitamente**: "Forçar [Idol] a trabalhar com [Lesão] pode
@@ -267,20 +272,18 @@ MedicalDashboard {
 }
 
 risk_level_calculation(idol) =
-  Green:  nenhum trigger de lesão ativo. Todas stats > thresholds
-  Yellow: 1+ trigger parcialmente ativo (ex: Resistência < 40 mas com folga)
-          OU retornando de lesão (risco de re-lesão)
-  Red:    2+ triggers ativos simultaneamente
-          OU Saúde < 25
-          OU semanas_sem_folga >= 4 com jobs físicos
+  Green:  training_load < 80% AND sem lesão ativa AND sem risco de re-lesão > 20%
+  Yellow: training_load entre 80-100%
+          OU em recuperação de lesão
+  Red:    training_load > 100%
+          OU lesão ativa
+          OU risco de re-lesão > 20%
 
 training_load(idol) =
   (jobs_fisicos_semana × PHYSICAL_JOB_COST + treinos_semana × TRAINING_COST)
-  / max_safe_load(idol)
+  / MAX_SAFE_LOAD
 
-max_safe_load(idol) = Resistência × 0.5 + 20
-  // Resistência 80: max load = 60
-  // Resistência 30: max load = 35
+MAX_SAFE_LOAD = 100  // Fixo para todas as idols
 ```
 
 **Medical Center Lv 3** gera relatório automático semanal com risk_level
@@ -317,12 +320,13 @@ de todas as idols. Sem Medical Center, jogador precisa inferir dos stats.
 
 ```
 weekly_injury_risk(idol) = max(
-  chance_muscle_strain,
-  chance_vocal_damage,
-  chance_stress_fracture,
-  chance_chronic_fatigue,
-  chance_ankle_sprain,
-  chance_tendinitis
+  chance_vocal_strain,
+  chance_muscle_injury,
+  chance_mental_exhaustion,
+  chance_back_injury,
+  chance_knee_injury,
+  chance_anxiety_disorder,
+  chance_general_fatigue
 ) × (1 - medical_center_reduction)
 
 // O risco exibido no dashboard é o MAIOR risco individual

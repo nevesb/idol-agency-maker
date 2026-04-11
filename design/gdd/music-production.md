@@ -10,10 +10,11 @@
 ## Overview
 
 O Music Production Pipeline gerencia o ciclo completo de criação musical: desde
-a encomenda ou composição até o lançamento no mercado. Uma música passa por
-**4 estágios sequenciais** — Composição, Arranjo, Coreografia e Gravação — cada
-um com duração, staff necessário, facilities envolvidas e fórmula de qualidade
-própria. O jogador gerencia múltiplos projetos musicais em paralelo via Kanban
+a encomenda ou composição até o lançamento no mercado. Uma música passa por uma
+**fase criativa** — onde Música, Letra e Arranjo acontecem em paralelo como
+partes interdependentes — seguida de **Coreografia** e **Gravação** em sequência.
+Cada parte/estágio tem duração, staff necessário, facilities envolvidas e fórmula
+de qualidade própria. O jogador gerencia múltiplos projetos musicais em paralelo via Kanban
 (wireframe 73), decide o caminho de aquisição (encomenda a NPC, composição pela
 idol, cover licenciado), e controla o release flow (single vs álbum, marketing,
 mídia física).
@@ -34,20 +35,22 @@ magicamente no catálogo.
 
 ## Detailed Design
 
-### 1. Pipeline de Produção — 4 Estágios
+### 1. Pipeline de Produção — Fase Criativa + Sequência
 
-Toda música (original ou cover) passa por um pipeline de 4 estágios
-sequenciais. Cada estágio avança automaticamente no tick semanal conforme
-as condições são atendidas.
+Toda música (original ou cover) passa pelo pipeline abaixo. A **fase criativa**
+(Música + Letra + Arranjo) acontece em paralelo — suas três partes são
+interdependentes e se completam juntas. Só após a fase criativa estar 100%
+concluída a pipeline avança para Coreografia e depois Gravação (sequenciais).
+Cada estágio avança automaticamente no tick semanal conforme as condições são atendidas.
 
 ```
 MusicProject {
   id:              uint32
   title:           string
-  origin:          "commissioned" | "idol_composed" | "cover"
+  origin:          "commissioned" | "idol_composed" | "cover" | "cover_as_is"
   genre:           enum (Pop, Rock, Ballad, Dance, Enka, Idol, R&B, EDM, ...)
   target_artist:   Idol | Group       // quem vai gravar
-  stage:           enum (Composicao, Arranjo, Coreografia, Gravacao, Concluido)
+  stage:           enum (FaseCriativa, Coreografia, Gravacao, Concluido)
   stage_progress:  0-100              // progresso no estágio atual (%)
   stage_quality:   float[]            // qualidade calculada por estágio [0-100]
   stalled:         bool               // travado por falta de recurso
@@ -64,7 +67,14 @@ MusicProject {
 }
 ```
 
-#### Estágio 1: Composição
+#### Fase Criativa — Música + Letra + Arranjo (paralelo)
+
+As três partes da fase criativa (Música/melodia, Letra, Arranjo) correm em
+paralelo e se influenciam mutuamente. A fase só avança quando todas as três
+estão completas. O progresso da fase criativa é o mínimo de progresso entre
+as três partes.
+
+**Parte: Música/Melodia (Composição)**
 
 | Aspecto | Valor |
 |---|---|

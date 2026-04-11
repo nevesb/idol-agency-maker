@@ -156,7 +156,7 @@ o jogador.
 #### Budget de Performance (por agência por tick)
 
 ```
-target: 2ms por agência, 100ms total pra 51 agências (ADR-002)
+target: 2ms por agência, 80ms total pra 50 agências (ADR-005)
 
 AgencyTick() unificada — mesma pipeline do jogador, otimizada pra Web Worker:
   contratacao: avaliar top 5 idols no mercado (bounded search pra performance)
@@ -250,7 +250,7 @@ Market/Transfer (competição), Job Assignment (disputa jobs), News Feed
 
 ## Acceptance Criteria
 
-1. 50 agências IA processam decisões semanais em <100ms total
+1. 50 agências IA processam decisões semanais em <80ms total (ADR-005)
 2. IA contrata idols do mercado proporcionalmente ao tier/estratégia
 3. IA escala idols em jobs com match de stats razoável
 4. Agências só competem com ±1 tier (Elite não rouba de Garagem)

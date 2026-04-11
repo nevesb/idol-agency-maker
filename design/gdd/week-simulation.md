@@ -162,14 +162,14 @@ Tipos de evento possíveis:
 // Modo Skip: tudo em 1 frame burst
 target_skip_time = <200ms no PC
 
-// Budget por fase:
-  Fase 1 (início): <50ms
-  Fase 2 (diário × 7 dias × N idols): <200ms
-  Fase 3 (fim semana + IA): <200ms
-  Fase 4 (relatório): <50ms
+// Budget por fase (ADR-005 — authoritative):
+  Fase 1 (início): 25ms
+  Fase 2 (diário × 7 dias × N idols): 70ms
+  Fase 3 (fim semana + IA): 45ms + 80ms paralelo (show processing parallelized)
+  Fase 4 (relatório): 15ms
 
 // Rival AI: 51 agências × AgencyTick() unificada (ADR-002)
-  target_ai_time = <100ms total (2ms por agência)
+  target_ai_time = <80ms total (2ms por agência) (ADR-005)
 ```
 
 #### Chance de Evento por Dia
@@ -450,7 +450,7 @@ Week Results UI, News Feed, todos sistemas que dependem de tick semanal
 2. Modo Skip roda em <200ms no PC target com 50 agências e 3000 idols
 3. Modo Live distribui processamento ao longo dos 7 dias sem drops de FPS
 4. Eventos urgentes interrompem Skip e forçam Pause corretamente
-5. Rival AI processa decisões pra 50 agências dentro do budget de 100ms
+5. Rival AI processa decisões pra 50 agências dentro do budget de 80ms (ADR-005)
 6. Fim de mês dispara relatórios mensais (Economy, Charts, Rankings)
 7. Todos sistemas são atualizados na ordem correta (stats antes de fama,
    fama antes de economia)
