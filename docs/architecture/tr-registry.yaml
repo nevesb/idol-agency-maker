@@ -24,8 +24,8 @@
 #
 # STATUS VALUES: active | deprecated | superseded-by: TR-[system]-NNN
 
-version: 4
-last_updated: "2026-04-09"
+version: 5
+last_updated: "2026-04-11"
 
 requirements:
   # ── stats (idol-attribute-stats.md) ──
@@ -1730,14 +1730,16 @@ requirements:
   - id: TR-messages-001
     system: messages
     gdd: design/gdd/message-types-catalog.md
-    requirement: "57 message types across 11 categories as discriminated union type model"
+    requirement: "120 message types across 13 categories as discriminated union type model"
     created: "2026-04-07"
+    revised: "2026-04-11"
     status: active
   - id: TR-messages-002
     system: messages
     gdd: design/gdd/message-types-catalog.md
-    requirement: "27 action-required messages persist until resolved or dismissed"
+    requirement: "49 action-required messages persist until resolved or dismissed"
     created: "2026-04-07"
+    revised: "2026-04-11"
     status: active
   - id: TR-messages-003
     system: messages
@@ -1748,8 +1750,9 @@ requirements:
   - id: TR-messages-004
     system: messages
     gdd: design/gdd/message-types-catalog.md
-    requirement: "All 11 system sources enqueue messages asynchronously during weekly tick"
+    requirement: "All 13 system sources enqueue messages asynchronously during weekly tick"
     created: "2026-04-07"
+    revised: "2026-04-11"
     status: active
   - id: TR-messages-005
     system: messages

@@ -1,8 +1,8 @@
 # Architecture Traceability Index
 
-> **Last Updated**: 2026-04-09 (re-run)
+> **Last Updated**: 2026-04-11
 > **Engine**: SvelteKit 2.50 + Svelte 5 + Tauri 2 + Supabase
-> **Review**: docs/architecture/architecture-review-2026-04-09.md
+> **Review**: docs/architecture/architecture-review-2026-04-11.md
 
 ## Coverage Summary
 
@@ -316,11 +316,11 @@
 | TR-main-menu-005 | main-menu | SvelteKit route groups for menu/game | ADR-013 |
 | TR-main-menu-006 | main-menu | Supabase Auth with Google/Discord/email | ADR-013 |
 | TR-main-menu-007 | main-menu | Agency roster init as player idols | ADR-013 |
-| TR-messages-001 | messages | 57 message types across 11 categories | ADR-014 |
-| TR-messages-002 | messages | 4 priority levels with delivery rules | ADR-014 |
-| TR-messages-003 | messages | Action-required messages with CTA | ADR-014 |
-| TR-messages-004 | messages | Sender identification (system/staff/idol/rival) | ADR-014 |
-| TR-messages-005 | messages | 3-month retention with archive | ADR-014 |
+| TR-messages-001 | messages | 120 message types across 13 categories | ADR-014, ADR-021 |
+| TR-messages-002 | messages | 49 action-required messages with CTA | ADR-014 |
+| TR-messages-003 | messages | Priority enum drives rendering/notifications | ADR-014 |
+| TR-messages-004 | messages | All 13 system sources enqueue asynchronously | ADR-014 |
+| TR-messages-005 | messages | 3-month retention with archive | ADR-014, ADR-021 |
 | TR-visual-gen-001 | visual-gen | 13+ modular part categories for >10B combinations | ADR-019 |
 | TR-visual-gen-002 | visual-gen | Deterministic: PRNG(seed) → same visual every run | ADR-019 |
 | TR-visual-gen-003 | visual-gen | 8 age brackets with cross-age consistency | ADR-019 |
@@ -401,3 +401,4 @@ was created (2026-04-07). All 319 entries remain `status: active`.
 | 2026-04-07 | 7% (~25/338) | 1 | Initial review — only ADR-001 existed |
 | 2026-04-09 | 59.6% (190/319) | 12 | 11 new ADRs. TR count corrected from ~338 to 319 |
 | 2026-04-09 | **100% (319/319)** | 20 | +8 Proposed ADRs + 2 amendments. Verdict: PASS |
+| **2026-04-11** | **100% (319/319)** | **21** | ADR-021 added; all 21 Accepted; 3 TR texts revised. Verdict: PASS |
