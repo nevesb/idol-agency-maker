@@ -66,7 +66,7 @@ both consume hidden stat data (Temperamento, Ambição, etc.) for their formulas
 
 ```typescript
 interface DialogueContext {
-  tone: 'encouraging' | 'neutral' | 'competitive' | 'aggressive' | 'calm';
+  tone: 'calm' | 'assertive' | 'aggressive';  // GDD: Calmo, Assertivo, Agressivo
   topic: string;
   idol: IdolRuntime;
   producerId: string;           // ID of the producer initiating dialogue
@@ -79,24 +79,58 @@ interface DialogueContext {
 // to do (see ADR-009). NPC producers use the same dialogue system with
 // tone selected by their personality profile.
 
+// TONE_BASE values (from GDD dialogue-system.md):
+//   calm=50, assertive=45, aggressive=35
+const TONE_BASE: Record<DialogueContext['tone'], number> = {
+  calm: 50, assertive: 45, aggressive: 35
+};
+
 function computeReactionScore(ctx: DialogueContext): number {
-  const base = TONE_BASE[ctx.tone];  // e.g. encouraging=60, aggressive=40
+  const base = TONE_BASE[ctx.tone];
   const typeMatch = TOPIC_MATCH[ctx.topic][ctx.idol.personality] ?? 0;
 
-  // 6 personality modifiers from hidden stats
-  const tempMod = ctx.idol.hiddenStats.temperamento > 14
-    ? (ctx.tone === 'aggressive' ? -15 : 5)  // resists aggression
-    : (ctx.tone === 'aggressive' ? 10 : 0);
-  const loyaltyMod = ctx.idol.hiddenStats.lealdade > 12 ? 5 : 0;
-  const profMod = ctx.idol.hiddenStats.profissionalismo > 14 ? 8 : 0;
-  const wellnessMod = ctx.idol.wellness.happiness < 30 ? -10 : 0;
-  const affinityMod = (getAffinity(ctx.idol.id, ctx.producerId) - 0.5) * 20;
+  // Temperamento modifier (GDD: >14 resists aggressive, <6 volatile)
+  const temp = ctx.idol.hiddenStats.temperamento;
+  const tempMod = temp > 14
+    ? (ctx.tone === 'aggressive' ? -15 : 5)
+    : temp < 6
+      ? Math.random() * 20 - 10  // volatile: random -10 to +10
+      : (ctx.tone === 'aggressive' ? 10 : 0);
+
+  // Lealdade modifier (GDD: >14 → +5, <8 → -5)
+  const lealdade = ctx.idol.hiddenStats.lealdade;
+  const loyaltyMod = lealdade > 14 ? 5 : (lealdade < 8 ? -5 : 0);
+
+  // Profissionalismo modifier (GDD: only for Disciplinar topic)
+  //   >14 → -5 (already knows, feels infantilized)
+  //   8-14 → +5 (accepts feedback)
+  //   <8 → -5 (resists correction)
+  //   Non-Disciplinar → 0
+  const prof = ctx.idol.hiddenStats.profissionalismo;
+  const profMod = ctx.topic === 'disciplinar'
+    ? (prof > 14 ? -5 : (prof >= 8 ? 5 : -5))
+    : 0;
+
+  // Wellness modifier (GDD: 4 cumulative branches)
+  let wellnessMod = 0;
+  if (ctx.idol.wellness.happiness > 60) wellnessMod += 5;
+  if (ctx.idol.wellness.happiness < 30) wellnessMod -= 5;
+  if (ctx.idol.wellness.stress > 70) wellnessMod -= 5;
+  if (ctx.idol.wellness.motivation < 30) wellnessMod -= 3;
+
+  // Affinity modifier (GDD: discrete thresholds on 0-100 scale)
+  const affinity = getAffinity(ctx.idol.id, ctx.producerId);  // 0-100
+  const affinityMod = affinity > 70 ? 10 : (affinity < 40 ? -10 : 0);
+
   const relevanceMod = TOPIC_RELEVANCE[ctx.topic] ?? 0;
 
-  return Math.max(0, Math.min(100,
-    base + typeMatch + tempMod + loyaltyMod + profMod
-    + wellnessMod + affinityMod + relevanceMod
-  ));
+  const raw = base + typeMatch + tempMod + loyaltyMod + profMod
+    + wellnessMod + affinityMod + relevanceMod;
+
+  // PR Manager mitigation: negative affinity deltas × 0.7 (except Disaster)
+  // Applied at outcome resolution, not here — see outcome processing below.
+
+  return Math.max(0, Math.min(100, raw));
 }
 ```
 
@@ -125,7 +159,9 @@ interface Promise {
 
 #### Saturation Penalty
 If same idol receives 2+ dialogues/week for 3+ consecutive weeks:
-positive affinity deltas multiplied by `SATURATION_DECAY` (0.5, then 0.25, etc.)
+positive affinity deltas multiplied by `(1 - SATURATION_PENALTY × consecutive_weeks)`.
+`SATURATION_PENALTY = 0.2` per consecutive week (GDD dialogue-system.md).
+Resets after 1 week without max-out.
 
 #### Wellness Advisor Integration (ADR-009)
 - Level 1: 70% prediction accuracy on reaction outcome
@@ -137,28 +173,42 @@ positive affinity deltas multiplied by `SATURATION_DECAY` (0.5, then 0.25, etc.)
 
 #### 7 Injury Types
 
-| Type | Trigger | Base Recovery (weeks) | Permanent Damage Risk |
-|------|---------|----------------------|----------------------|
-| Vocal strain | Vocal jobs > threshold | 2-4 | 25% → Vocal -5 |
-| Muscle injury | Dance/physical jobs > threshold | 3-6 | 25% → Dança -5 |
-| Mental exhaustion | Stress > 80 for 4+ weeks | 4-8 | 25% → Mentalidade -5 |
-| Back injury | Show + poor posture (low Resistência) | 4-8 | 30% → Resistência -5 |
-| Knee injury | Dance intensity + age > 25 | 6-12 | 35% → Dança -5 |
-| Anxiety disorder | Happiness < 20 for 8+ weeks | 6-12 | 20% → Comunicação -5 |
-| General fatigue | Training load > 120% for 3+ weeks | 1-3 | 10% → all physical -2 |
+| Type | Trigger (from GDD medical-system.md) | Base Recovery | Permanent Damage Risk |
+|------|---------------------------------------|---------------|----------------------|
+| Distensão Muscular | Resistência < 40 AND physical job AND weeks_without_rest ≥ 2 | 2-4 weeks | 25% × severity → Resistência -5 |
+| Lesão Vocal | Vocal-intensive shows ≥ 2 AND (Vocal < 50 OR Saúde < 40) | 3-5 weeks | 25% × severity → Vocal -5 |
+| Fratura por Estresse | Resistência < 30 AND intense choreo ≥ 3/4 weeks AND weeks_without_rest ≥ 3 | 4-8 weeks | 25% × severity → Resistência -5 |
+| Fadiga Crônica | Saúde < 30 for 4+ weeks | 3-6 weeks | 25% × severity → all physical -2 |
+| Colapso Mental | Stress = 100 (automatic) | 4-8 weeks | 25% × severity → Mentalidade -5 |
+| Entorse de Tornozelo | During show with intense choreo AND Resistência < 50 | 2-4 weeks | 25% × severity → Dança -5 |
+| Tendinite | Same physical job type for 5+ weeks AND Resistência < 45 | 3-6 weeks | 25% × severity → affected stat -5 |
+
+Permanent damage uses a **severity-based formula** (GDD medical-system.md):
+- `PERMANENT_DAMAGE_CHANCE = 0.25` (25% base)
+- `chance = PERMANENT_DAMAGE_CHANCE × severity_mult` where Light=0.5, Medium=1.0, Severe=1.5
+- Affected stat is injury-specific (see table above)
 
 #### Recovery Formula
 
 ```typescript
 function recoveryWeeks(
   baseWeeks: number,
-  facilityLevel: 1 | 2 | 3,
-  ptSkill: number,        // physiotherapist skill 0-100
-  resilience: number      // idol Resistência stat
+  facilityLevel: 0 | 1 | 2 | 3,  // 0 = no Medical Center
+  ptSkill: number,                 // physiotherapist skill 0-100
+  resilience: number               // idol Resistência stat
 ): number {
+  // Facility multiplier: discrete brackets (GDD medical-system.md)
   const facilityMult = [1.0, 0.85, 0.70, 0.50][facilityLevel];
-  const ptMult = 0.90 - (ptSkill / 100) * 0.30;  // 0.90 to 0.60
-  const resFactor = 1.0 - resilience / 200;        // 1.0 to 0.50
+
+  // PT staff multiplier: discrete brackets (GDD medical-system.md)
+  //   No PT: 1.0, skill 1-30: 0.90, 31-60: 0.80, 61-80: 0.70, 81-100: 0.60
+  const ptMult = ptSkill === 0 ? 1.0
+    : ptSkill <= 30 ? 0.90
+    : ptSkill <= 60 ? 0.80
+    : ptSkill <= 80 ? 0.70
+    : 0.60;
+
+  const resFactor = 1.0 - resilience / 200;  // 1.0 to 0.50
 
   return Math.ceil(baseWeeks * facilityMult * ptMult * resFactor);
 }
@@ -177,23 +227,33 @@ function reinjuryChance(ptSkill: number): number {
 ```typescript
 function trainingLoad(
   physicalJobs: number,
-  trainingSessions: number
+  trainingSessions: number,
+  resistencia: number        // idol Resistência stat
 ): number {
   const PHYSICAL_COST = 15;
   const TRAINING_COST = 10;
-  const MAX_SAFE_LOAD = 100;
+  // Per-idol max safe load (GDD medical-system.md):
+  //   max_safe_load = Resistência × 0.5 + 20
+  //   Resistência 80 → max_load=60; Resistência 30 → max_load=35
+  const maxSafeLoad = resistencia * 0.5 + 20;
 
   return ((physicalJobs * PHYSICAL_COST) + (trainingSessions * TRAINING_COST))
-    / MAX_SAFE_LOAD * 100;  // percentage
+    / maxSafeLoad * 100;  // percentage
 }
-// > 100% for 3+ weeks → triggers General Fatigue
+// > 100% for 3+ weeks → triggers Fadiga Crônica
 // > 120% → immediate injury risk check
 ```
 
-#### Medical Dashboard State
-- Green: training load < 80%, no injury history in 3 months
-- Yellow: training load 80-100%, or recovering from injury
-- Red: training load > 100%, or active injury, or re-injury risk > 20%
+#### Medical Dashboard State (GDD medical-system.md)
+- Green: training load < 80%, no injury triggers active, no recent injuries
+- Yellow: 1+ injury trigger partially active (e.g. Resistência < 40 but has rest), OR returning from injury (re-injury window)
+- Red: 2+ injury triggers simultaneously active, OR Saúde < 25, OR 4+ weeks without rest with physical jobs
+
+#### Rehab Training (GDD medical-system.md)
+During recovery, only mental stats may be trained at ×0.5 efficiency:
+- **Allowed**: Comunicação, Foco, Aura, Carisma, Mentalidade
+- **Blocked**: Vocal, Dança, Resistência, Atuação, Variedade
+- Requires Medical Center Lv 2+ AND Physical Therapist present
 
 ### Pipeline Integration
 
