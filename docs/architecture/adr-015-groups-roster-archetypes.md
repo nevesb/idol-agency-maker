@@ -1,7 +1,7 @@
 # ADR-015: Groups, Roster Balance & Idol Archetypes
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09
@@ -283,13 +283,36 @@ function computeComplementarity(
   const variance = counts.reduce((s, v) => s + (v - mean) ** 2, 0) / counts.length;
   const cv = Math.sqrt(variance) / mean;  // 0 = perfect, higher = worse
 
-  // Map to 0.0-0.3 range: cv=0 → 0.3 (perfect), cv≥1.5 → 0.0 (one star dominates)
-  return Math.max(0, Math.min(0.3, 0.3 * (1 - cv / 1.5)));
+  // Map to 0.0-0.3 range: cv=0 → 0.3 (perfect), cv≥1.0 → 0.0 (star dependency)
+  // CV divisor = 1.0 (not 1.5) because with 16 attributes the structural
+  // maximum CV is ~1.0 (half members get 16 pivots, half get 0).
+  // Using 1.0 ensures the full 0.0-0.3 range is reachable in gameplay.
+  return Math.max(0, Math.min(0.3, 0.3 * (1 - cv / 1.0)));
 }
-// 4 members, each is pivot in ~4 attributes → cv ≈ 0 → complementarity ≈ 0.3
-// 4 members, one has 12 pivots, rest have 1 → cv high → complementarity ≈ 0.0
-// This is manageable: player can improve by training weaker members to earn pivots
 ```
+
+#### Complementarity Study (16 attributes, groups of 2-12)
+
+| Size | topN | Best Case | Worst Case | Typical (random) |
+|------|------|-----------|------------|------------------|
+| 2 | 1 | **0.300** — 8/8 split | **0.000** — 16/0 (one dominates all) | ~0.225 |
+| 3 | 2 | **0.287** — 11/11/10 | **0.088** — 16/16/0 | ~0.247 |
+| 4 | 2 | **0.300** — 8/8/8/8 | **0.000** — 16/16/0/0 | ~0.225 |
+| 5 | 3 | **0.285** — 10/10/10/9/9 | **0.055** — 16/16/16/0/0 | ~0.239 |
+| 6 | 3 | **0.300** — 8 each | **0.000** — 16×3, 0×3 | ~0.225 |
+| 7 | 4 | **0.288** — 10/9×6 | **0.040** — 16×4, 0×3 | ~0.235 |
+| 8 | 4 | **0.300** — 8 each | **0.000** — 16×4, 0×4 | ~0.225 |
+| 9 | 5 | **0.289** — 9×8, 8×1 | **0.032** — 16×5, 0×4 | ~0.233 |
+| 10 | 5 | **0.300** — 8 each | **0.000** — 16×5, 0×5 | ~0.225 |
+| 11 | 6 | **0.285** — 9×8, 8×3 | **0.026** — 16×6, 0×5 | ~0.232 |
+| 12 | 6 | **0.300** — 8 each | **0.000** — 16×6, 0×6 | ~0.225 |
+
+**Design notes:**
+- Best case achievable for even-N groups (each member leads in exactly 8 attrs)
+- Worst case reaches 0.0 for even-N (half dominate, half contribute nothing)
+- Odd-N groups have a small inherent penalty (~0.010-0.015) — acceptable
+- Typical random groups land around 0.225 — room to improve through roster mgmt
+- Player controls complementarity by training weak members to earn pivot slots
 
 #### Synergy
 
