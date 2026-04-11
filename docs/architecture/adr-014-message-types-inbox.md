@@ -45,7 +45,7 @@ as a terminal presentation handler.
 ## Context
 
 ### Problem Statement
-The GDD defines 120 message types (MSG-W01 through MSG-P03) that notify the
+The GDD defines 120 message types (MSG-W01 through MSG-MR06) that notify the
 player of game events, request decisions, and deliver reports. These messages are
 fundamentally different from ADR-004's internal events: events cascade between
 systems synchronously; messages are stored for asynchronous player consumption.
@@ -122,7 +122,8 @@ interface GameMessage {
 
 type MessageCategory =
   | 'onboarding' | 'contracts' | 'staff' | 'scouting' | 'jobs'
-  | 'market' | 'idols' | 'finance' | 'scandals' | 'intelligence' | 'career';
+  | 'market' | 'idols' | 'finance' | 'scandals' | 'intelligence' | 'career'
+  | 'music' | 'merchandise';
 
 type MessagePriority = 'urgent' | 'important' | 'normal' | 'info';
 
@@ -198,17 +199,19 @@ does not duplicate the catalog but establishes:
 
 | Category | Count | Typical Priority | Typical Sender |
 |----------|-------|-----------------|----------------|
-| Onboarding | 3 | info | system |
-| Contracts | 7 | important/urgent | staff (Talent Mgr) |
-| Staff | 6 | normal/important | staff |
-| Scouting | 5 | normal | staff (Scout) |
-| Jobs | 8 | normal | staff |
-| Market | 6 | important/urgent | staff/rival |
-| Idols | 7 | normal/important | idol/staff |
-| Finance | 5 | normal/important | system |
-| Scandals | 4 | urgent | system |
-| Intelligence | 3 | info/normal | staff (Analyst) |
-| Career | 3 | normal | idol |
+| Onboarding | 7 | info | system |
+| Contracts | 9 | important/urgent | staff (Talent Mgr) |
+| Staff | 15 | normal/important | staff |
+| Scouting | 6 | normal | staff (Scout) |
+| Jobs/Shows | 10 | normal | staff |
+| Market | 7 | important/urgent | staff/rival |
+| Idols | 17 | normal/important | idol/staff |
+| Finance/Goals | 17 | normal/important | system |
+| Scandals/Events | 9 | urgent | system |
+| Intelligence | 5 | info/normal | staff (Analyst) |
+| Career | 6 | normal | idol |
+| Music | 6 | normal/important | staff |
+| Merchandise/Media | 6 | normal | staff/system |
 
 ### Inbox State Slice
 
