@@ -16,7 +16,7 @@ user + architecture-review
 Groups, roster balance, and archetypes are tightly coupled systems that need a
 unified state ownership model. This ADR defines the GroupsSlice, archetype
 derivation as pure function, pairwise affinity storage, and the formulas that
-connect them (top-50% stats, synergy, chemistry, pivô detection).
+connect them (top-50% stats, synergy, chemistry, pivot detection).
 
 ---
 
@@ -217,7 +217,7 @@ function computeGroupStats(
 // 12 members: topN = 6 → avg of top 6
 ```
 
-#### Pivô Detection
+#### Pivot Detection
 
 ```typescript
 function detectPivots(
@@ -244,30 +244,51 @@ function detectPivots(
 }
 ```
 
-#### Complementarity
+#### Complementarity (Pivot-Based)
 
-Measures how well group members' strengths cover each other's weaknesses.
-Recomputed on membership change (not every tick).
+Measures how evenly pivot points are distributed across group members.
+If every member has the same number of pivot points, the group has perfect
+complementarity (each member contributes equally). If one member dominates
+all pivots, complementarity is low (the group depends on one star).
+
+Recomputed on membership change or after stat updates.
 
 ```typescript
-function computeComplementarity(members: IdolRuntime[], attributes: string[]): number {
+function computeComplementarity(
+  members: IdolRuntime[],
+  attributes: string[]
+): number {
   if (members.length <= 1) return 0;
 
-  // For each attribute, measure the spread (max - min) among members.
-  // High spread = members complement each other (one strong where another is weak).
-  let totalSpread = 0;
+  const topN = Math.ceil(members.length / 2);
+
+  // Count how many pivot points each member has across all attributes
+  const pivotCounts = new Map<string, number>();
+  for (const m of members) pivotCounts.set(m.id, 0);
+
   for (const attr of attributes) {
-    const values = members.map(m => m.stats[attr]);
-    const max = Math.max(...values);
-    const min = Math.min(...values);
-    totalSpread += (max - min) / 100;  // normalize to 0-1 per attribute
+    const ranked = members
+      .map(m => ({ id: m.id, val: m.stats[attr] }))
+      .sort((a, b) => b.val - a.val);
+    for (const entry of ranked.slice(0, topN)) {
+      pivotCounts.set(entry.id, (pivotCounts.get(entry.id) ?? 0) + 1);
+    }
   }
 
-  // Average spread across all attributes, capped at 0.3
-  return Math.min(totalSpread / attributes.length, 0.3);
+  // Perfect complementarity = all members have the same pivot count
+  // Measure using coefficient of variation (lower = more equal = better)
+  const counts = [...pivotCounts.values()];
+  const mean = counts.reduce((s, v) => s + v, 0) / counts.length;
+  if (mean === 0) return 0;
+  const variance = counts.reduce((s, v) => s + (v - mean) ** 2, 0) / counts.length;
+  const cv = Math.sqrt(variance) / mean;  // 0 = perfect, higher = worse
+
+  // Map to 0.0-0.3 range: cv=0 → 0.3 (perfect), cv≥1.5 → 0.0 (one star dominates)
+  return Math.max(0, Math.min(0.3, 0.3 * (1 - cv / 1.5)));
 }
-// Duo with specialist + generalist → high complementarity
-// Group of clones (same stats) → 0 complementarity
+// 4 members, each is pivot in ~4 attributes → cv ≈ 0 → complementarity ≈ 0.3
+// 4 members, one has 12 pivots, rest have 1 → cv high → complementarity ≈ 0.0
+// This is manageable: player can improve by training weaker members to earn pivots
 ```
 
 #### Synergy
@@ -641,8 +662,8 @@ slices. Groups feature can be disabled by skipping Phase 3 group processing.
 
 - [ ] Group created with 1-12 members; solo acts have no chemistry/synergy
 - [ ] Top-50% stats match GDD examples (duo = max, 12-member = top 6 avg)
-- [ ] Pivô detection correct: idol in top ceil(N/2) for ≥1 attribute
-- [ ] Patinho feio crisis fires when: not pivô + bad show + 4+ weeks in group
+- [ ] Pivot detection correct: idol in top ceil(N/2) for ≥1 attribute
+- [ ] Patinho feio crisis fires when: not pivot + bad show + 4+ weeks in group
 - [ ] Leadership dispute fires on: stat dominance path OR 3 consecutive failures
 - [ ] Chemistry grows +0.01/month, +0.02 with healthy leader, -0.05 per conflict
 - [ ] Synergy = complementarity × chemistry
@@ -664,7 +685,7 @@ slices. Groups feature can be disabled by skipping Phase 3 group processing.
 | group-management.md | TR-groups-001 | Group creation 1-12 members | Group entity with memberIds array |
 | group-management.md | TR-groups-002 | Top 50% stats aggregation | computeGroupStats() with topN = ceil(N/2) |
 | group-management.md | TR-groups-003 | Duo max complementarity | topN = 1 for 2-member groups |
-| group-management.md | TR-groups-004 | Pivô detection and underperformer | detectPivots() + checkUnderperformer() |
+| group-management.md | TR-groups-004 | Pivot detection and underperformer | detectPivots() + checkUnderperformer() |
 | group-management.md | TR-groups-005 | Leader mechanics and disputes | checkLeadershipDispute() with 2 paths |
 | group-management.md | TR-groups-006 | Independent group fame | groupFame in FameSlice, decoupled from members |
 | group-management.md | TR-groups-007 | Synergy from complementarity × chemistry | computeSynergy() + monthly chemistry update |

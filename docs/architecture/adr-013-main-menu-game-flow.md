@@ -1,7 +1,7 @@
 # ADR-013: Main Menu & Game Flow
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09

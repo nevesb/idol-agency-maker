@@ -1,7 +1,7 @@
 # ADR-018: Meta-Game, Planning Board, Player Events & Post-Debut Careers
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09

@@ -254,9 +254,16 @@ generator** (`tools/generate-strings.ts`). The generator:
 npx tsx tools/generate-strings.ts --catalog design/gdd/message-types-catalog.md --out src/lib/i18n/messages/
 ```
 
-**Future (post-MVP)**: LLM enrichment for personality-flavored messages (idol
-personality affects phrasing). This is additive — generated templates remain the
-fallback.
+**No LLM in production.** All message strings are authored and generated at
+development time. LLM is used only during development to assist with writing
+templates — the final output is static locale files shipped with the game.
+
+> **⚠️ VERIFY:** The GDD states 57 message types across 11 categories. This
+> number seems low for a game of this scope. Before accepting this ADR, audit
+> the message catalog against all event types in ADR-004 and all decision
+> outcomes in ADR-009 to ensure no player-facing notifications are missing.
+> The dev-time generator makes adding more message types cheap — better to
+> have too many than miss important player notifications.
 
 ---
 
@@ -304,7 +311,7 @@ fallback.
 |------|------------|--------|------------|
 | Message spam overwhelming inbox | MEDIUM | MEDIUM | Batch normal-priority per week; dedup similar messages |
 | Urgent messages too frequent (annoying pauses) | LOW | HIGH | Cap urgent to 1 per phase; queue others as important |
-| Template count grows beyond maintainability | LOW | LOW | LLM generation post-MVP; template registry tool |
+| Template count grows beyond maintainability | LOW | LOW | Dev-time generator makes adding templates cheap; template registry tool |
 
 ---
 

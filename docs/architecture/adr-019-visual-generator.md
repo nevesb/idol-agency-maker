@@ -1,7 +1,7 @@
 # ADR-019: Visual Generator Pipeline
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09
@@ -50,11 +50,11 @@ Offline Generation (Python)
 │ (idol seeds) │     │ Pipeline │     │ (5-10s/image) │     │ Storage  │
 └─────────────┘     └──────────┘     └───────────────┘     └──────────┘
                                                                  │
-Game Runtime                                                     ▼
-┌─────────────┐     ┌──────────────┐     ┌──────────────┐
-│ idol.visual  │────▶│ CDN URL from │────▶│ <img> in UI  │
-│ _seed        │     │ Supabase     │     │ (Avatar comp)│
-└─────────────┘     └──────────────┘     └──────────────┘
+Game Runtime (download once, cache locally)                       ▼
+┌─────────────┐     ┌──────────────┐     ┌──────────┐     ┌──────────────┐
+│ idol.visual  │────▶│ CDN URL from │────▶│ Local    │────▶│ <img> in UI  │
+│ _seed        │     │ Supabase     │     │ Cache    │     │ (Avatar comp)│
+└─────────────┘     └──────────────┘     └──────────┘     └──────────────┘
 ```
 
 ### Generation Spec
@@ -93,14 +93,43 @@ GENERATION_CONFIG = {
 ### Runtime Integration
 
 At game runtime, the visual generator is **not invoked** — all portraits are
-pre-generated and served from Supabase Storage CDN. The Avatar component
-(ADR-006) constructs the URL from idol ID + age bracket + expression:
+pre-generated and served from Supabase Storage CDN.
+
+### Portrait Caching Strategy
+
+Portraits are **downloaded once and cached locally** on the user's machine.
+They must never be re-downloaded after the first fetch.
 
 ```typescript
+// Cache layers (checked in order):
+// 1. In-memory LRU cache (hot — current roster, ~50-200 images)
+// 2. IndexedDB blob store (warm — all previously loaded portraits)
+// 3. Supabase Storage CDN (cold — first-time download only)
+
+interface PortraitCache {
+  get(key: string): Promise<Blob | null>;   // checks memory → IndexedDB
+  put(key: string, blob: Blob): Promise<void>;  // writes to both layers
+  preload(idolIds: string[]): Promise<void>;     // batch download for new idols
+}
+
 function portraitUrl(idolId: string, ageBracket: number, expression: string): string {
   return `${SUPABASE_STORAGE_URL}/portraits/${idolId}/${ageBracket}_${expression}.webp`;
 }
+
+// The Avatar component calls PortraitCache.get() first.
+// On cache miss: fetch from CDN, store in IndexedDB + memory, display.
+// On cache hit: display immediately from local storage (no network).
+//
+// Tauri desktop: can also use filesystem cache under app data directory
+// for even faster access than IndexedDB.
+//
+// Preloading: When a new world pack is loaded or new idols are scouted,
+// batch-download all their portraits in the background to avoid visible
+// loading states during gameplay.
 ```
+
+**Key rule:** After initial download, portraits work fully offline. No network
+required to display any previously loaded idol portrait.
 
 ---
 

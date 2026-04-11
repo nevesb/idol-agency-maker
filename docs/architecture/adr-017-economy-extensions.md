@@ -1,7 +1,7 @@
 # ADR-017: Economy Extensions — Merchandising, Personal Finance, Financial Reporting, Media Entities
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09

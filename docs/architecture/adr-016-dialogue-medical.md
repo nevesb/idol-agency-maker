@@ -1,7 +1,7 @@
 # ADR-016: Dialogue System & Medical/Injury System
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09

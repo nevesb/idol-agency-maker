@@ -1,7 +1,7 @@
 # ADR-020: Tutorial/Onboarding & Settings/Accessibility
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09
