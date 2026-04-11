@@ -103,6 +103,17 @@
 - [x] 71-game-setup-rules.md
 - [x] 72-interaction-history.md
 
+## Music / Production domain
+- [x] 73-music-production-pipeline.md
+- [x] 77-composer-selection.md
+- [x] 78-release-planning.md
+
+## Settings / Tutorial / Meta
+- [x] 74-settings.md
+- [x] 75-tutorial-tooltips.md
+- [x] 76-rival-agency-profile.md
+- [x] 79-award-ceremony.md
+
 ## Final pass
 - [x] Revise 01-13 with same FM26-first method
 - [x] Ensure route coverage aligns with systems-index.md and ui-information-architecture.md
