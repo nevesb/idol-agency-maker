@@ -154,7 +154,7 @@ Em qualquer lugar do Portal, right-click em entidade abre menu:
 
 | Sistema | O que fornece ao Portal |
 |---|---|
-| **Message Types Catalog** | Mensagens do inbox (57 tipos em 11 categorias) |
+| **Message Types Catalog** | Mensagens do inbox (120 tipos em 13 categorias) |
 | **News Feed** | Noticias para o carrossel |
 | **Time/Calendar** | Semana/data, calendario semanal |
 | **Job Assignment** | Agenda de jobs, acoes pendentes |

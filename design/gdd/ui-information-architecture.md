@@ -99,7 +99,7 @@ Hub central — onde o jogador comeca e volta.
 | Submenu | Conteudo |
 |---|---|
 | **Visão Geral** | Dashboard 3 colunas: mensagens, noticias carrossel + calendario, agenda + rankings (3 abas: Hits, Idols, Grupos) |
-| **Mensagens** | Inbox completo (2 paineis: lista 30% + mensagem aberta 70%). 57 tipos em 11 categorias (ver message-types-catalog.md) |
+| **Mensagens** | Inbox completo (2 paineis: lista 30% + mensagem aberta 70%). 120 tipos em 13 categorias (ver message-types-catalog.md) |
 | **Calendario** | Proximas 4 semanas + eventos sazonais |
 | **Site de Noticias** | News Feed completo com filtros (noticias ≠ mensagens) |
 | **Relatorios** | Intelligence reports e analises |

@@ -64,7 +64,7 @@ inbox stores and surfaces messages.
 - 3-month retention policy (soft — configurable)
 
 ### Requirements
-- 120 message types across 11 categories with typed payloads
+- 120 message types across 13 categories with typed payloads
 - 4 priority levels: Urgent (pauses sim), Important, Normal, Info
 - 7 visual layouts for rendering
 - Action-required messages track completion state
@@ -99,7 +99,7 @@ messages — only events with player relevance.
 interface GameMessage {
   id: string;                    // unique, e.g. "msg-2026w12-scandal-001"
   type: MessageTypeId;           // e.g. "MSG-E01"
-  category: MessageCategory;     // 11 categories
+  category: MessageCategory;     // 13 categories
   priority: MessagePriority;
   sender: MessageSender;
   
@@ -236,7 +236,7 @@ All parameterizable message strings are produced by a **development-time string
 generator** (`tools/generate-strings.ts`). The generator:
 
 1. Reads the message type catalog (`design/gdd/message-types-catalog.md`)
-2. Extracts all 57 message type templates with their parameter slots
+2. Extracts all 120 message type templates with their parameter slots
 3. Produces typed locale files (`en.json`, `ja.json`, `pt.json`) per ADR-010
 4. Generates a TypeScript `MessageKeys` type with all valid key + param combinations
 5. Validates that every message type has templates in every supported language
@@ -340,7 +340,7 @@ templates — the final output is static locale files shipped with the game.
 
 | GDD Document | TR-ID | Requirement | How This ADR Satisfies It |
 |-------------|-------|-------------|--------------------------|
-| message-types-catalog.md | TR-messages-001 | 120 message types across 11 categories | Typed GameMessage with MessageTypeId enum |
+| message-types-catalog.md | TR-messages-001 | 120 message types across 13 categories | Typed GameMessage with MessageTypeId enum |
 | message-types-catalog.md | TR-messages-002 | 4 priority levels with delivery rules | Priority enum with sim-impact rules |
 | message-types-catalog.md | TR-messages-003 | Action-required messages with CTA | MessageAction interface with type + payload |
 | message-types-catalog.md | TR-messages-004 | Sender identification (system/staff/idol/rival) | MessageSender with entityId for avatar |
