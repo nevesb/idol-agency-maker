@@ -1,7 +1,7 @@
 # ADR-017: Economy Extensions — Merchandising, Personal Finance, Financial Reporting, Media Entities
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09
@@ -65,7 +65,7 @@ RosterSlice (ADR-003)
 ```typescript
 interface MerchState {
   activeMerchLines: MerchLine[];
-  monthlySales: Map<string, number>;  // merchId → units
+  weeklySales: Map<string, number>;  // merchId → units sold this week
 }
 
 interface MerchLine {
@@ -73,20 +73,63 @@ interface MerchLine {
   idolId: string | null;      // null = agency merch
   groupId: string | null;
   type: 'photobook' | 'goods' | 'apparel' | 'digital' | 'collab' | 'graduation';
-  productionCost: number;
+  productionCostPerUnit: number;
   pricePerUnit: number;
   launchWeek: number;
+
+  // STOCK MANAGEMENT — player must produce stock before selling
+  stockProduced: number;       // total units produced (cumulative)
+  stockRemaining: number;      // units available for sale
+  productionBatchSize: number; // units per production order
+  productionLeadWeeks: number; // weeks to produce a batch (1-4)
+  pendingProduction: number;   // units currently being produced
+  pendingReadyWeek: number | null; // when pending batch finishes
+
+  // Popularity / decay
+  popularityBonus: number;     // from active marketing campaigns (0.0-1.0)
   salesDecayRate: number;      // weekly multiplier (e.g. 0.85)
 }
-
-// Revenue formula:
-// weekly_revenue = base_sales × fan_multiplier × fame_modifier × decay^weeks_since_launch
-// fan_multiplier: Casual ×0.2, Dedicated ×1.0, Hardcore ×3.0 (from fan-club-system.md)
-// fame_modifier: fama / 1000 (capped at 5.0)
 ```
 
-**Pipeline integration:** Phase 3 end-of-week calculates merch revenue and adds
-to EconomySlice.ledger under revenue category `merchandising`.
+#### Revenue Model — Two Channels
+
+**Channel 1: Passive Sales** (weekly, fame-driven)
+```typescript
+// Passive sales happen every week based on idol/group fame
+// passive_demand = base_demand × fan_multiplier × fame_modifier × decay × (1 + popularityBonus)
+// fan_multiplier: Casual ×0.2, Dedicated ×1.0, Hardcore ×3.0 (from fan-club-system.md)
+// fame_modifier: fame / 1000 (capped at 5.0)
+// popularityBonus: boosted by marketing campaigns, discounts, public appearances
+// ACTUAL SOLD = min(passive_demand, stockRemaining)
+// If stockRemaining < passive_demand → "money left on the table"
+```
+
+**Channel 2: Show Sales** (per show, audience-budget model)
+```typescript
+// Each show generates a purchase budget based on audience size
+// show_merch_budget = audience_size × MERCH_SPEND_PER_PERSON  // e.g. ¥500/person
+//
+// Budget allocation:
+// 1. Up to 30% of budget goes to GROUP items (if group is performing)
+// 2. Remaining 70%+ split among IDOL items proportional to performance score
+//    - Idol who performed well → larger share of budget
+//    - idolShare = (idol_performance / total_performance) × remaining_budget
+//
+// For each idol's share:
+//   units_demanded = idolShare / pricePerUnit (for each of their merch lines)
+//   units_sold = min(units_demanded, stockRemaining)
+//   revenue = units_sold × pricePerUnit
+//
+// This forces the player to:
+// - Create merch for ALL performing idols/groups
+// - Manage stock levels before shows
+// - A popular idol with no stock = lost revenue (budget allocated but nothing to sell)
+```
+
+**Pipeline integration:** Phase 3 end-of-week calculates passive merch sales.
+Show merch sales are calculated in ADR-007 post-show settlement. Both add
+to EconomySlice.ledger under revenue category `merchandising`. Stock is
+decremented on sale; production orders advance by 1 week.
 
 ### Part B: Idol Personal Finance (TR-idol-finance-001..005)
 

@@ -1,7 +1,7 @@
 # ADR-013: Main Menu & Game Flow
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09
@@ -68,7 +68,6 @@ framework (SvelteKit routes, Supabase Auth) but no menu-specific architecture.
 - Cloud sync with conflict resolution (local vs. cloud)
 - Language selection before game data loads
 - Menu load <2s, wizard steps <100ms each (step 5 agency selection <500ms)
-- Route-driven for browser back/forward support
 
 ---
 
@@ -81,14 +80,7 @@ src/routes/
 ├── (menu)/                    # Menu route group — no HUD, no sim
 │   ├── +layout.svelte         # Full-screen menu layout, no nav bar
 │   ├── +page.svelte           # Title screen (Continue/New/Load/Settings)
-│   ├── new-game/
-│   │   ├── +layout.svelte     # Wizard layout with step indicator
-│   │   ├── step-1/+page.svelte   # Producer name, gender, birthday
-│   │   ├── step-2/+page.svelte   # Background city selection
-│   │   ├── step-3/+page.svelte   # Reputation tier selection
-│   │   ├── step-4/+page.svelte   # Production styles + personality traits
-│   │   ├── step-5/+page.svelte   # Agency selection (lazy loads world pack)
-│   │   └── step-6/+page.svelte   # Summary + confirmation
+│   ├── new-game/+page.svelte  # Single-page wizard (all 6 steps as components)
 │   ├── load-game/+page.svelte # Save slot list
 │   └── settings/+page.svelte  # Pre-game settings
 │
@@ -100,7 +92,10 @@ src/routes/
 **Key decisions:**
 - Route groups `(menu)` and `(game)` isolate layouts — menu has no HUD, game has
   full navigation
-- Wizard steps are individual routes for browser history support
+- **Wizard is a single page** (`new-game/+page.svelte`) with step components and
+  Next/Previous buttons. The compiled Tauri desktop app has no browser back button,
+  so route-per-step adds complexity for no benefit. All 6 steps render as Svelte
+  components within one page, controlled by a `currentStep` state variable.
 - Settings is a route, not a modal, for direct-link support
 - Auth modal overlays any menu page (not a separate route)
 
@@ -115,11 +110,11 @@ src/routes/
                               (Back navigation allowed)
 ```
 
-**State storage:** Svelte store (`$state` rune) persisted to `sessionStorage`.
-- If user refreshes mid-wizard, state restores from sessionStorage
-- If user navigates away and returns, wizard resumes at last step
-- On "Iniciar Campanha" (step 6): create full GameState, write to IndexedDB,
-  navigate to `/(game)/portal`
+**State storage:** Svelte component state (`$state` rune) — lives entirely within
+the `new-game/+page.svelte` component. No sessionStorage needed since the wizard
+is a single page; navigating away discards wizard state (acceptable — wizard is
+short). On "Iniciar Campanha" (step 6): create full GameState, write to IndexedDB,
+navigate to `/(game)/portal`.
 
 ```typescript
 interface WizardState {
@@ -201,18 +196,20 @@ On "Iniciar Campanha" or "Load Game":
 
 ## Alternatives Considered
 
-### Alternative 1: Single-Page App with Modal Wizard
+### Alternative 1 (REJECTED): Route-Per-Step Wizard
+- **Description**: Each wizard step as a separate SvelteKit route (`step-1/`, `step-2/`, etc.)
+- **Pros**: Browser back/forward navigation between steps
+- **Cons**: The compiled Tauri desktop app has no browser back button, making
+  route-based navigation useless. Adds 6 extra routes and a layout file for no
+  benefit. Requires sessionStorage to preserve state across routes.
+- **Rejection Reason**: Single-page wizard with components and Next/Previous
+  buttons is simpler, requires less code, and works identically in Tauri and web.
+
+### Alternative 2 (REJECTED): Modal Wizard Overlay
 - **Description**: Menu and game in same route group, wizard as modal overlay
 - **Pros**: Simpler routing, no route group setup
-- **Cons**: Browser back button breaks, can't deep-link to wizard steps, heavy
-  game bundle loaded for menu
+- **Cons**: Heavy game bundle loaded for menu, poor separation of concerns
 - **Rejection Reason**: SvelteKit route groups provide clean separation for free
-
-### Alternative 2: URL-Param Wizard State
-- **Description**: Store wizard state in URL query params
-- **Pros**: Fully shareable/bookmarkable wizard state
-- **Cons**: Sensitive data in URL (name), overly long URLs, security concern
-- **Rejection Reason**: sessionStorage is sufficient; wizard state is ephemeral
 
 ---
 
@@ -220,13 +217,12 @@ On "Iniciar Campanha" or "Load Game":
 
 ### Positive
 - Clean separation between menu and game UI via route groups
-- Wizard is resumable across page refreshes (sessionStorage)
+- Single-page wizard is simple to implement — one component per step, no routing
 - Auth is optional — no friction for single-player experience
-- Route-driven menu supports browser navigation naturally
 
 ### Negative
 - Route groups add structural complexity to `src/routes/`
-- sessionStorage wizard state lost if browser tab closes (acceptable trade-off)
+- Wizard state lost if user navigates away (acceptable — wizard takes <2 minutes)
 
 ### Neutral
 - Settings route vs. modal is a cosmetic choice; route chosen for consistency
@@ -274,11 +270,10 @@ affecting game systems.
 
 - [ ] Menu loads <2s without game data
 - [ ] Wizard completes all 6 steps with validation
-- [ ] Wizard state persists across page refresh (sessionStorage)
+- [ ] Next/Previous buttons navigate wizard steps correctly
 - [ ] Save/load works offline (IndexedDB only)
 - [ ] Auth is optional — game playable without login
 - [ ] Cloud sync with conflict resolution modal works
-- [ ] Browser back/forward works in wizard
 - [ ] Transition to portal creates valid GameState
 
 ---

@@ -1,7 +1,7 @@
 # ADR-014: Message Types & Inbox Delivery
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-04-09
@@ -13,7 +13,7 @@ Proposed
 user + architecture-review
 
 ## Summary
-The game needs a structured inbox system delivering 57 message types across 11
+The game needs a structured inbox system delivering 120 message types across 13
 categories to the player. This ADR defines the message taxonomy, priority system,
 delivery rules, and inbox lifecycle — consuming events from ADR-004's event bus
 as a terminal presentation handler.
@@ -45,7 +45,7 @@ as a terminal presentation handler.
 ## Context
 
 ### Problem Statement
-The GDD defines 57 message types (MSG-W01 through MSG-P03) that notify the
+The GDD defines 120 message types (MSG-W01 through MSG-P03) that notify the
 player of game events, request decisions, and deliver reports. These messages are
 fundamentally different from ADR-004's internal events: events cascade between
 systems synchronously; messages are stored for asynchronous player consumption.
@@ -64,7 +64,7 @@ inbox stores and surfaces messages.
 - 3-month retention policy (soft — configurable)
 
 ### Requirements
-- 57 message types across 11 categories with typed payloads
+- 120 message types across 11 categories with typed payloads
 - 4 priority levels: Urgent (pauses sim), Important, Normal, Info
 - 7 visual layouts for rendering
 - Action-required messages track completion state
@@ -191,7 +191,7 @@ function handleEvent(event: SimEvent, state: GameState): GameMessage[] {
 }
 ```
 
-### 11 Categories × 57 Types (Reference)
+### 13 Categories × 120 Types (Reference)
 
 The full catalog is defined in `design/gdd/message-types-catalog.md`. This ADR
 does not duplicate the catalog but establishes:
@@ -230,14 +230,38 @@ interface InboxSlice {
 **Retention policy:** Messages older than `retentionWeeks` are auto-archived
 at end-of-month processing. Starred messages are exempt from auto-archive.
 
-### Content Generation Strategy
+### Content Generation Strategy — Development-Time String Generator
 
-**MVP**: Template-based with i18n keys. Each message type has a fixed title/body
-template with parameter interpolation. Templates live in locale files
-(`en.json`, `ja.json`, `pt.json`) per ADR-010.
+All parameterizable message strings are produced by a **development-time string
+generator** (`tools/generate-strings.ts`). The generator:
 
-**Future (post-MVP)**: LLM enrichment for personality-flavored messages (idol
-personality affects phrasing). This is additive — templates remain the fallback.
+1. Reads the message type catalog (`design/gdd/message-types-catalog.md`)
+2. Extracts all 57 message type templates with their parameter slots
+3. Produces typed locale files (`en.json`, `ja.json`, `pt.json`) per ADR-010
+4. Generates a TypeScript `MessageKeys` type with all valid key + param combinations
+5. Validates that every message type has templates in every supported language
+
+**Why dev-time generation:**
+- Adding a new language requires only running the generator with new translations —
+  no code changes needed
+- The generator enforces that all message types have complete coverage in all locales
+- Type-safe: `bodyParams` must match the generated parameter slots at compile time
+- The generator is reusable for any future parameterizable string system (news,
+  dialogue, events)
+
+**Running the generator:**
+```bash
+npx tsx tools/generate-strings.ts --catalog design/gdd/message-types-catalog.md --out src/lib/i18n/messages/
+```
+
+**No LLM in production.** All message strings are authored and generated at
+development time. LLM is used only during development to assist with writing
+templates — the final output is static locale files shipped with the game.
+
+> **VERIFIED (2026-04-11):** Catalog audited against ADR-004 (33 events),
+> ADR-009 (44 NPC decisions), and ADR-015/016/017/018 (56 events). Expanded
+> from 57 to 120 message types across 13 categories. String generation
+> pipeline defined in ADR-021.
 
 ---
 
@@ -271,7 +295,7 @@ personality affects phrasing). This is additive — templates remain the fallbac
 - i18n-ready from day one via template keys
 
 ### Negative
-- 57 message types require significant template authoring work
+- 120 message types require significant template authoring work
 - Each new game feature may require new message types (maintenance cost)
 
 ### Neutral
@@ -285,7 +309,7 @@ personality affects phrasing). This is additive — templates remain the fallbac
 |------|------------|--------|------------|
 | Message spam overwhelming inbox | MEDIUM | MEDIUM | Batch normal-priority per week; dedup similar messages |
 | Urgent messages too frequent (annoying pauses) | LOW | HIGH | Cap urgent to 1 per phase; queue others as important |
-| Template count grows beyond maintainability | LOW | LOW | LLM generation post-MVP; template registry tool |
+| Template count grows beyond maintainability | LOW | LOW | Dev-time generator makes adding templates cheap; template registry tool |
 
 ---
 
@@ -302,7 +326,7 @@ personality affects phrasing). This is additive — templates remain the fallbac
 
 ## Validation Criteria
 
-- [ ] All 57 message types generate correctly from their trigger events
+- [ ] All 120 message types generate correctly from their trigger events
 - [ ] Urgent messages pause Live/Skip mode within 1 frame
 - [ ] Messages persist across save/load
 - [ ] Inbox displays correct unread count
@@ -316,7 +340,7 @@ personality affects phrasing). This is additive — templates remain the fallbac
 
 | GDD Document | TR-ID | Requirement | How This ADR Satisfies It |
 |-------------|-------|-------------|--------------------------|
-| message-types-catalog.md | TR-messages-001 | 57 message types across 11 categories | Typed GameMessage with MessageTypeId enum |
+| message-types-catalog.md | TR-messages-001 | 120 message types across 11 categories | Typed GameMessage with MessageTypeId enum |
 | message-types-catalog.md | TR-messages-002 | 4 priority levels with delivery rules | Priority enum with sim-impact rules |
 | message-types-catalog.md | TR-messages-003 | Action-required messages with CTA | MessageAction interface with type + payload |
 | message-types-catalog.md | TR-messages-004 | Sender identification (system/staff/idol/rival) | MessageSender with entityId for avatar |
