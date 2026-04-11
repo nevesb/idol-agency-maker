@@ -53,17 +53,17 @@ Cada idol requer **24 imagens** (8 idades × 3 expressoes):
 
 | Propriedade | Valor |
 |---|---|
-| **Resolucao de geracao** | 768×768 (otimo pra modelos de difusao) |
-| **Resolucao de entrega** | 512×512 (resize no pipeline) |
+| **Resolucao de geracao** | 512×512 (base de geracao) |
+| **Resolucao de entrega** | 1024×1024 (upscale pos-geracao no pipeline) |
 | **Formato** | WebP (qualidade 85, ~30-60KB por imagem) |
 | **Estilo** | Anime/otome — consistente com estetica do jogo |
 | **Enquadramento** | Retrato (busto pra cima), fundo neutro/transparente |
 | **Thumbnail** | 128×128 WebP (pra listas, rosters) |
 
 **Estimativa de storage:**
-- 50KB media por imagem × 120.000 = ~6GB total
+- 150KB media por imagem × 120.000 = ~18GB total (1024×1024 apos upscale)
 - Thumbnails: ~5KB × 120.000 = ~600MB
-- Total: ~7GB pra Full Vision
+- Total: ~19GB pra Full Vision
 
 ### 3. Seed e Determinismo
 
@@ -150,7 +150,7 @@ O prompt inclui descricao de roupa proporcional a idade.
 │        - Enviar pra ComfyUI via API                     │
 │        - Aguardar resultado                             │
 │        - Validar qualidade (CLIP score ou manual)       │
-│        - Resize pra 512×512 + thumbnail 128×128         │
+│        - Upscale pra 1024×1024 + thumbnail 128×128      │
 │        - Salvar como WebP                               │
 │     d. Upload batch pra Supabase Storage                │
 │  3. Registrar manifest (idol_id → URLs das imagens)     │
@@ -370,7 +370,8 @@ age_35: "35 year old woman, graceful aging, wisdom in eyes, subtle lines"
 
 | Knob | Default | Range | Efeito |
 |---|---|---|---|
-| `IMAGE_RESOLUTION` | 512×512 | 256-1024 | Qualidade vs storage/bandwidth |
+| `GENERATION_RESOLUTION` | 512×512 | 256-768 | Resolucao de entrada pra geracao |
+| `DELIVERY_RESOLUTION` | 1024×1024 | 512-2048 | Resolucao de entrega apos upscale |
 | `THUMB_RESOLUTION` | 128×128 | 64-256 | Tamanho de thumbnails |
 | `WEBP_QUALITY` | 85 | 60-95 | Qualidade vs tamanho de arquivo |
 | `IP_ADAPTER_WEIGHT` | 0.7 | 0.5-0.9 | Consistencia facial (alto = mais similar, menos variacao) |
@@ -387,7 +388,7 @@ age_35: "35 year old woman, graceful aging, wisdom in eyes, subtle lines"
 4. Roupa proporcional a maturidade por faixa etaria
 5. Todas 24 imagens por idol geradas em < 5 minutos
 6. Face similarity score > 0.7 entre idades da mesma idol
-7. WebP 512×512 com tamanho medio < 60KB
+7. Geracao base 512×512, upscale pos-geracao pra 1024×1024. WebP com tamanho medio < 150KB
 8. Pipeline com checkpoint — pode retomar apos interrupcao
 9. MVP (100 idols, 2.400 imgs) gerado em < 8 horas
 10. Imagens servidas via CDN com cache longo (imutaveis)

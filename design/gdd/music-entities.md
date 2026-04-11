@@ -37,7 +37,7 @@ Music {
   id:              uint32
   title:           string
   composer:        Composer          // quem compôs (tier, estilo)
-  origin:          "original" | "cover" | "idol_composed"
+  origin:          "original" | "cover" | "idol_composed" | "cover_as_is"
   genre:           enum (Pop, Rock, Ballad, Dance, Enka, Idol, R&B, EDM, ...)
   era:             Year              // ano de composição/lançamento
   language:        "ja" | "en" | "mixed"
@@ -165,11 +165,20 @@ Idols também têm perfil vocal (definido no idol-attribute-stats.md revisado).
 
 ### 4. Tipos de Origem
 
-| Origem | Custo | Qualidade | Propriedade |
-|---|---|---|---|
-| **Original** | Cachê do compositor (¥500K-¥20M) | Depende do tier do compositor | Agência (royalties vão pro compositor + agência) |
-| **Cover** | Licença (¥100K-¥2M) | Fixa (da música original) | Artista original (royalties limitadas) |
-| **Idol Composed** | ¥0 (tempo da idol) | Depende de Vocal + Aura + skill composição | Agência + idol (split) |
+| Origem | Custo | Qualidade | Propriedade | Pipeline |
+|---|---|---|---|---|
+| **Original** | Cachê do compositor (¥500K-¥20M) | Depende do tier do compositor | Agência (royalties vão pro compositor + agência) | Fase criativa completa |
+| **Cover** | Licença (¥100K-¥2M) | Fixa (da música original) | Artista original (royalties limitadas) | Fase criativa completa |
+| **Idol Composed** | ¥0 (tempo da idol) | Depende de Vocal + Aura + skill composição | Agência + idol (split) | Fase criativa completa |
+| **Cover As-Is** | Licença (¥50K-¥500K) | avg(stats dos performers) × 0.7 | Artista original (royalties limitadas) | Pula fase criativa — vai direto para Gravação |
+
+**Cover As-Is**: Uma cover executada sem adaptação — a música é usada exatamente
+como a original, sem novo arranjo ou letra. A qualidade é calculada diretamente
+a partir dos stats médios dos performers escalados, multiplicada por 0.7 (teto
+de qualidade por ausência de trabalho criativo próprio). Por não passar pela
+fase criativa (Música + Letra + Arranjo), o pipeline começa diretamente em
+Coreografia (opcional) → Gravação. Isso permite lançamento muito mais rápido
+mas com teto de qualidade reduzido.
 
 **Composição pela idol** (slot especial na agenda):
 ```
