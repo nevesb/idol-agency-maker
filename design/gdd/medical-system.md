@@ -375,8 +375,9 @@ annual_prevention_cost =
   Grupo continua com penalidade. Audiência reage com simpatia (engagement
   não cai tanto). Lesão aplicada pós-show
 - **Forçar trabalho 3 vezes consecutivas durante lesão**: Cada vez é check
-  separado de dano permanente. Chance cumulativa: 1 - (1-0.25)^3 = 58%
-  chance de pelo menos 1 dano permanente. Jogador está destruindo a idol
+  separado de dano permanente. Chance cumulativa depende do tipo de lesão.
+  Ex: KneeInjury (35%): 1 - (1-0.35)^3 = 73% de pelo menos 1 dano permanente.
+  Ex: GeneralFatigue (10%): 1 - (1-0.10)^3 = 27%. Jogador está destruindo a idol
 - **Physical Therapist demitido durante recuperação**: Recuperação volta ao
   ritmo normal (sem staff_multiplier). Semanas restantes recalculadas
 - **Idol novata (debut recente) com lesão grave**: 6 semanas fora no início
@@ -408,33 +409,37 @@ annual_prevention_cost =
 
 | Knob | Default | Range | Efeito |
 |---|---|---|---|
-| `MUSCLE_STRAIN_RESIST_THRESHOLD` | 40 | 20-60 | Resistência abaixo da qual risco de distensão aumenta |
-| `VOCAL_DAMAGE_VOCAL_THRESHOLD` | 50 | 30-70 | Vocal abaixo do qual risco de lesão vocal aumenta |
-| `STRESS_FRACTURE_RESIST_THRESHOLD` | 30 | 15-50 | Limiar de Resistência para fratura por estresse |
-| `CHRONIC_FATIGUE_HEALTH_THRESHOLD` | 30 | 20-50 | Saúde abaixo da qual fadiga crônica pode ocorrer |
-| `CONSECUTIVE_WEEKS_FACTOR` | 0.3 | 0.1-0.5 | Incremento de risco por semana consecutiva |
+| `VOCAL_INTENSITY_THRESHOLD` | 70 | 50-90 | Intensidade de job vocal acima do qual risco de lesão vocal começa |
+| `PHYSICAL_INTENSITY_THRESHOLD` | 70 | 50-90 | Intensidade de job físico/dança acima do qual risco de lesão muscular começa |
+| `MENTAL_EXHAUSTION_STRESS_THRESHOLD` | 80 | 60-95 | Nível de Stress mantido por 4+ semanas que dispara esgotamento mental |
+| `BACK_INJURY_RESIST_THRESHOLD` | 40 | 20-60 | Resistência abaixo da qual há risco de lesão nas costas durante shows |
+| `KNEE_DANCE_THRESHOLD` | 70 | 50-90 | Intensidade de dança acima do qual idols com idade > 25 têm risco de joelho |
+| `ANXIETY_DISORDER_HAPPINESS_THRESHOLD` | 20 | 10-35 | Felicidade abaixo da qual há risco de transtorno de ansiedade (requer 8+ semanas) |
+| `MAX_SAFE_LOAD` | 100 | 80-120 | Carga máxima segura fixa (todas as idols) |
+| `OVERLOAD_FATIGUE_THRESHOLD` | 120 | 110-150 | % de MAX_SAFE_LOAD que dispara fadiga geral (3+ semanas) |
+| `CONSECUTIVE_WEEKS_FACTOR` | 0.3 | 0.1-0.5 | Incremento de risco por semana consecutiva fora do threshold |
 | `MEDICAL_CENTER_LV1_REDUCTION` | 0.10 | 0.05-0.20 | Redução de chance de lesão Lv 1 |
 | `MEDICAL_CENTER_LV2_REDUCTION` | 0.20 | 0.10-0.35 | Redução de chance de lesão Lv 2 |
 | `MEDICAL_CENTER_LV3_REDUCTION` | 0.30 | 0.15-0.50 | Redução de chance de lesão Lv 3 |
 | `RECOVERY_FACILITY_LV1` | 0.85 | 0.7-0.95 | Multiplicador de recuperação Medical Center Lv 1 |
 | `RECOVERY_FACILITY_LV2` | 0.70 | 0.5-0.85 | Multiplicador de recuperação Medical Center Lv 2 |
 | `RECOVERY_FACILITY_LV3` | 0.50 | 0.3-0.70 | Multiplicador de recuperação Medical Center Lv 3 |
-| `PT_SKILL_RECOVERY_FACTOR` | skill-based | 0.60-1.0 | Multiplicador do Physical Therapist |
-| `PERMANENT_DAMAGE_CHANCE` | 0.25 | 0.10-0.50 | Chance de dano permanente ao forçar trabalho |
-| `PERMANENT_DAMAGE_AMOUNT` | -5 | -3 a -10 | Quanto o stat perde permanentemente |
+| `PT_BASE_MULTIPLIER` | 0.90 | 0.80-1.0 | Multiplicador base do PT (sem skill). ptMult = PT_BASE_MULTIPLIER - (ptSkill/100)×0.30 |
+| `PT_SKILL_COEFFICIENT` | 0.30 | 0.15-0.45 | Quanto cada ponto de skill do PT reduz o multiplicador de recuperação |
+| `PERMANENT_DAMAGE_AMOUNT` | -5 | -3 a -10 | Quanto o stat perde permanentemente ao forçar trabalho durante lesão |
 | `REINJURY_BASE_CHANCE` | 0.30 | 0.15-0.50 | Chance de re-lesão nas 2 primeiras semanas |
 | `REHAB_TRAINING_EFFICIENCY` | 0.50 | 0.25-0.75 | Eficiência do treino de reabilitação vs normal |
 
 ## Acceptance Criteria
 
-1. Lesões são determinísticas: triggers baseados em stats + carga + semanas consecutivas
-2. 7 tipos de lesão com gravidades e tempos de recuperação distintos
+1. Lesões são determinísticas: triggers baseados em intensidade de jobs, stats e semanas consecutivas
+2. 7 tipos de lesão (VocalStrain, MuscleInjury, MentalExhaustion, BackInjury, KneeInjury, AnxietyDisorder, GeneralFatigue) com tempos de recuperação e chances de dano permanente distintos conforme ADR-016
 3. Medical Center Lv 1-3 reduz chance de lesão em 10/20/30% e acelera recuperação ×1.2/1.5/2.0
-4. Physical Therapist reduz tempo de recuperação proporcional ao skill
+4. Physical Therapist reduz tempo de recuperação via fórmula contínua: ptMult = 0.90 - (ptSkill/100) × 0.30
 5. Rehab training permite treino de stats mentais durante recuperação (50% eficiência)
-6. Forçar trabalho durante recuperação tem 25% chance base de dano permanente (-5 stat)
-7. Dashboard médico mostra risk level (green/yellow/red) por idol com fatores de risco
-8. Training load % visível e comparável ao max_safe_load da idol
+6. Forçar trabalho durante recuperação aplica chance de dano permanente per-tipo: 25/25/25/30/35/20/10% conforme tipo de lesão
+7. Dashboard médico mostra Green (<80% load), Yellow (80-100% load ou em recuperação), Red (>100% load, lesão ativa, ou risco re-lesão >20%)
+8. Training load % visível usando MAX_SAFE_LOAD = 100 (fixo, igual para todas as idols)
 9. Re-lesão: 30% chance nas 2 primeiras semanas pós-recuperação, reduzida por PT
 10. Lesão mid-show processada como evento (idol sai, grupo continua com penalidade)
 11. Custo total de lesão inclui lost revenue + medical + replacement + morale

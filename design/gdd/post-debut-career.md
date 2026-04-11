@@ -25,15 +25,28 @@ atuais. O mundo lembra das suas decisões passadas.
 
 #### 1. Carreiras Pós-debut
 
-| Carreira | Requisito | Efeito no ecossistema |
+A carreira é derivada do atributo mais forte da idol no momento da formatura:
+
+| Tipo | Atributo Principal | Efeito no ecossistema |
 |---|---|---|
-| **Apresentadora TV/Rádio** | Fama alta (B+) ao debutar | Cria show regular com spots pra convidados |
-| **Produtora** | Experiência (10+ anos ativa) | Pode oferecer mentoria como facility |
-| **Compositora** | Compôs músicas durante carreira | Entra no pool de compositores NPC |
-| **Mentora** | Afinidade alta com agência | Facility especial (bônus treino) |
-| **Comentarista** | Variedade/Comunicação altos | Aparece no News Feed comentando eventos |
-| **Empreendedora** | Personal Finance alta (rica) | Pode criar agência rival (NPC) |
-| **Retorno temporário** | Fama lendária (SSS) | Raro, evento especial de alto impacto |
+| **solo-artist** | Vocal alto | Lança música solo, gera jobs de performance |
+| **actress** | Comunicação ou Visual altos | Aparece em dramas/filmes, cria spots de mídia |
+| **model** | Visual alto | Aparece em campanhas, gera jobs de variedade |
+| **trainer** | Mentalidade alta | Disponível como treinadora NPC para agências |
+| **composer** | Compôs músicas durante carreira | Entra no pool de compositores NPC |
+| **choreographer** | Coreografou durante carreira | Entra no pool de coreógrafos NPC |
+| **producer** | Mentalidade alta + 10+ anos ativa | Pode oferecer mentoria como facility |
+| **retired** | Sem atributo dominante | Decaimento de fama; possível retorno especial se fama lendária |
+
+**Derivação de carreira**: No momento da formatura, o sistema avalia o atributo mais alto:
+- Vocal → `solo-artist`
+- Dança → `model` ou `choreographer` (se coreografou)
+- Visual → `model` ou `actress`
+- Comunicação → `actress`
+- Mentalidade → `trainer` ou `producer`
+- Sem dominância clara → `retired`
+
+**Flags aditivas**: `composer` e `choreographer` são complementares ao `careerType` principal — uma idol pode ser `actress` E estar disponível como compositora NPC se compôs durante a carreira ativa.
 
 #### 2. Geração de Jobs
 
@@ -66,8 +79,9 @@ Ex-idols com programa próprio geram jobs automaticamente:
 
 ## Acceptance Criteria
 
-1. Ex-idols escolhem carreira baseada em stats/fama ao debutar
-2. Programas de ex-idols geram jobs no board
-3. Retorno temporário de lendária é evento especial raro
-4. Fama decai mensalmente pós-debut
-5. Hall of Fame preserva legado
+1. Ex-idols recebem tipo de carreira derivado do atributo dominante ao debutar (solo-artist/actress/model/trainer/composer/choreographer/producer/retired)
+2. Composer e choreographer são flags aditivas ao careerType principal
+3. Ex-idols com careerType ativo geram jobs no board mensalmente
+4. retired com fama lendária pode ter retorno temporário especial
+5. Fama decai mensalmente pós-debut
+6. Hall of Fame preserva legado

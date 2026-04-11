@@ -29,11 +29,11 @@ gerar fama e receita, diferente de só aceitar jobs do board.
 
 | Tipo | Custo base | Escala | Receita potencial |
 |---|---|---|---|
-| **Mini live** | ¥500K | 50-200 pessoas | Baixa, boa pra novatas |
-| **Show** | ¥2M-¥10M | 200-2000 pessoas | Média |
-| **Festival** | ¥20M-¥100M | 2000-50000 pessoas | Alta |
-| **Meet & greet** | ¥300K | 20-100 pessoas | Baixa, boa pra fan base |
-| **Release party** | ¥1M-¥5M | 100-500 pessoas | Média, promove música/disco |
+| **mini-live** | ¥500K | 50-200 pessoas | Baixa, boa pra novatas |
+| **concert** | ¥2M-¥10M | 200-2000 pessoas | Média |
+| **festival** | ¥20M-¥100M | 2000-50000 pessoas | Alta |
+| **fan-meeting** | ¥300K | 20-100 pessoas | Baixa, boa pra fan base |
+| **tour** | ¥1M-¥5M | 100-500 pessoas por data | Média, múltiplas datas |
 
 #### 2. Convidar Artistas Externos
 
@@ -69,7 +69,7 @@ fama_gain = sucesso × visibilidade × participantes
 
 ## Acceptance Criteria
 
-1. 5 tipos de evento criáveis com custos e escalas diferentes
+1. 5 tipos de evento criáveis (mini-live, concert, festival, fan-meeting, tour) com custos e escalas diferentes
 2. Artistas externos podem aceitar/recusar baseado no tier
 3. Receita = bilheteria - custos. Pode dar prejuízo
 4. Fama gerada proporcional ao sucesso e escala

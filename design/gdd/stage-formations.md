@@ -1,6 +1,6 @@
 # Stage Formations System
 
-> **Status**: Designed (v2 — modelo de roles por música, sem grid espacial)
+> **Status**: Designed (v3 — modelo de roles por música + grid espacial por ADR-008)
 > **Author**: user + game-designer
 > **Last Updated**: 2026-04-07
 > **Implements Pillar**: Pilar 1 — Simulação com Profundidade Real, Pilar 2 — Suas Decisões, Suas Consequências
@@ -8,27 +8,33 @@
 
 ## Overview
 
-O Stage Formations System define como idols de um grupo são **escaladas em
-roles para cada música** da setlist. Cada música tem sua própria formação:
-quem é Center, quem é Main Vocal, quem faz Backing. Na indústria idol real,
-formações rotacionam dentro da mesma música e entre músicas — o sistema
-abstrai isso como **atribuição de roles per-song**.
+O Stage Formations System define dois aspectos complementares de como um grupo
+se organiza em cada música da setlist:
 
-Não existe grid espacial fixo — a coreografia real tem dezenas de rotações
-por música. O que importa mecanicamente é **qual papel cada idol desempenha
-em cada música**, e como a **chemistry entre membros** afeta a performance
-coletiva.
+1. **Atribuição de roles per-song** — quem é Center, quem é Main Vocal, quem
+   faz Backing em cada música. Roles definem multiplicadores de performance,
+   fama e exposure por idol.
+2. **Formação espacial** — o tipo de arranjo físico no palco (linha, pares,
+   V, círculo, disperso), com posição para cada membro. A formação espacial é
+   uma adição ao sistema de roles; ambos coexistem e são configurados pelo
+   jogador.
+
+Na indústria idol real, formações rotacionam dentro da mesma música e entre
+músicas — o sistema abstrai isso como **atribuição de roles + tipo de formação
+espacial per-song**.
 
 É o equivalente a escalar 11 jogadores no FM26 com posições e funções
 diferentes por esquema tático — mas aqui a "tática" muda a cada música.
 
 ## Player Fantasy
 
-A fantasia é de **produtor que monta a escalação perfeita para cada música**.
-"Na balada, a Hana é Center porque tem a melhor voz. No hit dance, a Riko
-assume porque domina a coreografia. Na última música, coloco a Sakura como
-Center porque é o momento emocional do encore." Cada música é uma escalação
-tática diferente, e o jogador otimiza quem brilha onde.
+A fantasia é de **produtor que monta a escalação e a formação perfeitas para cada música**.
+"Na balada, a Hana é Center porque tem a melhor voz — e coloco o grupo em
+círculo para dar sensação de intimidade. No hit dance, a Riko assume como
+Center em formação V, ela na ponta. Na última música, Sakura no centro de
+uma linha aberta — o momento emocional do encore que a audiência vai lembrar."
+Cada música é uma escalação tática + visual diferente, e o jogador otimiza
+quem brilha onde e como o grupo aparece no palco.
 
 ## Detailed Design
 
@@ -205,6 +211,76 @@ FormationPreset {
 Presets são úteis para não reconfigurar toda vez. O jogador pode ter um
 preset "Padrão" e ajustar apenas músicas específicas.
 
+### 8. Formações Espaciais (Grid Físico no Palco)
+
+Além da atribuição de roles (seções 1-7), cada música pode ter um **tipo de
+formação espacial** que define como os membros se posicionam fisicamente no
+palco. A formação espacial é configurada separadamente dos roles e afeta
+engagement visual da audiência.
+
+#### 8a. Tipos de Formação (FormationType)
+
+```
+FormationType = line | pairs | v_shape | circle | scattered
+```
+
+| Tipo | Descrição | Ideal para |
+|---|---|---|
+| **line** | Linha horizontal, todos visíveis igualmente | Números de abertura, músicas com muitos membros |
+| **pairs** | Duplas posicionadas simetricamente | Músicas com harmonias vocais, duos de química |
+| **v_shape** | Center na frente, membros em V atrás | Center forte, músicas de impacto visual |
+| **circle** | Membros em círculo, rotação de foco | Baladas intimistas, músicas de unidade |
+| **scattered** | Posições livres no espaço do palco | Músicas dance-heavy, coreografias complexas |
+
+#### 8b. Slots de Posição
+
+Cada formação distribui membros em slots de posição:
+
+```
+PositionSlot = front | center | mid | side | back
+
+FormationSlots {
+  line:      todos em mid, distribuídos em side e center
+  pairs:     front (par líder), mid (pares secundários), back (par de suporte)
+  v_shape:   front=Center, center=flancos, mid=laterais, back=membros restantes
+  circle:    center (opcional solista), mid (anel de membros)
+  scattered: front/mid/side/back atribuídos livremente
+}
+```
+
+**Impacto de posição no slot:**
+- `front` / `center`: +5% exposure da idol (audiência foca mais)
+- `side` / `back`: -5% exposure (visualmente mais distante)
+- Center role + slot front: stacks com o role_multiplier existente
+
+#### 8c. Integração com MusicFormation
+
+```
+MusicFormation {
+  song_index:      uint8
+  assignments:     RoleAssignment[]   // roles por idol (seção 1)
+  formation_type:  FormationType      // tipo espacial (seção 8)
+  position_slots:  Map<idol_id, PositionSlot>  // slot por membro
+}
+```
+
+**Regras de consistência:**
+- Center role → deve estar em slot front ou center (aviso se não)
+- Backing role → recomendado em slot back (jogador pode ignorar)
+- Coreógrafo sugere tanto roles quanto formação espacial (qualidade proporcional ao skill)
+- Sem Coreógrafo: auto-assign de formação usa `line` como default
+
+#### 8d. Efeito na Audiência
+
+```
+formation_engagement_bonus =
+  formation_type == v_shape AND center_fit > 0.8: +3% engagement
+  formation_type == circle AND música.mood == Intimate: +4% emotional impact
+  formation_type == scattered AND música.dance_req > 70: +2% energy
+  formation_type == line: 0 (neutro — seguro e genérico)
+  formation_type == pairs AND chemistry_score > 0.7: +2% harmony bonus
+```
+
 ### States and Transitions
 
 | Estado | Descrição | Transição |
@@ -299,6 +375,12 @@ formation_score(assignments, group, song) =
 | `ROLE_FAMILIARITY_2` | 0.01 | 0.005-0.02 | Bônus 2+ músicas no mesmo role |
 | `ROLE_FAMILIARITY_4` | 0.02 | 0.01-0.03 | Bônus 4+ músicas |
 | `ROLE_FAMILIARITY_FULL` | 0.03 | 0.02-0.05 | Bônus show inteiro |
+| `FORMATION_VSHAPE_BONUS` | 0.03 | 0.01-0.05 | Bônus engagement formação V com center forte |
+| `FORMATION_CIRCLE_BONUS` | 0.04 | 0.02-0.06 | Bônus impacto emocional círculo em Intimate |
+| `FORMATION_SCATTER_BONUS` | 0.02 | 0.01-0.04 | Bônus energy formação dispersa em dance-heavy |
+| `FORMATION_PAIRS_BONUS` | 0.02 | 0.01-0.03 | Bônus harmonia pares com chemistry alta |
+| `SLOT_FRONT_EXPOSURE_BONUS` | 0.05 | 0.02-0.08 | Bônus de exposure por slot front/center |
+| `SLOT_BACK_EXPOSURE_PENALTY` | 0.05 | 0.02-0.08 | Penalidade de exposure por slot side/back |
 
 ## Acceptance Criteria
 
@@ -314,6 +396,12 @@ formation_score(assignments, group, song) =
 10. Grupos < 3 não usam sistema de formação
 11. Familiaridade por role dá bônus leve por consistência
 12. Idol não escalada como destaque por muitas músicas pode reclamar (drama emergente)
+13. Cada música pode ter um FormationType atribuído (line/pairs/v_shape/circle/scattered)
+14. Cada membro tem um PositionSlot (front/center/mid/side/back) na formação espacial
+15. Slot front/center dá +5% exposure; slot side/back dá -5% exposure
+16. Coreógrafo sugere tanto roles quanto formação espacial (proporcional ao skill)
+17. Sem Coreógrafo: formação spatial default é `line`
+18. Bônus de engagement por combinação formação+contexto (v_shape+center forte, circle+Intimate, etc.)
 
 ## Open Questions
 

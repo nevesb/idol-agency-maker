@@ -36,9 +36,9 @@ E olhar pra tras e ver que o plano funcionou -- ou entender por que nao.
 | **Medio prazo** | 12 semanas (trimestre) | Metas trimestrais, planos de desenvolvimento, campanhas | Visivel com detalhes |
 | **Longo prazo** | 52 semanas (ano) | Roadmap anual, grandes eventos sazonais, transicoes de roster | Visao geral + marcos |
 
-#### 2. Metas Trimestrais (Jogador Define)
+#### 2. Metas Sazonais (Jogador Define)
 
-O jogador pode definir ate **5 metas** por trimestre:
+O jogador pode definir ate **5 metas** por temporada (spring/summer/autumn/winter):
 
 | Tipo de Meta | Exemplos | Metrica |
 |---|---|---|
@@ -56,30 +56,31 @@ O jogador pode definir ate **5 metas** por trimestre:
 - Metas falhadas nao tem penalidade direta (so falta de bonus)
 - O dono da agencia define metas **obrigatorias** (do Agency Meta-Game)
 - Metas do jogador sao **adicionais** as do dono
+- Cada temporada tem seu proprio conjunto de metas (spring/summer/autumn/winter)
 
 #### 3. Roadmap Anual
 
-Visao de 12 meses com marcos planejados:
+Visao de 12 meses com marcos planejados, organizado por temporada (spring/summer/autumn/winter):
 
 ```
 ROADMAP 2027
 
-Q1 (Jan-Mar):
+Spring (Jan-Mar):
   [x] Contratar vocal coach skill 12+
   [x] Kimura passar pra estagio Rising
   [ ] Iniciar gravacao do album do grupo Aurora
 
-Q2 (Abr-Jun):
+Summer (Abr-Jun):
   [ ] Debut solo da Tanaka
   [ ] Participar do TIF (Tokyo Idol Festival)
   [ ] Renovar contrato da Sato (vence Jun)
 
-Q3 (Jul-Set):
+Autumn (Jul-Set):
   [ ] Lancar album
   [ ] Campanha de marketing pra grupo Aurora
   [ ] Avaliar roster: quem renovar, quem liberar
 
-Q4 (Out-Dez):
+Winter (Out-Dez):
   [ ] Kouhaku qualificacao (se ranking permitir)
   [ ] Preparar graduation da veterana Watanabe
   [ ] Planejar ano seguinte
@@ -194,7 +195,7 @@ OPORTUNIDADES:
 
 | Knob | Default | Range | Efeito |
 |---|---|---|---|
-| `MAX_QUARTERLY_GOALS` | 5 | 3-10 | Metas trimestrais maximas |
+| `MAX_SEASONAL_GOALS` | 5 | 3-10 | Metas sazonais maximas por temporada |
 | `GOAL_REPUTATION_BONUS` | 3 | 1-5 | Reputacao por meta cumprida |
 | `SEASONAL_ADVANCE_WEEKS` | 8 | 4-12 | Antecedencia de eventos sazonais |
 | `RISK_PROJECTION_MONTHS` | 3 | 1-6 | Horizonte de projecao de riscos |
@@ -202,8 +203,8 @@ OPORTUNIDADES:
 ## Acceptance Criteria
 
 1. 3 horizontes de planejamento visiveis (curto/medio/longo prazo)
-2. Ate 5 metas trimestrais configuraveis pelo jogador
-3. Roadmap anual editavel com marcos
+2. Ate 5 metas sazonais configuraveis pelo jogador por temporada (spring/summer/autumn/winter)
+3. Roadmap anual editavel com marcos organizados por temporada
 4. Eventos sazonais aparecem automaticamente com antecedencia
 5. Riscos e gargalos gerados automaticamente
 6. Oportunidades projetadas a partir de dados do mercado
