@@ -4,7 +4,7 @@
 > **Referência visual**: FM26 Development Centre
 > **Resolução alvo**: 1920×1080 (PC-first)
 > **Rota**: `/agency/roster/development`
-> **GDDs**: training-development, agency-growth
+> **GDDs**: training-development, agency-growth, talent-development-plans, staff-functional
 
 ---
 
@@ -66,9 +66,71 @@ A tabela foca apenas na evolução (`Prog.`: se os atributos estão subindo ou d
 
 ---
 
+## Aba: Atribuição de Staff de Treino (Merged from WF-15)
+
+> Esta aba é acessada dentro do Development Hub como uma das abas da navegação secundária (e.g. "Atribuições de Staff"). O conteúdo abaixo foi consolidado do [Wireframe 15 — Training Assignments](15-assignments-training.md).
+
+### Conceito
+
+Aba onde o Produtor distribui as responsabilidades de treinamento entre o **Staff Técnico** (Instrutores de Dança, Treinadores Vocais, Mentores de Mídia, etc.).
+
+Usa uma matriz densa de seleção (Staff × Categoria) e um painel de contexto à direita, com edição in-line (sem pop-ups) para minimizar cliques.
+
+### Estrutura da Aba (Layout FM26)
+
+```text
++-------------------------------------------------------------------------------------------------+
+| [Logo] < >   Portal | Plantel | Recrutamento | Eventos | Clube | Carreira         [Search] [>]  |
+|-------------------------------------------------------------------------------------------------|
+| Visão Geral | Calendário | Programação | Atribuições de Staff (Ativo) | Relatórios              |
+|-------------------------------------------------------------------------------------------------|
+| Clube > Treino > Atribuições de Staff                                                           |
++-------------------------------------------------------------------------------------------------+
+| [ COLUNA ESQ - VISÃO GERAL ] | [ CENTRO - MATRIZ DE ATRIBUIÇÕES (GRID) ]| [ DIREITA - CONTEXT ] |
+|                              |                                          |                       |
+| CARGA DE TREINO (WORKLOAD)   | STAFF                 | VOCAL | DANÇA |  | STAFF SELECIONADO     |
+|                              |-----------------------+-------+-------|  |                       |
+| Vocal:   [★★★☆☆] Leve    | [Avatar] John Doe     | [X]   | [ ]   |  | [Avatar] John Doe     |
+| Dança:   [★★★★☆] Média   | (Vocal Coach)         |       |       |  |                       |
+| Carisma: [★★☆☆☆] Pesada! |                       |       |       |  | Cargo: Vocal Coach    |
+| Atuação: [★★★☆☆] Leve    | [Avatar] Jane Smith   | [ ]   | [X]   |  | Idade: 34 anos        |
+|                              | (Dance Instructor)    |       |       |  |                       |
+| [ Botão: Auto-Assign ]       |                       |       |       |  | ATRIBUTOS CHAVE       |
+|                              | [Avatar] Akane Tendo  | [X]   | [X]   |  | Técnica Vocal:   18   |
+| FILTROS                      | (Trainee Mentor)      |       |       |  | Poder Vocal:     15   |
+| [X] Mostrar Produtor         |                       |       |       |  | Motivação:       16   |
+| [ ] Ocultar Sobrecarga       | [Avatar] Você (Prod)  | [ ]   | [ ]   |  | Disciplina:      12   |
+|                              | (Producer)            |       |       |  |                       |
+|                              |-----------------------+-------+-------|  | CARGA (WORKLOAD)      |
+|                              | AVALIAÇÃO             | 4.5*  | 4.0*  |  | Nível: Médio          |
+|                              | CARGA                 | LGT   | AVG   |  | Eventos: 2/semana     |
++-------------------------------------------------------------------------------------------------+
+```
+
+### Componentes FM26 Aplicados
+
+#### 1. Grids e Estrelas Integradas
+- O painel central usa uma tabela densa (Grid). Cada célula na interseção Staff × Categoria é um checkbox customizado (toggle).
+- Na base do painel central, a avaliação (Star Rating) e a carga (LGT/AVG/HVY) atualizam instantaneamente conforme o jogador marca/desmarca os checkboxes.
+
+#### 2. Coluna Esquerda: Overview Holístico (Workload)
+- Mostra a situação global da agência em relação às estrelas de cada área de treino. Fica fácil ver que "Carisma" tem só 2 estrelas e carga pesada (vermelho), alertando o jogador a contratar alguém ou realocar.
+- O botão `Auto-Assign` (pedir ao Head Coach/Assistant) fica em destaque na coluna esquerda.
+
+#### 3. Coluna Direita: Painel de Contexto de Staff
+- Ao invés de abrir o perfil de um instrutor em outra tela, ao passar o mouse ou focar na linha de um staff, a coluna direita carrega a foto e os atributos exatos necessários para o treino daquele membro.
+- Valores bons exibidos em verde, medianos em amarelo, fracos em vermelho.
+
+---
+
 ## Acceptance Criteria
 
 1. Tela apresenta a opinião textual da IA (Staff) sobre a saúde geral do centro de Trainees.
 2. Divide claramente as trainees em listas acionáveis: "Prontas para Promover" e "Estagnadas".
 3. Tabela oculta por padrão qualquer Idol que já seja do "Time Principal" (já fez Debut).
 4. Mostra o Progresso (setas de evolução de atributos) para guiar o feedback do jogador sobre o treino da base.
+5. Aba "Atribuições de Staff" usa modelo 3-colunas de gestão de dados (WF-15 AC1).
+6. Interação de clique na matriz central muda as estrelas no bottom instantaneamente (WF-15 AC2).
+7. Coluna da direita reage à seleção da linha central exibindo atributos técnicos de treino do staff selecionado (WF-15 AC3).
+8. Feedback visual forte (cores verde/amarelo/vermelho) para *Workload* na coluna esquerda e base da matriz (WF-15 AC4).
+9. Filtro permite que o Produtor (Você) também seja incluído na matriz caso queira treinar as Idols pessoalmente (WF-15 AC5).

@@ -111,6 +111,7 @@ Tudo sobre "quem eu tenho".
 |---|---|
 | **Visao Geral** | Tabela do roster com stats, wellness, contrato, arquetipo. Filtravel, ordenavel |
 | **Grupos** | Grupos formados, composicao por arquetipo, sinergia |
+| **Dinamica** | Clima da agencia, hierarquia, panelinhas, coesao de grupo (wireframe 29) |
 | **Desenvolvimento** | Planos trimestrais ativos, estagios, foco de treino |
 | **Roster Balance** | Cobertura por arquetipo, curva etaria, concentracao de receita, pipeline |
 | **Contratos** | Todos contratos, vencimentos, renovacoes pendentes |

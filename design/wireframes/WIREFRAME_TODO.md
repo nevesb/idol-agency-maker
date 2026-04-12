@@ -29,9 +29,9 @@
 - [~] especially: 13-staff.md
 
 ## Agency domain
-- [x] 14-responsibilities.md
-- [x] 15-assignments-training.md
-- [x] 16-assignments-show.md
+- [x] 14-responsibilities.md (+ merged WF-48 Operations as category tab)
+- [x] ~~15-assignments-training.md~~ → MERGED into 24-roster-development-hub.md
+- [x] ~~16-assignments-show.md~~ → MERGED into 49-show-overview.md
 - [x] 17-finances.md
 - [x] 18-strategy.md
 - [x] 19-board.md
@@ -69,7 +69,7 @@
 - [x] 45-planning-board.md
 - [x] 46-calendar-season-planner.md
 - [x] 47-week-results-expanded.md
-- [x] 48-operations-responsibilities.md
+- [x] ~~48-operations-responsibilities.md~~ → MERGED into 14-responsibilities.md
 
 ## Missing — Show / Performance domain
 - [x] 49-show-overview.md
@@ -99,8 +99,8 @@
 ## Cross-cutting utility modals / workbench dialogs
 - [x] 68-conversation-modal.md
 - [x] 69-social-media-feed.md
-- [x] 70-idol-status-summary.md
-- [x] 71-game-setup-rules.md
+- [x] 70-idol-status-summary.md (reclassified: UI Component Spec, not standalone screen)
+- [x] 71-game-setup-rules.md (read-only reference screen, aggregates multiple GDDs)
 - [x] 72-interaction-history.md
 
 ## Music / Production domain

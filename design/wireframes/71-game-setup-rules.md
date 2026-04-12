@@ -1,10 +1,13 @@
 # Wireframe 71 — Game Setup & Rules (Configurações da Liga)
 
 > **Status**: Draft (FM26 UI Standard)  
+> **Type**: Read-only reference screen (aggregates rules from multiple GDDs)  
 > **Referência visual**: FM26 Competition Rules / Game Setup Info  
 > **Resolução alvo**: 1920×1080 (PC-first) ou Modal/Sidebar  
 > **Rota**: `/game/rules`  
-> **GDDs**: finance-economy, agency-economy.md, agency-meta-game.md
+> **GDDs**: agency-economy.md (tiers, facilities, debt), contract-system.md (age limits, clauses), schedule-agenda.md (minor work caps), music-charts.md (chart prizes), agency-meta-game.md (goals, tiers)
+> **ADR**: No dedicated ADR — this screen reads data defined across ADRs 003, 005, 007, 008
+> **Note**: This is an in-game encyclopedia screen. No game state writes — purely informational.
 
 ---
 

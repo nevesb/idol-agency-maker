@@ -1,10 +1,12 @@
 # Wireframe 70 — Idol Status Summary (O Card de Substituição)
 
 > **Status**: Draft (FM26 UI Standard)  
+> **Type**: UI Component Spec (not a standalone screen)  
 > **Referência visual**: FM26 Quick Sub / Player Hover Card  
 > **Resolução alvo**: Tooltip/Popover (Tamanho Fixo)  
 > **Rota**: Componente global ativado no Hover (Hover sobre Avatar)  
-> **GDDs**: ui-idol-profile.md, idol-attribute-stats.md
+> **GDDs**: ui-idol-profile.md, idol-attribute-stats.md, happiness-wellness.md
+> **ADR**: ADR-006 (UI Component Architecture — IdolHoverCard component)
 
 ---
 

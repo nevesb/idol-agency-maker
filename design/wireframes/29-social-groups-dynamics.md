@@ -4,7 +4,9 @@
 > **Referência visual**: FM26 Dynamics / Hierarchy & Social Groups
 > **Resolução alvo**: 1920×1080 (PC-first)
 > **Rota**: `/agency/roster/dynamics`
-> **GDDs**: happiness-wellness, roster-balance, idol-archetypes-roles
+> **GDDs**: group-management.md, happiness-wellness.md, roster-balance.md, idol-archetypes-roles.md
+> **ADR**: ADR-015 (Groups, Roster & Archetypes)
+> **IA Nav**: Roster > Dinâmica
 
 ---
 
